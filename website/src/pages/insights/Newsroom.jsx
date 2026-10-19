@@ -1,0 +1,77 @@
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { ArrowRight } from 'lucide-react'
+import useSeo from '../../hooks/useSeo'
+import FadeUp from '../../components/FadeUp'
+import Img from '../../components/Img'
+import Breadcrumb from '../../components/Breadcrumb'
+import CTA from '../../components/CTA'
+import { news } from '../../data/news'
+import { shortDate } from '../../utils/format'
+import { pageContent } from '../../data/pageContent'
+
+export default function Newsroom() {
+  useSeo('Newsroom', 'Company announcements and news from AchiveX LLC.')
+  const pc = pageContent['/insights/newsroom/']
+  const years = [...new Set(news.map((n) => n.date.slice(0, 4)))].sort((a, b) => b - a)
+  const [year, setYear] = useState('all')
+  const list = [...news].sort((a, b) => b.date.localeCompare(a.date)).filter((n) => year === 'all' || n.date.startsWith(year))
+
+  return (
+    <>
+      <section className="bg-white pb-10 pt-12">
+        <div className="container-site">
+          <Breadcrumb items={[{ label: 'Insights' }, { label: 'Newsroom' }]} />
+          <FadeUp className="mt-12 flex flex-col justify-between gap-8 border-b-2 border-navy pb-10 md:flex-row md:items-end">
+            <h1 className="h-display text-5xl md:text-7xl">{pc.heroTitle}</h1>
+            <div role="tablist" aria-label="Filter by year" className="flex flex-wrap gap-6">
+              {['all', ...years].map((y) => (
+                <button
+                  key={y}
+                  role="tab"
+                  aria-selected={year === y}
+                  onClick={() => setYear(y)}
+                  className={`border-b-2 pb-1 text-sm font-semibold transition-colors ${year === y ? 'border-accent text-navy' : 'border-transparent text-ink/50 hover:text-accent'}`}
+                >
+                  {y === 'all' ? pc.allYearsLabel : y}
+                </button>
+              ))}
+            </div>
+          </FadeUp>
+        </div>
+      </section>
+
+      <section className="bg-white pb-24">
+        <div className="container-site">
+          <ul className="divide-y divide-mist">
+            {list.map((n) => {
+              const d = shortDate(n.date)
+              return (
+                <FadeUp as="li" key={n.slug}>
+                  <Link to={`/insights/newsroom/${n.slug}/`} className="group grid items-center gap-6 py-10 md:grid-cols-[140px_1fr_260px] md:gap-10">
+                    <time dateTime={n.date} className="flex items-baseline gap-3 md:block">
+                      <span className="font-display text-5xl text-navy">{d.day}</span>
+                      <span className="block text-sm font-semibold uppercase tracking-wide text-ink/60">{d.month} {d.year}</span>
+                    </time>
+                    <div>
+                      <h2 className="text-2xl font-bold leading-snug transition-colors group-hover:text-accent md:text-3xl">{n.title}</h2>
+                      <p className="mt-3 max-w-2xl leading-relaxed text-ink/70">{n.summary}</p>
+                      <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-navy">
+                        {pc.readMoreText} <ArrowRight className="h-4 w-4 text-accent transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                      </span>
+                    </div>
+                    <div className="overflow-hidden">
+                      <Img src={n.image.replace('w=1600', 'w=600')} alt={n.title} className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    </div>
+                  </Link>
+                </FadeUp>
+              )
+            })}
+          </ul>
+        </div>
+      </section>
+
+      <CTA variant="split" title={pc.ctaTitle} text={pc.ctaText} button={pc.ctaButton} />
+    </>
+  )
+}

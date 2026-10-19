@@ -1,0 +1,12 @@
+# Dependencies and builds
+node_modules/
+dist/
+admin/vendor/
+admin/public/storage
+admin/storage/*.key
+
+# Local settings and secrets
+.env
+*.zip
+.DS_Store
+Thumbs.db

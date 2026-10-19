@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    @apply bg-white font-sans text-ink;
+  }
+  h1, h2, h3, h4 {
+    @apply text-navy;
+  }
+  ::selection {
+    @apply bg-navy text-white;
+  }
+  :focus-visible {
+    outline: 2px solid #F0A500;
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-site px-5 sm:px-8 lg:px-10;
+  }
+  .h-display {
+    @apply font-display font-medium leading-[1.05] tracking-[-0.035em];
+    text-wrap: balance;
+  }
+  .field {
+    @apply w-full border border-mist bg-mist px-4 py-3 text-[15px] text-ink outline-none transition focus:border-navy focus:bg-white;
+  }
+  .label {
+    @apply mb-2 block text-sm font-semibold text-navy;
+  }
+  .prose-body p {
+    @apply mb-5 text-[17px] leading-[1.8] text-ink/80;
+  }
+  .prose-body h2 {
+    @apply mb-4 mt-12 scroll-mt-28 font-display text-2xl font-medium tracking-tight text-navy md:text-3xl;
+  }
+  .prose-body h3 {
+    @apply mb-3 mt-8 text-xl font-bold text-navy;
+  }
+  .prose-body ul {
+    @apply mb-6 list-disc space-y-2 pl-6 text-[17px] leading-[1.7] text-ink/80 marker:text-accent;
+  }
+  .prose-body a {
+    @apply text-navy underline decoration-accent underline-offset-4 hover:text-accent;
+  }
+}

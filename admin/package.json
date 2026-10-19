@@ -1,0 +1,15 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tailwindcss -i resources/css/admin.css -o public/css/admin.css --minify && node scripts/copy-vendor.js",
+    "watch": "tailwindcss -i resources/css/admin.css -o public/css/admin.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.9",
+    "alpinejs": "3.14.3",
+    "chart.js": "4.4.6",
+    "sortablejs": "1.15.3",
+    "tailwindcss": "^3.4.15"
+  }
+}

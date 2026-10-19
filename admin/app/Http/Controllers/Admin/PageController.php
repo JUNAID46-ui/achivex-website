@@ -1,0 +1,186 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Models\ActivityLog;
+use App\Models\Content\Page;
+use App\Models\Content\PageSection;
+use App\Models\Content\SeoMeta;
+use App\Services\ContentSchema;
+use App\Services\PageCatalog;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
+// The "Pages" section: every page of the website, its content, and pages made in the admin.
+class PageController extends Controller
+{
+    public function index(Request $request)
+    {
+        $scores = collect(Cache::remember('seo-index', 600, fn () => \App\Services\SeoIndex::all()))->pluck('score', 'path');
+        $rows = collect(PageCatalog::all());
+        if ($t = $request->input('type')) {
+            $rows = $rows->where('type', $t);
+        }
+        if ($q = mb_strtolower((string) $request->input('q'))) {
+            $rows = $rows->filter(fn ($r) => str_contains(mb_strtolower($r['title'].' '.$r['path']), $q));
+        }
+        $rows = $rows->sortBy(fn ($r) => [$r['kind'] === 'home' ? 0 : ($r['kind'] === 'custom' ? 1 : 2), $r['path']])->values();
+
+        return view('admin.pages.index', [
+            'rows' => $rows,
+            'scores' => $scores,
+            'types' => collect(PageCatalog::all())->pluck('type')->unique()->values(),
+            'siteUrl' => rtrim(config('admin.site_url'), '/'),
+        ]);
+    }
+
+    public function create()
+    {
+        return view('admin.pages.create', ['parents' => collect(PageCatalog::all())->where('kind', '!=', 'home')->pluck('title', 'path')]);
+    }
+
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'title' => 'required|max:120',
+            'slug' => ['required', 'max:120', 'regex:/^[a-z0-9-]+(\/[a-z0-9-]+)*$/'],
+            'description' => 'nullable|max:300',
+            'layout' => 'required|in:blank,basic,image',
+            'published' => 'nullable|boolean',
+        ], ['slug.regex' => 'Use lowercase letters, numbers and dashes only, for example "our-pricing".'], ['slug' => 'page address']);
+        $path = '/'.trim($data['slug'], '/').'/';
+        if (PageCatalog::find($path)) {
+            return back()->withInput()->withErrors(['slug' => "A page already uses {$path}. Choose another address."]);
+        }
+
+        DB::transaction(function () use ($data, $path, $request) {
+            Page::create([
+                'path' => $path, 'kind' => 'custom', 'title' => $data['title'], 'published' => $request->boolean('published'),
+                'content' => ['description' => $data['description'] ?? ''],
+            ]);
+            $starter = match ($data['layout']) {
+                'basic' => ['page_hero', 'rich_text', 'cta'],
+                'image' => ['page_hero', 'image_text', 'cards', 'cta'],
+                default => ['page_hero'],
+            };
+            foreach ($starter as $i => $type) {
+                $schema = config("builder.{$type}");
+                $sectionData = $type === 'cta'
+                    ? (PageSection::where('page', 'home')->where('key', 'cta')->value('data') ?? [])
+                    : ($schema['defaults'] ?? []);
+                if ($type === 'page_hero') {
+                    $sectionData['heading'] = $data['title'];
+                    $sectionData['text'] = $data['description'] ?? '';
+                }
+                PageSection::create([
+                    'page' => $path, 'key' => $type.'-'.Str::lower(Str::random(6)), 'type' => $type,
+                    'label' => $schema['label'] ?? Str::headline($type), 'data' => $sectionData, 'sort' => $i, 'visible' => true, 'updated_at' => now(),
+                ]);
+            }
+        });
+        Cache::forget('seo-index');
+        ActivityLog::record('created', 'Page', $data['title'], $path);
+
+        return redirect()->route('admin.builder', ['page' => $path])->with('status', 'Page created. Add and edit its sections here.');
+    }
+
+    public function edit(Request $request)
+    {
+        $page = PageCatalog::find((string) $request->input('path'));
+        abort_unless($page, 404, 'That page does not exist.');
+        if ($page['kind'] === 'home') {
+            return redirect()->route('admin.builder', ['page' => '/']);
+        }
+        $saved = Page::find($page['path']);
+        $viewData = ['page' => $page, 'saved' => $saved, 'siteUrl' => rtrim(config('admin.site_url'), '/'),
+            'sectionCount' => PageSection::where('page', $page['path'])->count()];
+
+        if ($page['kind'] === 'custom') {
+            return view('admin.pages.custom', $viewData);
+        }
+        $defaults = PageCatalog::defaults($page['path']);
+        abort_unless($defaults, 404, 'This page has no editable content.');
+
+        return view('admin.pages.edit', $viewData + [
+            'fields' => ContentSchema::fields($defaults),
+            'values' => array_replace($defaults, $saved?->content ?? []),
+        ]);
+    }
+
+    public function update(Request $request)
+    {
+        $page = PageCatalog::find((string) $request->input('path'));
+        abort_unless($page && $page['kind'] !== 'home', 404);
+
+        if ($page['kind'] === 'custom') {
+            return $this->updateCustom($request, $page);
+        }
+        $defaults = PageCatalog::defaults($page['path']);
+        $input = json_decode((string) $request->input('content_json'), true);
+        abort_unless(is_array($input), 422, 'The form could not be read. Reload the page and try again.');
+        $content = ContentSchema::clean(ContentSchema::fields($defaults), $input, $defaults);
+
+        Page::updateOrCreate(['path' => $page['path']], ['kind' => 'builtin', 'title' => $page['title'], 'published' => true, 'content' => $content]);
+        Cache::forget('seo-index');
+        ActivityLog::record('updated', 'Page', $page['title'], $page['path']);
+
+        return back()->with('status', 'Page saved. The website shows the new content on its next load.');
+    }
+
+    private function updateCustom(Request $request, array $page)
+    {
+        $data = $request->validate([
+            'title' => 'required|max:120',
+            'slug' => ['required', 'max:120', 'regex:/^[a-z0-9-]+(\/[a-z0-9-]+)*$/'],
+            'description' => 'nullable|max:300',
+        ], ['slug.regex' => 'Use lowercase letters, numbers and dashes only.'], ['slug' => 'page address']);
+        $newPath = '/'.trim($data['slug'], '/').'/';
+        if ($newPath !== $page['path'] && PageCatalog::find($newPath)) {
+            return back()->withInput()->withErrors(['slug' => "A page already uses {$newPath}."]);
+        }
+        DB::transaction(function () use ($page, $newPath, $data, $request) {
+            $row = Page::findOrFail($page['path']);
+            if ($newPath !== $page['path']) {
+                Page::create(['path' => $newPath, 'kind' => 'custom', 'title' => $data['title'], 'published' => $request->boolean('published'), 'content' => ['description' => $data['description'] ?? '']]);
+                PageSection::where('page', $page['path'])->update(['page' => $newPath]);
+                SeoMeta::where('path', $page['path'])->update(['path' => $newPath]);
+                $row->delete();
+            } else {
+                $row->update(['title' => $data['title'], 'published' => $request->boolean('published'), 'content' => array_merge($row->content ?? [], ['description' => $data['description'] ?? ''])]);
+            }
+        });
+        Cache::forget('seo-index');
+        ActivityLog::record('updated', 'Page', $data['title'], $newPath);
+
+        return redirect()->route('admin.pages.edit', ['path' => $newPath])->with('status', 'Page settings saved.');
+    }
+
+    public function reset(Request $request)
+    {
+        $page = PageCatalog::find((string) $request->input('path'));
+        abort_unless($page && $page['kind'] === 'builtin', 404);
+        Page::where('path', $page['path'])->delete();
+        Cache::forget('seo-index');
+        ActivityLog::record('updated', 'Page', $page['title'], 'Restored original content');
+
+        return back()->with('status', 'The original content of this page has been restored.');
+    }
+
+    public function destroy(Request $request)
+    {
+        $page = PageCatalog::find((string) $request->input('path'));
+        abort_unless($page && $page['kind'] === 'custom', 404);
+        DB::transaction(function () use ($page) {
+            PageSection::where('page', $page['path'])->delete();
+            SeoMeta::where('path', $page['path'])->delete();
+            Page::where('path', $page['path'])->delete();
+        });
+        Cache::forget('seo-index');
+        ActivityLog::record('deleted', 'Page', $page['title'], $page['path']);
+
+        return redirect()->route('admin.pages.index')->with('status', 'Page deleted.');
+    }
+}

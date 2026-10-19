@@ -1,0 +1,71 @@
+import { Routes, Route, Navigate } from 'react-router-dom'
+import Layout from './components/Layout'
+import Home from './pages/Home'
+import WhoWeAre from './pages/about/WhoWeAre'
+import Accomplishments from './pages/about/Accomplishments'
+import Esg from './pages/about/Esg'
+import Leadership from './pages/about/Leadership'
+import GlobalPresence from './pages/about/GlobalPresence'
+import Alliance from './pages/about/Alliance'
+import ServicesOverview from './pages/services/ServicesOverview'
+import ServiceResolver from './pages/services/ServiceResolver'
+import ServiceDetail from './pages/services/ServiceDetail'
+import Industry from './pages/Industry'
+import CaseStudies from './pages/insights/CaseStudies'
+import CaseStudyDetail from './pages/insights/CaseStudyDetail'
+import Newsroom from './pages/insights/Newsroom'
+import NewsDetail from './pages/insights/NewsDetail'
+import Whitepapers from './pages/insights/Whitepapers'
+import WhitepaperDetail from './pages/insights/WhitepaperDetail'
+import Blogs from './pages/insights/Blogs'
+import BlogPost from './pages/insights/BlogPost'
+import Contact from './pages/Contact'
+import Careers from './pages/Careers'
+import PrivacyPolicy from './pages/legal/PrivacyPolicy'
+import Terms from './pages/legal/Terms'
+import NotFound from './pages/NotFound'
+
+export default function App() {
+  return (
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index element={<Home />} />
+
+        <Route path="about-us">
+          <Route index element={<WhoWeAre />} />
+          <Route path="accomplishments" element={<Accomplishments />} />
+          <Route path="esg" element={<Esg />} />
+          <Route path="leadership" element={<Leadership />} />
+          <Route path="global-presence" element={<GlobalPresence />} />
+          <Route path="alliances/:slug" element={<Alliance />} />
+        </Route>
+
+        <Route path="services">
+          <Route index element={<ServicesOverview />} />
+          <Route path=":slug" element={<ServiceResolver />} />
+          <Route path=":category/:slug" element={<ServiceDetail />} />
+        </Route>
+
+        <Route path="industries/:slug" element={<Industry />} />
+
+        <Route path="insights">
+          <Route index element={<Navigate to="/insights/case-studies/" replace />} />
+          <Route path="case-studies" element={<CaseStudies />} />
+          <Route path="case-studies/:slug" element={<CaseStudyDetail />} />
+          <Route path="newsroom" element={<Newsroom />} />
+          <Route path="newsroom/:slug" element={<NewsDetail />} />
+          <Route path="whitepapers" element={<Whitepapers />} />
+          <Route path="whitepapers/:slug" element={<WhitepaperDetail />} />
+          <Route path="blogs" element={<Blogs />} />
+          <Route path="blogs/:slug" element={<BlogPost />} />
+        </Route>
+
+        <Route path="contact-us" element={<Contact />} />
+        <Route path="careers" element={<Careers />} />
+        <Route path="privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="terms-of-service" element={<Terms />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
+  )
+}

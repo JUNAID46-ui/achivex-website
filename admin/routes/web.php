@@ -1,0 +1,117 @@
+<?php
+
+use App\Http\Controllers\Admin;
+use App\Http\Controllers\PublicSeoController;
+use Illuminate\Support\Facades\Route;
+
+Route::redirect('/', '/admin');
+
+// Public SEO files generated from the admin settings
+Route::get('/sitemap.xml', [PublicSeoController::class, 'sitemap'])->name('sitemap');
+Route::get('/robots.txt', [PublicSeoController::class, 'robots'])->name('robots');
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::middleware('guest')->group(function () {
+        Route::get('login', [Admin\AuthController::class, 'showLogin'])->name('login');
+        Route::post('login', [Admin\AuthController::class, 'login'])->middleware('throttle:20,1');
+        Route::get('forgot-password', [Admin\PasswordResetController::class, 'request'])->name('password.request');
+        Route::post('forgot-password', [Admin\PasswordResetController::class, 'send'])->name('password.email')->middleware('throttle:5,1');
+        Route::get('reset-password/{token}', [Admin\PasswordResetController::class, 'edit'])->name('password.reset');
+        Route::post('reset-password', [Admin\PasswordResetController::class, 'update'])->name('password.update');
+    });
+
+    Route::middleware('auth')->group(function () {
+        Route::post('logout', [Admin\AuthController::class, 'logout'])->name('logout');
+        Route::get('/', [Admin\DashboardController::class, 'index'])->name('dashboard');
+        Route::post('quick-draft', [Admin\DashboardController::class, 'quickDraft'])->name('quick-draft')->middleware('area:posts');
+
+        // Page builder
+        Route::middleware('area:builder')->group(function () {
+            Route::get('builder', [Admin\BuilderController::class, 'index'])->name('builder');
+            Route::post('builder/sections/{section}', [Admin\BuilderController::class, 'save'])->name('builder.save');
+            Route::post('builder/order', [Admin\BuilderController::class, 'order'])->name('builder.order');
+            Route::post('builder/sections/{section}/toggle', [Admin\BuilderController::class, 'toggle'])->name('builder.toggle');
+            Route::post('builder/hero-stats', [Admin\BuilderController::class, 'heroStats'])->name('builder.hero-stats');
+            Route::post('builder/add', [Admin\BuilderController::class, 'add'])->name('builder.add');
+            Route::delete('builder/sections/{section}', [Admin\BuilderController::class, 'destroy'])->name('builder.destroy');
+
+            // Pages
+            Route::get('pages', [Admin\PageController::class, 'index'])->name('pages.index');
+            Route::get('pages/create', [Admin\PageController::class, 'create'])->name('pages.create');
+            Route::post('pages', [Admin\PageController::class, 'store'])->name('pages.store');
+            Route::get('pages/edit', [Admin\PageController::class, 'edit'])->name('pages.edit');
+            Route::post('pages/update', [Admin\PageController::class, 'update'])->name('pages.update');
+            Route::post('pages/reset', [Admin\PageController::class, 'reset'])->name('pages.reset');
+            Route::post('pages/delete', [Admin\PageController::class, 'destroy'])->name('pages.destroy');
+        });
+
+        // Generic content types
+        Route::get('r/{resource}', [Admin\ResourceController::class, 'index'])->name('resources.index');
+        Route::get('r/{resource}/create', [Admin\ResourceController::class, 'create'])->name('resources.create');
+        Route::post('r/{resource}', [Admin\ResourceController::class, 'store'])->name('resources.store');
+        Route::post('r/{resource}/bulk', [Admin\ResourceController::class, 'bulk'])->name('resources.bulk');
+        Route::get('r/{resource}/{id}/edit', [Admin\ResourceController::class, 'edit'])->name('resources.edit');
+        Route::put('r/{resource}/{id}', [Admin\ResourceController::class, 'update'])->name('resources.update');
+        Route::delete('r/{resource}/{id}', [Admin\ResourceController::class, 'destroy'])->name('resources.destroy');
+
+        // Media library
+        Route::middleware('area:media')->group(function () {
+            Route::get('media', [Admin\MediaController::class, 'index'])->name('media.index');
+            Route::get('media/list', [Admin\MediaController::class, 'list'])->name('media.list');
+            Route::post('media', [Admin\MediaController::class, 'store'])->name('media.store');
+            Route::patch('media/{media}', [Admin\MediaController::class, 'update'])->name('media.update');
+            Route::delete('media/{media}', [Admin\MediaController::class, 'destroy'])->name('media.destroy');
+        });
+
+        // Inbox
+        Route::middleware('area:inbox')->prefix('inbox')->name('inbox.')->group(function () {
+            Route::get('messages', [Admin\InboxController::class, 'messages'])->name('messages');
+            Route::get('messages/export', [Admin\InboxController::class, 'exportMessages'])->name('messages.export');
+            Route::get('messages/{message}', [Admin\InboxController::class, 'show'])->name('messages.show');
+            Route::post('messages/{message}/star', [Admin\InboxController::class, 'star'])->name('messages.star');
+            Route::post('messages/{message}/reply', [Admin\MailController::class, 'reply'])->name('messages.reply')->middleware('throttle:20,1');
+            Route::post('messages/{message}/unread', [Admin\InboxController::class, 'unread'])->name('messages.unread');
+            Route::delete('messages/{message}', [Admin\InboxController::class, 'destroy'])->name('messages.destroy');
+            Route::get('requests', [Admin\InboxController::class, 'requests'])->name('requests');
+            Route::get('requests/export', [Admin\InboxController::class, 'exportRequests'])->name('requests.export');
+            Route::post('requests/{guideRequest}/handled', [Admin\InboxController::class, 'handled'])->name('requests.handled');
+        });
+
+        // SEO
+        Route::middleware('area:seo')->prefix('seo')->name('seo.')->group(function () {
+            Route::get('/', [Admin\SeoController::class, 'overview'])->name('overview');
+            Route::get('pages', [Admin\SeoController::class, 'pages'])->name('pages');
+            Route::get('pages/edit', [Admin\SeoController::class, 'editPage'])->name('pages.edit');
+            Route::post('pages/edit', [Admin\SeoController::class, 'savePage'])->name('pages.save');
+            Route::get('appearance', [Admin\SeoController::class, 'appearance'])->name('appearance');
+            Route::post('appearance', [Admin\SeoController::class, 'saveAppearance']);
+            Route::get('sitemap', [Admin\SeoController::class, 'sitemap'])->name('sitemap');
+            Route::get('sitemap/download', [Admin\SeoController::class, 'downloadSitemap'])->name('sitemap.download');
+            Route::get('robots', [Admin\SeoController::class, 'robots'])->name('robots');
+            Route::post('robots', [Admin\SeoController::class, 'saveRobots']);
+            Route::get('404', [Admin\SeoController::class, 'notFound'])->name('notfound');
+            Route::post('404/redirect', [Admin\SeoController::class, 'redirectNotFound'])->name('notfound.redirect');
+            Route::post('404/clear', [Admin\SeoController::class, 'clearNotFound'])->name('notfound.clear');
+            Route::get('local', [Admin\SeoController::class, 'schema'])->name('schema');
+            Route::post('local', [Admin\SeoController::class, 'saveSchema']);
+            Route::get('webmaster', [Admin\SeoController::class, 'webmaster'])->name('webmaster');
+            Route::post('webmaster', [Admin\SeoController::class, 'saveWebmaster']);
+        });
+
+        Route::get('analytics', [Admin\AnalyticsController::class, 'index'])->name('analytics')->middleware('area:analytics');
+        Route::get('analytics/export', [Admin\AnalyticsController::class, 'export'])->name('analytics.export')->middleware('area:analytics');
+
+        Route::middleware('area:settings')->group(function () {
+            Route::get('settings', [Admin\SettingsController::class, 'index'])->name('settings');
+            Route::post('settings', [Admin\SettingsController::class, 'save']);
+            Route::post('settings/storage', [Admin\SettingsController::class, 'saveStorage'])->name('settings.storage');
+            Route::post('settings/mail', [Admin\SettingsController::class, 'saveMail'])->name('settings.mail');
+            Route::post('settings/test-email', [Admin\MailController::class, 'test'])->name('settings.test-email')->middleware('throttle:5,1');
+        });
+
+        Route::get('activity', [Admin\ActivityController::class, 'index'])->name('activity')->middleware('area:activity');
+
+        Route::get('profile', [Admin\ProfileController::class, 'edit'])->name('profile');
+        Route::post('profile', [Admin\ProfileController::class, 'update']);
+    });
+});
