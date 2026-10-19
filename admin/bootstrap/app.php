@@ -12,6 +12,10 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias(['area' => \App\Http\Middleware\EnsureArea::class]);
+        // On Vercel requests reach PHP through Vercel's proxy, so trust it to get https links.
+        if (env('VERCEL')) {
+            $middleware->trustProxies(at: '*');
+        }
         $middleware->redirectGuestsTo(fn () => route('admin.login'));
         $middleware->redirectUsersTo(fn () => route('admin.dashboard'));
     })
