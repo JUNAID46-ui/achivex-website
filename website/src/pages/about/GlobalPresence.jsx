@@ -34,16 +34,16 @@ export default function GlobalPresence() {
         />
         <div className="pt-8 md:pointer-events-none md:absolute md:inset-x-0 md:top-10 md:pt-0">
           <div className="container-site">
-            <FadeUp className="max-w-md bg-white p-8 md:pointer-events-auto">
+            <FadeUp className="max-w-md bg-canvas p-8 md:pointer-events-auto">
               <div className="flex items-center gap-3">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-accent text-ink"><MapPin className="h-5 w-5" aria-hidden="true" /></span>
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-accent text-canvas"><MapPin className="h-5 w-5" aria-hidden="true" /></span>
                 <h2 className="text-2xl font-bold">{hq.city}, {hq.country}</h2>
               </div>
               <p className="mt-2 text-sm font-semibold text-accent">{hq.type}</p>
-              {hq.address && <p className="mt-4 text-sm text-ink/70">{hq.address}</p>}
+              {hq.address && <p className="mt-4 text-sm text-body/70">{hq.address}</p>}
               <div className="mt-5 space-y-2 text-[15px]">
-                <a href={site.phoneHref} className="flex items-center gap-2 text-navy hover:text-accent"><Phone className="h-4 w-4 text-accent" aria-hidden="true" />{hq.phone}</a>
-                <a href={`mailto:${hq.email}`} className="flex items-center gap-2 text-navy hover:text-accent"><Mail className="h-4 w-4 text-accent" aria-hidden="true" />{hq.email}</a>
+                <a href={site.phoneHref} className="flex items-center gap-2 text-white hover:text-accent"><Phone className="h-4 w-4 text-accent" aria-hidden="true" />{hq.phone}</a>
+                <a href={`mailto:${hq.email}`} className="flex items-center gap-2 text-white hover:text-accent"><Mail className="h-4 w-4 text-accent" aria-hidden="true" />{hq.email}</a>
               </div>
             </FadeUp>
           </div>
@@ -55,10 +55,10 @@ export default function GlobalPresence() {
           <FadeUp><h2 className="h-display text-4xl md:text-5xl">{c.locationsTitle}</h2></FadeUp>
           <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {locations.map((l) => (
-              <FadeUp as="li" key={l.city} className="bg-white p-8">
+              <FadeUp as="li" key={l.city} className="bg-canvas p-8">
                 <MapPin className="h-6 w-6 text-accent" aria-hidden="true" />
                 <h3 className="mt-5 text-xl font-bold">{l.city}, {l.country}</h3>
-                <p className="mt-1 text-ink/60">{l.type}</p>
+                <p className="mt-1 text-body/60">{l.type}</p>
               </FadeUp>
             ))}
           </ul>

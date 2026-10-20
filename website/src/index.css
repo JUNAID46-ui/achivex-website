@@ -8,16 +8,16 @@
     -webkit-font-smoothing: antialiased;
   }
   body {
-    @apply bg-white font-sans text-ink;
+    @apply bg-canvas font-sans text-body;
   }
   h1, h2, h3, h4 {
-    @apply text-navy;
+    @apply text-white;
   }
   ::selection {
     @apply bg-navy text-white;
   }
   :focus-visible {
-    outline: 2px solid #F0A500;
+    outline: 2px solid #B6F500;
     outline-offset: 3px;
   }
 }
@@ -31,24 +31,24 @@
     text-wrap: balance;
   }
   .field {
-    @apply w-full border border-mist bg-mist px-4 py-3 text-[15px] text-ink outline-none transition focus:border-navy focus:bg-white;
+    @apply w-full border border-mist bg-mist px-4 py-3 text-[15px] text-body outline-none transition focus:border-accent focus:bg-canvas;
   }
   .label {
-    @apply mb-2 block text-sm font-semibold text-navy;
+    @apply mb-2 block text-sm font-semibold text-white;
   }
   .prose-body p {
-    @apply mb-5 text-[17px] leading-[1.8] text-ink/80;
+    @apply mb-5 text-[17px] leading-[1.8] text-body/80;
   }
   .prose-body h2 {
-    @apply mb-4 mt-12 scroll-mt-28 font-display text-2xl font-medium tracking-tight text-navy md:text-3xl;
+    @apply mb-4 mt-12 scroll-mt-28 font-display text-2xl font-medium tracking-tight text-white md:text-3xl;
   }
   .prose-body h3 {
-    @apply mb-3 mt-8 text-xl font-bold text-navy;
+    @apply mb-3 mt-8 text-xl font-bold text-white;
   }
   .prose-body ul {
-    @apply mb-6 list-disc space-y-2 pl-6 text-[17px] leading-[1.7] text-ink/80 marker:text-accent;
+    @apply mb-6 list-disc space-y-2 pl-6 text-[17px] leading-[1.7] text-body/80 marker:text-accent;
   }
   .prose-body a {
-    @apply text-navy underline decoration-accent underline-offset-4 hover:text-accent;
+    @apply text-white underline decoration-accent underline-offset-4 hover:text-accent;
   }
 }

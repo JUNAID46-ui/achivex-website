@@ -18,7 +18,7 @@ export default function Industry() {
 
   return (
     <>
-      <section className="relative bg-ink text-white">
+      <section className="relative bg-canvas text-white">
         <Img src={ind.image} alt={`${ind.name} industry`} className="absolute inset-0 h-full w-full object-cover opacity-40" />
         <div className="container-site relative flex min-h-[460px] flex-col justify-between py-12">
           <Breadcrumb light items={[{ label: 'Industries' }, { label: ind.name }]} />
@@ -29,11 +29,11 @@ export default function Industry() {
         </div>
       </section>
 
-      <section className="bg-white py-20 md:py-28">
+      <section className="bg-canvas py-20 md:py-28">
         <div className="container-site grid gap-12 lg:grid-cols-2">
           <FadeUp>
             <h2 className="h-display text-4xl md:text-5xl">Where we focus</h2>
-            <p className="mt-6 max-w-md text-lg leading-relaxed text-ink/70">
+            <p className="mt-6 max-w-md text-lg leading-relaxed text-body/70">
               The areas below are where {ind.name.toLowerCase()} clients most often ask for help. Every engagement starts with your own priorities.
             </p>
           </FadeUp>
@@ -41,7 +41,7 @@ export default function Industry() {
             {ind.focus.map((f, i) => (
               <FadeUp as="li" key={f} delay={i * 0.05} className="bg-mist p-7">
                 <span className="block h-1 w-8 bg-accent" aria-hidden="true" />
-                <p className="mt-5 text-lg font-bold text-navy">{f}</p>
+                <p className="mt-5 text-lg font-bold text-white">{f}</p>
               </FadeUp>
             ))}
           </ul>
@@ -56,10 +56,10 @@ export default function Industry() {
               <FadeUp key={s.slug}><ServiceCard service={s} /></FadeUp>
             ))}
           </div>
-          <div className="mt-14 flex flex-wrap gap-x-8 gap-y-3 border-t border-navy/15 pt-8">
-            <span className="font-semibold text-navy">Other industries:</span>
+          <div className="mt-14 flex flex-wrap gap-x-8 gap-y-3 border-t border-white/15 pt-8">
+            <span className="font-semibold text-white">Other industries:</span>
             {industries.filter((i) => i.slug !== slug).map((i) => (
-              <ArrowLink key={i.slug} to={`/industries/${i.slug}/`} className="text-navy">{i.name}</ArrowLink>
+              <ArrowLink key={i.slug} to={`/industries/${i.slug}/`} className="text-white">{i.name}</ArrowLink>
             ))}
           </div>
         </div>

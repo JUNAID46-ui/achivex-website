@@ -58,7 +58,7 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`sticky top-0 z-50 bg-ink transition-shadow duration-300 ${solid ? 'shadow-[0_1px_0_rgba(255,255,255,0.08)]' : ''}`}
+        className={`sticky top-0 z-50 bg-canvas transition-shadow duration-300 ${solid ? 'shadow-[0_1px_0_rgba(255,255,255,0.08)]' : ''}`}
         onMouseLeave={leave}
       >
         <div className="container-site flex h-[72px] items-center justify-between gap-6">
@@ -91,7 +91,7 @@ export default function Navbar() {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -6 }}
                             transition={{ duration: 0.22 }}
-                            className="absolute left-0 top-full bg-white"
+                            className="absolute left-0 top-full bg-canvas"
                           >
                             <item.panel onNavigate={close} />
                           </motion.div>
@@ -145,7 +145,7 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.25, ease: 'easeOut' }}
-              className="absolute inset-x-0 top-full hidden border-t border-mist bg-white lg:block"
+              className="absolute inset-x-0 top-full hidden border-t border-mist bg-canvas lg:block"
               onMouseEnter={() => enter(active.key)}
             >
               <div className="mx-auto max-w-[1440px]">

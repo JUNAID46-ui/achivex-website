@@ -36,7 +36,7 @@ export default function Blogs() {
 
   return (
     <>
-      <section className="bg-white pb-16 pt-12">
+      <section className="bg-canvas pb-16 pt-12">
         <div className="container-site">
           <Breadcrumb items={[{ label: 'Insights' }, { label: 'Blogs' }]} />
           <FadeUp className="mt-10"><h1 className="h-display text-5xl md:text-7xl">{pc.heroTitle}</h1></FadeUp>
@@ -48,11 +48,11 @@ export default function Blogs() {
               </div>
               <div className="flex flex-col justify-center p-8 md:p-12">
                 <h2 className="h-display text-4xl leading-tight md:text-5xl">{featured.title}</h2>
-                <p className="mt-3 text-sm text-ink/60">
+                <p className="mt-3 text-sm text-body/60">
                   <span className="font-semibold text-accent">{pc.featuredLabel} / {featured.category}</span> / {formatDate(featured.date)} / {readTime(featured)} min read
                 </p>
-                <p className="mt-5 text-lg leading-relaxed text-ink/70">{featured.excerpt}</p>
-                <span className="mt-8 inline-flex items-center gap-2 font-semibold text-navy group-hover:text-accent">
+                <p className="mt-5 text-lg leading-relaxed text-body/70">{featured.excerpt}</p>
+                <span className="mt-8 inline-flex items-center gap-2 font-semibold text-white group-hover:text-accent">
                   {pc.readArticleText} <ArrowRight className="h-4 w-4 text-accent transition-transform group-hover:translate-x-1" aria-hidden="true" />
                 </span>
               </div>
@@ -71,7 +71,7 @@ export default function Blogs() {
                   role="tab"
                   aria-selected={cat === c}
                   onClick={() => change(setCat)(c)}
-                  className={`border-b-2 pb-1 text-sm font-semibold transition-colors ${cat === c ? 'border-accent text-navy' : 'border-transparent text-ink/50 hover:text-accent'}`}
+                  className={`border-b-2 pb-1 text-sm font-semibold transition-colors ${cat === c ? 'border-accent text-white' : 'border-transparent text-body/50 hover:text-accent'}`}
                 >
                   {c === 'All' ? pc.allCategoriesLabel : c}
                 </button>
@@ -79,20 +79,20 @@ export default function Blogs() {
             </div>
             <div className="relative w-full lg:w-80">
               <label htmlFor="blog-search" className="sr-only">{pc.searchPlaceholder}</label>
-              <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-navy/50" aria-hidden="true" />
+              <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/50" aria-hidden="true" />
               <input
                 id="blog-search"
                 type="search"
                 value={q}
                 onChange={(e) => change(setQ)(e.target.value)}
                 placeholder={pc.searchPlaceholder}
-                className="w-full border border-white bg-white py-3 pl-11 pr-5 text-[15px] outline-none focus:border-navy"
+                className="w-full border border-white bg-canvas py-3 pl-11 pr-5 text-[15px] outline-none focus:border-accent"
               />
             </div>
           </div>
 
           {shown.length === 0 ? (
-            <p className="py-20 text-center text-lg text-ink/60">{pc.emptyText}</p>
+            <p className="py-20 text-center text-lg text-body/60">{pc.emptyText}</p>
           ) : (
             <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {shown.map((b, i) => (
@@ -107,7 +107,7 @@ export default function Blogs() {
                 onClick={() => setPage(current - 1)}
                 disabled={current === 1}
                 aria-label="Previous page"
-                className="flex h-11 w-11 items-center justify-center bg-white text-navy transition-colors hover:bg-accent hover:text-ink disabled:opacity-40 disabled:hover:bg-white disabled:hover:text-navy"
+                className="flex h-11 w-11 items-center justify-center bg-canvas text-white transition-colors hover:bg-accent hover:text-canvas disabled:opacity-40 disabled:hover:bg-canvas disabled:hover:text-white"
               >
                 <ChevronLeft className="h-5 w-5" />
               </button>
@@ -116,7 +116,7 @@ export default function Blogs() {
                   key={n}
                   onClick={() => setPage(n)}
                   aria-current={n === current ? 'page' : undefined}
-                  className={`h-11 w-11 rounded-full text-sm font-semibold transition-colors ${n === current ? 'bg-navy text-white' : 'bg-white text-navy hover:bg-accent hover:text-ink'}`}
+                  className={`h-11 w-11 rounded-full text-sm font-semibold transition-colors ${n === current ? 'bg-accent text-canvas' : 'bg-canvas text-white hover:bg-accent hover:text-canvas'}`}
                 >
                   {n}
                 </button>
@@ -125,7 +125,7 @@ export default function Blogs() {
                 onClick={() => setPage(current + 1)}
                 disabled={current === pages}
                 aria-label="Next page"
-                className="flex h-11 w-11 items-center justify-center bg-white text-navy transition-colors hover:bg-accent hover:text-ink disabled:opacity-40 disabled:hover:bg-white disabled:hover:text-navy"
+                className="flex h-11 w-11 items-center justify-center bg-canvas text-white transition-colors hover:bg-accent hover:text-canvas disabled:opacity-40 disabled:hover:bg-canvas disabled:hover:text-white"
               >
                 <ChevronRight className="h-5 w-5" />
               </button>

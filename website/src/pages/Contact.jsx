@@ -37,7 +37,7 @@ export default function Contact() {
 
   return (
     <>
-      <section className="bg-ink pb-16 pt-12 text-white md:pb-20">
+      <section className="bg-canvas pb-16 pt-12 text-white md:pb-20">
         <div className="container-site">
           <Breadcrumb light items={[{ label: 'Contact us' }]} />
           <FadeUp className="mt-14 grid gap-8 lg:grid-cols-[1.3fr_1fr] lg:items-end">
@@ -49,12 +49,12 @@ export default function Contact() {
 
       <section className="bg-mist py-16 md:py-24">
         <div className="container-site grid gap-8 lg:grid-cols-[1.4fr_1fr]">
-          <FadeUp className="bg-white p-8 md:p-12">
+          <FadeUp className="bg-canvas p-8 md:p-12">
             {sent ? (
               <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} role="status" className="py-10">
                 <CheckCircle2 className="h-12 w-12 text-accent" aria-hidden="true" />
                 <h2 className="mt-6 font-display text-4xl">Thanks, {form.name.split(' ')[0]}.</h2>
-                <p className="mt-4 max-w-md text-lg leading-relaxed text-ink/70">
+                <p className="mt-4 max-w-md text-lg leading-relaxed text-body/70">
                   {c.thanksText} {form.email}.
                 </p>
               </motion.div>
@@ -96,7 +96,7 @@ export default function Contact() {
                     <textarea id="c-message" required rows={6} value={form.message} onChange={set('message')} className="field resize-y" />
                   </div>
                 </div>
-                {error && <p role="alert" className="mt-6 border-l-2 border-accent bg-mist px-4 py-3 text-sm text-ink">{error}</p>}
+                {error && <p role="alert" className="mt-6 border-l-2 border-accent bg-mist px-4 py-3 text-sm text-body">{error}</p>}
                 <Button type="submit" className="mt-8" disabled={sending}>{sending ? 'Sending...' : c.formButton}</Button>
               </form>
             )}
@@ -127,7 +127,7 @@ export default function Contact() {
                 href={site.googleProfile}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-10 inline-flex items-center gap-2 bg-white px-6 py-3 text-[15px] font-semibold text-navy transition-colors hover:bg-accent hover:text-ink"
+                className="mt-10 inline-flex items-center gap-2 bg-accent px-6 py-3 text-[15px] font-semibold text-canvas transition-colors hover:bg-white hover:text-canvas"
               >
                 {c.googleButton} <ExternalLink className="h-4 w-4" aria-hidden="true" />
               </a>

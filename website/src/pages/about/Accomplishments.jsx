@@ -29,7 +29,7 @@ export default function Accomplishments() {
 
   return (
     <>
-      <section className="bg-ink pb-20 pt-12 text-white md:pb-28">
+      <section className="bg-canvas pb-20 pt-12 text-white md:pb-28">
         <div className="container-site">
           <Breadcrumb light items={[{ label: 'About', to: '/about-us/' }, { label: 'Our Accomplishments' }]} />
           <div className="mt-16 grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-end">
@@ -43,15 +43,15 @@ export default function Accomplishments() {
         </div>
       </section>
 
-      <section className="bg-white py-20 md:py-28">
+      <section className="bg-canvas py-20 md:py-28">
         <div className="container-site">
           <FadeUp><h2 className="h-display text-4xl md:text-5xl">{c.builtTitle}</h2></FadeUp>
-          <ul className="mt-12 grid grid-cols-2 border-l border-t border-ink/10 md:grid-cols-5">
+          <ul className="mt-12 grid grid-cols-2 border-l border-t border-body/10 md:grid-cols-5">
             {built.map((b, i) => (
-              <FadeUp as="li" key={b.label} delay={i * 0.05} className="border-b border-r border-ink/10">
+              <FadeUp as="li" key={b.label} delay={i * 0.05} className="border-b border-r border-body/10">
                 <Link to={b.to} className="group block p-6 transition-colors hover:bg-mist md:p-8">
-                  <span className="block font-display text-5xl font-medium tracking-tight text-navy md:text-6xl">{b.value}</span>
-                  <span className="mt-4 block text-[15px] text-ink/60 group-hover:text-ink">{b.label}</span>
+                  <span className="block font-display text-5xl font-medium tracking-tight text-white md:text-6xl">{b.value}</span>
+                  <span className="mt-4 block text-[15px] text-body/60 group-hover:text-canvas">{b.label}</span>
                 </Link>
               </FadeUp>
             ))}
@@ -64,23 +64,23 @@ export default function Accomplishments() {
           <FadeUp className="lg:sticky lg:top-28 lg:self-start">
             <h2 className="h-display text-4xl md:text-5xl">{c.milestonesTitle}</h2>
             <div className="mt-10 hidden overflow-hidden lg:block">
-              <Img src={c.milestonesImage} alt={c.milestonesImageAlt} className="aspect-[4/3] w-full bg-white object-cover" />
+              <Img src={c.milestonesImage} alt={c.milestonesImageAlt} className="aspect-[4/3] w-full bg-canvas object-cover" />
             </div>
           </FadeUp>
-          <ol className="relative border-l-2 border-ink/10 pl-10 md:pl-14">
+          <ol className="relative border-l-2 border-body/10 pl-10 md:pl-14">
             {milestones.map((m, i) => (
               <FadeUp as="li" key={i} className="relative pb-14 last:pb-0">
                 <span className="absolute -left-[49px] top-2 h-4 w-4 rounded-full border-4 border-mist bg-accent md:-left-[65px]" aria-hidden="true" />
-                <p className="font-display text-4xl font-medium tracking-tight text-navy md:text-5xl">{m.date}</p>
+                <p className="font-display text-4xl font-medium tracking-tight text-white md:text-5xl">{m.date}</p>
                 <h3 className="mt-4 text-2xl font-semibold">{m.title}</h3>
-                {m.text && <p className="mt-3 max-w-xl leading-relaxed text-ink/65">{m.text}</p>}
+                {m.text && <p className="mt-3 max-w-xl leading-relaxed text-body/65">{m.text}</p>}
               </FadeUp>
             ))}
             <FadeUp as="li" className="relative">
-              <span className="absolute -left-[49px] top-2 h-4 w-4 rounded-full border-2 border-ink/20 bg-mist md:-left-[65px]" aria-hidden="true" />
-              <p className="text-lg font-semibold text-navy">{c.nextTitle}</p>
-              <p className="mt-2 max-w-xl leading-relaxed text-ink/65">{c.nextText}</p>
-              <div className="mt-4"><ArrowLink to="/insights/newsroom/" className="font-medium text-navy">{c.nextLinkText}</ArrowLink></div>
+              <span className="absolute -left-[49px] top-2 h-4 w-4 rounded-full border-2 border-body/20 bg-mist md:-left-[65px]" aria-hidden="true" />
+              <p className="text-lg font-semibold text-white">{c.nextTitle}</p>
+              <p className="mt-2 max-w-xl leading-relaxed text-body/65">{c.nextText}</p>
+              <div className="mt-4"><ArrowLink to="/insights/newsroom/" className="font-medium text-white">{c.nextLinkText}</ArrowLink></div>
             </FadeUp>
           </ol>
         </div>

@@ -47,7 +47,7 @@ export default function WhitepaperDetail() {
 
   return (
     <>
-      <section className="bg-white pb-24 pt-12">
+      <section className="bg-canvas pb-24 pt-12">
         <div className="container-site">
           <Breadcrumb items={[{ label: 'Insights' }, { label: 'Whitepapers and eBooks', to: '/insights/whitepapers/' }, { label: paper.title }]} />
           <div className="mt-12 grid gap-14 lg:grid-cols-2 lg:gap-20">
@@ -56,14 +56,14 @@ export default function WhitepaperDetail() {
                 <BookCover paper={paper} className="aspect-[3/4] w-56 shrink-0" />
                 <div>
                   <h1 className="h-display text-4xl md:text-5xl">{paper.title}</h1>
-                  <p className="mt-5 text-lg leading-relaxed text-ink/70">{paper.description}</p>
+                  <p className="mt-5 text-lg leading-relaxed text-body/70">{paper.description}</p>
                 </div>
               </div>
               <div className="mt-12 bg-mist p-8">
                 <h2 className="text-xl font-bold">What is inside</h2>
                 <ul className="mt-5 space-y-3">
                   {paper.inside.map((i) => (
-                    <li key={i} className="flex gap-3 text-ink/80">
+                    <li key={i} className="flex gap-3 text-body/80">
                       <Check className="mt-0.5 h-5 w-5 shrink-0 text-accent" aria-hidden="true" />{i}
                     </li>
                   ))}
@@ -81,7 +81,7 @@ export default function WhitepaperDetail() {
                       Your request for {paper.title} has been received. We will send it to {form.email}.
                     </p>
                     {paper.file && (
-                      <a href={paper.file} download className="mt-8 inline-flex bg-white px-6 py-3 font-semibold text-navy hover:bg-accent hover:text-ink">
+                      <a href={paper.file} download className="mt-8 inline-flex bg-accent px-6 py-3 font-semibold text-canvas hover:bg-white hover:text-canvas">
                         Download now
                       </a>
                     )}
@@ -120,9 +120,9 @@ export default function WhitepaperDetail() {
       </section>
       <section className="bg-mist py-14">
         <div className="container-site flex flex-wrap items-center gap-x-8 gap-y-3">
-          <span className="font-semibold text-navy">More guides:</span>
+          <span className="font-semibold text-white">More guides:</span>
           {whitepapers.filter((w) => w.slug !== slug).map((w) => (
-            <ArrowLink key={w.slug} to={`/insights/whitepapers/${w.slug}/`} className="text-navy">{w.title}</ArrowLink>
+            <ArrowLink key={w.slug} to={`/insights/whitepapers/${w.slug}/`} className="text-white">{w.title}</ArrowLink>
           ))}
         </div>
       </section>

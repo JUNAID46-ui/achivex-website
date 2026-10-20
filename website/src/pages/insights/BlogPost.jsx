@@ -39,15 +39,15 @@ export default function BlogPost() {
 
   return (
     <>
-      <article className="bg-white pb-20 pt-12">
+      <article className="bg-canvas pb-20 pt-12">
         <div className="container-site">
           <Breadcrumb items={[{ label: 'Insights' }, { label: 'Blogs', to: '/insights/blogs/' }, { label: post.category }]} />
         </div>
 
         <header className="mx-auto mt-12 max-w-read px-5 text-center">
           <h1 className="h-display text-4xl md:text-6xl">{post.title}</h1>
-          <p className="mt-6 text-sm text-ink/60">
-            By <span className="font-semibold text-navy">{post.author}</span> / <time dateTime={post.date}>{formatDate(post.date)}</time> / {readTime(post)} min read / <span className="font-semibold text-accent">{post.category}</span>
+          <p className="mt-6 text-sm text-body/60">
+            By <span className="font-semibold text-white">{post.author}</span> / <time dateTime={post.date}>{formatDate(post.date)}</time> / {readTime(post)} min read / <span className="font-semibold text-accent">{post.category}</span>
           </p>
         </header>
 
@@ -58,13 +58,13 @@ export default function BlogPost() {
         <div className="container-site mt-14 grid gap-12 lg:grid-cols-[220px_minmax(0,720px)_1fr]">
           <aside className="lg:sticky lg:top-28 lg:self-start">
             <nav aria-label="Table of contents" className="bg-mist p-6 lg:bg-transparent lg:p-0">
-              <p className="text-sm font-bold text-navy">In this article</p>
+              <p className="text-sm font-bold text-white">In this article</p>
               <ol className="mt-4 space-y-3 border-l-2 border-mist text-sm">
                 {post.sections.map((s) => (
                   <li key={s.id}>
                     <a
                       href={`#${s.id}`} onClick={(e) => jumpTo(e, s.id)}
-                      className={`-ml-0.5 block border-l-2 pl-4 transition-colors hover:text-accent ${activeId === s.id ? 'border-accent font-semibold text-navy' : 'border-transparent text-ink/60'}`}
+                      className={`-ml-0.5 block border-l-2 pl-4 transition-colors hover:text-accent ${activeId === s.id ? 'border-accent font-semibold text-white' : 'border-transparent text-body/60'}`}
                     >
                       {s.heading}
                     </a>
@@ -76,7 +76,7 @@ export default function BlogPost() {
 
           <div className="prose-body">
             <p className="!text-xl !leading-relaxed">
-              <strong className="font-bold text-navy">{post.intro.keyword}</strong>{post.intro.text}
+              <strong className="font-bold text-white">{post.intro.keyword}</strong>{post.intro.text}
             </p>
             {post.sections.map((s) => (
               <section key={s.id}>

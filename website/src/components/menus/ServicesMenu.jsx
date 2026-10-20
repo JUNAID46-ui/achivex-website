@@ -9,7 +9,7 @@ function CategoryBlock({ category, onNavigate }) {
   const to = category.single ? servicePath(getService(category.slug)) : categoryPath(category)
   return (
     <div className="mb-8">
-      <Link to={to} onClick={onNavigate} className="text-lg font-bold text-ink transition-colors hover:text-accent">
+      <Link to={to} onClick={onNavigate} className="text-lg font-bold text-body transition-colors hover:text-accent">
         {category.name}
       </Link>
       {!category.single && (
@@ -18,7 +18,7 @@ function CategoryBlock({ category, onNavigate }) {
             const s = getService(slug)
             return (
               <li key={slug}>
-                <ArrowLink to={servicePath(s)} onClick={onNavigate} className="text-[15px] text-ink/75">{s.name}</ArrowLink>
+                <ArrowLink to={servicePath(s)} onClick={onNavigate} className="text-[15px] text-body/75">{s.name}</ArrowLink>
               </li>
             )
           })}
@@ -34,17 +34,17 @@ export default function ServicesMenu({ onNavigate }) {
   return (
     <div className="grid grid-cols-[minmax(260px,30%)_1fr]">
       <aside className="bg-mist px-10 py-10">
-        <p className="font-display text-3xl text-ink">Services</p>
+        <p className="font-display text-3xl text-body">Services</p>
         <Link to={servicesFeature.to} onClick={onNavigate} className="group mt-6 block">
           <div className="overflow-hidden">
             <Img src={servicesFeature.image} alt="Featured article on data modernization" className="aspect-[16/9] w-full object-cover transition-transform duration-700 group-hover:scale-105" />
           </div>
-          <p className="mt-5 text-lg font-bold leading-snug text-ink">{servicesFeature.title}</p>
-          <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-ink group-hover:text-accent">
+          <p className="mt-5 text-lg font-bold leading-snug text-body">{servicesFeature.title}</p>
+          <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-body group-hover:text-accent">
             Learn More <span className="text-accent transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
           </span>
         </Link>
-        <Link to="/services/" onClick={onNavigate} className="mt-8 block border-t border-navy/15 pt-5 text-sm font-semibold text-ink hover:text-accent">
+        <Link to="/services/" onClick={onNavigate} className="mt-8 block border-t border-white/15 pt-5 text-sm font-semibold text-body hover:text-accent">
           View all services
         </Link>
       </aside>

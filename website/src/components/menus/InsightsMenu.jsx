@@ -11,13 +11,13 @@ export default function InsightsMenu({ onNavigate }) {
   return (
     <div className="grid grid-cols-[minmax(260px,30%)_1fr]">
       <aside className="bg-mist px-10 py-10">
-        <p className="font-display text-3xl text-ink">Insights</p>
+        <p className="font-display text-3xl text-body">Insights</p>
         <Link to={`/insights/blogs/${featured.slug}/`} onClick={onNavigate} className="group mt-6 block">
           <div className="overflow-hidden">
             <Img src={featured.image.replace('w=2000', 'w=800')} alt={featured.title} className="aspect-[16/9] w-full object-cover transition-transform duration-700 group-hover:scale-105" />
           </div>
-          <p className="mt-5 text-lg font-bold leading-snug text-ink">{featured.title}</p>
-          <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-ink group-hover:text-accent">
+          <p className="mt-5 text-lg font-bold leading-snug text-body">{featured.title}</p>
+          <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-body group-hover:text-accent">
             Learn More <span className="text-accent transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
           </span>
         </Link>
@@ -28,8 +28,8 @@ export default function InsightsMenu({ onNavigate }) {
             <li key={l.to}>
               <Link to={l.to} onClick={onNavigate} className="group flex items-start justify-between gap-4 px-4 py-4 transition-colors hover:bg-mist">
                 <span>
-                  <span className="block text-lg font-bold text-ink group-hover:text-accent">{l.label}</span>
-                  <span className="mt-1 block text-sm text-ink/60">{l.text}</span>
+                  <span className="block text-lg font-bold text-body group-hover:text-accent">{l.label}</span>
+                  <span className="mt-1 block text-sm text-body/60">{l.text}</span>
                 </span>
                 <ArrowRight className="mt-1.5 h-4 w-4 text-accent transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
               </Link>
@@ -37,11 +37,11 @@ export default function InsightsMenu({ onNavigate }) {
           ))}
         </ul>
         <div>
-          <p className="text-lg font-bold text-ink">Recent case studies</p>
+          <p className="text-lg font-bold text-body">Recent case studies</p>
           <ul className="mt-4 space-y-3">
             {caseStudies.slice(0, 4).map((c) => (
               <li key={c.slug}>
-                <ArrowLink to={`/insights/case-studies/${c.slug}/`} onClick={onNavigate} className="text-[15px] text-ink/75">{c.title}</ArrowLink>
+                <ArrowLink to={`/insights/case-studies/${c.slug}/`} onClick={onNavigate} className="text-[15px] text-body/75">{c.title}</ArrowLink>
               </li>
             ))}
           </ul>

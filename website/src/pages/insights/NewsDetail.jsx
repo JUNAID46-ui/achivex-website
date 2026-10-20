@@ -17,14 +17,14 @@ export default function NewsDetail() {
   const more = news.filter((x) => x.slug !== slug).slice(0, 3)
 
   return (
-    <article className="bg-white pb-24 pt-12">
+    <article className="bg-canvas pb-24 pt-12">
       <div className="container-site">
         <Breadcrumb items={[{ label: 'Insights' }, { label: 'Newsroom', to: '/insights/newsroom/' }, { label: 'Article' }]} />
       </div>
       <header className="mx-auto mt-14 max-w-read px-5">
         <h1 className="text-4xl font-extrabold leading-tight tracking-tight md:text-5xl">{n.title}</h1>
         <time dateTime={n.date} className="mt-4 block text-sm font-semibold text-accent">{formatDate(n.date)}</time>
-        <p className="mt-6 text-xl leading-relaxed text-ink/70">{n.summary}</p>
+        <p className="mt-6 text-xl leading-relaxed text-body/70">{n.summary}</p>
       </header>
       <FadeUp className="mx-auto mt-12 max-w-4xl px-5">
         <Img src={n.image} alt={n.title} className="aspect-[16/9] w-full object-cover" />
@@ -39,7 +39,7 @@ export default function NewsDetail() {
         <h2 className="text-lg font-bold">More from the newsroom</h2>
         <ul className="mt-4 space-y-3">
           {more.map((m) => (
-            <li key={m.slug}><ArrowLink to={`/insights/newsroom/${m.slug}/`} className="text-navy">{m.title}</ArrowLink></li>
+            <li key={m.slug}><ArrowLink to={`/insights/newsroom/${m.slug}/`} className="text-white">{m.title}</ArrowLink></li>
           ))}
         </ul>
       </aside>

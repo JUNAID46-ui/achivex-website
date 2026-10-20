@@ -69,13 +69,13 @@ export default function CaseStudies() {
         </div>
       </section>
 
-      <section className="bg-white py-16 md:py-24">
+      <section className="bg-canvas py-16 md:py-24">
         <div className="container-site">
-          <p className="mb-12 max-w-3xl border-l-2 border-accent pl-4 text-[15px] text-ink/65">
+          <p className="mb-12 max-w-3xl border-l-2 border-accent pl-4 text-[15px] text-body/65">
             {pc.note}
           </p>
           {list.length === 0 ? (
-            <p className="py-16 text-center text-lg text-ink/60">{pc.emptyText}</p>
+            <p className="py-16 text-center text-lg text-body/60">{pc.emptyText}</p>
           ) : (
             <div className="grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
               {list.map((c, i) => (

@@ -46,7 +46,7 @@ export default function SearchOverlay({ open, onClose }) {
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-[80] bg-ink/70"
+          className="fixed inset-0 z-[80] bg-canvas/70"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -56,7 +56,7 @@ export default function SearchOverlay({ open, onClose }) {
           aria-label="Search"
         >
           <motion.div
-            className="bg-white"
+            className="bg-canvas"
             initial={{ y: -30 }}
             animate={{ y: 0 }}
             exit={{ y: -30 }}
@@ -64,7 +64,7 @@ export default function SearchOverlay({ open, onClose }) {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="container-site py-8">
-              <div className="flex items-center gap-4 border-b-2 border-navy pb-3">
+              <div className="flex items-center gap-4 border-b-2 border-white pb-3">
                 <Search className="h-6 w-6 text-accent" aria-hidden="true" />
                 <label htmlFor="site-search" className="sr-only">Search the site</label>
                 <input
@@ -73,21 +73,21 @@ export default function SearchOverlay({ open, onClose }) {
                   value={q}
                   onChange={(e) => setQ(e.target.value)}
                   placeholder="Search services, insights and pages"
-                  className="w-full bg-transparent py-2 text-xl text-ink outline-none placeholder:text-ink/40 md:text-2xl"
+                  className="w-full bg-transparent py-2 text-xl text-body outline-none placeholder:text-body/40 md:text-2xl"
                 />
-                <button onClick={onClose} aria-label="Close search" className="text-navy hover:text-accent">
+                <button onClick={onClose} aria-label="Close search" className="text-white hover:text-accent">
                   <X className="h-6 w-6" />
                 </button>
               </div>
               {q.trim().length >= 2 && (
                 <ul className="mt-4 max-h-[60vh] divide-y divide-mist overflow-y-auto">
-                  {results.length === 0 && <li className="py-6 text-ink/60">No results for "{q}". Try a service name such as cloud or security.</li>}
+                  {results.length === 0 && <li className="py-6 text-body/60">No results for "{q}". Try a service name such as cloud or security.</li>}
                   {results.map((r) => (
                     <li key={r.to + r.title}>
                       <Link to={r.to} onClick={onClose} className="group flex items-center justify-between gap-6 py-4">
                         <span>
-                          <span className="block text-lg font-bold text-navy group-hover:text-accent">{r.title}</span>
-                          <span className="block text-sm text-ink/60"><span className="font-semibold text-accent">{r.type}</span> / {r.text}</span>
+                          <span className="block text-lg font-bold text-white group-hover:text-accent">{r.title}</span>
+                          <span className="block text-sm text-body/60"><span className="font-semibold text-accent">{r.type}</span> / {r.text}</span>
                         </span>
                         <ArrowRight className="h-5 w-5 shrink-0 text-accent transition-transform group-hover:translate-x-1" aria-hidden="true" />
                       </Link>

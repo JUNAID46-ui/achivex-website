@@ -11,7 +11,7 @@ export default function WhoWeAre() {
   const c = pageContent['/about-us/']
   return (
     <>
-      <section className="bg-white">
+      <section className="bg-canvas">
         <div className="grid lg:min-h-[640px] lg:grid-cols-2">
           <div className="relative min-h-[360px] overflow-hidden lg:order-2">
             <Img src={c.heroImage} alt={c.heroImageAlt} className="absolute inset-0 h-full w-full object-cover" />
@@ -20,7 +20,7 @@ export default function WhoWeAre() {
             <Breadcrumb items={[{ label: 'About', to: '/about-us/' }, { label: 'Who We Are' }]} />
             <FadeUp className="mt-14">
               <h1 className="h-display text-5xl md:text-6xl">{c.heroTitle}</h1>
-              <p className="mt-8 max-w-lg text-xl leading-relaxed text-ink/75">{c.heroText}</p>
+              <p className="mt-8 max-w-lg text-xl leading-relaxed text-body/75">{c.heroText}</p>
             </FadeUp>
           </div>
         </div>
@@ -32,21 +32,21 @@ export default function WhoWeAre() {
             <h2 className="h-display text-4xl md:text-5xl">{c.storyTitle}</h2>
             <span className="mt-6 block h-1 w-14 bg-accent" aria-hidden="true" />
           </FadeUp>
-          <FadeUp delay={0.1} className="space-y-6 text-[17px] leading-relaxed text-ink/75">
+          <FadeUp delay={0.1} className="space-y-6 text-[17px] leading-relaxed text-body/75">
             {(c.storyParagraphs || []).map((p, i) => <p key={i}>{p}</p>)}
           </FadeUp>
         </div>
       </section>
 
-      <section className="bg-white py-20 md:py-28">
+      <section className="bg-canvas py-20 md:py-28">
         <div className="container-site grid gap-12 md:grid-cols-2 md:gap-16">
-          <FadeUp className="border-t-2 border-navy pt-8">
+          <FadeUp className="border-t-2 border-white pt-8">
             <h2 className="h-display text-4xl md:text-5xl">{c.missionTitle}</h2>
-            <p className="mt-6 max-w-md text-lg leading-relaxed text-ink/65">{c.missionText}</p>
+            <p className="mt-6 max-w-md text-lg leading-relaxed text-body/65">{c.missionText}</p>
           </FadeUp>
           <FadeUp delay={0.1} className="border-t-2 border-accent pt-8">
             <h2 className="h-display text-4xl md:text-5xl">{c.visionTitle}</h2>
-            <p className="mt-6 max-w-md text-lg leading-relaxed text-ink/65">{c.visionText}</p>
+            <p className="mt-6 max-w-md text-lg leading-relaxed text-body/65">{c.visionText}</p>
           </FadeUp>
         </div>
       </section>
@@ -59,10 +59,10 @@ export default function WhoWeAre() {
           </FadeUp>
           <ul className="mt-14 grid gap-px overflow-hidden bg-navy/10 sm:grid-cols-2 lg:grid-cols-3">
             {(c.values || []).map((v, i) => (
-              <FadeUp as="li" key={v.title} delay={(i % 3) * 0.06} className="bg-white p-8 md:p-10">
+              <FadeUp as="li" key={v.title} delay={(i % 3) * 0.06} className="bg-canvas p-8 md:p-10">
                 <span className="block h-1 w-8 bg-accent" aria-hidden="true" />
                 <h3 className="mt-6 text-xl font-bold">{v.title}</h3>
-                <p className="mt-3 leading-relaxed text-ink/70">{v.text}</p>
+                <p className="mt-3 leading-relaxed text-body/70">{v.text}</p>
               </FadeUp>
             ))}
           </ul>

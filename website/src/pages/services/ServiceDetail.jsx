@@ -29,9 +29,9 @@ export default function ServiceDetail({ singleSlug }) {
   return (
     <>
       {/* Hero with breadcrumb */}
-      <section className="relative overflow-hidden bg-ink text-white">
+      <section className="relative overflow-hidden bg-canvas text-white">
         <Img src={service.heroImage} alt={`${service.name} at AchiveX`} className="absolute inset-0 h-full w-full object-cover opacity-50" />
-        <div className="absolute inset-0 bg-ink/40" aria-hidden="true" />
+        <div className="absolute inset-0 bg-canvas/40" aria-hidden="true" />
         <div className="container-site relative flex min-h-[520px] flex-col justify-between py-12 md:min-h-[600px]">
           <Breadcrumb light items={crumbs} />
           <FadeUp className="max-w-4xl pt-24">
@@ -42,13 +42,13 @@ export default function ServiceDetail({ singleSlug }) {
       </section>
 
       {/* Overview */}
-      <section className="bg-white py-20 md:py-28">
+      <section className="bg-canvas py-20 md:py-28">
         <div className="container-site grid gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <FadeUp>
             <h2 className="h-display text-4xl md:text-5xl">Overview</h2>
             <span className="mt-6 block h-1 w-14 bg-accent" aria-hidden="true" />
             {service.overview.map((p, i) => (
-              <p key={i} className={`mt-6 leading-relaxed text-ink/75 ${i === 0 ? 'text-xl' : 'text-[17px]'}`}>{p}</p>
+              <p key={i} className={`mt-6 leading-relaxed text-body/75 ${i === 0 ? 'text-xl' : 'text-[17px]'}`}>{p}</p>
             ))}
           </FadeUp>
           <FadeUp delay={0.1} className="overflow-hidden">
@@ -62,16 +62,16 @@ export default function ServiceDetail({ singleSlug }) {
         <div className="container-site grid gap-14 lg:grid-cols-[0.8fr_1.2fr]">
           <FadeUp className="lg:sticky lg:top-28 lg:self-start">
             <h2 className="h-display text-4xl md:text-5xl">What is included</h2>
-            <p className="mt-6 text-lg leading-relaxed text-ink/70">The scope is agreed with you up front. These are the pieces most clients ask for.</p>
+            <p className="mt-6 text-lg leading-relaxed text-body/70">The scope is agreed with you up front. These are the pieces most clients ask for.</p>
             <div className="mt-10 hidden overflow-hidden lg:block">
               <Img src={service.images[1]} alt={`${service.name} team at work`} className="aspect-[4/3] w-full object-cover transition-transform duration-700 hover:scale-105" />
             </div>
           </FadeUp>
-          <ul className="border-t border-ink/15">
+          <ul className="border-t border-body/15">
             {service.included.map((item) => (
-              <FadeUp as="li" key={item} className="flex items-start gap-4 border-b border-ink/15 py-5">
+              <FadeUp as="li" key={item} className="flex items-start gap-4 border-b border-body/15 py-5">
                 <Check className="mt-1 h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
-                <span className="text-[17px] leading-snug text-navy">{item}</span>
+                <span className="text-[17px] leading-snug text-white">{item}</span>
               </FadeUp>
             ))}
           </ul>
@@ -79,14 +79,14 @@ export default function ServiceDetail({ singleSlug }) {
       </section>
 
       {/* Benefits */}
-      <section className="bg-white py-20 md:py-28">
+      <section className="bg-canvas py-20 md:py-28">
         <div className="container-site">
           <FadeUp><h2 className="h-display max-w-2xl text-4xl md:text-5xl">What you can expect</h2></FadeUp>
           <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             {service.benefits.map((b, i) => (
-              <FadeUp key={b.title} delay={i * 0.06} className="border-t border-ink/15 pt-6">
+              <FadeUp key={b.title} delay={i * 0.06} className="border-t border-body/15 pt-6">
                 <h3 className="text-lg font-semibold">{b.title}</h3>
-                <p className="mt-3 leading-relaxed text-ink/60">{b.text}</p>
+                <p className="mt-3 leading-relaxed text-body/60">{b.text}</p>
               </FadeUp>
             ))}
           </div>
@@ -94,7 +94,7 @@ export default function ServiceDetail({ singleSlug }) {
       </section>
 
       {/* Process */}
-      <section className="bg-ink py-20 text-white md:py-28">
+      <section className="bg-canvas py-20 text-white md:py-28">
         <div className="container-site">
           <FadeUp><h2 className="h-display text-4xl text-white md:text-5xl">Our process</h2></FadeUp>
           <ol className="mt-14 grid gap-10 md:grid-cols-4 md:gap-8">
@@ -120,8 +120,8 @@ export default function ServiceDetail({ singleSlug }) {
               <div>
                 <h2 className="h-display text-4xl">{cs.title}</h2>
                 <p className="mt-3 text-sm font-semibold text-accent">Related case study / {cs.clientType}</p>
-                <p className="mt-5 text-lg leading-relaxed text-ink/70">{cs.summary}</p>
-                <Link to={`/insights/case-studies/${cs.slug}/`} className="group mt-8 inline-flex items-center gap-2 font-semibold text-navy hover:text-accent">
+                <p className="mt-5 text-lg leading-relaxed text-body/70">{cs.summary}</p>
+                <Link to={`/insights/case-studies/${cs.slug}/`} className="group mt-8 inline-flex items-center gap-2 font-semibold text-white hover:text-accent">
                   Read Case Study <ArrowRight className="h-4 w-4 text-accent transition-transform group-hover:translate-x-1" aria-hidden="true" />
                 </Link>
               </div>
@@ -131,16 +131,16 @@ export default function ServiceDetail({ singleSlug }) {
       )}
 
       {/* FAQ */}
-      <section className="bg-white py-20 md:py-28">
+      <section className="bg-canvas py-20 md:py-28">
         <div className="container-site grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
           <FadeUp>
             <h2 className="h-display text-4xl md:text-5xl">Questions we often hear</h2>
             {siblings.length > 0 && (
-              <div className="mt-10 border-t border-ink/15 pt-6">
-                <p className="font-semibold text-navy">More in {category.name}</p>
+              <div className="mt-10 border-t border-body/15 pt-6">
+                <p className="font-semibold text-white">More in {category.name}</p>
                 <ul className="mt-4 space-y-3">
                   {siblings.map((s) => (
-                    <li key={s.slug}><ArrowLink to={servicePath(s)} className="text-[15px] text-navy">{s.name}</ArrowLink></li>
+                    <li key={s.slug}><ArrowLink to={servicePath(s)} className="text-[15px] text-white">{s.name}</ArrowLink></li>
                   ))}
                 </ul>
               </div>

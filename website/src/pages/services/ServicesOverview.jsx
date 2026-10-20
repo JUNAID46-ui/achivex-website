@@ -18,19 +18,19 @@ export default function ServicesOverview() {
 
   return (
     <>
-      <header className="border-b border-mist bg-white pb-16 pt-12 md:pb-24 md:pt-16">
+      <header className="border-b border-mist bg-canvas pb-16 pt-12 md:pb-24 md:pt-16">
         <div className="container-site">
           <Breadcrumb items={[{ label: 'Services' }]} />
           <div className="mt-10 grid gap-10 lg:grid-cols-[1.3fr_1fr] lg:items-end">
             <h1 className="h-display text-5xl md:text-7xl">{pc.heroTitle}</h1>
-            <p className="text-lg leading-relaxed text-ink/70">
+            <p className="text-lg leading-relaxed text-body/70">
               {pc.heroText}
             </p>
           </div>
           <ul className="mt-14 flex flex-wrap gap-x-8 gap-y-3 border-t border-mist pt-6 text-[15px] font-semibold">
             {categories.map((c, i) => (
               <li key={c.slug}>
-                <a href={`#${c.slug}`} onClick={(e) => jumpTo(e, c.slug)} className="text-navy transition-colors hover:text-accent">
+                <a href={`#${c.slug}`} onClick={(e) => jumpTo(e, c.slug)} className="text-white transition-colors hover:text-accent">
                   <span className="mr-2 text-accent">{String(i + 1).padStart(2, '0')}</span>{c.name}
                 </a>
               </li>
@@ -42,7 +42,7 @@ export default function ServicesOverview() {
       {multi.map((c, i) => {
         const reverse = i % 2 === 1
         return (
-          <section key={c.slug} id={c.slug} className={`scroll-mt-24 py-20 md:py-28 ${reverse ? 'bg-mist' : 'bg-white'}`}>
+          <section key={c.slug} id={c.slug} className={`scroll-mt-24 py-20 md:py-28 ${reverse ? 'bg-mist' : 'bg-canvas'}`}>
             <div className="container-site grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
               <FadeUp className={reverse ? 'lg:order-2' : ''}>
                 <Link to={categoryPath(c)} className="group block overflow-hidden">
@@ -54,13 +54,13 @@ export default function ServicesOverview() {
                   <span className="text-2xl text-accent">{String(categories.indexOf(c) + 1).padStart(2, '0')}</span>
                   <Link to={categoryPath(c)} className="transition-colors hover:text-accent">{c.name}</Link>
                 </h2>
-                <p className="mt-6 text-lg leading-relaxed text-ink/70">{c.description}</p>
-                <ul className="mt-8 divide-y divide-navy/10 border-y border-navy/10">
+                <p className="mt-6 text-lg leading-relaxed text-body/70">{c.description}</p>
+                <ul className="mt-8 divide-y divide-white/10 border-y border-white/10">
                   {c.services.map((slug) => {
                     const s = getService(slug)
                     return (
                       <li key={slug}>
-                        <ArrowLink to={servicePath(s)} className="w-full justify-between py-4 text-[17px] font-semibold text-navy">{s.name}</ArrowLink>
+                        <ArrowLink to={servicePath(s)} className="w-full justify-between py-4 text-[17px] font-semibold text-white">{s.name}</ArrowLink>
                       </li>
                     )
                   })}
@@ -71,7 +71,7 @@ export default function ServicesOverview() {
         )
       })}
 
-      <section className="bg-ink py-20 text-white md:py-28">
+      <section className="bg-canvas py-20 text-white md:py-28">
         <div className="container-site">
           <FadeUp>
             <h2 className="h-display max-w-2xl text-5xl text-white md:text-6xl">{pc.specialistTitle}</h2>

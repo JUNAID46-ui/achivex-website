@@ -12,7 +12,7 @@ export function BookCover({ paper, className = '' }) {
   return (
     <div className={`relative overflow-hidden bg-navy ${className}`}>
       <Img src={paper.cover} alt="" className="absolute inset-0 h-full w-full object-cover opacity-30 mix-blend-luminosity transition-transform duration-700 group-hover:scale-105" />
-      <span className="absolute inset-y-0 left-0 w-3 bg-ink/40" aria-hidden="true" />
+      <span className="absolute inset-y-0 left-0 w-3 bg-canvas/40" aria-hidden="true" />
       <div className="relative flex h-full flex-col justify-between p-7 pl-9">
         <span className="text-xs font-bold uppercase tracking-[0.2em] text-white/70">AchiveX {paper.type}</span>
         <div>
@@ -34,12 +34,12 @@ export default function Whitepapers() {
           <Breadcrumb items={[{ label: 'Insights' }, { label: 'Whitepapers and eBooks' }]} />
           <FadeUp className="mt-12 max-w-3xl">
             <h1 className="h-display text-5xl md:text-7xl">{pc.heroTitle}</h1>
-            <p className="mt-6 text-lg leading-relaxed text-ink/70">{pc.heroText}</p>
+            <p className="mt-6 text-lg leading-relaxed text-body/70">{pc.heroText}</p>
           </FadeUp>
         </div>
       </section>
 
-      <section className="bg-white py-20 md:py-24">
+      <section className="bg-canvas py-20 md:py-24">
         <div className="container-site grid gap-x-10 gap-y-16 sm:grid-cols-2 lg:grid-cols-4">
           {whitepapers.map((w, i) => (
             <FadeUp key={w.slug} delay={(i % 4) * 0.06} className="group flex flex-col">
@@ -49,10 +49,10 @@ export default function Whitepapers() {
               <h2 className="mt-7 text-xl font-bold leading-snug">
                 <Link to={`/insights/whitepapers/${w.slug}/`} className="hover:text-accent">{w.title}</Link>
               </h2>
-              <p className="mt-2 flex-1 text-[15px] leading-relaxed text-ink/70">{w.description}</p>
+              <p className="mt-2 flex-1 text-[15px] leading-relaxed text-body/70">{w.description}</p>
               <Link
                 to={`/insights/whitepapers/${w.slug}/`}
-                className="mt-6 inline-flex w-fit items-center gap-2 bg-navy px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-accent hover:text-ink"
+                className="mt-6 inline-flex w-fit items-center gap-2 bg-accent px-5 py-2.5 text-sm font-semibold text-canvas transition-colors hover:bg-white hover:text-canvas"
               >
                 <Download className="h-4 w-4" aria-hidden="true" /> {pc.downloadText}
               </Link>

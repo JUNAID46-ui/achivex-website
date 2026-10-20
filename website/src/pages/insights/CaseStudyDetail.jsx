@@ -22,7 +22,7 @@ export default function CaseStudyDetail() {
 
   return (
     <>
-      <section className="bg-white pt-12">
+      <section className="bg-canvas pt-12">
         <div className="container-site">
           <Breadcrumb items={[{ label: 'Insights' }, { label: 'Case Studies', to: '/insights/case-studies/' }, { label: 'Case study' }]} />
           <FadeUp className="mt-12 max-w-4xl">
@@ -34,44 +34,44 @@ export default function CaseStudyDetail() {
         </div>
       </section>
 
-      <section className="bg-white py-16 md:py-24">
+      <section className="bg-canvas py-16 md:py-24">
         <div className="container-site grid gap-14 lg:grid-cols-[300px_1fr]">
           <aside className="lg:sticky lg:top-28 lg:self-start">
             <dl className="divide-y divide-mist bg-mist p-7">
               <div className="pb-5">
-                <dt className="text-sm font-semibold text-ink/60">Client</dt>
-                <dd className="mt-1 font-bold text-navy">{cs.clientType}</dd>
+                <dt className="text-sm font-semibold text-body/60">Client</dt>
+                <dd className="mt-1 font-bold text-white">{cs.clientType}</dd>
               </div>
               <div className="py-5">
-                <dt className="text-sm font-semibold text-ink/60">Industry</dt>
-                <dd className="mt-1 font-bold text-navy">{industry?.name}</dd>
+                <dt className="text-sm font-semibold text-body/60">Industry</dt>
+                <dd className="mt-1 font-bold text-white">{industry?.name}</dd>
               </div>
               <div className="pt-5">
-                <dt className="text-sm font-semibold text-ink/60">Services used</dt>
+                <dt className="text-sm font-semibold text-body/60">Services used</dt>
                 <dd className="mt-3 space-y-2">
                   {cs.services.map(getService).filter(Boolean).map((s) => (
-                    <ArrowLink key={s.slug} to={servicePath(s)} className="text-[15px] font-semibold text-navy">{s.name}</ArrowLink>
+                    <ArrowLink key={s.slug} to={servicePath(s)} className="text-[15px] font-semibold text-white">{s.name}</ArrowLink>
                   ))}
                 </dd>
               </div>
             </dl>
-            <p className="mt-4 text-xs leading-relaxed text-ink/50">This case study describes our approach for this type of client. Client names and figures are shared only with permission.</p>
+            <p className="mt-4 text-xs leading-relaxed text-body/50">This case study describes our approach for this type of client. Client names and figures are shared only with permission.</p>
           </aside>
 
           <div className="max-w-read">
             <FadeUp>
               <h2 className="h-display text-4xl">The situation</h2>
-              <p className="mt-5 text-xl leading-relaxed text-ink/75">{cs.overview}</p>
+              <p className="mt-5 text-xl leading-relaxed text-body/75">{cs.overview}</p>
             </FadeUp>
             <FadeUp className="mt-14">
               <h2 className="h-display text-4xl">The challenge</h2>
-              {cs.challenge.map((p, i) => <p key={i} className="mt-5 text-[17px] leading-relaxed text-ink/75">{p}</p>)}
+              {cs.challenge.map((p, i) => <p key={i} className="mt-5 text-[17px] leading-relaxed text-body/75">{p}</p>)}
             </FadeUp>
             <FadeUp className="mt-14">
               <h2 className="h-display text-4xl">Our approach</h2>
               <ul className="mt-6 space-y-4">
                 {cs.solution.map((p, i) => (
-                  <li key={i} className="flex gap-4 text-[17px] leading-relaxed text-ink/75">
+                  <li key={i} className="flex gap-4 text-[17px] leading-relaxed text-body/75">
                     <Check className="mt-1 h-5 w-5 shrink-0 text-accent" aria-hidden="true" />{p}
                   </li>
                 ))}
@@ -100,10 +100,10 @@ export default function CaseStudyDetail() {
 
       <Link to={`/insights/case-studies/${next.slug}/`} className="group block bg-mist">
         <div className="container-site flex flex-col justify-between gap-6 py-14 md:flex-row md:items-center">
-          <p className="font-display text-3xl text-navy group-hover:text-accent md:text-4xl">{next.title}</p>
-          <span className="flex shrink-0 items-center gap-4 font-semibold text-navy">
+          <p className="font-display text-3xl text-white group-hover:text-accent md:text-4xl">{next.title}</p>
+          <span className="flex shrink-0 items-center gap-4 font-semibold text-white">
             Next case study
-            <span className="flex h-14 w-14 items-center justify-center rounded-full bg-navy text-white transition-colors group-hover:bg-accent group-hover:text-ink">
+            <span className="flex h-14 w-14 items-center justify-center rounded-full bg-navy text-white transition-colors group-hover:bg-accent group-hover:text-canvas">
               <ArrowRight className="h-6 w-6 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
             </span>
           </span>

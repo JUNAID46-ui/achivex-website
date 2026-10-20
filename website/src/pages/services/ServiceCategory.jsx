@@ -30,18 +30,18 @@ export default function ServiceCategory({ category }) {
         </div>
       </section>
 
-      <section className="bg-white py-20 md:py-28">
+      <section className="bg-canvas py-20 md:py-28">
         <FadeUp className="container-site grid gap-10 lg:grid-cols-[1fr_2fr]">
           <h2 className="h-display text-4xl md:text-5xl">Where we help</h2>
-          <p className="text-2xl font-light leading-relaxed text-ink/80 md:text-[28px]">{category.description}</p>
+          <p className="text-2xl font-light leading-relaxed text-body/80 md:text-[28px]">{category.description}</p>
         </FadeUp>
       </section>
 
-      <section className="border-t border-ink/10 bg-white py-20 md:py-28">
+      <section className="border-t border-body/10 bg-canvas py-20 md:py-28">
         <div className="container-site">
           <FadeUp className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <h2 className="h-display text-5xl">{category.name} services</h2>
-            <p className="max-w-md text-ink/70">Choose a service to see what is included, how we work and common questions.</p>
+            <p className="max-w-md text-body/70">Choose a service to see what is included, how we work and common questions.</p>
           </FadeUp>
           <div className={`mt-12 grid gap-x-8 gap-y-14 sm:grid-cols-2 ${items.length > 4 ? 'lg:grid-cols-3' : items.length === 3 ? 'lg:grid-cols-3' : 'lg:grid-cols-2'}`}>
             {items.map((s, i) => (
@@ -52,18 +52,18 @@ export default function ServiceCategory({ category }) {
       </section>
 
       {cs && (
-        <section className="bg-white py-20 md:py-28">
+        <section className="bg-canvas py-20 md:py-28">
           <div className="container-site">
             <FadeUp>
-              <Link to={`/insights/case-studies/${cs.slug}/`} className="group grid border-y border-ink/15 md:grid-cols-2">
+              <Link to={`/insights/case-studies/${cs.slug}/`} className="group grid border-y border-body/15 md:grid-cols-2">
                 <div className="overflow-hidden">
                   <Img src={cs.image} alt={cs.title} className="h-full min-h-[280px] w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 </div>
                 <div className="flex flex-col justify-center py-10 md:p-14">
                   <h2 className="h-display text-4xl">{cs.title}</h2>
                   <p className="mt-3 text-sm font-semibold text-accent">Related case study / {cs.clientType}</p>
-                  <p className="mt-5 leading-relaxed text-ink/60">{cs.summary}</p>
-                  <span className="mt-8 inline-flex items-center gap-2 font-medium text-navy group-hover:text-accent">
+                  <p className="mt-5 leading-relaxed text-body/60">{cs.summary}</p>
+                  <span className="mt-8 inline-flex items-center gap-2 font-medium text-white group-hover:text-accent">
                     Read Case Study <ArrowRight className="h-4 w-4 text-accent transition-transform group-hover:translate-x-1" aria-hidden="true" />
                   </span>
                 </div>

@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-// The palette is locked to the brand colors (#082032, #334756, #F0A500, #000000), white and one light tint of #334756 for backgrounds.
+// The palette is locked to the brand colors: #0B0D12 background, #0F2C9C sections and cards,
+// #FFFFFF headings, #C9CED6 body text and #B6F500 for CTA buttons, numbers and icons.
 // Tailwind's default colors are intentionally replaced, not extended.
 export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
@@ -8,11 +9,12 @@ export default {
       transparent: 'transparent',
       current: 'currentColor',
       white: '#FFFFFF',
-      navy: '#082032',
-      slate: '#334756',
-      ink: '#000000',
-      accent: '#F0A500',
-      mist: '#EEF1F3',
+      canvas: '#0B0D12',
+      navy: '#0F2C9C',
+      mist: '#0F2C9C',
+      body: '#C9CED6',
+      slate: '#C9CED6',
+      accent: '#B6F500',
     },
     extend: {
       fontFamily: {

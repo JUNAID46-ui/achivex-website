@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 
 const styles = {
-  primary: 'bg-navy text-white hover:bg-accent hover:text-ink',
-  light: 'bg-white text-navy hover:bg-accent hover:text-ink',
-  outline: 'border border-navy text-navy hover:border-accent hover:bg-accent hover:text-ink',
-  outlineLight: 'border border-white/60 text-white hover:border-accent hover:bg-accent hover:text-ink',
+  primary: 'bg-accent text-canvas hover:bg-white hover:text-canvas',
+  light: 'bg-accent text-canvas hover:bg-white hover:text-canvas',
+  outline: 'border border-white text-white hover:border-accent hover:bg-accent hover:text-canvas',
+  outlineLight: 'border border-white/60 text-white hover:border-accent hover:bg-accent hover:text-canvas',
 }
 
 export default function Button({ to, href, children, variant = 'primary', arrow = true, className = '', ...rest }) {

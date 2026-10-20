@@ -21,13 +21,13 @@ export default function Leadership() {
           <Breadcrumb items={[{ label: 'About', to: '/about-us/' }, { label: 'Our Leadership' }]} />
           <div className="mt-14 flex flex-col justify-between gap-8 md:flex-row md:items-end">
             <FadeUp><h1 className="h-display text-5xl md:text-7xl">{c.heroTitle}</h1></FadeUp>
-            <FadeUp delay={0.1}><p className="max-w-md text-lg leading-relaxed text-ink/70">{c.heroText}</p></FadeUp>
+            <FadeUp delay={0.1}><p className="max-w-md text-lg leading-relaxed text-body/70">{c.heroText}</p></FadeUp>
           </div>
         </div>
       </section>
 
       {leaders.length > 0 && (
-        <section className="bg-white py-20 md:py-28">
+        <section className="bg-canvas py-20 md:py-28">
           <div className="container-site">
             <ul className="grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
               {leaders.map((p, i) => (
@@ -38,10 +38,10 @@ export default function Leadership() {
                   <div className="mt-6 flex items-start justify-between gap-4">
                     <div>
                       <h2 className="text-xl font-semibold">{p.name}</h2>
-                      <p className="mt-1 text-ink/60">{p.role}</p>
+                      <p className="mt-1 text-body/60">{p.role}</p>
                     </div>
                     {p.linkedin && (
-                      <a href={p.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${p.name} on LinkedIn`} className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-navy text-white transition-colors hover:bg-accent hover:text-ink">
+                      <a href={p.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${p.name} on LinkedIn`} className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-navy text-white transition-colors hover:bg-accent hover:text-canvas">
                         <SocialIcon name="LinkedIn" />
                       </a>
                     )}
@@ -53,15 +53,15 @@ export default function Leadership() {
         </section>
       )}
 
-      <section className="bg-white py-20 md:py-28">
+      <section className="bg-canvas py-20 md:py-28">
         <div className="container-site">
           <FadeUp><h2 className="h-display max-w-2xl text-4xl md:text-5xl">{c.principlesTitle}</h2></FadeUp>
           <div className="mt-14 grid gap-10 md:grid-cols-3">
             {principles.map(({ icon: Icon, title, text }, i) => (
-              <FadeUp key={title} delay={i * 0.06} className="border-t border-ink/15 pt-6">
+              <FadeUp key={title} delay={i * 0.06} className="border-t border-body/15 pt-6">
                 <Icon className="h-6 w-6 text-accent" aria-hidden="true" />
                 <h3 className="mt-5 text-xl font-semibold">{title}</h3>
-                <p className="mt-3 leading-relaxed text-ink/60">{text}</p>
+                <p className="mt-3 leading-relaxed text-body/60">{text}</p>
               </FadeUp>
             ))}
           </div>

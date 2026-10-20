@@ -42,20 +42,20 @@ function Missing({ pathname }) {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="font-display text-[140px] leading-none text-navy md:text-[240px]"
+          className="font-display text-[140px] leading-none text-white md:text-[240px]"
           aria-hidden="true"
         >
           404
         </motion.p>
         <h1 className="mt-4 text-3xl font-bold md:text-4xl">This page does not exist</h1>
-        <p className="mx-auto mt-4 max-w-md text-lg text-ink/70">
+        <p className="mx-auto mt-4 max-w-md text-lg text-body/70">
           The link may be old or mistyped. Try one of the pages below, or head back to the homepage.
         </p>
         <div className="mt-10"><Button to="/">Back to Home</Button></div>
-        <ul className="mt-12 flex flex-wrap justify-center gap-x-10 gap-y-4 border-t border-navy/15 pt-8 font-semibold">
-          <li><ArrowLink to="/services/" className="text-navy">Services</ArrowLink></li>
-          <li><ArrowLink to="/insights/case-studies/" className="text-navy">Insights</ArrowLink></li>
-          <li><ArrowLink to="/contact-us/" className="text-navy">Contact</ArrowLink></li>
+        <ul className="mt-12 flex flex-wrap justify-center gap-x-10 gap-y-4 border-t border-white/15 pt-8 font-semibold">
+          <li><ArrowLink to="/services/" className="text-white">Services</ArrowLink></li>
+          <li><ArrowLink to="/insights/case-studies/" className="text-white">Insights</ArrowLink></li>
+          <li><ArrowLink to="/contact-us/" className="text-white">Contact</ArrowLink></li>
         </ul>
       </div>
     </section>

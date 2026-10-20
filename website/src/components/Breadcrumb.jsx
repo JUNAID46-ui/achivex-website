@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { ChevronRight } from 'lucide-react'
 
 export default function Breadcrumb({ items, light = false }) {
-  const base = light ? 'text-white/70' : 'text-ink/60'
+  const base = light ? 'text-white/70' : 'text-body/60'
   return (
     <nav aria-label="Breadcrumb">
       <ol className={`flex flex-wrap items-center gap-1.5 text-sm ${base}`}>
@@ -13,7 +13,7 @@ export default function Breadcrumb({ items, light = false }) {
             {item.to ? (
               <Link to={item.to} className="transition-colors hover:text-accent">{item.label}</Link>
             ) : (
-              <span aria-current="page" className={light ? 'text-white' : 'text-navy'}>{item.label}</span>
+              <span aria-current="page" className={light ? 'text-white' : 'text-white'}>{item.label}</span>
             )}
           </li>
         ))}

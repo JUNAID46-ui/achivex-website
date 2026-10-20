@@ -12,15 +12,15 @@ export default function CTA({
 }) {
   const dark = variant === 'band'
   return (
-    <section className={dark ? 'bg-navy text-white' : 'border-t border-ink/10 bg-mist'}>
+    <section className={dark ? 'bg-navy text-white' : 'border-t border-body/10 bg-mist'}>
       <FadeUp className="container-site grid gap-10 py-20 md:grid-cols-[1.4fr_1fr] md:items-end md:py-28">
         <div>
           <h2 className={`h-display text-4xl md:text-5xl ${dark ? 'text-white' : ''}`}>{title}</h2>
-          <p className={`mt-6 max-w-xl text-lg leading-relaxed ${dark ? 'text-white/70' : 'text-ink/60'}`}>{text}</p>
+          <p className={`mt-6 max-w-xl text-lg leading-relaxed ${dark ? 'text-white/70' : 'text-body/60'}`}>{text}</p>
         </div>
         <div className="flex flex-col items-start gap-4 md:items-end">
           <Button to={to} variant={dark ? 'light' : 'primary'}>{button}</Button>
-          <a href={site.phoneHref} className={`text-[15px] transition-colors hover:text-accent ${dark ? 'text-white/70' : 'text-ink/60'}`}>
+          <a href={site.phoneHref} className={`text-[15px] transition-colors hover:text-accent ${dark ? 'text-white/70' : 'text-body/60'}`}>
             or call {site.phone}
           </a>
         </div>
