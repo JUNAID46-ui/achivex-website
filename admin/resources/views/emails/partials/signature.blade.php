@@ -1,6 +1,6 @@
-{{-- Sender signature: logo mark, a green divider, then name, title, company and contact links. --}}
+{{-- Company signature: logo mark, a green divider, then the company (or a name set in Settings), title and contact links. --}}
 @php
-  $sigName = $brand['signatureName'] ?: ($sender?->name ?? $brand['name']);
+  $sigName = $brand['signatureName'] ?: $brand['name'];
   $sigTitle = $brand['signatureTitle'];
 @endphp
 <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border-top:1px solid #E3E6EB">
@@ -14,7 +14,7 @@
         <td valign="top" style="border-left:3px solid #B6F500;padding-left:18px;font-family:Arial,Helvetica,sans-serif">
           <p style="margin:0;font-size:17px;font-weight:bold;color:#0B0D12;line-height:1.3">{{ $sigName }}</p>
           @if($sigTitle)<p style="margin:3px 0 0;font-size:13px;font-weight:bold;color:#0F2C9C;line-height:1.4">{{ $sigTitle }}</p>@endif
-          <p style="margin:3px 0 10px;font-size:13px;color:#4B5563;line-height:1.4">{{ $brand['name'] }} &middot; {{ $brand['tagline'] }}</p>
+          <p style="margin:3px 0 10px;font-size:13px;color:#4B5563;line-height:1.4">@if($sigName !== $brand['name']){{ $brand['name'] }} &middot; @endif{{ $brand['tagline'] }}</p>
           <p style="margin:0;font-size:13px;line-height:1.75;color:#4B5563">
             <span style="color:#0F2C9C;font-weight:bold">P</span>&nbsp; <a href="{{ $brand['phoneHref'] }}" style="color:#0B0D12;text-decoration:none">{{ $brand['phone'] }}</a><br>
             <span style="color:#0F2C9C;font-weight:bold">E</span>&nbsp; <a href="mailto:{{ $brand['email'] }}" style="color:#0B0D12;text-decoration:none">{{ $brand['email'] }}</a><br>
