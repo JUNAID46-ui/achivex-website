@@ -19,16 +19,18 @@ class EmailBrand
         } catch (\Throwable) {
             [$general, $social, $mail] = [[], [], []];
         }
-        $site = rtrim((string) config('admin.site_url'), '/');
+        // Links show the public address; images load from where the website is hosted, so they always resolve.
+        $site = rtrim((string) config('admin.site_public_url'), '/');
+        $assets = rtrim((string) config('admin.site_url'), '/');
         $phone = $general['phone'] ?? '+1 307 622 1140';
 
         return [
             'name' => $general['siteName'] ?? 'AchiveX LLC',
             'tagline' => 'Marketing & Software Solutions',
             'site' => $site,
-            'siteLabel' => Str::after(Str::after($site, '://'), 'www.'),
-            'logo' => $site.'/brand/email/logo.png',
-            'mark' => $site.'/brand/email/mark.png',
+            'siteLabel' => Str::after($site, '://'),
+            'logo' => $assets.'/brand/email/logo.png',
+            'mark' => $assets.'/brand/email/mark.png',
             'about' => $general['tagline'] ?? 'Empowering Businesses Through Digital Innovation.',
             'phone' => $phone,
             'phoneHref' => 'tel:'.preg_replace('/[^0-9+]/', '', $phone),
@@ -37,7 +39,7 @@ class EmailBrand
             // Label => [link, round icon] for the footer and signature.
             'social' => collect(['facebook' => 'Facebook', 'linkedin' => 'LinkedIn', 'x' => 'X', 'instagram' => 'Instagram'])
                 ->filter(fn ($label, $key) => is_string($social[$key] ?? null) && preg_match('#^https?://#i', $social[$key]))
-                ->mapWithKeys(fn ($label, $key) => [$label => ['url' => $social[$key], 'icon' => $site.'/brand/email/'.$key.'.png']])
+                ->mapWithKeys(fn ($label, $key) => [$label => ['url' => $social[$key], 'icon' => $assets.'/brand/email/'.$key.'.png']])
                 ->all(),
             'signatureName' => $mail['signature_name'] ?? null,
             'signatureTitle' => $mail['signature_title'] ?? null,
