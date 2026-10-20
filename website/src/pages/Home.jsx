@@ -47,15 +47,15 @@ function HeroStat({ stat, dark = false, icon = false }) {
   if (!stat) return null
   return (
     <>
-      <p className={`flex items-center gap-2 text-[28px] font-semibold leading-none tracking-tight lg:text-[34px] text-accent`}>
+      <p className={`flex items-center gap-2 text-[28px] font-semibold leading-none tracking-tight lg:text-[34px] ${dark ? 'text-white' : 'text-ink'}`}>
         {stat.value}
         {icon && (
-          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-accent text-canvas">
+          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-ink text-white">
             <Check className="h-3.5 w-3.5" aria-hidden="true" />
           </span>
         )}
       </p>
-      <p className={`mt-3 text-[13px] leading-snug lg:mt-4 ${dark ? 'text-white/80' : 'text-body/60'}`}>{stat.label}</p>
+      <p className={`mt-3 text-[13px] leading-snug lg:mt-4 ${dark ? 'text-white/80' : 'text-ink/60'}`}>{stat.label}</p>
     </>
   )
 }
@@ -71,13 +71,13 @@ function Hero({ d }) {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="text-center"
         >
-          <span className="inline-block rounded-full border border-body/10 bg-canvas px-4 py-1.5 text-xs text-body/70 shadow-[0_2px_10px_rgba(0,0,0,0.06)]">
+          <span className="inline-block rounded-full border border-ink/10 bg-white px-4 py-1.5 text-xs text-ink/70 shadow-[0_2px_10px_rgba(0,0,0,0.06)]">
             {d.pill}
           </span>
           <h1 className="mt-6 font-display text-[40px] font-semibold leading-[1.05] tracking-[-0.035em] text-white sm:text-6xl lg:text-[64px]">
             {d.heading}
           </h1>
-          <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-body/60 md:text-base">
+          <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-body/70 md:text-base">
             {d.text}
           </p>
         </motion.div>
@@ -92,21 +92,21 @@ function Hero({ d }) {
             <Img
               src={d.image}
               alt={d.imageAlt || ''}
-              className="absolute inset-0 h-full w-full rounded-[28px] bg-mist object-cover md:rounded-[32px]"
+              className="absolute inset-0 h-full w-full rounded-[28px] bg-cloud object-cover md:rounded-[32px]"
             />
 
             {/* Dark card in the top left notch */}
-            <div className="absolute left-0 top-0 hidden h-[44%] w-[27%] flex-col justify-between rounded-[22px] bg-navy p-5 ring-[14px] ring-canvas md:flex lg:p-6">
+            <div className="absolute left-0 top-0 hidden h-[44%] w-[27%] flex-col justify-between rounded-[22px] bg-ink p-5 ring-[14px] ring-canvas md:flex lg:p-6">
               <HeroStat stat={first} dark />
             </div>
 
             {/* Card overlapping the left edge */}
-            <div className="absolute -left-[11%] top-[54%] hidden w-[21%] rounded-[20px] bg-navy p-5 shadow-[0_18px_50px_-12px_rgba(0,0,0,0.18)] md:block lg:p-6">
+            <div className="absolute -left-[11%] top-[54%] hidden w-[21%] rounded-[20px] bg-white p-5 shadow-[0_18px_50px_-12px_rgba(0,0,0,0.18)] md:block lg:p-6">
               <HeroStat stat={second} />
             </div>
 
             {/* Card overlapping the right edge */}
-            <div className="absolute -right-[8%] top-[13%] hidden w-[19%] rounded-[20px] bg-navy p-5 shadow-[0_18px_50px_-12px_rgba(0,0,0,0.18)] md:block lg:p-6">
+            <div className="absolute -right-[8%] top-[13%] hidden w-[19%] rounded-[20px] bg-white p-5 shadow-[0_18px_50px_-12px_rgba(0,0,0,0.18)] md:block lg:p-6">
               <HeroStat stat={third} icon />
             </div>
 
@@ -117,7 +117,7 @@ function Hero({ d }) {
                   <li key={slug}>
                     <Link
                       to={pathFor(slug)}
-                      className="inline-block rounded-full bg-navy px-4 py-2.5 text-[13px] font-medium text-body shadow-[0_4px_16px_rgba(0,0,0,0.08)] ring-1 ring-body/5 transition-colors hover:bg-canvas hover:text-white"
+                      className="inline-block rounded-full bg-white px-4 py-2.5 text-[13px] font-medium text-ink shadow-[0_4px_16px_rgba(0,0,0,0.08)] ring-1 ring-ink/5 transition-colors hover:bg-ink hover:text-white"
                     >
                       {areaName(slug)}
                     </Link>
@@ -129,14 +129,14 @@ function Hero({ d }) {
 
           {/* Small screens: cards and chips stack under the image */}
           <div className="mt-5 grid grid-cols-3 gap-3 md:hidden">
-            <div className="rounded-2xl bg-navy p-4"><HeroStat stat={first} dark /></div>
-            <div className="rounded-2xl bg-navy p-4 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.2)]"><HeroStat stat={second} /></div>
-            <div className="rounded-2xl bg-navy p-4 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.2)]"><HeroStat stat={third} /></div>
+            <div className="rounded-2xl bg-ink p-4"><HeroStat stat={first} dark /></div>
+            <div className="rounded-2xl bg-white p-4 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.2)]"><HeroStat stat={second} /></div>
+            <div className="rounded-2xl bg-white p-4 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.2)]"><HeroStat stat={third} /></div>
           </div>
           <ul className="mt-5 flex flex-wrap justify-center gap-2 md:hidden">
             {mainAreas.map((slug) => (
               <li key={slug}>
-                <Link to={pathFor(slug)} className="inline-block rounded-full bg-navy px-4 py-2 text-[13px] font-medium text-body shadow-[0_4px_16px_rgba(0,0,0,0.08)] ring-1 ring-body/5">
+                <Link to={pathFor(slug)} className="inline-block rounded-full bg-white px-4 py-2 text-[13px] font-medium text-ink shadow-[0_4px_16px_rgba(0,0,0,0.08)] ring-1 ring-ink/5">
                   {areaName(slug)}
                 </Link>
               </li>

@@ -15,6 +15,9 @@ export default {
       body: '#C9CED6',
       slate: '#C9CED6',
       accent: '#B6F500',
+      // Home hero keeps its original white and black cards on the dark background.
+      ink: '#000000',
+      cloud: '#EEF1F3',
     },
     extend: {
       fontFamily: {
