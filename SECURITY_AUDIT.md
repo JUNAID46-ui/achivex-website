@@ -10,7 +10,7 @@ The system is in reasonable shape. The browser only holds the public Supabase ke
 
 No critical issue was found. The most important problems were in the admin panel: spreadsheet formula injection in CSV exports, a session cookie without the Secure flag, sessions that survived a password change, and secrets stored in plain text. These are fixed in branch `claude/security-hardening` with tests, and that branch is deployed to both Vercel projects (21 October 2026).
 
-Three items need a decision or action from the owner: two database changes (section 7), rotating two credentials that appeared in an AI session transcript (section 8), and upgrading Laravel 11, which no longer gets security fixes (section 6).
+After the second pass (see the end of section 4), the database changes, the Laravel 12 upgrade, the form spam limit and admin two-step login are done. The owner still needs to rotate two credentials that appeared in an AI session transcript and remove one unneeded variable (section 8).
 
 This audit does not make the system unhackable. An independent penetration test is still recommended before handling sensitive customer data.
 
@@ -54,7 +54,7 @@ Status: **Fixed** means fixed in branch `claude/security-hardening` and deployed
 
 | ID | Finding | Evidence | Status |
 |---|---|---|---|
-| H1 | Laravel 11.57 is out of security support and has a published high advisory (CRLF accepted by the `email` rule, GHSA-5vg9-5847-vvmq) plus a medium one (signed URL path confusion) | `composer audit` | Mitigated: every email rule now also rejects line breaks. The real fix is upgrading to Laravel 12. Open |
+| H1 | Laravel 11.57 is out of security support and has a published high advisory (CRLF accepted by the `email` rule, GHSA-5vg9-5847-vvmq) plus a medium one (signed URL path confusion) | `composer audit` | Fixed (second pass): upgraded to Laravel 12.70. `composer audit` reports no advisories |
 
 ### Medium
 
@@ -62,12 +62,12 @@ Status: **Fixed** means fixed in branch `claude/security-hardening` and deployed
 |---|---|---|---|
 | M1 | CSV formula injection. Contact messages and page views come from the public. An attacker can submit `=HYPERLINK(...)` and it runs when an admin opens the export in Excel | `InboxController::csv`, `AnalyticsController::export` | Fixed: `App\Support\Csv` prefixes risky cells |
 | M2 | Admin session cookie had no Secure flag because `SESSION_SECURE_COOKIE` was unset | `config/session.php`, `api/index.php` | Fixed: defaults to Secure on Vercel. Verified in a local request |
-| M3 | Browser inserts can set any column, including `id`, `created_at`, `read_at`, `starred`, `handled_at`. Spam is not rate limited | column privileges on 4 insert-only tables | Open: SQL ready in section 7, needs approval. Spam needs CAPTCHA or an edge function |
+| M3 | Browser inserts can set any column, including `id`, `created_at`, `read_at`, `starred`, `handled_at`. Spam is not rate limited | column privileges on 4 insert-only tables | Fixed (second pass): browser roles may only insert the form fields, and a database trigger allows at most 3 submissions per email in 10 minutes and 20 per form per minute. Tested inside rolled back transactions |
 | M4 | A password reset or password change did not end other sessions or "remember me" logins, so a stolen session stayed valid | `PasswordResetController`, `ProfileController`, `User` | Fixed: password or role change deletes the user's other sessions and rotates the remember token |
 | M5 | SMTP password and Supabase secret key were stored as plain JSON in `admin.app_settings` and in the cache table | `AppSetting::put` | Fixed: encrypted with `APP_KEY`. Table was empty, so nothing to migrate |
 | M6 | No security headers on either app (clickjacking, MIME sniffing, admin indexable by search engines) | response headers | Fixed: admin middleware `SecurityHeaders`; website CSP and headers in `vercel.json`. CSP tested on 5 pages with 0 violations |
 | M7 | Credentials appeared in an AI assistant session transcript during setup (the admin database role password and `APP_KEY`) | this session | Open: rotate, see section 8 |
-| M8 | No multi factor authentication for admin logins | `AuthController` | Open: recommended feature |
+| M8 | No multi factor authentication for admin logins | `AuthController` | Fixed (second pass): optional two-step login with an authenticator app and one time recovery codes, under Profile. Each admin must turn it on |
 
 ### Low
 
@@ -78,12 +78,26 @@ Status: **Fixed** means fixed in branch `claude/security-hardening` and deployed
 | L3 | Links from admin settings and page builder were rendered without a scheme check | Fixed: `safeHref()` on the website |
 | L4 | User role field accepted any string | Fixed: limited to administrator, editor, author |
 | L5 | Analytics export accepted any number of days | Fixed: capped at 366 |
-| L6 | React Router 6 advisories (open redirect with backslash, SSR constructor injection) | Not exploitable here: no user controlled navigation and no SSR. Upgrade to v7 later |
-| L7 | SVG uploads allowed in the public `media` bucket. SVG can carry script, but it is served from the Supabase domain, not the site | Open: accept, or remove `svg` from allowed types |
-| L8 | Password policy is 8 characters with no breached password check | Open |
+| L6 | React Router 6 advisories (open redirect with backslash, SSR constructor injection) | Fixed (second pass): upgraded to React Router 7.18.4. `npm audit --omit=dev` reports 0 |
+| L7 | SVG uploads allowed in the public `media` bucket. SVG can carry script, but it is served from the Supabase domain, not the site | Fixed (second pass): SVG removed from allowed upload types |
+| L8 | Password policy is 8 characters with no breached password check | Fixed (second pass): at least 10 characters with letters and numbers, checked against known breaches (Have I Been Pwned, only a hash prefix is sent) |
 | L9 | `DB_PASSWORD` was added to the website Vercel project, which does not need it | Open: delete it there |
 
 Confirmed not vulnerable: SQL injection (all raw SQL is static, the rest uses the query builder), mass assignment (resources only save declared fields), CSRF (Laravel web middleware), XSS in Blade (all `{!! !!}` output is static or escaped), secrets in Git history or the website bundle (none found), login brute force (5 attempts per email and IP, plus 20 per minute per IP).
+
+### Second pass (20 October 2026)
+
+Re-checked after the email, upload, backup, cache and custom code features were added.
+
+| ID | Finding | Status |
+|---|---|---|
+| S1 | Custom Code (Tools menu) lets an administrator add HTML, CSS and JavaScript to every page. This is stored cross site scripting by design | Accepted: administrators only. The website CSP still blocks inline and third party scripts, so only HTML and CSS take effect until the owner decides to allow specific script domains |
+| S2 | `/hooks/inbox` is public | Accepted: it takes no input, only emails rows not yet emailed, and is limited to 30 calls a minute |
+| S3 | Direct uploads to Supabase skip the server's content check | Mitigated: the signed path is tied to the admin session, the extension must be on the allow list, and the stored type is checked after upload |
+| S4 | Supabase storage has no policies for browser roles | Confirmed safe: only the service key can write to the `media` bucket |
+| S5 | Build tool advisory (`braces` through Tailwind CSS 3) | Accepted: build time only, not shipped to visitors. Clears with a Tailwind 4 upgrade |
+
+Supabase security advisor: no warnings.
 
 ## 5. Files changed
 
@@ -120,9 +134,9 @@ Confirmed not vulnerable: SQL injection (all raw SQL is static, the rest uses th
 
 Not run: tests against the real Supabase database, OWASP ZAP or any scan against live URLs, and the CRLF test does not prove the Laravel bug itself (the sample address is rejected by both old and new code).
 
-## 7. Database changes waiting for approval
+## 7. Database changes (applied in the second pass)
 
-Both are non destructive and reversible. Run them only after approval.
+Both are non destructive and reversible. They were applied on 20 October 2026 after the owner asked for the findings to be resolved, together with the `limit_form_spam` trigger and three new nullable columns on `admin.users` for two-step login.
 
 ```sql
 -- M3: the browser may only fill the form fields; ids, dates and admin flags are set by the database or the admin.
@@ -141,20 +155,19 @@ revoke update, delete, truncate on all tables in schema public from anon, authen
 1. **Rotate the `achivex_admin` database password** in the Supabase SQL editor (`alter role achivex_admin password '<new>'`), then put the new value in `DB_PASSWORD` of the **achivex-admin** Vercel project and redeploy.
 2. **Rotate `APP_KEY`** in the achivex-admin Vercel project (generate with `php artisan key:generate --show`). All admins will need to log in again.
 3. Delete `DB_PASSWORD` from the **achivex-website** Vercel project.
-4. Turn on two factor authentication for the Vercel, Supabase and GitHub accounts.
-5. In Supabase Auth, turn off public sign ups if Supabase Auth is not used.
-6. Plan the Laravel 12 upgrade.
-7. Decide whether SVG uploads are needed.
-8. If the admin moves to a custom domain, add it to `frame-ancestors` in `vercel.json` so the page builder preview keeps working.
+4. Every administrator: turn on two-step login under Profile.
+5. Turn on two factor authentication for the Vercel, Supabase and GitHub accounts.
+6. In Supabase Auth, turn off public sign ups if Supabase Auth is not used.
+7. If the admin moves to a custom domain, add it to `frame-ancestors` in `vercel.json` so the page builder preview keeps working.
 
 ## 9. Production readiness checklist
 
 - [x] Deploy branch `claude/security-hardening` (done; still merge it into `main`)
-- [ ] Approve and run the SQL in section 7
+- [x] Approve and run the SQL in section 7 (done in the second pass)
 - [ ] Rotate the database password and `APP_KEY` (section 8)
 - [ ] Remove `DB_PASSWORD` from the website project
 - [ ] Two factor authentication on Vercel, Supabase, GitHub
-- [ ] CAPTCHA or rate limiting for the contact and guide forms
-- [ ] Laravel 12 upgrade
-- [ ] Admin MFA
+- [x] Rate limiting for the contact and guide forms (database trigger)
+- [x] Laravel 12 upgrade
+- [x] Admin two-step login built (each admin must turn it on)
 - [ ] Independent penetration test on a staging copy

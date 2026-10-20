@@ -18,6 +18,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('guest')->group(function () {
         Route::get('login', [Admin\AuthController::class, 'showLogin'])->name('login');
         Route::post('login', [Admin\AuthController::class, 'login'])->middleware('throttle:20,1');
+        Route::get('two-factor', [Admin\AuthController::class, 'showTwoFactor'])->name('two-factor');
+        Route::post('two-factor', [Admin\AuthController::class, 'twoFactor'])->middleware('throttle:20,1');
         Route::get('forgot-password', [Admin\PasswordResetController::class, 'request'])->name('password.request');
         Route::post('forgot-password', [Admin\PasswordResetController::class, 'send'])->name('password.email')->middleware('throttle:5,1');
         Route::get('reset-password/{token}', [Admin\PasswordResetController::class, 'edit'])->name('password.reset');
@@ -130,5 +132,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('profile', [Admin\ProfileController::class, 'edit'])->name('profile');
         Route::post('profile', [Admin\ProfileController::class, 'update']);
+        Route::post('profile/two-factor', [Admin\ProfileController::class, 'startTwoFactor'])->name('profile.two-factor');
+        Route::post('profile/two-factor/confirm', [Admin\ProfileController::class, 'confirmTwoFactor'])->name('profile.two-factor.confirm')->middleware('throttle:10,1');
+        Route::post('profile/two-factor/disable', [Admin\ProfileController::class, 'disableTwoFactor'])->name('profile.two-factor.disable')->middleware('throttle:10,1');
     });
 });

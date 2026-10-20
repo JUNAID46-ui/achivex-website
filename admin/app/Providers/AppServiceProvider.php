@@ -15,6 +15,10 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        // Admin passwords: at least 10 characters with letters and numbers, and not
+        // found in known data breaches (checked with Have I Been Pwned, only a hash prefix is sent).
+        \Illuminate\Validation\Rules\Password::defaults(fn () => \Illuminate\Validation\Rules\Password::min(10)->letters()->numbers()->uncompromised());
+
         // Some unzip tools skip empty folders; Laravel needs these to store sessions, cache and views.
         foreach (['framework/sessions', 'framework/cache/data', 'framework/views', 'logs', 'app/public'] as $dir) {
             if (! is_dir($path = storage_path($dir))) {

@@ -18,7 +18,7 @@ class User extends Authenticatable
     ];
 
     protected $fillable = ['name', 'email', 'password', 'role', 'avatar', 'last_login_at'];
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = ['password', 'remember_token', 'two_factor_secret', 'two_factor_recovery_codes'];
 
     protected function casts(): array
     {
@@ -26,7 +26,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'last_login_at' => 'datetime',
             'password' => 'hashed',
+            'two_factor_secret' => 'encrypted',
+            'two_factor_recovery_codes' => 'encrypted:array',
+            'two_factor_confirmed_at' => 'datetime',
         ];
+    }
+
+    public function hasTwoFactor(): bool
+    {
+        return $this->two_factor_confirmed_at !== null && (bool) $this->two_factor_secret;
     }
 
     // A new password or role signs the account out everywhere else: other browser sessions are

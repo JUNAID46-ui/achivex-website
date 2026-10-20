@@ -54,8 +54,8 @@ class UserResource extends Resource
                 throw \Illuminate\Validation\ValidationException::withMessages(['password' => 'Set a password for the new user.']);
             }
             unset($data['password']);
-        } elseif (strlen($data['password']) < 8) {
-            throw \Illuminate\Validation\ValidationException::withMessages(['password' => 'The password must be at least 8 characters.']);
+        } else {
+            \Illuminate\Support\Facades\Validator::make($data, ['password' => \Illuminate\Validation\Rules\Password::defaults()])->validate();
         }
 
         return $data;
