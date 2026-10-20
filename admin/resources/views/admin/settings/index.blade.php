@@ -69,12 +69,12 @@
     <form method="POST" action="{{ route('admin.settings.mail') }}">
       @csrf
       <div class="card-body grid gap-4 text-[13px] sm:grid-cols-2">
-        <div><label for="m-host" class="label">SMTP server</label><input id="m-host" name="host" value="{{ old('host', $mail['host'] ?? config('mail.mailers.smtp.host')) }}" class="input"></div>
-        <div><label for="m-port" class="label">Port</label><input id="m-port" name="port" value="{{ old('port', $mail['port'] ?? config('mail.mailers.smtp.port')) }}" class="input"></div>
-        <div><label for="m-user" class="label">Email account</label><input id="m-user" name="username" value="{{ old('username', $mail['username'] ?? config('mail.mailers.smtp.username')) }}" class="input"></div>
+        <div><label for="m-host" class="label">SMTP server</label><input id="m-host" name="host" value="{{ old('host', $mail['host'] ?? 'smtp.gmail.com') }}" class="input"></div>
+        <div><label for="m-port" class="label">Port</label><input id="m-port" name="port" value="{{ old('port', $mail['port'] ?? 587) }}" class="input"></div>
+        <div><label for="m-user" class="label">Email account</label><input id="m-user" name="username" value="{{ old('username', $mail['username'] ?? '') }}" class="input" placeholder="you@gmail.com"></div>
         <div><label for="m-pass" class="label">App password</label><input id="m-pass" name="password" type="password" autocomplete="off" class="input" placeholder="{{ config('mail.mailers.smtp.password') ? 'Saved. Leave empty to keep it.' : '16 letter Gmail App Password' }}"></div>
-        <div><label for="m-from" class="label">Send from address</label><input id="m-from" name="from_address" value="{{ old('from_address', $mail['from_address'] ?? config('mail.from.address')) }}" class="input"></div>
-        <div><label for="m-name" class="label">Send from name</label><input id="m-name" name="from_name" value="{{ old('from_name', $mail['from_name'] ?? config('mail.from.name')) }}" class="input"></div>
+        <div><label for="m-from" class="label">Send from address</label><input id="m-from" name="from_address" value="{{ old('from_address', $mail['from_address'] ?? '') }}" class="input" placeholder="Same as the email account"></div>
+        <div><label for="m-name" class="label">Send from name</label><input id="m-name" name="from_name" value="{{ old('from_name', $mail['from_name'] ?? 'AchiveX LLC') }}" class="input"></div>
         <div class="sm:col-span-2"><label for="m-notify" class="label">Send new website messages to</label><input id="m-notify" name="notify_to" value="{{ old('notify_to', $mail['notify_to'] ?? '') }}" class="input" placeholder="you@gmail.com"><p class="help">Every new contact message and guide request is emailed here. Separate several addresses with commas. Empty sends to all administrators.</p></div>
         <p class="help sm:col-span-2">For Gmail use smtp.gmail.com, port 587, and a Gmail App Password (not your normal password).</p>
       </div>

@@ -1,29 +1,35 @@
 @extends('admin.layouts.app')
 @section('title', 'Media Library')
 @section('heading', 'Media Library')
-@section('subheading', $media->total().' files · '.number_format($totalSize / 1048576, 1).' MB used · up to '.$maxUpload.' MB per file')
+@section('subheading', $media->total().' files · '.number_format($totalSize / 1048576, 1).' MB used · up to '.($maxUpload >= 1024 ? round($maxUpload / 1024, 1).' GB' : $maxUpload.' MB').' per file')
 
 @section('content')
-<div x-data="{ selected: null, dragging: false }" class="space-y-4">
+<div x-data="{ selected: null, dragging: false, busy: false, progress: '', error: '',
+        async send(files) {
+          if (!files.length || this.busy) return
+          this.busy = true; this.error = ''
+          try { await uploadMedia(files, (p) => this.progress = (p.total > 1 ? 'File ' + (p.index + 1) + ' of ' + p.total + ': ' : '') + p.percent + '%'); window.location.reload() }
+          catch (e) { this.error = e.message; this.busy = false }
+        } }" class="space-y-4">
   @unless($cloud)
     <div class="rounded-md border-l-4 border-amber bg-amber-50 px-4 py-3 text-[13px] text-slate-700">
       <strong>Images are saved on this computer only.</strong> The live website cannot show them until image storage is connected.
       @if(auth()->user()->canAccess('settings'))<a href="{{ route('admin.settings') }}#storage" class="font-semibold text-navy underline">Connect image storage in Settings</a>@endif
     </div>
   @endunless
-  <form method="POST" action="{{ route('admin.media.store') }}" enctype="multipart/form-data" x-ref="up"
+  <div
         class="card flex flex-col items-center justify-center gap-3 border-2 border-dashed px-6 py-10 text-center transition"
         :class="dragging ? 'border-amber bg-amber-50' : 'border-slate-300'"
         @dragover.prevent="dragging = true" @dragleave.prevent="dragging = false"
-        @drop.prevent="dragging = false; $refs.files.files = $event.dataTransfer.files; $refs.up.submit()">
-    @csrf
+        @drop.prevent="dragging = false; send($event.dataTransfer.files)">
     <span class="text-slate-400">@include('admin.partials.icon', ['name' => 'upload', 'class' => 'h-8 w-8'])</span>
     <p class="text-[14px] font-semibold text-navy">Drop files to upload</p>
-    <p class="text-xs text-slate-500">Images, PDFs, documents and short videos</p>
-    <label class="btn-primary cursor-pointer">Select files
-      <input x-ref="files" type="file" name="files[]" multiple class="sr-only" @change="$refs.up.submit()">
+    <p class="text-xs text-slate-500">Images, PDFs, documents and videos, up to {{ $maxUpload >= 1024 ? round($maxUpload / 1024, 1).' GB' : $maxUpload.' MB' }} each</p>
+    <label class="btn-primary cursor-pointer" :class="busy && 'pointer-events-none opacity-60'"><span x-text="busy ? 'Uploading ' + progress : 'Select files'">Select files</span>
+      <input type="file" multiple class="sr-only" @change="send($event.target.files); $event.target.value = ''">
     </label>
-  </form>
+    <p x-show="error" x-text="error" class="text-[13px] font-semibold text-red-600"></p>
+  </div>
 
   <div class="flex flex-wrap items-center justify-between gap-3">
     <div class="flex gap-1 text-[13px]">

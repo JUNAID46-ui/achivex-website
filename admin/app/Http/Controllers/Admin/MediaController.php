@@ -14,6 +14,16 @@ class MediaController extends Controller
 {
     private const TYPES = 'jpg,jpeg,png,gif,webp,svg,avif,pdf,doc,docx,xls,xlsx,ppt,pptx,txt,csv,zip,mp4,webm';
 
+    // File types the media bucket accepts, by extension.
+    private const MIMES = [
+        'jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg', 'png' => 'image/png', 'gif' => 'image/gif', 'webp' => 'image/webp',
+        'svg' => 'image/svg+xml', 'avif' => 'image/avif', 'pdf' => 'application/pdf', 'mp4' => 'video/mp4', 'webm' => 'video/webm',
+        'doc' => 'application/msword', 'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        'xls' => 'application/vnd.ms-excel', 'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        'ppt' => 'application/vnd.ms-powerpoint', 'pptx' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+        'txt' => 'text/plain', 'csv' => 'text/csv', 'zip' => 'application/zip',
+    ];
+
     public function index(Request $request)
     {
         $media = Media::query()
@@ -25,7 +35,7 @@ class MediaController extends Controller
         return view('admin.media.index', [
             'media' => $media,
             'totalSize' => Media::sum('size'),
-            'maxUpload' => $this->maxUploadMb(),
+            'maxUpload' => SupabaseStorage::enabled() ? $this->directMaxMb() : $this->maxUploadMb(),
             'cloud' => SupabaseStorage::enabled(),
         ]);
     }
@@ -84,6 +94,59 @@ class MediaController extends Controller
         return back()->with('status', count($saved).' file(s) uploaded.');
     }
 
+    // Step 1 of a direct upload: check the file and hand the browser a one time upload link.
+    public function sign(Request $request)
+    {
+        abort_unless(SupabaseStorage::enabled(), 422, 'Connect image storage in Settings first.');
+        $data = $request->validate([
+            'filename' => 'required|string|max:255',
+            'size' => 'required|integer|min:1|max:'.($this->directMaxMb() * 1048576),
+        ], ['size.max' => 'Each file must be under '.$this->directMaxMb().' MB.']);
+        $ext = strtolower(pathinfo($data['filename'], PATHINFO_EXTENSION));
+        abort_unless(isset(self::MIMES[$ext]), 422, 'This file type is not allowed.');
+
+        $name = Str::slug(pathinfo($data['filename'], PATHINFO_FILENAME)) ?: 'file';
+        $path = now()->format('Y/m').'/'.Str::limit($name, 80, '').'-'.Str::lower(Str::random(6)).'.'.$ext;
+        try {
+            $url = SupabaseStorage::signUpload($path);
+        } catch (\Throwable $e) {
+            report($e);
+            abort(502, $e->getMessage());
+        }
+        // Only paths handed out here can be registered in step 2.
+        $request->session()->put('media_uploads.'.md5($path), $path);
+
+        return response()->json(['url' => $url, 'path' => $path, 'mime' => self::MIMES[$ext]]);
+    }
+
+    // Step 2: once the browser has sent the file, record it in the library.
+    public function complete(Request $request)
+    {
+        $data = $request->validate([
+            'path' => 'required|string|max:300',
+            'filename' => 'required|string|max:255',
+            'width' => 'nullable|integer|min:1|max:100000',
+            'height' => 'nullable|integer|min:1|max:100000',
+        ]);
+        abort_unless($request->session()->pull('media_uploads.'.md5($data['path'])) === $data['path'], 422, 'This upload was not started here.');
+        $file = SupabaseStorage::head($data['path']);
+        abort_unless($file, 422, 'The file did not reach storage. Please try again.');
+        $ext = strtolower(pathinfo($data['path'], PATHINFO_EXTENSION));
+        if ($file['mime'] !== self::MIMES[$ext]) {
+            SupabaseStorage::delete($data['path']);
+            abort(422, 'The file type does not match its name.');
+        }
+
+        $media = Media::create([
+            'disk' => 'supabase', 'path' => $data['path'], 'public_url' => SupabaseStorage::publicUrl($data['path']),
+            'filename' => $data['filename'], 'mime' => $file['mime'], 'size' => $file['size'],
+            'width' => $data['width'] ?? null, 'height' => $data['height'] ?? null, 'uploaded_by' => auth()->id(),
+        ]);
+        ActivityLog::record('uploaded', 'Media', '1 file(s)', $media->filename);
+
+        return response()->json($media);
+    }
+
     public function update(Request $request, Media $media)
     {
         $media->update($request->validate(['alt' => 'nullable|max:250']));
@@ -106,6 +169,12 @@ class MediaController extends Controller
         ActivityLog::record('deleted', 'Media', $media->filename);
 
         return request()->wantsJson() ? response()->json(['ok' => true]) : back()->with('status', 'File deleted.');
+    }
+
+    // Largest file for direct uploads. Supabase can lower it: its Free plan stops at 50 MB per file.
+    private function directMaxMb(): int
+    {
+        return max(1, (int) config('admin.max_upload_mb', 2048));
     }
 
     private function maxUploadMb(): int

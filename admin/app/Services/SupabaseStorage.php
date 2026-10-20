@@ -60,6 +60,29 @@ class SupabaseStorage
         static::client()->delete(static::baseUrl().'/storage/v1/object/'.static::BUCKET, ['prefixes' => [$path]]);
     }
 
+    // A one time upload link, so the browser sends the file straight to Supabase.
+    // Big files never pass through Vercel, which only accepts requests up to 4.5 MB.
+    public static function signUpload(string $path): string
+    {
+        $res = static::client()->post(static::baseUrl().'/storage/v1/object/upload/sign/'.static::BUCKET.'/'.$path);
+        if (! $res->successful() || ! $res->json('url')) {
+            throw new \RuntimeException('Supabase did not create an upload link: '.($res->json('message') ?? $res->status()));
+        }
+
+        return static::baseUrl().'/storage/v1'.$res->json('url');
+    }
+
+    // Size and type of an uploaded file, as Supabase stores it. Null when the file is not there.
+    public static function head(string $path): ?array
+    {
+        $res = \Illuminate\Support\Facades\Http::timeout(30)->head(static::publicUrl($path));
+        if (! $res->successful()) {
+            return null;
+        }
+
+        return ['size' => (int) $res->header('Content-Length'), 'mime' => strtok((string) $res->header('Content-Type'), ';')];
+    }
+
     // Used by the Settings screen to check a key before saving it.
     public static function check(string $key): ?string
     {

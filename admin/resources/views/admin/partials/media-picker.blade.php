@@ -1,15 +1,15 @@
 {{-- Global media picker. Open it with pickMedia(url => ...) from any field. --}}
 <div x-data="{
-        open: false, items: [], q: '', loading: false, uploading: false, onSelect: null, error: '',
+        open: false, items: [], q: '', loading: false, uploading: false, progress: '', onSelect: null, error: '',
         async load() { this.loading = true; try { this.items = await adminFetch('{{ route('admin.media.list') }}?q=' + encodeURIComponent(this.q)) } catch (e) { this.error = e.message } this.loading = false },
         async upload(files) {
           if (!files.length) return
           this.uploading = true; this.error = ''
-          const fd = new FormData(); [...files].forEach(f => fd.append('files[]', f))
-          try { await adminFetch('{{ route('admin.media.store') }}', { method: 'POST', body: fd }); await this.load() } catch (e) { this.error = e.message }
+          try { await uploadMedia(files, (p) => this.progress = (p.total > 1 ? (p.index + 1) + '/' + p.total + ' ' : '') + p.percent + '%') } catch (e) { this.error = e.message }
+          this.progress = ''; await this.load()
           this.uploading = false
         },
-        url(m) { return '{{ rtrim(asset('storage'), '/') }}/' + m.path },
+        url(m) { return m.public_url || '{{ rtrim(asset('storage'), '/') }}/' + m.path },
         choose(m) { this.onSelect && this.onSelect(this.url(m)); this.open = false },
      }"
      @media-pick.window="onSelect = $event.detail.onSelect; open = true; load()"
@@ -23,7 +23,7 @@
     <div class="flex flex-wrap items-center gap-2 border-b border-slate-200 px-5 py-3">
       <input x-model="q" @input.debounce.300ms="load()" class="input w-56 py-1.5" placeholder="Search files">
       <label class="btn-primary cursor-pointer">
-        @include('admin.partials.icon', ['name' => 'upload']) <span x-text="uploading ? 'Uploading...' : 'Upload files'"></span>
+        @include('admin.partials.icon', ['name' => 'upload']) <span x-text="uploading ? 'Uploading ' + progress : 'Upload files'"></span>
         <input type="file" multiple class="sr-only" @change="upload($event.target.files); $event.target.value = ''">
       </label>
       <p class="text-xs text-red-600" x-text="error"></p>

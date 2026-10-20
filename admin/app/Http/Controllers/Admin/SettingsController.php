@@ -40,11 +40,12 @@ class SettingsController extends Controller
     public function saveMail(Request $request)
     {
         $data = $request->validate([
-            'host' => 'required|max:200',
+            // A local address cannot work on Vercel, which has no mail server of its own.
+            'host' => 'required|max:200|not_in:127.0.0.1,localhost,0.0.0.0',
             'port' => 'required|integer|min:1|max:65535',
             'username' => 'required|max:200',
             'password' => 'nullable|max:200',
-            'from_address' => 'required|email|max:200|not_regex:/[\r\n]/',
+            'from_address' => 'nullable|email|max:200|not_regex:/[\r\n]/',
             'from_name' => 'required|max:120',
             'notify_to' => ['nullable', 'max:500', function ($attribute, $value, $fail) {
                 foreach (array_filter(array_map('trim', explode(',', (string) $value))) as $email) {
@@ -53,8 +54,9 @@ class SettingsController extends Controller
                     }
                 }
             }],
-        ]);
-        $data['password'] = str_replace(' ', '', (string) $data['password']) ?: (AppSetting::group('mail')['password'] ?? '');
+        ], ['host.not_in' => 'Use your email provider\'s SMTP server. For Gmail that is smtp.gmail.com.']);
+        $data['password'] = str_replace(' ', '', (string) ($data['password'] ?? '')) ?: (AppSetting::group('mail')['password'] ?? '');
+        $data['from_address'] = ($data['from_address'] ?? null) ?: $data['username'];
         AppSetting::put('mail', $data);
         ActivityLog::record('updated', 'Settings', 'Email server');
 

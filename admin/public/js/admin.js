@@ -128,3 +128,58 @@ window.contentForm = {
     },
   },
 }
+
+// Uploads files to the media library and returns the saved items. With image storage connected,
+// each file goes from the browser straight to Supabase, so large files work (Vercel itself only
+// accepts 4.5 MB per request). Without it, files go through the admin, for local testing.
+window.uploadMedia = async (files, onProgress = () => {}) => {
+  const cfg = window.adminMedia || {}
+  const list = [...files]
+  const saved = []
+  for (const [index, file] of list.entries()) {
+    const step = (percent) => onProgress({ index, total: list.length, name: file.name, percent })
+    step(0)
+    if (!cfg.cloud) {
+      const fd = new FormData()
+      fd.append('files[]', file)
+      saved.push(...(await adminFetch(cfg.store, { method: 'POST', body: fd })))
+      step(100)
+      continue
+    }
+    const link = await adminFetch(cfg.sign, { method: 'POST', body: JSON.stringify({ filename: file.name, size: file.size }) })
+    await new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest()
+      xhr.open('PUT', link.url)
+      xhr.setRequestHeader('Content-Type', link.mime)
+      xhr.setRequestHeader('cache-control', 'max-age=31536000')
+      xhr.setRequestHeader('x-upsert', 'false')
+      xhr.upload.onprogress = (e) => e.lengthComputable && step(Math.round((e.loaded / e.total) * 100))
+      xhr.onload = () => (xhr.status < 300 ? resolve() : reject(new Error(uploadError(xhr, file))))
+      xhr.onerror = () => reject(new Error(`The upload of ${file.name} was interrupted. Check the connection and try again.`))
+      xhr.send(file)
+    })
+    saved.push(await adminFetch(cfg.complete, { method: 'POST', body: JSON.stringify({ path: link.path, filename: file.name, ...(await imageSize(file)) }) }))
+  }
+  return saved
+}
+
+function uploadError(xhr, file) {
+  let message = ''
+  try { message = JSON.parse(xhr.responseText).message || '' } catch {}
+  if (xhr.status === 413 || /maximum allowed size|too large/i.test(message)) {
+    return `${file.name} is larger than your Supabase storage allows. The Free plan accepts up to 50 MB per file.`
+  }
+  return `${file.name} could not be uploaded${message ? ': ' + message : '.'}`
+}
+
+async function imageSize(file) {
+  if (!file.type.startsWith('image/') || file.type === 'image/svg+xml' || !window.createImageBitmap) return {}
+  try {
+    const bitmap = await createImageBitmap(file)
+    const size = { width: bitmap.width, height: bitmap.height }
+    bitmap.close()
+    return size
+  } catch {
+    return {}
+  }
+}

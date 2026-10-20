@@ -63,6 +63,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('media', [Admin\MediaController::class, 'index'])->name('media.index');
             Route::get('media/list', [Admin\MediaController::class, 'list'])->name('media.list');
             Route::post('media', [Admin\MediaController::class, 'store'])->name('media.store');
+            Route::post('media/sign', [Admin\MediaController::class, 'sign'])->name('media.sign')->middleware('throttle:120,1');
+            Route::post('media/complete', [Admin\MediaController::class, 'complete'])->name('media.complete')->middleware('throttle:120,1');
             Route::patch('media/{media}', [Admin\MediaController::class, 'update'])->name('media.update');
             Route::delete('media/{media}', [Admin\MediaController::class, 'destroy'])->name('media.destroy');
         });

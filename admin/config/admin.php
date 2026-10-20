@@ -5,6 +5,9 @@ return [
     'site_url' => env('SITE_URL', 'http://localhost:5173'),
     'site_public_url' => env('SITE_PUBLIC_URL', 'https://www.achivex.com'),
 
+    // Largest file the media library accepts, in MB. Files go straight to Supabase Storage.
+    'max_upload_mb' => (int) env('MEDIA_MAX_UPLOAD_MB', 2048),
+
     'menu' => [
         ['label' => 'Dashboard', 'icon' => 'gauge', 'route' => 'admin.dashboard', 'area' => 'dashboard'],
         ['label' => 'Pages', 'icon' => 'layout', 'area' => 'builder', 'children' => [
