@@ -22,6 +22,7 @@ import { whitepapers } from '../data/whitepapers'
 import { heroStats } from '../data/about'
 import { homeSections } from '../data/homeSections'
 import PageSections from '../components/PageSections'
+import { safeHref } from '../utils/safeHref'
 
 const mainAreas = ['digital', 'data-and-analytics', 'cloud', 'security', 'business-process-services']
 const areaName = (slug) => categories.find((c) => c.slug === slug).name
@@ -488,7 +489,7 @@ function ContactStrip() {
           return (
             <li key={label} className="border-b border-white/15 py-10 sm:px-6 lg:border-b-0 lg:border-r lg:first:pl-0 lg:last:border-r-0">
               {href ? (
-                <a href={href} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})} className="block transition-colors hover:text-accent">{inner}</a>
+                <a href={safeHref(href)} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})} className="block transition-colors hover:text-accent">{inner}</a>
               ) : inner}
             </li>
           )

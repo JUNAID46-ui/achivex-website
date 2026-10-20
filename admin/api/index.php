@@ -20,6 +20,7 @@ $defaults = [
     'SESSION_DRIVER' => 'database',
     'CACHE_STORE' => 'database',
     'QUEUE_CONNECTION' => 'sync',
+    'SESSION_SECURE_COOKIE' => 'true',
 ];
 foreach ($defaults as $key => $value) {
     if (getenv($key) === false) {

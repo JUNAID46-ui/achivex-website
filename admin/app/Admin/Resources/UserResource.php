@@ -22,9 +22,9 @@ class UserResource extends Resource
     {
         return [
             ['name' => 'name', 'label' => 'Full name', 'type' => 'text', 'rules' => 'required|max:120', 'big' => true],
-            ['name' => 'email', 'label' => 'Email', 'type' => 'email', 'rules' => 'required|email|max:200'],
+            ['name' => 'email', 'label' => 'Email', 'type' => 'email', 'rules' => 'required|email|max:200|not_regex:/[\r\n]/'],
             ['name' => 'password', 'label' => 'Password', 'type' => 'password', 'help' => 'At least 8 characters. Leave empty to keep the current password.'],
-            ['name' => 'role', 'label' => 'Role', 'type' => 'select', 'options' => User::ROLES, 'rules' => 'required', 'side' => true],
+            ['name' => 'role', 'label' => 'Role', 'type' => 'select', 'options' => User::ROLES, 'rules' => 'required|in:'.implode(',', array_keys(User::ROLES)), 'side' => true],
         ];
     }
 

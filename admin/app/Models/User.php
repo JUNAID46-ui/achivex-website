@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -25,6 +27,25 @@ class User extends Authenticatable
             'last_login_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    // A new password or role signs the account out everywhere else: other browser sessions are
+    // removed and "remember me" cookies stop working. The browser making the change stays signed in.
+    protected static function booted(): void
+    {
+        static::updating(function (User $user) {
+            if ($user->isDirty('password')) {
+                $user->remember_token = Str::random(60);
+            }
+        });
+        static::updated(function (User $user) {
+            if ($user->wasChanged(['password', 'role']) && config('session.driver') === 'database') {
+                DB::table(config('session.table', 'sessions'))
+                    ->where('user_id', $user->getKey())
+                    ->when(session()->isStarted(), fn ($q) => $q->where('id', '!=', session()->getId()))
+                    ->delete();
+            }
+        });
     }
 
     public function isAdmin(): bool

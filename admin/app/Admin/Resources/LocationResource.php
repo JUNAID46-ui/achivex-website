@@ -23,7 +23,7 @@ class LocationResource extends Resource
             ['name' => 'country', 'label' => 'Country', 'type' => 'text', 'rules' => 'required|max:120'],
             ['name' => 'address', 'label' => 'Street address', 'type' => 'textarea', 'rows' => 2],
             ['name' => 'phone', 'label' => 'Phone', 'type' => 'text', 'rules' => 'nullable|max:50'],
-            ['name' => 'email', 'label' => 'Email', 'type' => 'email', 'rules' => 'nullable|email|max:200'],
+            ['name' => 'email', 'label' => 'Email', 'type' => 'email', 'rules' => 'nullable|email|max:200|not_regex:/[\r\n]/'],
             ['name' => 'type', 'label' => 'Type', 'type' => 'select', 'options' => ['Headquarters' => 'Headquarters', 'Office' => 'Office', 'Delivery center' => 'Delivery center'], 'side' => true],
             ['name' => 'is_hq', 'label' => 'Headquarters', 'type' => 'toggle', 'side' => true],
             ['name' => 'sort', 'label' => 'Order', 'type' => 'number', 'side' => true],

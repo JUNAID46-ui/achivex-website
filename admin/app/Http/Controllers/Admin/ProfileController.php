@@ -20,7 +20,7 @@ class ProfileController extends Controller
         $user = $request->user();
         $data = $request->validate([
             'name' => 'required|max:120',
-            'email' => ['required', 'email', 'max:200', Rule::unique('users')->ignore($user->id)],
+            'email' => ['required', 'email', 'max:200', 'not_regex:/[\r\n]/', Rule::unique('users')->ignore($user->id)],
             'current_password' => 'nullable|required_with:password',
             'password' => 'nullable|min:8|confirmed',
         ]);

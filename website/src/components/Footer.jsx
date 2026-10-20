@@ -6,6 +6,7 @@ import { site, quickLinks } from '../data/site'
 import { categories } from '../data/categories'
 import { getService, servicePath, categoryPath } from '../data/services'
 import { insightsLinks } from '../data/menus'
+import { safeHref } from '../utils/safeHref'
 
 const footerServices = ['digital', 'data-and-analytics', 'cloud', 'security', 'business-process-services']
 
@@ -63,7 +64,7 @@ export default function Footer() {
             <li><a href={`mailto:${site.email}`} className={`flex items-center gap-3 ${linkCls}`}><Mail className="h-4 w-4 text-accent" aria-hidden="true" />{site.email}</a></li>
             <li className="flex items-center gap-3 text-[15px] text-white/75"><MapPin className="h-4 w-4 text-accent" aria-hidden="true" />{site.location}</li>
             <li>
-              <a href={site.googleProfile} target="_blank" rel="noopener noreferrer" className={`flex items-center gap-3 ${linkCls}`}>
+              <a href={safeHref(site.googleProfile)} target="_blank" rel="noopener noreferrer" className={`flex items-center gap-3 ${linkCls}`}>
                 <ExternalLink className="h-4 w-4 text-accent" aria-hidden="true" />Google Business Profile
               </a>
             </li>

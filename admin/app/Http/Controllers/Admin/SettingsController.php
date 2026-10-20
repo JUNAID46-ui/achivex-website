@@ -44,7 +44,7 @@ class SettingsController extends Controller
             'port' => 'required|integer|min:1|max:65535',
             'username' => 'required|max:200',
             'password' => 'nullable|max:200',
-            'from_address' => 'required|email|max:200',
+            'from_address' => 'required|email|max:200|not_regex:/[\r\n]/',
             'from_name' => 'required|max:120',
         ]);
         $data['password'] = str_replace(' ', '', (string) $data['password']) ?: (AppSetting::group('mail')['password'] ?? '');
@@ -60,7 +60,7 @@ class SettingsController extends Controller
             'general.siteName' => 'required|max:120',
             'general.tagline' => 'nullable|max:200',
             'general.phone' => 'nullable|max:50',
-            'general.email' => 'nullable|email|max:200',
+            'general.email' => 'nullable|email|max:200|not_regex:/[\r\n]/',
             'general.location' => 'nullable|max:120',
             'general.googleProfile' => 'nullable|url|max:300',
             'social.facebook' => 'nullable|url|max:300',

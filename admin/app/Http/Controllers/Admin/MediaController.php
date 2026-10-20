@@ -12,6 +12,8 @@ use Illuminate\Support\Str;
 
 class MediaController extends Controller
 {
+    private const TYPES = 'jpg,jpeg,png,gif,webp,svg,avif,pdf,doc,docx,xls,xlsx,ppt,pptx,txt,csv,zip,mp4,webm';
+
     public function index(Request $request)
     {
         $media = Media::query()
@@ -40,8 +42,9 @@ class MediaController extends Controller
     {
         $request->validate([
             'files' => 'required|array|max:20',
-            'files.*' => 'file|max:'.($this->maxUploadMb() * 1024).'|mimes:jpg,jpeg,png,gif,webp,svg,avif,pdf,doc,docx,xls,xlsx,ppt,pptx,txt,csv,zip,mp4,webm',
-        ], ['files.*.mimes' => 'This file type is not allowed.', 'files.*.max' => 'Each file must be under '.$this->maxUploadMb().' MB.']);
+            // mimes checks the file contents, extensions checks the name it is saved under.
+            'files.*' => 'file|max:'.($this->maxUploadMb() * 1024).'|mimes:'.self::TYPES.'|extensions:'.self::TYPES,
+        ], ['files.*.mimes' => 'This file type is not allowed.', 'files.*.extensions' => 'This file type is not allowed.', 'files.*.max' => 'Each file must be under '.$this->maxUploadMb().' MB.']);
 
         // With a storage key, files go to Supabase so the live website can show them.
         // Without one they stay on this computer, which only works while testing locally.

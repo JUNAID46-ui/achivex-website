@@ -23,7 +23,7 @@ class RedirectResource extends Resource
     {
         return [
             ['name' => 'from_path', 'label' => 'Source URL', 'type' => 'text', 'rules' => 'required|max:300|starts_with:/', 'placeholder' => '/old-page/', 'big' => true],
-            ['name' => 'to_path', 'label' => 'Target URL', 'type' => 'text', 'rules' => 'required|max:500', 'placeholder' => '/new-page/ or https://...'],
+            ['name' => 'to_path', 'label' => 'Target URL', 'type' => 'text', 'rules' => ['required', 'max:500', 'regex:#^(/(?![/\\\\])|https?://)#i'], 'placeholder' => '/new-page/ or https://...'],
             ['name' => 'status_code', 'label' => 'Redirect type', 'type' => 'select', 'options' => ['301' => '301 Moved permanently', '302' => '302 Found (temporary)', '307' => '307 Temporary redirect', '308' => '308 Permanent redirect'], 'side' => true],
             ['name' => 'active', 'label' => 'Active', 'type' => 'toggle', 'side' => true],
         ];

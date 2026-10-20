@@ -180,7 +180,7 @@ class SeoController extends Controller
 
     public function redirectNotFound(Request $request)
     {
-        $data = $request->validate(['from_path' => 'required|max:300', 'to_path' => 'required|max:500']);
+        $data = $request->validate(['from_path' => 'required|max:300', 'to_path' => ['required', 'max:500', 'regex:#^(/(?![/\\\\])|https?://)#i']]);
         $from = '/'.trim($data['from_path'], '/').'/';
         Redirect::updateOrCreate(['from_path' => $from], ['to_path' => $data['to_path'], 'status_code' => 301, 'active' => true]);
         ActivityLog::record('created', 'Redirect', $from.' to '.$data['to_path']);
@@ -209,7 +209,7 @@ class SeoController extends Controller
             'url' => 'nullable|url|max:300',
             'logo' => 'nullable|max:500',
             'phone' => 'nullable|max:50',
-            'email' => 'nullable|email|max:200',
+            'email' => 'nullable|email|max:200|not_regex:/[\r\n]/',
             'street' => 'nullable|max:200',
             'city' => 'nullable|max:120',
             'region' => 'nullable|max:60',

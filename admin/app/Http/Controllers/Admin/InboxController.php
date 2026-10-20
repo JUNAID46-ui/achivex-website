@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ActivityLog;
 use App\Models\Content\ContactSubmission;
 use App\Models\Content\WhitepaperRequest;
+use App\Support\Csv;
 use Illuminate\Http\Request;
 
 class InboxController extends Controller
@@ -102,7 +103,7 @@ class InboxController extends Controller
             $out = fopen('php://output', 'w');
             fputcsv($out, $header);
             foreach ($rows as $row) {
-                fputcsv($out, array_map(fn ($v) => (string) $v, $row));
+                fputcsv($out, Csv::row($row));
             }
             fclose($out);
         }, $name.'-'.now()->format('Y-m-d').'.csv', ['Content-Type' => 'text/csv']);

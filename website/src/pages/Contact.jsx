@@ -10,6 +10,7 @@ import { categories } from '../data/categories'
 import { getService } from '../data/services'
 import { sendContactMessage } from '../lib/content'
 import { pageContent } from '../data/pageContent'
+import { safeHref } from '../utils/safeHref'
 
 export default function Contact() {
   useSeo('Contact Us', 'Contact AchiveX LLC by phone at +1 307 622 1140, by email at info@achivex.com, or send a message using our contact form.')
@@ -124,7 +125,7 @@ export default function Contact() {
                 </li>
               </ul>
               <a
-                href={site.googleProfile}
+                href={safeHref(site.googleProfile)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-10 inline-flex items-center gap-2 bg-accent px-6 py-3 text-[15px] font-semibold text-onaccent transition-colors hover:bg-white hover:text-onaccent"

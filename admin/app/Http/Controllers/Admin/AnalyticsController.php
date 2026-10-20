@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Content\PageView;
 use App\Services\Analytics;
+use App\Support\Csv;
 use Illuminate\Http\Request;
 
 class AnalyticsController extends Controller
@@ -26,14 +27,14 @@ class AnalyticsController extends Controller
 
     public function export(Request $request)
     {
-        $days = (int) $request->input('days', 30);
+        $days = min(max((int) $request->input('days', 30), 1), 366);
 
         return response()->streamDownload(function () use ($days) {
             $out = fopen('php://output', 'w');
             fputcsv($out, ['Date', 'Path', 'Referrer', 'Device']);
             PageView::where('created_at', '>=', now()->subDays($days))->orderBy('created_at')->chunk(1000, function ($rows) use ($out) {
                 foreach ($rows as $r) {
-                    fputcsv($out, [$r->created_at, $r->path, $r->referrer, $r->device]);
+                    fputcsv($out, Csv::row([$r->created_at, $r->path, $r->referrer, $r->device]));
                 }
             });
             fclose($out);
