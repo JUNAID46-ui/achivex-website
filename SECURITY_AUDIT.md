@@ -8,7 +8,7 @@ No live penetration test, brute force test or scan was run against production. D
 
 The system is in reasonable shape. The browser only holds the public Supabase key, row level security is on for every public table, the admin schema is not reachable from the browser, and the admin panel checks roles on every protected route.
 
-No critical issue was found. The most important problems were in the admin panel: spreadsheet formula injection in CSV exports, a session cookie without the Secure flag, sessions that survived a password change, and secrets stored in plain text. These are fixed in branch `claude/security-hardening` with tests. That branch is **not deployed yet**.
+No critical issue was found. The most important problems were in the admin panel: spreadsheet formula injection in CSV exports, a session cookie without the Secure flag, sessions that survived a password change, and secrets stored in plain text. These are fixed in branch `claude/security-hardening` with tests, and that branch is deployed to both Vercel projects (21 October 2026).
 
 Three items need a decision or action from the owner: two database changes (section 7), rotating two credentials that appeared in an AI session transcript (section 8), and upgrading Laravel 11, which no longer gets security fixes (section 6).
 
@@ -48,7 +48,7 @@ Supabase security advisor: no warnings. No SQL functions, triggers or views exis
 
 ## 4. Findings
 
-Status: **Fixed** means fixed in branch `claude/security-hardening` (not yet deployed). **Open** means it needs a decision or manual action.
+Status: **Fixed** means fixed in branch `claude/security-hardening` and deployed. **Open** means it needs a decision or manual action.
 
 ### High
 
@@ -149,7 +149,7 @@ revoke update, delete, truncate on all tables in schema public from anon, authen
 
 ## 9. Production readiness checklist
 
-- [ ] Review and deploy branch `claude/security-hardening`
+- [x] Deploy branch `claude/security-hardening` (done; still merge it into `main`)
 - [ ] Approve and run the SQL in section 7
 - [ ] Rotate the database password and `APP_KEY` (section 8)
 - [ ] Remove `DB_PASSWORD` from the website project
