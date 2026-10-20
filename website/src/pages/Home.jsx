@@ -147,7 +147,7 @@ function Hero({ d }) {
         <div className="mt-12 text-center md:mt-14">
           <Link
             to={d.buttonLink || '/contact-us/'}
-            className="group inline-flex items-center gap-2.5 rounded-full bg-accent px-7 py-3.5 text-sm font-medium text-canvas transition-colors hover:bg-white hover:text-canvas"
+            className="group inline-flex items-center gap-2.5 rounded-full bg-accent px-7 py-3.5 text-sm font-medium text-onaccent transition-colors hover:bg-white hover:text-onaccent"
           >
             {d.buttonText}
             <ArrowRightCircle className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
@@ -374,7 +374,7 @@ function Platforms({ d }) {
             <li key={a.slug} className="border-b border-r border-body/10">
               <Link
                 to={`/about-us/alliances/${a.slug}/`}
-                className="flex h-24 items-center justify-center text-lg font-semibold tracking-tight text-slate transition-colors hover:bg-mist hover:text-white"
+                className="flex h-24 items-center justify-center text-lg font-semibold tracking-tight text-slate transition-colors hover:bg-navy hover:text-white"
               >
                 {a.logo ? <img src={a.logo} alt={a.name} className="max-h-8" /> : a.name}
               </Link>

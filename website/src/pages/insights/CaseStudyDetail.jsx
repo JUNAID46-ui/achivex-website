@@ -103,7 +103,7 @@ export default function CaseStudyDetail() {
           <p className="font-display text-3xl text-white group-hover:text-accent md:text-4xl">{next.title}</p>
           <span className="flex shrink-0 items-center gap-4 font-semibold text-white">
             Next case study
-            <span className="flex h-14 w-14 items-center justify-center rounded-full bg-navy text-white transition-colors group-hover:bg-accent group-hover:text-canvas">
+            <span className="flex h-14 w-14 items-center justify-center rounded-full bg-navy text-white transition-colors group-hover:bg-accent group-hover:text-onaccent">
               <ArrowRight className="h-6 w-6 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
             </span>
           </span>

@@ -52,7 +52,7 @@ export default function Whitepapers() {
               <p className="mt-2 flex-1 text-[15px] leading-relaxed text-body/70">{w.description}</p>
               <Link
                 to={`/insights/whitepapers/${w.slug}/`}
-                className="mt-6 inline-flex w-fit items-center gap-2 bg-accent px-5 py-2.5 text-sm font-semibold text-canvas transition-colors hover:bg-white hover:text-canvas"
+                className="mt-6 inline-flex w-fit items-center gap-2 bg-accent px-5 py-2.5 text-sm font-semibold text-onaccent transition-colors hover:bg-white hover:text-onaccent"
               >
                 <Download className="h-4 w-4" aria-hidden="true" /> {pc.downloadText}
               </Link>

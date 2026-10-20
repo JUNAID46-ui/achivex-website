@@ -22,7 +22,7 @@ export default function Esg() {
           </FadeUp>
           <nav aria-label="ESG sections" className="mx-auto mt-12 flex max-w-xl justify-center gap-3">
             {esg.map((s) => (
-              <a key={s.key} href={`#${s.key}`} onClick={(e) => jumpTo(e, s.key)} className="border border-white px-5 py-2 text-sm font-semibold text-white transition-colors hover:border-accent hover:bg-accent hover:text-canvas">
+              <a key={s.key} href={`#${s.key}`} onClick={(e) => jumpTo(e, s.key)} className="border border-white px-5 py-2 text-sm font-semibold text-white transition-colors hover:border-accent hover:bg-accent hover:text-onaccent">
                 {s.title}
               </a>
             ))}

@@ -2,6 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Dark is the default. White sections (bg-mist) switch headings and body text to black, cards to silver
+   and the green accent to blue so it stays readable. Blue sections switch back to the dark set. */
+:root,
+[class~='bg-navy'],
+[class~='bg-ink'] {
+  --c-fg: 255 255 255;
+  --c-body: 201 206 214;
+  --c-canvas: 11 13 18;
+  --c-accent: 182 245 0;
+  --c-on-accent: 11 13 18;
+}
+[class~='bg-mist'] {
+  --c-fg: 11 13 18;
+  --c-body: 11 13 18;
+  --c-canvas: 201 206 214;
+  --c-accent: 15 44 156;
+  --c-on-accent: 255 255 255;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -17,7 +36,7 @@
     @apply bg-navy text-white;
   }
   :focus-visible {
-    outline: 2px solid #B6F500;
+    outline: 2px solid rgb(var(--c-accent));
     outline-offset: 3px;
   }
 }

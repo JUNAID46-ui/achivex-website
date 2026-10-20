@@ -26,7 +26,7 @@ export default function SocialIcons({ className = '' }) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`AchiveX on ${s.name}`}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:border-accent hover:bg-accent hover:text-canvas"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:border-accent hover:bg-accent hover:text-onaccent"
           >
             <SocialIcon name={s.name} />
           </a>

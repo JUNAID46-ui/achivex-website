@@ -26,7 +26,7 @@ export default function InsightsMenu({ onNavigate }) {
         <ul className="space-y-1">
           {insightsLinks.map((l) => (
             <li key={l.to}>
-              <Link to={l.to} onClick={onNavigate} className="group flex items-start justify-between gap-4 px-4 py-4 transition-colors hover:bg-mist">
+              <Link to={l.to} onClick={onNavigate} className="group flex items-start justify-between gap-4 px-4 py-4 transition-colors hover:bg-canvas">
                 <span>
                   <span className="block text-lg font-bold text-body group-hover:text-accent">{l.label}</span>
                   <span className="mt-1 block text-sm text-body/60">{l.text}</span>

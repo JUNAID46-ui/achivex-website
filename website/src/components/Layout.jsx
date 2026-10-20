@@ -17,7 +17,7 @@ export default function Layout() {
 
   return (
     <>
-      <a href="#main" onClick={(e) => jumpTo(e, 'main')} className="sr-only z-[90] bg-accent px-4 py-2 text-canvas focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
+      <a href="#main" onClick={(e) => jumpTo(e, 'main')} className="sr-only z-[90] bg-accent px-4 py-2 text-onaccent focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
         Skip to content
       </a>
       <SiteHead />

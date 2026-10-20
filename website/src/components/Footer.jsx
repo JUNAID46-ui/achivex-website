@@ -23,7 +23,7 @@ const linkCls = 'text-[15px] text-white/75 transition-colors hover:text-accent'
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-navy text-white">
+    <footer className="border-t border-white/10 bg-canvas text-white">
       <div className="container-site grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1.1fr_1.1fr_1.3fr] lg:gap-10 lg:py-20">
         <div>
           <Logo variant="full" />

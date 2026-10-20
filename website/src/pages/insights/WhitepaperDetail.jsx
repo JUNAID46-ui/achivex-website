@@ -81,7 +81,7 @@ export default function WhitepaperDetail() {
                       Your request for {paper.title} has been received. We will send it to {form.email}.
                     </p>
                     {paper.file && (
-                      <a href={paper.file} download className="mt-8 inline-flex bg-accent px-6 py-3 font-semibold text-canvas hover:bg-white hover:text-canvas">
+                      <a href={paper.file} download className="mt-8 inline-flex bg-accent px-6 py-3 font-semibold text-onaccent hover:bg-white hover:text-onaccent">
                         Download now
                       </a>
                     )}

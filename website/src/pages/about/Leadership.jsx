@@ -41,7 +41,7 @@ export default function Leadership() {
                       <p className="mt-1 text-body/60">{p.role}</p>
                     </div>
                     {p.linkedin && (
-                      <a href={p.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${p.name} on LinkedIn`} className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-navy text-white transition-colors hover:bg-accent hover:text-canvas">
+                      <a href={p.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${p.name} on LinkedIn`} className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-navy text-white transition-colors hover:bg-accent hover:text-onaccent">
                         <SocialIcon name="LinkedIn" />
                       </a>
                     )}

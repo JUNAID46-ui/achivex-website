@@ -36,7 +36,7 @@ export default function GlobalPresence() {
           <div className="container-site">
             <FadeUp className="max-w-md bg-canvas p-8 md:pointer-events-auto">
               <div className="flex items-center gap-3">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-accent text-canvas"><MapPin className="h-5 w-5" aria-hidden="true" /></span>
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-accent text-onaccent"><MapPin className="h-5 w-5" aria-hidden="true" /></span>
                 <h2 className="text-2xl font-bold">{hq.city}, {hq.country}</h2>
               </div>
               <p className="mt-2 text-sm font-semibold text-accent">{hq.type}</p>

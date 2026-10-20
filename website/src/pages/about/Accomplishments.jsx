@@ -49,9 +49,9 @@ export default function Accomplishments() {
           <ul className="mt-12 grid grid-cols-2 border-l border-t border-body/10 md:grid-cols-5">
             {built.map((b, i) => (
               <FadeUp as="li" key={b.label} delay={i * 0.05} className="border-b border-r border-body/10">
-                <Link to={b.to} className="group block p-6 transition-colors hover:bg-mist md:p-8">
+                <Link to={b.to} className="group block p-6 transition-colors hover:bg-navy md:p-8">
                   <span className="block font-display text-5xl font-medium tracking-tight text-white md:text-6xl">{b.value}</span>
-                  <span className="mt-4 block text-[15px] text-body/60 group-hover:text-canvas">{b.label}</span>
+                  <span className="mt-4 block text-[15px] text-body/60 group-hover:text-onaccent">{b.label}</span>
                 </Link>
               </FadeUp>
             ))}

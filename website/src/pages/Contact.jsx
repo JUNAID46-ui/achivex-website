@@ -127,7 +127,7 @@ export default function Contact() {
                 href={site.googleProfile}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-10 inline-flex items-center gap-2 bg-accent px-6 py-3 text-[15px] font-semibold text-canvas transition-colors hover:bg-white hover:text-canvas"
+                className="mt-10 inline-flex items-center gap-2 bg-accent px-6 py-3 text-[15px] font-semibold text-onaccent transition-colors hover:bg-white hover:text-onaccent"
               >
                 {c.googleButton} <ExternalLink className="h-4 w-4" aria-hidden="true" />
               </a>

@@ -107,7 +107,7 @@ export default function Blogs() {
                 onClick={() => setPage(current - 1)}
                 disabled={current === 1}
                 aria-label="Previous page"
-                className="flex h-11 w-11 items-center justify-center bg-canvas text-white transition-colors hover:bg-accent hover:text-canvas disabled:opacity-40 disabled:hover:bg-canvas disabled:hover:text-white"
+                className="flex h-11 w-11 items-center justify-center bg-canvas text-white transition-colors hover:bg-accent hover:text-onaccent disabled:opacity-40 disabled:hover:bg-canvas disabled:hover:text-white"
               >
                 <ChevronLeft className="h-5 w-5" />
               </button>
@@ -116,7 +116,7 @@ export default function Blogs() {
                   key={n}
                   onClick={() => setPage(n)}
                   aria-current={n === current ? 'page' : undefined}
-                  className={`h-11 w-11 rounded-full text-sm font-semibold transition-colors ${n === current ? 'bg-accent text-canvas' : 'bg-canvas text-white hover:bg-accent hover:text-canvas'}`}
+                  className={`h-11 w-11 rounded-full text-sm font-semibold transition-colors ${n === current ? 'bg-accent text-onaccent' : 'bg-canvas text-white hover:bg-accent hover:text-onaccent'}`}
                 >
                   {n}
                 </button>
@@ -125,7 +125,7 @@ export default function Blogs() {
                 onClick={() => setPage(current + 1)}
                 disabled={current === pages}
                 aria-label="Next page"
-                className="flex h-11 w-11 items-center justify-center bg-canvas text-white transition-colors hover:bg-accent hover:text-canvas disabled:opacity-40 disabled:hover:bg-canvas disabled:hover:text-white"
+                className="flex h-11 w-11 items-center justify-center bg-canvas text-white transition-colors hover:bg-accent hover:text-onaccent disabled:opacity-40 disabled:hover:bg-canvas disabled:hover:text-white"
               >
                 <ChevronRight className="h-5 w-5" />
               </button>
