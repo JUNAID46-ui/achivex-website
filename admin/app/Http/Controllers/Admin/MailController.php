@@ -18,7 +18,7 @@ class MailController extends Controller
             'body' => 'required|max:10000',
         ]);
         try {
-            Mail::send('emails.reply', ['body' => $data['body'], 'original' => $message], function ($m) use ($message, $data) {
+            Mail::send('emails.reply', ['body' => $data['body'], 'original' => $message, 'sender' => $request->user()], function ($m) use ($message, $data) {
                 $m->to($message->email, $message->name)->subject($data['subject']);
             });
         } catch (\Throwable $e) {

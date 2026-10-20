@@ -39,6 +39,9 @@ class AppServiceProvider extends ServiceProvider
             // Settings table not created yet (before the first migration).
         }
 
+        // Logo, contact details and signature for every email template.
+        View::composer('emails.*', fn ($view) => $view->with('brand', \App\Support\EmailBrand::data()));
+
         // Unread message count for the admin bar and sidebar badge.
         View::composer('admin.layouts.app', function ($view) {
             $count = 0;

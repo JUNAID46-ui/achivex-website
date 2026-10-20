@@ -48,6 +48,8 @@ class SettingsController extends Controller
             'password' => 'nullable|max:200',
             'from_address' => 'nullable|email|max:200|not_regex:/[\r\n]/',
             'from_name' => 'required|max:120',
+            'signature_name' => 'nullable|max:120',
+            'signature_title' => 'nullable|max:120',
             'notify_to' => ['nullable', 'max:500', function ($attribute, $value, $fail) {
                 foreach (array_filter(array_map('trim', explode(',', (string) $value))) as $email) {
                     if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {

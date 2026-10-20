@@ -22,7 +22,7 @@
         </div>
         <div>
           <label for="body" class="label">Message</label>
-          <textarea id="body" name="body" rows="7" required class="input">{{ old('body', "Hi ".$message->name.",\n\nThank you for contacting AchiveX LLC.\n\n\n\nBest regards,\n".auth()->user()->name."\nAchiveX LLC\n+1 307 622 1140") }}</textarea>
+          <textarea id="body" name="body" rows="7" required class="input">{{ old('body', "Hi ".$message->name.",\n\nThank you for contacting AchiveX LLC.\n\n") }}</textarea>
           <p class="help">Their original message is added below your reply automatically.</p>
         </div>
         <button class="btn-primary">@include('admin.partials.icon', ['name' => 'mail']) Send reply</button>
