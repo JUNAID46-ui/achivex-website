@@ -27,18 +27,18 @@ class EmailBrand
             'tagline' => 'Marketing & Software Solutions',
             'site' => $site,
             'siteLabel' => Str::after(Str::after($site, '://'), 'www.'),
-            'logo' => $site.'/brand/logo-light.png',
-            'mark' => $site.'/brand/mark-dark.png',
+            'logo' => $site.'/brand/email/logo.png',
+            'mark' => $site.'/brand/email/mark.png',
+            'about' => $general['tagline'] ?? 'Empowering Businesses Through Digital Innovation.',
             'phone' => $phone,
             'phoneHref' => 'tel:'.preg_replace('/[^0-9+]/', '', $phone),
             'email' => $general['email'] ?? 'info@achivex.com',
             'location' => $general['location'] ?? 'Wyoming, USA',
-            'social' => array_filter([
-                'LinkedIn' => $social['linkedin'] ?? null,
-                'Facebook' => $social['facebook'] ?? null,
-                'X' => $social['x'] ?? null,
-                'Instagram' => $social['instagram'] ?? null,
-            ], fn ($url) => is_string($url) && preg_match('#^https?://#i', $url)),
+            // Label => [link, round icon] for the footer and signature.
+            'social' => collect(['facebook' => 'Facebook', 'linkedin' => 'LinkedIn', 'x' => 'X', 'instagram' => 'Instagram'])
+                ->filter(fn ($label, $key) => is_string($social[$key] ?? null) && preg_match('#^https?://#i', $social[$key]))
+                ->mapWithKeys(fn ($label, $key) => [$label => ['url' => $social[$key], 'icon' => $site.'/brand/email/'.$key.'.png']])
+                ->all(),
             'signatureName' => $mail['signature_name'] ?? null,
             'signatureTitle' => $mail['signature_title'] ?? null,
         ];
