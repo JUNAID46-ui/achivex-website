@@ -10,6 +10,8 @@ class InboxHookController extends Controller
 {
     public function __invoke()
     {
-        return response()->json(['sent' => InboxNotifier::run()]);
+        $sent = InboxNotifier::run();
+
+        return response()->json(['sent' => $sent, 'status' => InboxNotifier::status()]);
     }
 }

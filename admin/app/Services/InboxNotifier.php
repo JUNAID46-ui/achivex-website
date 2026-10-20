@@ -6,6 +6,7 @@ use App\Models\AppSetting;
 use App\Models\Content\ContactSubmission;
 use App\Models\Content\WhitepaperRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
@@ -25,6 +26,14 @@ class InboxNotifier
     public static function ready(): bool
     {
         return config('mail.default') === 'smtp' && (bool) config('mail.mailers.smtp.password');
+    }
+
+    // Last failure, shown on the Settings screen until an email goes out again.
+    public const ERROR_KEY = 'inbox-notify-error';
+
+    public static function status(): string
+    {
+        return ! static::ready() ? 'mail_not_set_up' : (Cache::has(self::ERROR_KEY) ? 'mail_failed' : 'ok');
     }
 
     public static function run(int $limit = 20): int
@@ -50,9 +59,11 @@ class InboxNotifier
                         }
                     });
                     $sent++;
+                    Cache::forget(self::ERROR_KEY);
                 } catch (\Throwable $e) {
-                    // Most likely the mail server is unreachable. Leave the row for the next call.
+                    // Most likely the mail server refused the login or is unreachable. Leave the row for the next call.
                     report($e);
+                    Cache::put(self::ERROR_KEY, ['message' => mb_substr($e->getMessage(), 0, 500), 'at' => now()->toIso8601String()], now()->addDays(7));
                     $model::whereKey($id)->update(['notified_at' => null]);
 
                     return $sent;

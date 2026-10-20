@@ -77,6 +77,9 @@
         <div><label for="m-name" class="label">Send from name</label><input id="m-name" name="from_name" value="{{ old('from_name', $mail['from_name'] ?? 'AchiveX LLC') }}" class="input"></div>
         <div class="sm:col-span-2"><label for="m-notify" class="label">Send new website messages to</label><input id="m-notify" name="notify_to" value="{{ old('notify_to', $mail['notify_to'] ?? '') }}" class="input" placeholder="you@gmail.com"><p class="help">Every new contact message and guide request is emailed here. Separate several addresses with commas. Empty sends to all administrators.</p></div>
         <p class="help sm:col-span-2">For Gmail use smtp.gmail.com, port 587, and a Gmail App Password (not your normal password).</p>
+        @if($notifyError)
+          <div class="rounded-md border-l-4 border-red-600 bg-red-50 px-3 py-2 text-red-700 sm:col-span-2"><strong>The last new-message email failed</strong> ({{ \Illuminate\Support\Carbon::parse($notifyError['at'])->diffForHumans() }}): {{ $notifyError['message'] }}</div>
+        @endif
       </div>
       <div class="flex flex-wrap items-center justify-between gap-2 border-t border-slate-200 bg-slate-50 px-5 py-3">
         <button type="submit" form="test-email" class="btn-secondary">@include('admin.partials.icon', ['name' => 'mail']) Send test email</button>

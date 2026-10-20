@@ -17,6 +17,7 @@ class SettingsController extends Controller
             'general' => SiteSetting::group('general'),
             'social' => SiteSetting::group('social'),
             'mail' => AppSetting::group('mail'),
+            'notifyError' => \Illuminate\Support\Facades\Cache::get(\App\Services\InboxNotifier::ERROR_KEY),
             'storageReady' => SupabaseStorage::enabled(),
             'storageKeyHint' => ($k = SupabaseStorage::key()) ? substr($k, 0, 12).'...'.substr($k, -4) : null,
         ]);
