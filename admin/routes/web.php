@@ -115,6 +115,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('activity', [Admin\ActivityController::class, 'index'])->name('activity')->middleware('area:activity');
 
+        // Backup and cache tools (administrators only)
+        Route::middleware('area:tools')->group(function () {
+            Route::get('backup', [Admin\BackupController::class, 'index'])->name('backup');
+            Route::get('backup/download', [Admin\BackupController::class, 'download'])->name('backup.download')->middleware('throttle:10,1');
+            Route::post('backup/restore', [Admin\BackupController::class, 'restore'])->name('backup.restore')->middleware('throttle:5,1');
+            Route::get('cache', [Admin\CacheController::class, 'index'])->name('cache');
+            Route::post('cache/clear', [Admin\CacheController::class, 'clear'])->name('cache.clear');
+        });
+
         Route::get('profile', [Admin\ProfileController::class, 'edit'])->name('profile');
         Route::post('profile', [Admin\ProfileController::class, 'update']);
     });
