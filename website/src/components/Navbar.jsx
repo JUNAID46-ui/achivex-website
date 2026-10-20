@@ -91,7 +91,7 @@ export default function Navbar() {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -6 }}
                             transition={{ duration: 0.22 }}
-                            className="absolute left-0 top-full bg-canvas"
+                            className="absolute left-0 top-full bg-mist shadow-[0_18px_40px_-12px_rgba(0,0,0,0.45)]"
                           >
                             <item.panel onNavigate={close} />
                           </motion.div>
@@ -145,7 +145,7 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.25, ease: 'easeOut' }}
-              className="absolute inset-x-0 top-full hidden border-t border-mist bg-canvas lg:block"
+              className="absolute inset-x-0 top-full hidden bg-mist shadow-[0_18px_40px_-12px_rgba(0,0,0,0.45)] lg:block"
               onMouseEnter={() => enter(active.key)}
             >
               <div className="mx-auto max-w-[1440px]">

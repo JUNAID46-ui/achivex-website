@@ -33,7 +33,7 @@ export default function ServicesMenu({ onNavigate }) {
   const colB = categories.filter((c) => !colA.includes(c))
   return (
     <div className="grid grid-cols-[minmax(260px,30%)_1fr]">
-      <aside className="bg-mist px-10 py-10">
+      <aside className="bg-cloud px-10 py-10">
         <p className="font-display text-3xl text-body">Services</p>
         <Link to={servicesFeature.to} onClick={onNavigate} className="group mt-6 block">
           <div className="overflow-hidden">

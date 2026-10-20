@@ -10,7 +10,7 @@ export default function InsightsMenu({ onNavigate }) {
   const featured = blogs.find((b) => b.featured) || blogs[0]
   return (
     <div className="grid grid-cols-[minmax(260px,30%)_1fr]">
-      <aside className="bg-mist px-10 py-10">
+      <aside className="bg-cloud px-10 py-10">
         <p className="font-display text-3xl text-body">Insights</p>
         <Link to={`/insights/blogs/${featured.slug}/`} onClick={onNavigate} className="group mt-6 block">
           <div className="overflow-hidden">
