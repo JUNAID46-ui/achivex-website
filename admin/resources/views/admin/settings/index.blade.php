@@ -75,6 +75,7 @@
         <div><label for="m-pass" class="label">App password</label><input id="m-pass" name="password" type="password" autocomplete="off" class="input" placeholder="{{ config('mail.mailers.smtp.password') ? 'Saved. Leave empty to keep it.' : '16 letter Gmail App Password' }}"></div>
         <div><label for="m-from" class="label">Send from address</label><input id="m-from" name="from_address" value="{{ old('from_address', $mail['from_address'] ?? config('mail.from.address')) }}" class="input"></div>
         <div><label for="m-name" class="label">Send from name</label><input id="m-name" name="from_name" value="{{ old('from_name', $mail['from_name'] ?? config('mail.from.name')) }}" class="input"></div>
+        <div class="sm:col-span-2"><label for="m-notify" class="label">Send new website messages to</label><input id="m-notify" name="notify_to" value="{{ old('notify_to', $mail['notify_to'] ?? '') }}" class="input" placeholder="you@gmail.com"><p class="help">Every new contact message and guide request is emailed here. Separate several addresses with commas. Empty sends to all administrators.</p></div>
         <p class="help sm:col-span-2">For Gmail use smtp.gmail.com, port 587, and a Gmail App Password (not your normal password).</p>
       </div>
       <div class="flex flex-wrap items-center justify-between gap-2 border-t border-slate-200 bg-slate-50 px-5 py-3">

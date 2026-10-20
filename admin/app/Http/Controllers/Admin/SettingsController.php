@@ -46,6 +46,13 @@ class SettingsController extends Controller
             'password' => 'nullable|max:200',
             'from_address' => 'required|email|max:200|not_regex:/[\r\n]/',
             'from_name' => 'required|max:120',
+            'notify_to' => ['nullable', 'max:500', function ($attribute, $value, $fail) {
+                foreach (array_filter(array_map('trim', explode(',', (string) $value))) as $email) {
+                    if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                        $fail("{$email} is not a valid email address.");
+                    }
+                }
+            }],
         ]);
         $data['password'] = str_replace(' ', '', (string) $data['password']) ?: (AppSetting::group('mail')['password'] ?? '');
         AppSetting::put('mail', $data);

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin;
+use App\Http\Controllers\InboxHookController;
 use App\Http\Controllers\PublicSeoController;
 use Illuminate\Support\Facades\Route;
 
@@ -9,6 +10,9 @@ Route::redirect('/', '/admin');
 // Public SEO files generated from the admin settings
 Route::get('/sitemap.xml', [PublicSeoController::class, 'sitemap'])->name('sitemap');
 Route::get('/robots.txt', [PublicSeoController::class, 'robots'])->name('robots');
+
+// New contact messages and guide requests are emailed to the owner (called by a database trigger)
+Route::post('/hooks/inbox', InboxHookController::class)->middleware('throttle:30,1')->name('hooks.inbox');
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('guest')->group(function () {
