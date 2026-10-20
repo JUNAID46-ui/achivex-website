@@ -13,7 +13,9 @@
       <ol class="list-decimal space-y-1 pl-5 text-[13px] text-slate-600">
         <li>Open <a href="https://search.google.com/search-console" target="_blank" class="text-navy underline">Google Search Console</a> and add your website.</li>
         <li>Choose the "HTML tag" method and copy the tag.</li>
-        <li>Paste it here, save, then click Verify in Search Console.</li>
+        <li>Paste it here and save.</li>
+        <li>The code goes into the website's HTML when the website is next published, so publish (redeploy) the website before you click Verify.</li>
+        <li>Use the same address in Search Console as the live website, for example {{ rtrim(config('admin.site_url'), '/') }}.</li>
       </ol>
     </div>
   </div>
