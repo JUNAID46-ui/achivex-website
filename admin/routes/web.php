@@ -124,6 +124,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('backup/restore', [Admin\BackupController::class, 'restore'])->name('backup.restore')->middleware('throttle:5,1');
             Route::get('cache', [Admin\CacheController::class, 'index'])->name('cache');
             Route::post('cache/clear', [Admin\CacheController::class, 'clear'])->name('cache.clear');
+            Route::get('custom-code', [Admin\CustomCodeController::class, 'index'])->name('custom-code');
+            Route::post('custom-code', [Admin\CustomCodeController::class, 'save']);
         });
 
         Route::get('profile', [Admin\ProfileController::class, 'edit'])->name('profile');

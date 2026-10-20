@@ -48,6 +48,7 @@ return [
         ['label' => 'Tools', 'icon' => 'refresh', 'area' => 'tools', 'children' => [
             ['label' => 'Backup and Restore', 'route' => 'admin.backup', 'area' => 'tools'],
             ['label' => 'Cache', 'route' => 'admin.cache', 'area' => 'tools'],
+            ['label' => 'Custom Code', 'route' => 'admin.custom-code', 'area' => 'tools'],
         ]],
     ],
 ];

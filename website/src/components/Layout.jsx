@@ -4,6 +4,7 @@ import Navbar from './Navbar'
 import Footer from './Footer'
 import jumpTo from '../utils/jumpTo'
 import SiteHead from './SiteHead'
+import CustomCode from './CustomCode'
 import { logPageView, normalizePath } from '../lib/content'
 import { customPages, pageSections } from '../data/customPages'
 import PageSections from './PageSections'
@@ -21,6 +22,7 @@ export default function Layout() {
         Skip to content
       </a>
       <SiteHead />
+      <CustomCode />
       <Navbar />
       <main id="main">
         <Outlet />

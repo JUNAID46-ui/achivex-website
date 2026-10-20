@@ -32,6 +32,7 @@ function applySettings(rows) {
   })
   Object.assign(settings.seo, byKey.seo || {})
   Object.assign(settings.schema, byKey.schema || {})
+  Object.assign(settings.customCode, byKey.custom_code || {})
 }
 
 // Loads the editable content from the database and swaps it into the data arrays

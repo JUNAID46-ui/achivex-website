@@ -20,6 +20,16 @@ export const settings = {
     region: 'WY',
     country: 'US',
   },
+  // Code added in the admin under Tools, Custom Code.
+  customCode: {
+    head: '',
+    bodyStart: '',
+    footer: '',
+    homeHead: '',
+    homeFooter: '',
+    css: '',
+    js: '',
+  },
 }
 
 // Per URL SEO overrides keyed by path, for example "/services/".
