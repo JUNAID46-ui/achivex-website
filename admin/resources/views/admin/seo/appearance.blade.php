@@ -27,7 +27,7 @@
     </div>
     <div class="card card-body">
       <p class="label">Home page in Google</p>
-      <div class="rounded-md border border-slate-200 p-4">
+      <div class="border border-slate-200 p-4">
         <p class="text-xs text-slate-600">{{ parse_url(config('admin.site_public_url'), PHP_URL_HOST) }}</p>
         <p class="mt-1 text-[18px] text-[#1a0dab]" x-text="home"></p>
         <p class="mt-1 text-[13px] text-slate-600" x-text="desc"></p>

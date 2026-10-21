@@ -18,7 +18,7 @@
   <div class="space-y-6">
     <div class="card card-body">
       <p class="label">Google preview</p>
-      <div class="rounded-md border border-slate-200 p-4">
+      <div class="border border-slate-200 p-4">
         <p class="text-xs text-slate-600">{{ parse_url(config('admin.site_public_url'), PHP_URL_HOST) }}{{ $row['path'] }}</p>
         <p class="mt-1 text-[19px] leading-snug text-[#1a0dab]" x-text="fullTitle"></p>
         <p class="mt-1 text-[13px] leading-snug text-slate-600" x-text="fullDesc"></p>
@@ -37,10 +37,10 @@
     </div>
   </div>
   <div class="card self-start">
-    <div class="card-header"><h2 class="card-title">Analysis</h2><span class="score" :class="result.score >= 80 ? 'bg-emerald-500' : result.score >= 50 ? 'bg-amber' : 'bg-red-500'" x-text="result.score"></span></div>
+    <div class="card-header"><h2 class="card-title">Analysis</h2><span class="score" :class="result.score >= 80 ? 'bg-emerald-500' : result.score >= 50 ? 'bg-ink' : 'bg-red-500'" x-text="result.score"></span></div>
     <ul class="card-body space-y-2.5">
       <template x-for="c in result.checks" :key="c.label">
-        <li class="flex gap-2 text-[13px]"><span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full" :class="c.status === 'good' ? 'bg-emerald-500' : c.status === 'ok' ? 'bg-amber' : 'bg-red-500'"></span><span x-text="c.label"></span></li>
+        <li class="flex gap-2 text-[13px]"><span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full" :class="c.status === 'good' ? 'bg-emerald-500' : c.status === 'ok' ? 'bg-ink' : 'bg-red-500'"></span><span x-text="c.label"></span></li>
       </template>
     </ul>
     <div class="border-t border-slate-100 px-5 py-3 text-xs text-slate-500">The page text itself is part of the website code. Ask your developer to update it, or contact AchiveX.</div>

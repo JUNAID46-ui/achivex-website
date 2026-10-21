@@ -30,9 +30,9 @@
   </div>
   <div class="card-body space-y-4 text-[13px]">
     @if($recoveryCodes)
-      <div class="rounded-lg border border-amber-200 bg-amber-50 p-4">
-        <p class="font-semibold text-amber-900">Save these recovery codes now. They are shown only once.</p>
-        <p class="mt-1 text-amber-900">Each code works one time if you lose your phone.</p>
+      <div class="border border-ink bg-slate-50 p-4">
+        <p class="font-semibold text-ink">Save these recovery codes now. They are shown only once.</p>
+        <p class="mt-1 text-ink">Each code works one time if you lose your phone.</p>
         <div class="mt-3 grid grid-cols-2 gap-2 font-mono text-[14px] sm:grid-cols-4">@foreach($recoveryCodes as $c)<span>{{ $c }}</span>@endforeach</div>
       </div>
     @endif
@@ -52,7 +52,7 @@
         <li>Enter the 6 digit code the app shows.</li>
       </ol>
       <div class="flex flex-wrap items-center gap-6">
-        <div class="rounded-lg border border-slate-200 bg-white p-2">{!! $setupQr !!}</div>
+        <div class="border border-slate-200 bg-white p-2">{!! $setupQr !!}</div>
         <div class="space-y-3">
           <p>Setup key: <span class="font-mono font-semibold tracking-wider">{{ trim(chunk_split($setupSecret, 4, ' ')) }}</span></p>
           <form method="POST" action="{{ route('admin.profile.two-factor.confirm') }}" class="flex flex-wrap items-end gap-3">

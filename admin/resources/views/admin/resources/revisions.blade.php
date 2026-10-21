@@ -10,7 +10,7 @@
   <div class="card divide-y divide-slate-100">
     @forelse($revisions as $rev)
       <a href="{{ route('admin.resources.revisions', [$resource->slug, $record->getKey(), 'compare' => $rev->id]) }}"
-         class="block px-4 py-3 hover:bg-slate-50 {{ $compare?->id === $rev->id ? 'bg-accent-50' : '' }}">
+         class="block px-4 py-3 hover:bg-slate-50 {{ $compare?->id === $rev->id ? 'bg-slate-100' : '' }}">
         <span class="font-semibold text-ink">{{ $rev->created_at?->format('M j, Y H:i') }} UTC</span>
         <span class="block text-xs text-slate-500">{{ $rev->user_name ?? 'System' }} · {{ $rev->action === 'delete' ? 'before delete' : 'before a change' }}</span>
       </a>
@@ -26,8 +26,8 @@
           <div>
             <p class="label">{{ str_replace('_', ' ', ucfirst($field)) }}</p>
             <div class="grid gap-3 md:grid-cols-2 text-[13px]">
-              <pre class="max-h-60 overflow-auto whitespace-pre-wrap rounded-md bg-red-50 p-3 text-red-900">{{ is_scalar($d['then']) || $d['then'] === null ? ($d['then'] ?? '(empty)') : json_encode($d['then'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) }}</pre>
-              <pre class="max-h-60 overflow-auto whitespace-pre-wrap rounded-md bg-emerald-50 p-3 text-emerald-900">{{ is_scalar($d['now']) || $d['now'] === null ? ($d['now'] ?? '(empty)') : json_encode($d['now'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) }}</pre>
+              <pre class="max-h-60 overflow-auto whitespace-pre-wrap  bg-red-50 p-3 text-red-900">{{ is_scalar($d['then']) || $d['then'] === null ? ($d['then'] ?? '(empty)') : json_encode($d['then'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) }}</pre>
+              <pre class="max-h-60 overflow-auto whitespace-pre-wrap  bg-emerald-50 p-3 text-emerald-900">{{ is_scalar($d['now']) || $d['now'] === null ? ($d['now'] ?? '(empty)') : json_encode($d['now'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) }}</pre>
             </div>
           </div>
         @empty
@@ -37,7 +37,7 @@
       @if($diff)
         <form method="POST" action="{{ route('admin.resources.restore', [$resource->slug, $record->getKey(), $compare->id]) }}" class="flex flex-wrap items-center justify-between gap-3 pt-2">
           @csrf
-          <label class="flex items-center gap-2 text-[13px]"><input type="checkbox" name="confirm" value="1" class="rounded border-slate-300" required> I want to replace the current version with this copy</label>
+          <label class="flex items-center gap-2 text-[13px]"><input type="checkbox" name="confirm" value="1" class="border-slate-300" required> I want to replace the current version with this copy</label>
           <button class="btn-primary" data-loading>Restore this copy</button>
         </form>
       @endif

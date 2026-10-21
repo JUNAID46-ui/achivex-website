@@ -5,11 +5,11 @@
 @section('content')
 @php
   $ready = $storage['exists'] && $storage['public'] === false;
-  $badge = ['verified' => 'green', 'failed' => 'red', 'running' => 'gray', 'completed' => 'amber', 'deleted' => 'gray'];
+  $badge = ['verified' => 'green', 'failed' => 'red', 'running' => 'gray', 'completed' => 'warn', 'deleted' => 'gray'];
 @endphp
 
 @if(! $ready)
-  <div class="mb-6 rounded-lg border {{ $storage['public'] ? 'border-red-200 bg-red-50 text-red-800' : 'border-amber-200 bg-amber-50 text-amber-900' }} px-5 py-4 text-[13px]">
+  <div class="mb-6  border {{ $storage['public'] ? 'border-red-200 bg-red-50 text-red-800' : 'border-ink bg-slate-50 text-ink' }} px-5 py-4 text-[13px]">
     @if($storage['public'])
       <p class="font-semibold">The "backups" bucket in Supabase is public.</p>
       <p class="mt-1">Backups contain inbox messages and must not be public. Make the bucket private in Supabase (Storage, backups, Edit bucket). Until then, backups are not stored there.</p>
@@ -63,7 +63,7 @@
       @if($ready)
         <p>Choose an AchiveX backup file (.json). It is uploaded to private storage and checked. You see exactly what will change before anything is restored.</p>
         <input type="file" accept=".json,application/json" class="input" x-ref="file" aria-label="Backup file">
-        <div x-show="progress !== null" class="h-2 rounded bg-slate-100"><div class="h-2 rounded bg-ink" :style="`width:${progress}%`"></div></div>
+        <div x-show="progress !== null" class="h-2  bg-slate-100"><div class="h-2  bg-ink" :style="`width:${progress}%`"></div></div>
         <p class="error" x-show="error" x-text="error"></p>
       @else
         <form method="POST" action="{{ route('admin.backup.restore-upload') }}" enctype="multipart/form-data" class="space-y-3" x-data="{ mode: 'merge' }">

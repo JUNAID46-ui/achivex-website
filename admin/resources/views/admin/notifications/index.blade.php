@@ -20,8 +20,8 @@
 </div>
 <div class="card divide-y divide-slate-100">
   @forelse($items as $n)
-    <div class="flex flex-wrap items-start gap-3 px-5 py-4 {{ $n->read_at ? '' : 'bg-accent-50/60' }}">
-      <span class="mt-0.5 badge-{{ ['critical' => 'red', 'warning' => 'amber', 'info' => 'gray'][$n->severity] ?? 'gray' }}">{{ ucfirst($n->severity) }}</span>
+    <div class="flex flex-wrap items-start gap-3 px-5 py-4 {{ $n->read_at ? '' : 'bg-slate-50' }}">
+      <span class="mt-0.5 badge-{{ ['critical' => 'red', 'warning' => 'warn', 'info' => 'gray'][$n->severity] ?? 'gray' }}">{{ ucfirst($n->severity) }}</span>
       <div class="min-w-0 flex-1">
         <a href="{{ route('admin.notifications.open', $n->id) }}" class="font-semibold text-ink hover:underline">{{ $n->title }}</a>
         @if($n->body)<p class="mt-0.5 text-[13px] text-slate-600">{{ $n->body }}</p>@endif

@@ -33,16 +33,14 @@
     <p class="stat-value {{ $unread ? 'text-neon-red' : 'text-neon-green' }}">{{ $unread }}</p>
     <p class="mt-1 text-xs text-slate-400">{{ $requests30 }} guide requests in 30 days</p>
   </a>
-  <a href="{{ route('admin.seo.overview') }}" class="group flex items-center gap-4 py-2">
-    <span class="score h-14 w-14 text-base {{ \App\Services\SeoAnalyzer::color($seoAvg) }}">{{ $seoAvg }}</span>
-    <div>
-      <p class="stat-label group-hover:text-ink">Average SEO score</p>
-      <p class="mt-1 text-xs text-slate-500">
-        <span class="text-emerald-600">{{ $seoCounts['good'] ?? 0 }} good</span> ·
-        <span class="text-amber-600">{{ $seoCounts['ok'] ?? 0 }} need work</span> ·
-        <span class="text-red-600">{{ $seoCounts['bad'] ?? 0 }} poor</span>
-      </p>
-    </div>
+  <a href="{{ route('admin.seo.overview') }}" class="group py-2">
+    <p class="stat-label group-hover:text-ink">Average SEO score</p>
+    <p class="stat-value {{ ['good' => 'text-neon-green', 'ok' => 'text-ink', 'bad' => 'text-neon-red'][\App\Services\SeoAnalyzer::grade($seoAvg)] }}">{{ $seoAvg }}<span class="text-base text-slate-400">/100</span></p>
+    <p class="mt-1 text-xs text-slate-500">
+      <span class="text-green-700">{{ $seoCounts['good'] ?? 0 }} good</span> ·
+      <span>{{ $seoCounts['ok'] ?? 0 }} need work</span> ·
+      <span class="text-neon-red">{{ $seoCounts['bad'] ?? 0 }} poor</span>
+    </p>
   </a>
 </div>
 
@@ -51,7 +49,7 @@
   <div class="card xl:col-span-2">
     <div class="card-header">
       <h2 class="card-title">Website traffic</h2>
-      <a href="{{ route('admin.analytics') }}" class="text-[13px] font-semibold text-ink hover:text-accent">Full report &rarr;</a>
+      <a href="{{ route('admin.analytics') }}" class="text-[13px] font-semibold text-ink hover:underline">Full report &rarr;</a>
     </div>
     <div class="card-body"><div class="h-64"><canvas id="trafficChart"></canvas></div></div>
   </div>
@@ -59,12 +57,12 @@
   {{-- At a glance --}}
   <div class="card">
     <div class="card-header"><h2 class="card-title">At a glance</h2></div>
-    <ul class="grid grid-cols-2">
+    <ul>
       @foreach($glance as $g)
-        <li class="bg-white">
-          <a href="{{ $g['route'] }}" class="group block py-4 pr-4">
-            <span class="block text-2xl font-extrabold text-ink group-hover:text-accent">{{ $g['count'] }}</span>
-            <span class="text-[13px] text-slate-500">{{ $g['label'] }}</span>
+        <li class="border-b border-slate-200">
+          <a href="{{ $g['route'] }}" class="group flex items-baseline justify-between py-3">
+            <span class="text-[13.5px] text-slate-600 group-hover:text-ink">{{ $g['label'] }}</span>
+            <span class="font-mono text-lg font-bold text-ink">{{ $g['count'] }}</span>
           </a>
         </li>
       @endforeach
@@ -103,13 +101,13 @@
   {{-- Site health --}}
   <div class="card">
     <div class="card-header"><h2 class="card-title">Site health</h2>
-      <span class="badge-{{ collect($health)->where('ok', false)->count() ? 'amber' : 'green' }}">{{ collect($health)->where('ok', true)->count() }} of {{ count($health) }} passed</span>
+      <span class="badge-{{ collect($health)->where('ok', false)->count() ? 'warn' : 'green' }}">{{ collect($health)->where('ok', true)->count() }} of {{ count($health) }} passed</span>
     </div>
     <ul class="divide-y divide-slate-100">
       @foreach($health as $h)
         <li>
           <a href="{{ $h['url'] }}" class="flex items-start gap-2.5 px-5 py-2.5 text-[13px] hover:bg-slate-50">
-            <span class="mt-0.5 {{ $h['ok'] ? 'text-emerald-500' : 'text-amber-600' }}">@include('admin.partials.icon', ['name' => $h['ok'] ? 'check' : 'alert'])</span>
+            <span class="mt-0.5 {{ $h['ok'] ? 'text-emerald-500' : 'text-ink' }}">@include('admin.partials.icon', ['name' => $h['ok'] ? 'check' : 'alert'])</span>
             <span class="{{ $h['ok'] ? 'text-slate-600' : 'font-semibold text-slate-800' }}">{{ $h['label'] }}</span>
           </a>
         </li>
@@ -121,7 +119,7 @@
 <div class="mt-10 grid gap-x-10 gap-y-10 xl:grid-cols-3">
   {{-- Recent messages --}}
   <div class="card">
-    <div class="card-header"><h2 class="card-title">Latest messages</h2><a href="{{ route('admin.inbox.messages') }}" class="text-[13px] font-semibold text-ink hover:text-accent">Inbox &rarr;</a></div>
+    <div class="card-header"><h2 class="card-title">Latest messages</h2><a href="{{ route('admin.inbox.messages') }}" class="text-[13px] font-semibold text-ink hover:underline">Inbox &rarr;</a></div>
     <ul class="divide-y divide-slate-100">
       @forelse($messages as $m)
         <li>
@@ -160,7 +158,7 @@
 
   {{-- Activity --}}
   <div class="card">
-    <div class="card-header"><h2 class="card-title">Recent activity</h2>@if(auth()->user()->canAccess('activity'))<a href="{{ route('admin.activity') }}" class="text-[13px] font-semibold text-ink hover:text-accent">All &rarr;</a>@endif</div>
+    <div class="card-header"><h2 class="card-title">Recent activity</h2>@if(auth()->user()->canAccess('activity'))<a href="{{ route('admin.activity') }}" class="text-[13px] font-semibold text-ink hover:underline">All &rarr;</a>@endif</div>
     <ul class="divide-y divide-slate-100">
       @forelse($activity as $a)
         <li class="px-5 py-2.5 text-[13px]">

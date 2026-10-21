@@ -7,7 +7,7 @@
 @endsection
 @section('content')
 @php $sum = $run?->summary ?? []; @endphp
-<div class="mb-6 rounded-lg border border-slate-200 bg-white px-5 py-4 text-[13px] text-slate-600">
+<div class="mb-6  border border-slate-200 bg-white px-5 py-4 text-[13px] text-slate-600">
   <p><span class="font-semibold text-ink">What this measures.</span> Things the admin can observe: what the website serves to crawlers, robots.txt rules for AI crawlers, llms.txt, organization data, indexing settings and the structure of your content.</p>
   <p class="mt-1"><span class="font-semibold text-ink">What it does not measure.</span> AI citations, AI rankings, crawler visits and competitor data. No data source for these is connected, so none are shown. No tool can guarantee that a website will appear in ChatGPT, Google AI Overviews or other AI products.</p>
 </div>

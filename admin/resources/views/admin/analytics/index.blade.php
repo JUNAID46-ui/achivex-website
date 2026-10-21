@@ -3,9 +3,9 @@
 @section('heading', 'Analytics')
 @section('subheading', 'Visits recorded by the AchiveX website. No cookies or third party trackers are used.')
 @section('actions')
-  <div class="flex rounded-lg bg-slate-100 p-0.5">
+  <div class="flex  bg-slate-100 p-0.5">
     @foreach([7 => '7 days', 30 => '30 days', 90 => '90 days', 365 => '12 months'] as $d => $l)
-      <a href="{{ route('admin.analytics', ['days' => $d]) }}" class="rounded px-3 py-1.5 text-[13px] {{ $days === $d ? 'bg-ink font-semibold text-white' : 'text-slate-600 hover:text-ink' }}">{{ $l }}</a>
+      <a href="{{ route('admin.analytics', ['days' => $d]) }}" class="px-3 py-1.5 text-[13px] {{ $days === $d ? 'bg-ink font-semibold text-white' : 'text-slate-600 hover:text-ink' }}">{{ $l }}</a>
     @endforeach
   </div>
   <a href="{{ route('admin.analytics.export', ['days' => $days]) }}" class="btn-secondary">@include('admin.partials.icon', ['name' => 'download']) CSV</a>
@@ -30,7 +30,7 @@
         @forelse($topPages as $p)
           @php $max = $topPages[0]['views'] ?: 1; @endphp
           <tr><td><a href="{{ rtrim(config('admin.site_url'), '/').$p['path'] }}" target="_blank" class="text-ink hover:underline">{{ $p['path'] }}</a>
-            <div class="mt-1 h-1 rounded bg-slate-100"><div class="h-1 rounded bg-gradient-to-r from-neon-purple to-neon-blue" style="width: {{ round($p['views'] * 100 / $max) }}%"></div></div></td>
+            <div class="mt-1 h-1  bg-slate-100"><div class="h-1  bg-gradient-to-r from-neon-purple to-neon-blue" style="width: {{ round($p['views'] * 100 / $max) }}%"></div></div></td>
             <td class="text-right font-semibold">{{ $p['views'] }}</td><td class="text-right text-slate-500">{{ $p['visitors'] }}</td></tr>
         @empty
           <tr><td colspan="3" class="py-12 text-center text-slate-500">No visits in this period.</td></tr>

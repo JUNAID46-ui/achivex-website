@@ -14,7 +14,7 @@
       <img src="{{ asset('brand/logo-dark.png') }}" alt="AchiveX LLC" class="h-24">
     </div>
     @if(session('status'))
-      <div class="mb-4 rounded-md border-l-4 border-emerald-500 bg-white px-4 py-3 text-sm shadow-sm">{{ session('status') }}</div>
+      <div class="mb-4  border-l-4 border-emerald-500 bg-white px-4 py-3 text-sm ">{{ session('status') }}</div>
     @endif
     <form method="POST" action="{{ route('admin.password.update') }}" class="card card-body space-y-5">
       @csrf

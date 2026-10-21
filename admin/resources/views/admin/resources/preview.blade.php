@@ -11,7 +11,7 @@
 <body class="bg-white">
   <div class="sticky top-0 z-10 flex flex-wrap items-center justify-between gap-2 bg-ink px-4 py-2 text-[13px] text-white">
     <span>Preview of the saved version{{ $state ? ' · '.\App\Services\ContentWorkflow::STATES[$state] : '' }}. The website layout differs slightly.</span>
-    <a href="{{ route('admin.resources.edit', [$resource->slug, $record->getKey()]) }}" class="font-semibold text-accent-200 hover:underline">Back to editing</a>
+    <a href="{{ route('admin.resources.edit', [$resource->slug, $record->getKey()]) }}" class="font-semibold text-white underline">Back to editing</a>
   </div>
   @php
     $fields = collect($resource->allFields())->reject(fn ($f) => in_array($f['type'], ['toggle', 'slug', 'password'], true) || in_array($f['name'], [$resource->titleField], true));
@@ -20,7 +20,7 @@
   <article class="mx-auto max-w-3xl px-5 py-10">
     <h1 class="text-3xl font-extrabold leading-tight text-ink">{{ $resource->titleOf($record) }}</h1>
     @if($image && $record->{$image['name']})
-      <img src="{{ $record->{$image['name']} }}" alt="" class="mt-6 w-full rounded-lg object-cover">
+      <img src="{{ $record->{$image['name']} }}" alt="" class="mt-6 w-full  object-cover">
     @endif
     <div class="mt-6 space-y-5 text-[16px] leading-relaxed text-slate-800">
       @foreach($fields as $f)

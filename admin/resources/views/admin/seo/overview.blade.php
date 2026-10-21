@@ -7,7 +7,7 @@
 @endsection
 @section('content')
 @php $lastAudit = \App\Models\AuditRun::where('type', 'seo')->where('status', 'completed')->latest('id')->first(['id', 'summary', 'started_at']); @endphp
-<div class="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white px-5 py-3 text-[13px]">
+<div class="mb-6 flex flex-wrap items-center justify-between gap-3  border border-slate-200 bg-white px-5 py-3 text-[13px]">
   @if($lastAudit)
     <span>Last technical audit <time datetime="{{ $lastAudit->started_at?->toIso8601String() }}">{{ $lastAudit->started_at?->diffForHumans() }}</time>:
       <span class="font-semibold text-ink">{{ $lastAudit->summary['total'] ?? 0 }} findings</span>,
@@ -29,16 +29,16 @@
     <p class="mt-4 font-semibold text-ink">Site SEO score</p>
     <p class="mt-1 text-[13px] text-slate-500">Average of {{ $total }} URLs</p>
     <div class="mt-5 grid w-full grid-cols-3 gap-2 text-center text-xs">
-      <a href="{{ route('admin.seo.pages', ['grade' => 'good']) }}" class="rounded-md bg-emerald-50 p-2 text-emerald-700"><span class="block text-lg font-bold">{{ $counts['good'] ?? 0 }}</span>Good</a>
-      <a href="{{ route('admin.seo.pages', ['grade' => 'ok']) }}" class="rounded-md bg-amber-50 p-2 text-amber-600"><span class="block text-lg font-bold">{{ $counts['ok'] ?? 0 }}</span>Needs work</a>
-      <a href="{{ route('admin.seo.pages', ['grade' => 'bad']) }}" class="rounded-md bg-red-50 p-2 text-red-700"><span class="block text-lg font-bold">{{ $counts['bad'] ?? 0 }}</span>Poor</a>
+      <a href="{{ route('admin.seo.pages', ['grade' => 'good']) }}" class="bg-emerald-50 p-2 text-emerald-700"><span class="block text-lg font-bold">{{ $counts['good'] ?? 0 }}</span>Good</a>
+      <a href="{{ route('admin.seo.pages', ['grade' => 'ok']) }}" class="bg-slate-50 p-2 text-ink"><span class="block text-lg font-bold">{{ $counts['ok'] ?? 0 }}</span>Needs work</a>
+      <a href="{{ route('admin.seo.pages', ['grade' => 'bad']) }}" class="bg-red-50 p-2 text-red-700"><span class="block text-lg font-bold">{{ $counts['bad'] ?? 0 }}</span>Poor</a>
     </div>
   </div>
 
   <div class="space-y-6">
     <div class="grid gap-4 sm:grid-cols-4">
       @foreach([['Redirects active', $redirects, route('admin.resources.index', 'redirects')], ['404 hits (7 days)', $notFound7, route('admin.seo.notfound')], ['Hidden from Google', $noindex, route('admin.seo.pages')], ['Search Console', !empty($settings['googleVerification']) ? 'Verified' : 'Not set', route('admin.seo.webmaster')]] as [$l, $v, $u])
-        <a href="{{ $u }}" class="card card-body hover:ring-2 hover:ring-accent"><p class="text-xs font-semibold text-slate-500">{{ $l }}</p><p class="mt-1 text-xl font-extrabold text-ink">{{ $v }}</p></a>
+        <a href="{{ $u }}" class="card card-body hover:ring-2 hover:ring-ink"><p class="text-xs font-semibold text-slate-500">{{ $l }}</p><p class="mt-1 text-xl font-extrabold text-ink">{{ $v }}</p></a>
       @endforeach
     </div>
     <div class="grid gap-6 xl:grid-cols-2">
@@ -68,7 +68,7 @@
       <table class="table"><thead><tr><th>Type</th><th>URLs</th><th>Average score</th></tr></thead><tbody>
         @foreach($byType as $type => $t)
           <tr><td><a href="{{ route('admin.seo.pages', ['type' => $type]) }}" class="font-semibold text-ink hover:underline">{{ $type }}</a></td><td>{{ $t['count'] }}</td>
-            <td><div class="flex items-center gap-3"><div class="h-2 w-40 rounded bg-slate-100"><div class="h-2 rounded {{ \App\Services\SeoAnalyzer::color($t['avg']) }}" style="width: {{ $t['avg'] }}%"></div></div><span class="font-semibold">{{ $t['avg'] }}</span></div></td></tr>
+            <td><div class="flex items-center gap-3"><div class="h-2 w-40  bg-slate-100"><div class="h-2  {{ \App\Services\SeoAnalyzer::color($t['avg']) }}" style="width: {{ $t['avg'] }}%"></div></div><span class="font-semibold">{{ $t['avg'] }}</span></div></td></tr>
         @endforeach
       </tbody></table>
     </div>

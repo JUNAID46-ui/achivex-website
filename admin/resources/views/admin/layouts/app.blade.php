@@ -9,7 +9,7 @@
   <title>@yield('title', 'Dashboard') · AchiveX Admin</title>
   <link rel="icon" href="{{ asset('brand/mark-dark.png') }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/admin.css') }}?v={{ filemtime(public_path('css/admin.css')) }}">
   <script src="{{ asset('vendor/sortable.min.js') }}"></script>
   <script src="{{ asset('vendor/chart.umd.js') }}"></script>
@@ -31,21 +31,21 @@
 @endphp
 
 {{-- Top admin bar --}}
-<header class="fixed inset-x-0 top-0 z-40 flex h-12 items-center justify-between border-b border-slate-100 bg-white/95 px-3 text-[13px] text-slate-600 backdrop-blur">
+<header class="fixed inset-x-0 top-0 z-40 flex h-12 items-center justify-between border-b border-ink bg-white px-3 text-[13px] text-slate-600 backdrop-blur">
   <div class="flex items-center gap-1">
     <button class="btn-ghost lg:hidden" @click="sidebar = !sidebar" aria-label="Toggle menu">@include('admin.partials.icon', ['name' => 'menu'])</button>
     <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2 px-2">
       <img src="{{ asset('brand/mark-dark.png') }}" alt="" class="h-5">
-      <span class="hidden font-extrabold tracking-tight text-ink sm:inline">AchiveX</span>
+      <span class="hidden font-extrabold uppercase tracking-[0.08em] text-ink sm:inline">AchiveX</span>
     </a>
-    <a href="{{ config('admin.site_url') }}" target="_blank" rel="noopener" class="flex items-center gap-1.5 rounded px-2 py-1.5 hover:bg-slate-100 hover:text-ink">
+    <a href="{{ config('admin.site_url') }}" target="_blank" rel="noopener" class="flex items-center gap-1.5  px-2 py-1.5 hover:bg-slate-100 hover:text-ink">
       @include('admin.partials.icon', ['name' => 'globe']) <span class="hidden sm:inline">Visit Site</span>
     </a>
     <div class="relative" x-data="{ open: false }" @click.outside="open = false">
-      <button @click="open = !open" class="flex items-center gap-1.5 rounded px-2 py-1.5 hover:bg-slate-100 hover:text-ink">
+      <button @click="open = !open" class="flex items-center gap-1.5  px-2 py-1.5 hover:bg-slate-100 hover:text-ink">
         @include('admin.partials.icon', ['name' => 'plus']) <span class="hidden sm:inline">New</span>
       </button>
-      <div x-show="open" x-cloak x-transition class="absolute left-0 top-full mt-1 w-48 rounded-md bg-white py-1 shadow-xl ring-1 ring-slate-200">
+      <div x-show="open" x-cloak x-transition class="absolute left-0 top-full mt-1 w-48  border border-ink bg-white py-1">
         <a class="block px-4 py-2 hover:bg-slate-100 hover:text-ink" href="{{ route('admin.resources.create', 'blog-posts') }}">Blog Post</a>
         @if($user->canAccess('content'))
         <a class="block px-4 py-2 hover:bg-slate-100 hover:text-ink" href="{{ route('admin.resources.create', 'case-studies') }}">Case Study</a>
@@ -59,22 +59,22 @@
       </div>
     </div>
     @if($user->canAccess('inbox'))
-    <a href="{{ route('admin.inbox.messages') }}" class="flex items-center gap-1.5 rounded px-2 py-1.5 hover:bg-slate-100 hover:text-ink" title="Unread messages">
+    <a href="{{ route('admin.inbox.messages') }}" class="flex items-center gap-1.5  px-2 py-1.5 hover:bg-slate-100 hover:text-ink" title="Unread messages">
       @include('admin.partials.icon', ['name' => 'mail']) <span>{{ $unreadCount ?? 0 }}</span>
     </a>
     @endif
   </div>
   <div class="flex items-center gap-1">
-  <a href="{{ route('admin.notifications') }}" class="relative flex items-center rounded px-2 py-1.5 hover:bg-slate-100 hover:text-ink" title="Notifications" aria-label="Notifications, {{ $notificationCount ?? 0 }} unread">
+  <a href="{{ route('admin.notifications') }}" class="relative flex items-center  px-2 py-1.5 hover:bg-slate-100 hover:text-ink" title="Notifications" aria-label="Notifications, {{ $notificationCount ?? 0 }} unread">
     @include('admin.partials.icon', ['name' => 'bell'])
-    @if(($notificationCount ?? 0) > 0)<span class="absolute -right-0.5 -top-0.5 rounded-full bg-accent px-1 text-[10px] font-bold leading-4 text-white">{{ $notificationCount > 99 ? '99+' : $notificationCount }}</span>@endif
+    @if(($notificationCount ?? 0) > 0)<span class="absolute -right-1 -top-0.5 bg-neon-red px-1 font-mono text-[10px] font-bold leading-4 text-white">{{ $notificationCount > 99 ? '99+' : $notificationCount }}</span>@endif
   </a>
   <div class="relative" x-data="{ open: false }" @click.outside="open = false">
-    <button @click="open = !open" class="flex items-center gap-2 rounded px-2 py-1.5 hover:bg-slate-100">
+    <button @click="open = !open" class="flex items-center gap-2  px-2 py-1.5 hover:bg-slate-100">
       <span class="hidden sm:inline">Howdy, {{ explode(' ', $user->name)[0] }}</span>
-      <span class="flex h-7 w-7 items-center justify-center rounded-full bg-accent text-[11px] font-bold text-white">{{ $user->initials() }}</span>
+      <span class="flex h-7 w-7 items-center justify-center bg-ink font-mono text-[11px] font-bold text-white">{{ $user->initials() }}</span>
     </button>
-    <div x-show="open" x-cloak x-transition class="absolute right-0 top-full mt-1 w-56 rounded-md bg-white py-1 shadow-xl ring-1 ring-slate-200">
+    <div x-show="open" x-cloak x-transition class="absolute right-0 top-full mt-1 w-56  border border-ink bg-white py-1">
       <div class="border-b border-slate-100 px-4 py-2.5">
         <p class="font-semibold text-ink">{{ $user->name }}</p>
         <p class="text-xs text-slate-400">{{ \App\Models\User::ROLES[$user->role] ?? $user->role }}</p>
@@ -106,7 +106,7 @@
             @include('admin.partials.icon', ['name' => $item['icon'], 'class' => 'h-[18px] w-[18px]'])
             <span class="flex-1 text-left">{{ $item['label'] }}</span>
             @if(($item['badge'] ?? null) === 'unread' && ($unreadCount ?? 0) > 0)
-              <span class="rounded-full bg-accent px-1.5 text-[10px] font-bold text-white">{{ $unreadCount }}</span>
+              <span class="bg-white px-1.5 font-mono text-[10px] font-bold text-ink">{{ $unreadCount }}</span>
             @endif
             <span :class="open && 'rotate-180'" class="transition">@include('admin.partials.icon', ['name' => 'chevron', 'class' => 'h-3.5 w-3.5'])</span>
           </button>
@@ -132,22 +132,22 @@
 {{-- Main --}}
 <main class="min-h-screen pt-12 lg:pl-60">
   <div class="mx-auto max-w-[1400px] px-4 py-8 sm:px-6 lg:px-10">
-    <div class="mb-8 flex flex-wrap items-end justify-between gap-3">
+    <div class="mb-10 flex flex-wrap items-end justify-between gap-3 border-b-2 border-ink pb-5">
       <div>
-        <h1 class="text-[28px] font-extrabold tracking-tight text-ink">@yield('heading')</h1>
-        @hasSection('subheading')<p class="mt-0.5 text-[13px] text-slate-500">@yield('subheading')</p>@endif
+        <h1 class="text-[30px] font-extrabold uppercase leading-none tracking-[-0.01em] text-ink">@yield('heading')</h1>
+        @hasSection('subheading')<p class="mt-2 text-[13px] text-slate-500">@yield('subheading')</p>@endif
       </div>
       <div class="flex flex-wrap items-center gap-2">@yield('actions')</div>
     </div>
 
     @if(session('status'))
-      <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 5000)" class="mb-5 flex items-center justify-between rounded-lg bg-green-50 px-4 py-3 text-[13.5px] text-green-800">
+      <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 5000)" class="mb-5 flex items-center justify-between border border-neon-green bg-white px-4 py-3 text-[13.5px] text-ink">
         <span>{{ session('status') }}</span>
         <button @click="show = false" class="text-slate-400 hover:text-slate-700">@include('admin.partials.icon', ['name' => 'x'])</button>
       </div>
     @endif
     @if($errors->any())
-      <div class="mb-5 rounded-lg bg-red-50 px-4 py-3 text-[13.5px]">
+      <div class="mb-5 border border-neon-red bg-white px-4 py-3 text-[13.5px]">
         <p class="font-semibold text-red-700">Please fix the following:</p>
         <ul class="mt-1 list-disc pl-5 text-red-600">@foreach($errors->all() as $e)<li>{{ $e }}</li>@endforeach</ul>
       </div>

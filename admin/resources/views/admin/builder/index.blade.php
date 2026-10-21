@@ -29,25 +29,25 @@
     <p x-show="!sections.length" class="px-4 py-6 text-center text-[13px] text-slate-500">No sections yet. Add the first one below.</p>
     <ul x-ref="list" class="divide-y divide-slate-100">
       <template x-for="s in sections" :key="s.id">
-        <li :data-id="s.id" class="flex items-center gap-2 px-3 py-2.5 transition" :class="current && current.id === s.id ? 'bg-accent-50' : 'hover:bg-slate-50'">
+        <li :data-id="s.id" class="flex items-center gap-2 px-3 py-2.5 transition" :class="current && current.id === s.id ? 'bg-slate-100' : 'hover:bg-slate-50'">
           <span class="handle cursor-grab text-slate-300 hover:text-slate-500" title="Drag to reorder">@include('admin.partials.icon', ['name' => 'grip'])</span>
           <button type="button" class="min-w-0 flex-1 text-left" @click="select(s)">
             <span class="block truncate text-[13.5px] font-semibold" :class="s.visible ? 'text-ink' : 'text-slate-400 line-through'" x-text="s.label"></span>
             <span class="block text-[11px] text-slate-400" x-text="s.updated_at ? 'Edited ' + s.updated_at : ''"></span>
           </button>
-          <button type="button" @click="toggle(s)" class="rounded p-1 hover:bg-white" :class="s.visible ? 'text-emerald-600' : 'text-slate-400'" :title="s.visible ? 'Visible: click to hide' : 'Hidden: click to show'">
+          <button type="button" @click="toggle(s)" class="p-1 hover:bg-white" :class="s.visible ? 'text-emerald-600' : 'text-slate-400'" :title="s.visible ? 'Visible: click to hide' : 'Hidden: click to show'">
             <template x-if="s.visible">@include('admin.partials.icon', ['name' => 'eye'])</template>
             <template x-if="!s.visible">@include('admin.partials.icon', ['name' => 'eye-off'])</template>
           </button>
-          <button type="button" x-show="page.kind !== 'home'" @click="remove(s)" class="rounded p-1 text-slate-400 hover:bg-white hover:text-red-600" title="Delete section">@include('admin.partials.icon', ['name' => 'trash'])</button>
+          <button type="button" x-show="page.kind !== 'home'" @click="remove(s)" class="p-1 text-slate-400 hover:bg-white hover:text-red-600" title="Delete section">@include('admin.partials.icon', ['name' => 'trash'])</button>
         </li>
       </template>
     </ul>
     <div class="border-t border-slate-200 p-3" x-data="{ open: false }">
       <button type="button" class="btn-primary w-full justify-center" @click="open = !open">@include('admin.partials.icon', ['name' => 'plus']) Add section</button>
-      <ul x-show="open" @click.outside="open = false" class="mt-2 max-h-80 divide-y divide-slate-100 overflow-y-auto rounded-md border border-slate-200 bg-white">
+      <ul x-show="open" @click.outside="open = false" class="mt-2 max-h-80 divide-y divide-slate-100 overflow-y-auto  border border-slate-200 bg-white">
         <template x-for="t in library" :key="t.type">
-          <li><button type="button" class="block w-full px-3 py-2 text-left hover:bg-accent-50" @click="open = false; addSection(t.type)">
+          <li><button type="button" class="block w-full px-3 py-2 text-left hover:bg-slate-100" @click="open = false; addSection(t.type)">
             <span class="block text-[13px] font-semibold text-ink" x-text="t.label"></span>
             <span class="block text-[11px] text-slate-500" x-text="t.description"></span>
           </button></li>
@@ -71,13 +71,13 @@
         </div>
         <div class="card-body space-y-4">
           <template x-if="!current.schema.fields.length">
-            <p class="rounded-md bg-slate-50 p-4 text-[13px] text-slate-600">This section has no text to edit here. <a href="{{ route('admin.settings') }}" class="font-semibold text-ink underline">Open Settings</a> to change the contact details it shows.</p>
+            <p class="bg-slate-50 p-4 text-[13px] text-slate-600">This section has no text to edit here. <a href="{{ route('admin.settings') }}" class="font-semibold text-ink underline">Open Settings</a> to change the contact details it shows.</p>
           </template>
           @include('admin.partials.content-fields', ['fields' => 'current.schema.fields', 'extra' => '<template x-if="f.type === \'case\'"><select class="input" x-model="form[f.name]" @change="dirty = true"><template x-for="(title, slug) in cases" :key="slug"><option :value="slug" x-text="title" :selected="form[f.name] === slug"></option></template></select></template>'])
 
           {{-- Hero figures (stored in hero_stats) --}}
           <template x-if="current.schema.heroStats">
-            <div class="rounded-md border border-slate-200 p-3">
+            <div class="border border-slate-200 p-3">
               <p class="label">Hero figures (the three floating cards)</p>
               <p class="help mb-3">Use real, verifiable figures only.</p>
               <template x-for="(st, i) in heroStats" :key="i">
@@ -90,7 +90,7 @@
           </template>
         </div>
         <div class="flex items-center justify-between gap-2 pt-2">
-          <span class="text-xs" :class="dirty || statsDirty ? 'text-amber-600 font-semibold' : 'text-slate-400'" x-text="dirty || statsDirty ? 'Unsaved changes' : 'All changes saved'"></span>
+          <span class="text-xs" :class="dirty || statsDirty ? 'text-ink font-semibold' : 'text-slate-400'" x-text="dirty || statsDirty ? 'Unsaved changes' : 'All changes saved'"></span>
           <button type="button" class="btn-primary" @click="save()" :disabled="saving" x-text="saving ? 'Saving...' : 'Save and publish'"></button>
         </div>
       </div>
@@ -103,19 +103,19 @@
       <h2 class="card-title">Live preview</h2>
       <div class="flex items-center gap-1">
         <template x-for="d in [['desktop', '100%'], ['tablet', '768px'], ['mobile', '390px']]" :key="d[0]">
-          <button type="button" class="rounded p-1.5" :class="device === d[0] ? 'bg-ink text-white' : 'text-slate-500 hover:bg-slate-100'" @click="device = d[0]" :title="d[0]">
+          <button type="button" class="p-1.5" :class="device === d[0] ? 'bg-ink text-white' : 'text-slate-500 hover:bg-slate-100'" @click="device = d[0]" :title="d[0]">
             <span x-show="d[0] === 'desktop'">@include('admin.partials.icon', ['name' => 'monitor'])</span>
             <span x-show="d[0] === 'tablet'">@include('admin.partials.icon', ['name' => 'tablet'])</span>
             <span x-show="d[0] === 'mobile'">@include('admin.partials.icon', ['name' => 'phone'])</span>
           </button>
         </template>
-        <button type="button" class="rounded p-1.5 text-slate-500 hover:bg-slate-100" @click="reload()" title="Reload preview">@include('admin.partials.icon', ['name' => 'refresh'])</button>
+        <button type="button" class="p-1.5 text-slate-500 hover:bg-slate-100" @click="reload()" title="Reload preview">@include('admin.partials.icon', ['name' => 'refresh'])</button>
       </div>
     </div>
     {{-- The page renders at its real width and is scaled down to fit, so the desktop layout looks right on a laptop. --}}
     <div x-ref="stage" class="overflow-hidden bg-slate-100 p-3" :style="'height:' + (stageHeight + 24) + 'px'">
       <div class="mx-auto origin-top-left" :style="'width:' + frameWidth * scale + 'px; height:' + stageHeight + 'px'">
-        <iframe :src="previewUrl" title="Website preview" class="origin-top-left rounded-md bg-white shadow ring-1 ring-slate-200"
+        <iframe :src="previewUrl" title="Website preview" class="origin-top-left  bg-white  ring-1 ring-slate-200"
                 :style="'width:' + frameWidth + 'px; height:' + (stageHeight / scale) + 'px; transform: scale(' + scale + ')'"></iframe>
       </div>
     </div>

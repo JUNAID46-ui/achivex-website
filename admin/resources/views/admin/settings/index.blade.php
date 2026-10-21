@@ -40,7 +40,7 @@
   <form id="storage" method="POST" action="{{ route('admin.settings.storage') }}" class="card scroll-mt-20">
     @csrf
     <div class="card-header"><h2 class="card-title">Image storage</h2>
-      <span class="badge-{{ $storageReady ? 'green' : 'amber' }}">{{ $storageReady ? 'Connected' : 'Not connected' }}</span>
+      <span class="badge-{{ $storageReady ? 'green' : 'warn' }}">{{ $storageReady ? 'Connected' : 'Not connected' }}</span>
     </div>
     <div class="card-body space-y-4 text-[13px]">
       <p class="text-slate-600">Images you upload are stored in Supabase so the live website can show them. This needs your Supabase <strong>secret key</strong>, entered once.</p>
@@ -64,7 +64,7 @@
   {{-- Email --}}
   <div id="email" class="card scroll-mt-20">
     <div class="card-header"><h2 class="card-title">Email (SMTP)</h2>
-      <span class="badge-{{ config('mail.default') === 'smtp' && config('mail.mailers.smtp.password') ? 'green' : 'amber' }}">{{ config('mail.default') === 'smtp' && config('mail.mailers.smtp.password') ? 'Connected' : 'Not set up' }}</span>
+      <span class="badge-{{ config('mail.default') === 'smtp' && config('mail.mailers.smtp.password') ? 'green' : 'warn' }}">{{ config('mail.default') === 'smtp' && config('mail.mailers.smtp.password') ? 'Connected' : 'Not set up' }}</span>
     </div>
     <form method="POST" action="{{ route('admin.settings.mail') }}">
       @csrf
@@ -80,7 +80,7 @@
         <div class="sm:col-span-2"><label for="m-notify" class="label">Send new website messages to</label><input id="m-notify" name="notify_to" value="{{ old('notify_to', $mail['notify_to'] ?? '') }}" class="input" placeholder="you@gmail.com"><p class="help">Every new contact message and guide request is emailed here. Separate several addresses with commas. Empty sends to all administrators.</p></div>
         <p class="help sm:col-span-2">For Gmail use smtp.gmail.com, port 587, and a Gmail App Password (not your normal password).</p>
         @if($notifyError)
-          <div class="rounded-md border-l-4 border-red-600 bg-red-50 px-3 py-2 text-red-700 sm:col-span-2"><strong>The last new-message email failed</strong> ({{ \Illuminate\Support\Carbon::parse($notifyError['at'])->diffForHumans() }}): {{ $notifyError['message'] }}</div>
+          <div class="border-l-4 border-red-600 bg-red-50 px-3 py-2 text-red-700 sm:col-span-2"><strong>The last new-message email failed</strong> ({{ \Illuminate\Support\Carbon::parse($notifyError['at'])->diffForHumans() }}): {{ $notifyError['message'] }}</div>
         @endif
       </div>
       <div class="flex flex-wrap items-center justify-between gap-2 pt-2">

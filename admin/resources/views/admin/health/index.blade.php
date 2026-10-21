@@ -7,8 +7,8 @@
 @endsection
 @section('content')
 @php
-  $pill = ['ok' => 'bg-emerald-50 text-emerald-700 ring-emerald-200', 'warning' => 'bg-amber-50 text-amber-700 ring-amber-200', 'critical' => 'bg-red-50 text-red-700 ring-red-200', 'unknown' => 'bg-slate-50 text-slate-600 ring-slate-200'];
-  $dot = ['ok' => 'bg-neon-green', 'warning' => 'bg-amber-500', 'critical' => 'bg-red-500', 'unknown' => 'bg-slate-400'];
+  $pill = ['ok' => 'bg-emerald-50 text-emerald-700 ring-emerald-200', 'warning' => 'bg-slate-50 text-ink ring-slate-300', 'critical' => 'bg-red-50 text-red-700 ring-red-200', 'unknown' => 'bg-slate-50 text-slate-600 ring-slate-200'];
+  $dot = ['ok' => 'bg-neon-green', 'warning' => 'bg-ink', 'critical' => 'bg-red-500', 'unknown' => 'bg-slate-400'];
   $label = ['ok' => 'OK', 'warning' => 'Warning', 'critical' => 'Critical', 'unknown' => 'Unknown'];
 @endphp
 <p class="mb-4 text-xs text-slate-500">Measured <time datetime="{{ $measuredAt->toIso8601String() }}">{{ $measuredAt->format('Y-m-d H:i:s') }} UTC</time>{{ $live ? ', including live connection checks.' : '. Live checks (storage key, website) run only when you click the button.' }}</p>
@@ -21,7 +21,7 @@
           <span class="h-1.5 w-1.5 rounded-full {{ $dot[$c['status']] }}"></span>{{ $label[$c['status']] }}
         </span>
       </div>
-      <p class="mt-1 text-xl font-extrabold tracking-tight {{ ['ok' => 'text-ink', 'warning' => 'text-amber-600', 'critical' => 'text-neon-red', 'unknown' => 'text-slate-400'][$c['status']] }}">{{ $c['value'] }}</p>
+      <p class="mt-1 text-xl font-extrabold tracking-tight {{ ['ok' => 'text-ink', 'warning' => 'text-ink', 'critical' => 'text-neon-red', 'unknown' => 'text-slate-400'][$c['status']] }}">{{ $c['value'] }}</p>
       @if($c['percent'] !== null)
         <div class="mt-2 h-2 rounded-full bg-slate-100" role="progressbar" aria-valuenow="{{ $c['percent'] }}" aria-valuemin="0" aria-valuemax="100" aria-label="{{ $c['label'] }} used">
           <div class="h-2 rounded-full {{ $dot[$c['status']] }}" style="width: {{ min(100, $c['percent']) }}%"></div>

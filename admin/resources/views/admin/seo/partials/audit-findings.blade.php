@@ -1,6 +1,6 @@
 {{-- Findings of one audit run with filters, history and downloads. Expects: $type, $run, $runs, $previous, $findings, $categories --}}
 @php
-  $sevBadge = ['critical' => 'red', 'high' => 'red', 'medium' => 'amber', 'low' => 'gray', 'info' => 'gray'];
+  $sevBadge = ['critical' => 'red', 'high' => 'red', 'medium' => 'warn', 'low' => 'gray', 'info' => 'gray'];
   $sum = $run?->summary ?? [];
   $prev = $previous?->summary ?? null;
 @endphp
@@ -12,7 +12,7 @@
           @php $n = $sum['by_severity'][$s] ?? 0; $d = $prev ? $n - ($prev['by_severity'][$s] ?? 0) : null; @endphp
           <a href="{{ request()->fullUrlWithQuery(['severity' => $s]) }}" class="group py-1">
             <p class="stat-label group-hover:text-ink">{{ ucfirst($s) }}</p>
-            <p class="stat-value {{ ['critical' => 'text-neon-red', 'high' => 'text-neon-red', 'medium' => 'text-amber', 'low' => 'text-neon-blue', 'info' => 'text-slate-400'][$s] }}">{{ $n }}</p>
+            <p class="stat-value {{ ['critical' => 'text-neon-red', 'high' => 'text-neon-red', 'medium' => 'text-ink', 'low' => 'text-neon-blue', 'info' => 'text-slate-400'][$s] }}">{{ $n }}</p>
             @if($d)<p class="text-xs {{ $d > 0 ? 'text-red-600' : 'text-emerald-600' }}">{{ $d > 0 ? '+'.$d : $d }} since last run</p>@endif
           </a>
         @endforeach
@@ -90,7 +90,7 @@
       <div class="card-header"><h2 class="card-title">History</h2></div>
       <div class="divide-y divide-slate-100 text-[13px]">
         @forelse($runs as $r)
-          <a href="{{ request()->url() }}?run={{ $r->id }}" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 {{ $run?->id === $r->id ? 'bg-accent-50' : '' }}">
+          <a href="{{ request()->url() }}?run={{ $r->id }}" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 {{ $run?->id === $r->id ? 'bg-slate-100' : '' }}">
             <span>{{ $r->started_at?->format('M j, H:i') }}</span>
             @if($r->status === 'completed')<span class="text-slate-500">{{ $r->summary['total'] ?? 0 }} findings</span>
             @elseif($r->status === 'failed')<span class="badge-red" title="{{ $r->error }}">Failed</span>

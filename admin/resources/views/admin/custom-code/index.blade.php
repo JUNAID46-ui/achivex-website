@@ -5,7 +5,7 @@
 @section('content')
 <form method="POST" class="max-w-5xl space-y-6">
   @csrf
-  <div class="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-[13px] text-amber-900">
+  <div class="border border-ink bg-slate-50 px-4 py-3 text-[13px] text-ink">
     Code saved here runs in every visitor's browser. Paste code only from services you trust, such as Google or Meta. PHP cannot run here because the website is a static site; use HTML, CSS or JavaScript.
   </div>
   <div class="grid gap-6 lg:grid-cols-2">

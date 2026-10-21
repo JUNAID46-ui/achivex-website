@@ -6,7 +6,7 @@
   <form method="POST" action="{{ route('admin.security.run') }}">@csrf<button class="btn-primary" data-loading>@include('admin.partials.icon', ['name' => 'shield']) Run security check</button></form>
 @endsection
 @section('content')
-@php $sev = ['critical' => 'red', 'high' => 'red', 'medium' => 'amber', 'low' => 'gray', 'info' => 'gray']; $sum = $run?->summary ?? []; @endphp
+@php $sev = ['critical' => 'red', 'high' => 'red', 'medium' => 'warn', 'low' => 'gray', 'info' => 'gray']; $sum = $run?->summary ?? []; @endphp
 <div class="mb-10 grid gap-6 border-b border-slate-100 pb-8 sm:grid-cols-2 lg:grid-cols-4">
   <div class="py-1"><p class="stat-label">Failed sign ins, 24 h</p><p class="stat-value {{ $failed24 >= 10 ? 'text-neon-red' : 'text-neon-purple' }}">{{ $failed24 }}</p><p class="text-xs text-slate-500">{{ $failed7 }} in 7 days</p></div>
   <div class="py-1"><p class="stat-label">Accounts with two-step login</p><p class="stat-value {{ $users->filter->hasTwoFactor()->count() === $users->count() ? 'text-neon-green' : 'text-neon-red' }}">{{ $users->filter->hasTwoFactor()->count() }} <span class="text-base text-slate-400">/ {{ $users->count() }}</span></p></div>
@@ -54,7 +54,7 @@
         @foreach($users as $u)
           <tr>
             <td><span class="font-semibold text-ink">{{ $u->name }}</span><span class="block text-xs text-slate-500">{{ \App\Models\User::ROLES[$u->role] ?? $u->role }} · {{ $u->email }}</span></td>
-            <td>@if($u->hasTwoFactor())<span class="badge-green">On</span>@else<span class="badge-{{ $u->isAdmin() ? 'red' : 'amber' }}">Off</span>@endif</td>
+            <td>@if($u->hasTwoFactor())<span class="badge-green">On</span>@else<span class="badge-{{ $u->isAdmin() ? 'red' : 'warn' }}">Off</span>@endif</td>
             <td class="whitespace-nowrap text-slate-500">{{ $u->last_login_at?->diffForHumans() ?? 'Never' }}</td>
             <td>{{ $sessionsEnabled ? ($sessionCounts[$u->id] ?? 0) : 'n/a' }}</td>
             <td class="text-right" x-data="{ open: false }">

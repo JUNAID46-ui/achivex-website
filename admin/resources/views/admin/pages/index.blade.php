@@ -24,14 +24,14 @@
         @php($score = $scores[$r['path']] ?? null)
         <tr>
           <td class="max-w-[320px]">
-            <a href="{{ $r['kind'] === 'home' ? route('admin.builder', ['page' => '/']) : route('admin.pages.edit', ['path' => $r['path']]) }}" class="block truncate font-semibold text-ink hover:text-accent">{{ $r['title'] }}</a>
+            <a href="{{ $r['kind'] === 'home' ? route('admin.builder', ['page' => '/']) : route('admin.pages.edit', ['path' => $r['path']]) }}" class="block truncate font-semibold text-ink hover:underline">{{ $r['title'] }}</a>
             <span class="block truncate text-xs text-slate-500">{{ $r['path'] }}</span>
           </td>
           <td class="whitespace-nowrap text-slate-600">{{ $r['type'] }}</td>
           <td class="whitespace-nowrap">
             @if(! $r['published'])<span class="badge-gray">Draft</span>
             @elseif($r['kind'] === 'custom')<span class="badge-green">Published</span>
-            @elseif($r['edited'])<span class="badge-amber">Edited</span>
+            @elseif($r['edited'])<span class="badge-warn">Edited</span>
             @else<span class="badge-gray">Original</span>@endif
           </td>
           <td>@if($score !== null)<span class="score {{ \App\Services\SeoAnalyzer::color($score) }}">{{ $score }}</span>@else<span class="text-xs text-slate-400">n/a</span>@endif</td>

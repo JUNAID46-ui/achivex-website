@@ -49,13 +49,13 @@
            }">
         <div class="card-header">
           <h2 class="card-title">SEO</h2>
-          <span class="score" :class="result.score >= 80 ? 'bg-emerald-500' : result.score >= 50 ? 'bg-amber' : 'bg-red-500'" x-text="result.score"></span>
+          <span class="score" :class="result.score >= 80 ? 'bg-emerald-500' : result.score >= 50 ? 'bg-ink' : 'bg-red-500'" x-text="result.score"></span>
         </div>
         <div class="card-body grid gap-6 lg:grid-cols-2">
           <div class="space-y-4">
             <div>
               <p class="label">Google preview</p>
-              <div class="rounded-md border border-slate-200 bg-white p-4">
+              <div class="border border-slate-200 bg-white p-4">
                 <p class="truncate text-xs text-slate-600">{{ parse_url($publicUrl, PHP_URL_HOST) }}{{ $path ?? '/' }}</p>
                 <p class="mt-1 truncate text-[18px] leading-snug text-[#1a0dab]" x-text="fullTitle"></p>
                 <p class="mt-1 line-clamp-2 text-[13px] leading-snug text-slate-600" x-text="fullDesc"></p>
@@ -82,18 +82,18 @@
             <ul class="space-y-2">
               <template x-for="c in result.checks" :key="c.label">
                 <li class="flex gap-2 text-[13px]">
-                  <span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full" :class="c.status === 'good' ? 'bg-emerald-500' : c.status === 'ok' ? 'bg-amber' : 'bg-red-500'"></span>
+                  <span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full" :class="c.status === 'good' ? 'bg-emerald-500' : c.status === 'ok' ? 'bg-ink' : 'bg-red-500'"></span>
                   <span x-text="c.label"></span>
                 </li>
               </template>
             </ul>
             @if($analysis)
-              <details class="mt-5 rounded-md bg-slate-50 p-3 text-[13px]">
+              <details class="mt-5  bg-slate-50 p-3 text-[13px]">
                 <summary class="cursor-pointer font-semibold text-ink">Full content analysis (last save, score {{ $analysis['score'] }})</summary>
                 <ul class="mt-3 space-y-2">
                   @foreach($analysis['checks'] as $c)
                     <li class="flex gap-2">
-                      <span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full {{ ['good' => 'bg-emerald-500', 'ok' => 'bg-amber', 'bad' => 'bg-red-500'][$c['status']] }}"></span>
+                      <span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full {{ ['good' => 'bg-emerald-500', 'ok' => 'bg-ink', 'bad' => 'bg-red-500'][$c['status']] }}"></span>
                       <span>{{ $c['label'] }} @if($c['tip'])<span class="text-slate-500">{{ $c['tip'] }}</span>@endif</span>
                     </li>
                   @endforeach
@@ -109,7 +109,7 @@
   <aside class="space-y-6">
     <div class="card xl:sticky xl:top-16">
       <div class="card-header"><h2 class="card-title">{{ $resource->hasPublished ? 'Publish' : 'Save' }}</h2>
-        @if($state)<span class="badge-{{ ['published' => 'green', 'scheduled' => 'accent', 'review' => 'amber', 'archived' => 'gray', 'draft' => 'gray'][$state] }}">{{ \App\Services\ContentWorkflow::STATES[$state] }}</span>@endif
+        @if($state)<span class="badge-{{ ['published' => 'green', 'scheduled' => 'blue', 'review' => 'warn', 'archived' => 'gray', 'draft' => 'gray'][$state] }}">{{ \App\Services\ContentWorkflow::STATES[$state] }}</span>@endif
       </div>
       <div class="card-body space-y-4">
         @if($resource->hasPublished)
@@ -139,12 +139,12 @@
           @include('admin.partials.field', ['field' => $field, 'value' => $value($field)])
         @endforeach
         @unless($isNew)
-          <a href="{{ route('admin.resources.preview', [$resource->slug, $record->getKey()]) }}" target="_blank" class="flex items-center gap-1.5 text-[13px] font-semibold text-ink hover:text-accent">
+          <a href="{{ route('admin.resources.preview', [$resource->slug, $record->getKey()]) }}" target="_blank" class="flex items-center gap-1.5 text-[13px] font-semibold text-ink hover:underline">
             @include('admin.partials.icon', ['name' => 'eye']) Preview (saved version)
           </a>
         @endunless
         @if($path && in_array($state, [null, 'published'], true))
-          <a href="{{ $siteUrl.$path }}" target="_blank" class="flex items-center gap-1.5 text-[13px] font-semibold text-ink hover:text-accent">
+          <a href="{{ $siteUrl.$path }}" target="_blank" class="flex items-center gap-1.5 text-[13px] font-semibold text-ink hover:underline">
             @include('admin.partials.icon', ['name' => 'external']) View on website
           </a>
         @endif
@@ -167,11 +167,11 @@
 
     @if($health)
       <div class="card">
-        <div class="card-header"><h2 class="card-title">Checks</h2><span class="badge-{{ collect($health)->contains('level', 'warning') ? 'amber' : 'gray' }}">{{ count($health) }}</span></div>
+        <div class="card-header"><h2 class="card-title">Checks</h2><span class="badge-{{ collect($health)->contains('level', 'warning') ? 'warn' : 'gray' }}">{{ count($health) }}</span></div>
         <ul class="card-body space-y-2.5 text-[13px]">
           @foreach($health as $h)
             <li class="flex gap-2">
-              <span class="mt-1.5 h-2 w-2 shrink-0 rounded-full {{ $h['level'] === 'warning' ? 'bg-amber' : 'bg-slate-300' }}"></span>
+              <span class="mt-1.5 h-2 w-2 shrink-0 rounded-full {{ $h['level'] === 'warning' ? 'bg-ink' : 'bg-slate-300' }}"></span>
               <span><span class="font-semibold text-slate-700">{{ $h['label'] }}</span><span class="block text-xs text-slate-500">{{ $h['fix'] }}</span></span>
             </li>
           @endforeach

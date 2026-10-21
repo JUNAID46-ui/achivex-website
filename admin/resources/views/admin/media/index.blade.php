@@ -12,14 +12,14 @@
           catch (e) { this.error = e.message; this.busy = false }
         } }" class="space-y-4">
   @unless($cloud)
-    <div class="rounded-md border-l-4 border-accent bg-accent-50 px-4 py-3 text-[13px] text-slate-700">
+    <div class="border-l-4 border-ink bg-slate-100 px-4 py-3 text-[13px] text-slate-700">
       <strong>Images are saved on this computer only.</strong> The live website cannot show them until image storage is connected.
       @if(auth()->user()->canAccess('settings'))<a href="{{ route('admin.settings') }}#storage" class="font-semibold text-ink underline">Connect image storage in Settings</a>@endif
     </div>
   @endunless
   <div
         class="card flex flex-col items-center justify-center gap-3 border-2 border-dashed px-6 py-10 text-center transition"
-        :class="dragging ? 'border-accent bg-accent-50' : 'border-slate-300'"
+        :class="dragging ? 'border-ink bg-slate-100' : 'border-slate-300'"
         @dragover.prevent="dragging = true" @dragleave.prevent="dragging = false"
         @drop.prevent="dragging = false; send($event.dataTransfer.files)">
     <span class="text-slate-400">@include('admin.partials.icon', ['name' => 'upload', 'class' => 'h-8 w-8'])</span>
@@ -34,7 +34,7 @@
   <div class="flex flex-wrap items-center justify-between gap-3">
     <div class="flex gap-1 text-[13px]">
       @foreach(['' => 'All', 'image' => 'Images', 'document' => 'Documents'] as $k => $l)
-        <a href="{{ request()->fullUrlWithQuery(['type' => $k ?: null, 'page' => null]) }}" class="rounded-md px-3 py-1.5 {{ request('type', '') === $k ? 'bg-ink font-semibold text-white' : 'text-slate-600 hover:bg-white' }}">{{ $l }}</a>
+        <a href="{{ request()->fullUrlWithQuery(['type' => $k ?: null, 'page' => null]) }}" class="px-3 py-1.5 {{ request('type', '') === $k ? 'bg-ink font-semibold text-white' : 'text-slate-600 hover:bg-white' }}">{{ $l }}</a>
       @endforeach
     </div>
     <form method="GET" class="flex gap-2">
@@ -45,7 +45,7 @@
 
   <div class="grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-6">
     @forelse($media as $m)
-      <button type="button" @click="selected = @js($m)" class="group overflow-hidden rounded-lg border border-slate-200 bg-white text-left shadow-sm hover:ring-2 hover:ring-accent">
+      <button type="button" @click="selected = @js($m)" class="group overflow-hidden  border border-slate-200 bg-white text-left  hover:ring-2 hover:ring-ink">
         @if($m->isImage())
           <img src="{{ $m->url }}" alt="{{ $m->alt }}" class="aspect-square w-full bg-slate-100 object-cover" loading="lazy">
         @else
@@ -66,7 +66,7 @@
         <div class="space-y-4">
           <div class="flex items-center justify-between"><h2 class="text-lg font-bold text-ink">File details</h2>
             <button class="btn-ghost" @click="selected = null">@include('admin.partials.icon', ['name' => 'x'])</button></div>
-          <template x-if="(selected.mime || '').startsWith('image/')"><img :src="selected.url" class="w-full rounded-md bg-slate-100 ring-1 ring-slate-200" alt=""></template>
+          <template x-if="(selected.mime || '').startsWith('image/')"><img :src="selected.url" class="w-full  bg-slate-100 ring-1 ring-slate-200" alt=""></template>
           <dl class="grid grid-cols-3 gap-y-2 text-[13px]">
             <dt class="text-slate-500">File name</dt><dd class="col-span-2 break-all" x-text="selected.filename"></dd>
             <dt class="text-slate-500">Type</dt><dd class="col-span-2" x-text="selected.mime"></dd>

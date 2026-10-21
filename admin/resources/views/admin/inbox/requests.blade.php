@@ -7,8 +7,8 @@
 @endsection
 @section('content')
 <div class="mb-4 flex gap-1 text-[13px]">
-  <a href="{{ route('admin.inbox.requests') }}" class="rounded-md px-3 py-1.5 {{ request('status') ? 'text-slate-600 hover:bg-white' : 'bg-ink font-semibold text-white' }}">All</a>
-  <a href="{{ route('admin.inbox.requests', ['status' => 'pending']) }}" class="rounded-md px-3 py-1.5 {{ request('status') ? 'bg-ink font-semibold text-white' : 'text-slate-600 hover:bg-white' }}">Waiting <span class="opacity-70">({{ $pending }})</span></a>
+  <a href="{{ route('admin.inbox.requests') }}" class="px-3 py-1.5 {{ request('status') ? 'text-slate-600 hover:bg-white' : 'bg-ink font-semibold text-white' }}">All</a>
+  <a href="{{ route('admin.inbox.requests', ['status' => 'pending']) }}" class="px-3 py-1.5 {{ request('status') ? 'bg-ink font-semibold text-white' : 'text-slate-600 hover:bg-white' }}">Waiting <span class="opacity-70">({{ $pending }})</span></a>
 </div>
 <div class="card overflow-x-auto">
   <table class="table">
@@ -24,7 +24,7 @@
           <td>{{ $r->job_title }}</td>
           <td>
             <form method="POST" action="{{ route('admin.inbox.requests.handled', $r) }}">@csrf
-              <button class="{{ $r->handled_at ? 'badge-green' : 'badge-amber' }}">{{ $r->handled_at ? 'Sent' : 'Mark as sent' }}</button>
+              <button class="{{ $r->handled_at ? 'badge-green' : 'badge-warn' }}">{{ $r->handled_at ? 'Sent' : 'Mark as sent' }}</button>
             </form>
           </td>
         </tr>
