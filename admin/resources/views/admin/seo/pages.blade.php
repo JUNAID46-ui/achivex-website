@@ -17,8 +17,8 @@
       @forelse($rows as $r)
         <tr class="cursor-pointer" onclick="location.href='{{ route('admin.seo.pages.edit', ['path' => $r['path']]) }}'">
           <td><span class="score {{ \App\Services\SeoAnalyzer::color($r['score']) }}">{{ $r['score'] }}</span></td>
-          <td class="max-w-[220px]"><p class="truncate font-semibold text-navy">{{ $r['title'] }}</p><p class="truncate text-xs text-slate-500">{{ $r['path'] }}</p>
-            @if($r['noindex'])<span class="badge-red mt-1">noindex</span>@endif @if($r['custom'])<span class="badge-navy mt-1">custom</span>@endif</td>
+          <td class="max-w-[220px]"><p class="truncate font-semibold text-ink">{{ $r['title'] }}</p><p class="truncate text-xs text-slate-500">{{ $r['path'] }}</p>
+            @if($r['noindex'])<span class="badge-red mt-1">noindex</span>@endif @if($r['custom'])<span class="badge-ink mt-1">custom</span>@endif</td>
           <td class="max-w-[420px]"><p class="truncate text-[13px] text-[#1a0dab]">{{ $r['seo_title'] }}</p><p class="line-clamp-2 text-xs text-slate-500">{{ $r['description'] }}</p></td>
           <td>{!! $r['keyword'] ? '<span class="badge-gray">'.e($r['keyword']).'</span>' : '<span class="text-xs text-red-600">Not set</span>' !!}</td>
           <td class="whitespace-nowrap text-slate-500">{{ $r['type'] }}</td>

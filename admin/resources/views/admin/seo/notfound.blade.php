@@ -13,7 +13,7 @@
       @forelse($rows as $r)
         @php $key = '/'.trim($r->path, '/').'/'; @endphp
         <tr>
-          <td class="font-semibold text-navy">{{ $r->path }}</td>
+          <td class="font-semibold text-ink">{{ $r->path }}</td>
           <td><span class="badge-red">{{ $r->hits }}</span></td>
           <td class="whitespace-nowrap text-slate-500">{{ \Illuminate\Support\Carbon::parse($r->last_seen)->diffForHumans() }}</td>
           <td class="max-w-[200px] truncate text-xs text-slate-500">{{ $r->referrer ?: 'Direct' }}</td>

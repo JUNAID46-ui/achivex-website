@@ -10,8 +10,8 @@
   <div class="card divide-y divide-slate-100">
     @forelse($revisions as $rev)
       <a href="{{ route('admin.resources.revisions', [$resource->slug, $record->getKey(), 'compare' => $rev->id]) }}"
-         class="block px-4 py-3 hover:bg-slate-50 {{ $compare?->id === $rev->id ? 'bg-amber-50' : '' }}">
-        <span class="font-semibold text-navy">{{ $rev->created_at?->format('M j, Y H:i') }} UTC</span>
+         class="block px-4 py-3 hover:bg-slate-50 {{ $compare?->id === $rev->id ? 'bg-accent-50' : '' }}">
+        <span class="font-semibold text-ink">{{ $rev->created_at?->format('M j, Y H:i') }} UTC</span>
         <span class="block text-xs text-slate-500">{{ $rev->user_name ?? 'System' }} · {{ $rev->action === 'delete' ? 'before delete' : 'before a change' }}</span>
       </a>
     @empty

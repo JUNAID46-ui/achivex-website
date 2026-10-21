@@ -29,14 +29,14 @@
       </div>
       <div class="flex items-center justify-between">
         <label class="flex items-center gap-2 text-[13px] text-slate-600">
-          <input type="checkbox" name="remember" class="rounded border-slate-300 text-navy focus:ring-navy"> Remember me
+          <input type="checkbox" name="remember" class="rounded border-slate-300 text-ink focus:ring-ink"> Remember me
         </label>
         <button class="btn-primary">Log In</button>
       </div>
     </form>
-    <p class="mt-4 text-center text-[13px]"><a href="{{ route('admin.password.request') }}" class="font-semibold text-navy hover:text-amber-600">Forgot your password?</a></p>
+    <p class="mt-4 text-center text-[13px]"><a href="{{ route('admin.password.request') }}" class="font-semibold text-ink hover:text-accent">Forgot your password?</a></p>
     <p class="mt-3 text-center text-xs text-slate-500">
-      <a href="{{ config('admin.site_url') }}" class="hover:text-navy">&larr; Go to AchiveX website</a>
+      <a href="{{ config('admin.site_url') }}" class="hover:text-ink">&larr; Go to AchiveX website</a>
     </p>
   </div>
 </body>

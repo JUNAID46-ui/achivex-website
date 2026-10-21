@@ -21,7 +21,7 @@
           <span class="h-1.5 w-1.5 rounded-full {{ $dot[$c['status']] }}"></span>{{ $label[$c['status']] }}
         </span>
       </div>
-      <p class="mt-1 text-lg font-bold text-navy">{{ $c['value'] }}</p>
+      <p class="mt-1 text-lg font-bold text-ink">{{ $c['value'] }}</p>
       @if($c['percent'] !== null)
         <div class="mt-2 h-2 rounded-full bg-slate-100" role="progressbar" aria-valuenow="{{ $c['percent'] }}" aria-valuemin="0" aria-valuemax="100" aria-label="{{ $c['label'] }} used">
           <div class="h-2 rounded-full {{ $dot[$c['status']] }}" style="width: {{ min(100, $c['percent']) }}%"></div>
@@ -37,7 +37,7 @@
   <div class="card">
     <div class="card-header"><h2 class="card-title">Application</h2></div>
     <dl class="card-body grid grid-cols-2 gap-x-4 gap-y-2 text-[13px]">
-      @foreach($env as $k => $v)<dt class="text-slate-500">{{ $k }}</dt><dd class="font-semibold text-navy">{{ $v }}</dd>@endforeach
+      @foreach($env as $k => $v)<dt class="text-slate-500">{{ $k }}</dt><dd class="font-semibold text-ink">{{ $v }}</dd>@endforeach
     </dl>
   </div>
   <div class="card">
@@ -78,7 +78,7 @@
       @forelse($errorLogs as $e)
         <tr>
           <td class="whitespace-nowrap text-slate-500">{{ $e->created_at?->format('Y-m-d H:i') }}</td>
-          <td><span class="font-semibold text-navy">{{ class_basename($e->exception) }}</span><span class="block max-w-xl break-words text-[12.5px] text-slate-600">{{ $e->message }}</span></td>
+          <td><span class="font-semibold text-ink">{{ class_basename($e->exception) }}</span><span class="block max-w-xl break-words text-[12.5px] text-slate-600">{{ $e->message }}</span></td>
           <td class="font-mono text-[11px] text-slate-500">{{ $e->location }}</td>
           <td class="text-[12.5px] text-slate-500">{{ $e->method }} {{ $e->path }}</td>
         </tr>

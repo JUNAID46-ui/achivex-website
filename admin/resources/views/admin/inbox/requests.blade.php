@@ -7,8 +7,8 @@
 @endsection
 @section('content')
 <div class="mb-4 flex gap-1 text-[13px]">
-  <a href="{{ route('admin.inbox.requests') }}" class="rounded-md px-3 py-1.5 {{ request('status') ? 'text-slate-600 hover:bg-white' : 'bg-navy font-semibold text-white' }}">All</a>
-  <a href="{{ route('admin.inbox.requests', ['status' => 'pending']) }}" class="rounded-md px-3 py-1.5 {{ request('status') ? 'bg-navy font-semibold text-white' : 'text-slate-600 hover:bg-white' }}">Waiting <span class="opacity-70">({{ $pending }})</span></a>
+  <a href="{{ route('admin.inbox.requests') }}" class="rounded-md px-3 py-1.5 {{ request('status') ? 'text-slate-600 hover:bg-white' : 'bg-ink font-semibold text-white' }}">All</a>
+  <a href="{{ route('admin.inbox.requests', ['status' => 'pending']) }}" class="rounded-md px-3 py-1.5 {{ request('status') ? 'bg-ink font-semibold text-white' : 'text-slate-600 hover:bg-white' }}">Waiting <span class="opacity-70">({{ $pending }})</span></a>
 </div>
 <div class="card overflow-x-auto">
   <table class="table">
@@ -17,9 +17,9 @@
       @forelse($requests as $r)
         <tr>
           <td class="whitespace-nowrap text-slate-500">{{ $r->created_at?->format('M j, Y') }}</td>
-          <td class="font-semibold text-navy">{{ $r->whitepaper?->title ?? $r->whitepaper_slug }}</td>
+          <td class="font-semibold text-ink">{{ $r->whitepaper?->title ?? $r->whitepaper_slug }}</td>
           <td>{{ $r->name }}</td>
-          <td><a class="text-navy underline" href="mailto:{{ $r->email }}?subject={{ rawurlencode('Your copy of '.($r->whitepaper?->title ?? 'our guide')) }}{{ $r->whitepaper?->file_url ? '&body='.rawurlencode("Hello {$r->name},\n\nHere is your copy: ".$r->whitepaper->file_url) : '' }}">{{ $r->email }}</a></td>
+          <td><a class="text-ink underline" href="mailto:{{ $r->email }}?subject={{ rawurlencode('Your copy of '.($r->whitepaper?->title ?? 'our guide')) }}{{ $r->whitepaper?->file_url ? '&body='.rawurlencode("Hello {$r->name},\n\nHere is your copy: ".$r->whitepaper->file_url) : '' }}">{{ $r->email }}</a></td>
           <td>{{ $r->company }}</td>
           <td>{{ $r->job_title }}</td>
           <td>

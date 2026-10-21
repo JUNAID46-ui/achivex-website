@@ -29,9 +29,9 @@
       @forelse($logs as $l)
         <tr>
           <td class="whitespace-nowrap text-slate-500"><time datetime="{{ $l->created_at?->toIso8601String() }}" title="{{ $l->created_at?->diffForHumans() }}">{{ $l->created_at?->format('Y-m-d H:i') }}</time></td>
-          <td><span class="font-semibold text-navy">{{ $l->user?->name ?? $l->user_name ?? 'System' }}</span>@if($l->user_role)<span class="block text-xs text-slate-400">{{ \App\Models\User::ROLES[$l->user_role] ?? $l->user_role }}</span>@endif</td>
+          <td><span class="font-semibold text-ink">{{ $l->user?->name ?? $l->user_name ?? 'System' }}</span>@if($l->user_role)<span class="block text-xs text-slate-400">{{ \App\Models\User::ROLES[$l->user_role] ?? $l->user_role }}</span>@endif</td>
           <td class="whitespace-nowrap">
-            <span class="badge-{{ ['created' => 'green', 'deleted' => 'red', 'login' => 'navy', 'login_failed' => 'red', 'restored' => 'amber'][$l->action] ?? 'gray' }}">{{ str_replace('_', ' ', $l->action) }}</span>
+            <span class="badge-{{ ['created' => 'green', 'deleted' => 'red', 'login' => 'ink', 'login_failed' => 'red', 'restored' => 'amber'][$l->action] ?? 'gray' }}">{{ str_replace('_', ' ', $l->action) }}</span>
             @if($l->status === 'failure')<span class="badge-red">failed</span>@endif
           </td>
           <td>{{ $l->module ?? $l->subject_type }} @if($l->subject_label)<span class="text-slate-500">· {{ $l->subject_label }}</span>@endif @if($l->subject_id)<span class="block font-mono text-[11px] text-slate-400">{{ $l->subject_id }}</span>@endif</td>

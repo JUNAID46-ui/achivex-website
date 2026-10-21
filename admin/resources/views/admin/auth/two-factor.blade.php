@@ -22,7 +22,7 @@
         <p class="help mt-2">Lost your phone? Enter one of your recovery codes instead.</p>
       </div>
       <div class="flex items-center justify-between">
-        <a href="{{ route('admin.login') }}" class="text-[13px] text-slate-600 hover:text-navy">&larr; Back</a>
+        <a href="{{ route('admin.login') }}" class="text-[13px] text-slate-600 hover:text-ink">&larr; Back</a>
         <button class="btn-primary">Continue</button>
       </div>
     </form>

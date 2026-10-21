@@ -10,15 +10,15 @@
       <div class="grid gap-3 sm:grid-cols-3 lg:grid-cols-6">
         @foreach(['critical', 'high', 'medium', 'low', 'info'] as $s)
           @php $n = $sum['by_severity'][$s] ?? 0; $d = $prev ? $n - ($prev['by_severity'][$s] ?? 0) : null; @endphp
-          <a href="{{ request()->fullUrlWithQuery(['severity' => $s]) }}" class="card px-4 py-3 hover:ring-1 hover:ring-navy">
+          <a href="{{ request()->fullUrlWithQuery(['severity' => $s]) }}" class="card px-4 py-3 hover:ring-1 hover:ring-ink">
             <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">{{ ucfirst($s) }}</p>
-            <p class="text-2xl font-bold text-navy">{{ $n }}</p>
+            <p class="text-2xl font-bold text-ink">{{ $n }}</p>
             @if($d)<p class="text-xs {{ $d > 0 ? 'text-red-600' : 'text-emerald-600' }}">{{ $d > 0 ? '+'.$d : $d }} since last run</p>@endif
           </a>
         @endforeach
         <div class="card px-4 py-3">
           <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Verified / advice</p>
-          <p class="text-2xl font-bold text-navy">{{ $sum['verified'] ?? 0 }} <span class="text-base font-semibold text-slate-400">/ {{ $sum['recommendations'] ?? 0 }}</span></p>
+          <p class="text-2xl font-bold text-ink">{{ $sum['verified'] ?? 0 }} <span class="text-base font-semibold text-slate-400">/ {{ $sum['recommendations'] ?? 0 }}</span></p>
         </div>
       </div>
 
@@ -46,11 +46,11 @@
                   <span class="badge-{{ $sevBadge[$f['severity']] }}">{{ ucfirst($f['severity']) }}</span>
                   <span class="mt-1 block text-[11px] {{ $f['kind'] === 'verified' ? 'text-emerald-700' : 'text-slate-500' }}" title="{{ $f['kind'] === 'verified' ? 'Observed in the admin data or the live website' : 'Advice based on good practice, not a measurement' }}">{{ $f['kind'] === 'verified' ? 'Verified' : 'Recommendation' }}</span>
                 </td>
-                <td><span class="font-semibold text-navy">{{ $f['check'] }}</span><span class="block text-xs text-slate-500">{{ $f['category'] }}</span></td>
+                <td><span class="font-semibold text-ink">{{ $f['check'] }}</span><span class="block text-xs text-slate-500">{{ $f['category'] }}</span></td>
                 <td class="max-w-[220px] break-all text-[12.5px]">
                   @if($f['url'])
                     @php $u = str_starts_with($f['url'], 'http') ? $f['url'] : rtrim(config('admin.site_url'), '/').$f['url']; @endphp
-                    <a href="{{ $u }}" target="_blank" rel="noopener" class="text-navy hover:underline">{{ $f['url'] }}</a>
+                    <a href="{{ $u }}" target="_blank" rel="noopener" class="text-ink hover:underline">{{ $f['url'] }}</a>
                   @else<span class="text-slate-400">Site wide</span>@endif
                 </td>
                 <td class="max-w-sm text-[12.5px] text-slate-600">{{ $f['evidence'] }}</td>
@@ -90,7 +90,7 @@
       <div class="card-header"><h2 class="card-title">History</h2></div>
       <div class="divide-y divide-slate-100 text-[13px]">
         @forelse($runs as $r)
-          <a href="{{ request()->url() }}?run={{ $r->id }}" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 {{ $run?->id === $r->id ? 'bg-amber-50' : '' }}">
+          <a href="{{ request()->url() }}?run={{ $r->id }}" class="flex items-center justify-between px-4 py-2.5 hover:bg-slate-50 {{ $run?->id === $r->id ? 'bg-accent-50' : '' }}">
             <span>{{ $r->started_at?->format('M j, H:i') }}</span>
             @if($r->status === 'completed')<span class="text-slate-500">{{ $r->summary['total'] ?? 0 }} findings</span>
             @elseif($r->status === 'failed')<span class="badge-red" title="{{ $r->error }}">Failed</span>

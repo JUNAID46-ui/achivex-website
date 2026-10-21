@@ -89,7 +89,7 @@
             </ul>
             @if($analysis)
               <details class="mt-5 rounded-md bg-slate-50 p-3 text-[13px]">
-                <summary class="cursor-pointer font-semibold text-navy">Full content analysis (last save, score {{ $analysis['score'] }})</summary>
+                <summary class="cursor-pointer font-semibold text-ink">Full content analysis (last save, score {{ $analysis['score'] }})</summary>
                 <ul class="mt-3 space-y-2">
                   @foreach($analysis['checks'] as $c)
                     <li class="flex gap-2">
@@ -109,7 +109,7 @@
   <aside class="space-y-6">
     <div class="card xl:sticky xl:top-16">
       <div class="card-header"><h2 class="card-title">{{ $resource->hasPublished ? 'Publish' : 'Save' }}</h2>
-        @if($state)<span class="badge-{{ ['published' => 'green', 'scheduled' => 'navy', 'review' => 'amber', 'archived' => 'gray', 'draft' => 'gray'][$state] }}">{{ \App\Services\ContentWorkflow::STATES[$state] }}</span>@endif
+        @if($state)<span class="badge-{{ ['published' => 'green', 'scheduled' => 'accent', 'review' => 'amber', 'archived' => 'gray', 'draft' => 'gray'][$state] }}">{{ \App\Services\ContentWorkflow::STATES[$state] }}</span>@endif
       </div>
       <div class="card-body space-y-4">
         @if($resource->hasPublished)
@@ -139,12 +139,12 @@
           @include('admin.partials.field', ['field' => $field, 'value' => $value($field)])
         @endforeach
         @unless($isNew)
-          <a href="{{ route('admin.resources.preview', [$resource->slug, $record->getKey()]) }}" target="_blank" class="flex items-center gap-1.5 text-[13px] font-semibold text-navy hover:text-amber-600">
+          <a href="{{ route('admin.resources.preview', [$resource->slug, $record->getKey()]) }}" target="_blank" class="flex items-center gap-1.5 text-[13px] font-semibold text-ink hover:text-accent">
             @include('admin.partials.icon', ['name' => 'eye']) Preview (saved version)
           </a>
         @endunless
         @if($path && in_array($state, [null, 'published'], true))
-          <a href="{{ $siteUrl.$path }}" target="_blank" class="flex items-center gap-1.5 text-[13px] font-semibold text-navy hover:text-amber-600">
+          <a href="{{ $siteUrl.$path }}" target="_blank" class="flex items-center gap-1.5 text-[13px] font-semibold text-ink hover:text-accent">
             @include('admin.partials.icon', ['name' => 'external']) View on website
           </a>
         @endif
@@ -182,7 +182,7 @@
     @unless($isNew || $resource->slug === 'users')
       <div class="card">
         <div class="card-header"><h2 class="card-title">Revisions</h2>
-          @if($revisions->isNotEmpty())<a href="{{ route('admin.resources.revisions', [$resource->slug, $record->getKey()]) }}" class="text-[13px] font-semibold text-navy hover:underline">View all</a>@endif
+          @if($revisions->isNotEmpty())<a href="{{ route('admin.resources.revisions', [$resource->slug, $record->getKey()]) }}" class="text-[13px] font-semibold text-ink hover:underline">View all</a>@endif
         </div>
         <div class="card-body text-[13px]">
           @forelse($revisions as $rev)

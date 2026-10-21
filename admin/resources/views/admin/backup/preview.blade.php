@@ -7,8 +7,8 @@
 @endsection
 @section('content')
 <div class="mb-4 flex flex-wrap gap-2 text-[13px]">
-  <a href="{{ route('admin.backup.preview', [$run->id, 'mode' => 'merge']) }}" class="rounded-full px-3 py-1 {{ ! $replace ? 'bg-navy text-white' : 'bg-white ring-1 ring-slate-200' }}">Merge (safe)</a>
-  <a href="{{ route('admin.backup.preview', [$run->id, 'mode' => 'replace']) }}" class="rounded-full px-3 py-1 {{ $replace ? 'bg-navy text-white' : 'bg-white ring-1 ring-slate-200' }}">Replace</a>
+  <a href="{{ route('admin.backup.preview', [$run->id, 'mode' => 'merge']) }}" class="rounded-full px-3 py-1 {{ ! $replace ? 'bg-ink text-white' : 'bg-white ring-1 ring-slate-200' }}">Merge (safe)</a>
+  <a href="{{ route('admin.backup.preview', [$run->id, 'mode' => 'replace']) }}" class="rounded-full px-3 py-1 {{ $replace ? 'bg-ink text-white' : 'bg-white ring-1 ring-slate-200' }}">Replace</a>
   <span class="self-center text-slate-500">{{ $replace ? 'Tables become exactly what the backup holds. Rows added since are deleted.' : 'Adds missing rows and updates rows that are in the backup. Nothing is deleted.' }}</span>
 </div>
 <div class="card overflow-x-auto">

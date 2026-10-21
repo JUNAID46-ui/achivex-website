@@ -12,7 +12,7 @@
     <tbody>
       @forelse($items as $rev)
         <tr>
-          <td class="font-semibold text-navy">{{ $rev->data[$resource->titleField] ?? $rev->record_key }}</td>
+          <td class="font-semibold text-ink">{{ $rev->data[$resource->titleField] ?? $rev->record_key }}</td>
           <td>{{ $rev->user_name ?? 'System' }}</td>
           <td class="whitespace-nowrap text-slate-500">{{ $rev->created_at?->format('Y-m-d H:i') }}</td>
           <td class="text-right">

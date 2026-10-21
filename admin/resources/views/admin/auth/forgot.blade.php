@@ -26,7 +26,7 @@
       </div>
       <button class="btn-primary w-full justify-center">Send reset link</button>
     </form>
-    <p class="mt-6 text-center text-[13px]"><a href="{{ route('admin.login') }}" class="font-semibold text-navy hover:text-amber-600">&larr; Back to log in</a></p>
+    <p class="mt-6 text-center text-[13px]"><a href="{{ route('admin.login') }}" class="font-semibold text-ink hover:text-accent">&larr; Back to log in</a></p>
   </div>
 </body>
 </html>

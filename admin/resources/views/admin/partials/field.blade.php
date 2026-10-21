@@ -34,7 +34,7 @@
         <span class="text-[13px] font-semibold text-slate-700">{{ $field['label'] }}</span>
         <input type="hidden" name="{{ $name }}" value="0">
         <input id="{{ $id }}" type="checkbox" name="{{ $name }}" value="1" @checked($val) class="peer sr-only">
-        <span class="relative h-5 w-9 rounded-full bg-slate-300 transition after:absolute after:left-0.5 after:top-0.5 after:h-4 after:w-4 after:rounded-full after:bg-white after:transition peer-checked:bg-emerald-500 peer-checked:after:translate-x-4 peer-focus-visible:ring-2 peer-focus-visible:ring-amber"></span>
+        <span class="relative h-5 w-9 rounded-full bg-slate-300 transition after:absolute after:left-0.5 after:top-0.5 after:h-4 after:w-4 after:rounded-full after:bg-white after:transition peer-checked:bg-emerald-500 peer-checked:after:translate-x-4 peer-focus-visible:ring-2 peer-focus-visible:ring-accent"></span>
       </label>
       @break
 
@@ -65,7 +65,7 @@
       <div class="grid max-h-64 gap-1 overflow-y-auto rounded-md border border-slate-200 p-3 sm:grid-cols-2">
         @foreach($field['options'] as $optValue => $optLabel)
           <label class="flex items-center gap-2 text-[13px]">
-            <input type="checkbox" name="{{ $name }}[]" value="{{ $optValue }}" @checked(in_array($optValue, $selected)) class="rounded border-slate-300 text-navy focus:ring-navy">
+            <input type="checkbox" name="{{ $name }}[]" value="{{ $optValue }}" @checked(in_array($optValue, $selected)) class="rounded border-slate-300 text-ink focus:ring-ink">
             {{ $optLabel }}
           </label>
         @endforeach

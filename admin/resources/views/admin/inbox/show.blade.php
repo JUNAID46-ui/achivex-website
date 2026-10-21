@@ -32,7 +32,7 @@
   <aside class="space-y-6">
     <div class="card card-body space-y-3 text-[13px]">
       <div><p class="text-slate-500">Name</p><p class="font-semibold">{{ $message->name }}</p></div>
-      <div><p class="text-slate-500">Email</p><p class="flex items-center gap-2 font-semibold">{{ $message->email }} <button type="button" class="text-xs text-navy underline" onclick="copyText('{{ $message->email }}', this)">Copy</button></p></div>
+      <div><p class="text-slate-500">Email</p><p class="flex items-center gap-2 font-semibold">{{ $message->email }} <button type="button" class="text-xs text-ink underline" onclick="copyText('{{ $message->email }}', this)">Copy</button></p></div>
       @if($message->phone)<div><p class="text-slate-500">Phone</p><p class="font-semibold">{{ $message->phone }}</p></div>@endif
       @if($message->service)<div><p class="text-slate-500">Service</p><p class="font-semibold">{{ $message->service }}</p></div>@endif
       <div class="flex flex-wrap gap-2 border-t border-slate-100 pt-3">

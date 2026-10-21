@@ -9,7 +9,7 @@
     <div class="card-body space-y-4">
       <div><label for="name" class="label">Full name</label><input id="name" name="name" value="{{ old('name', $user->name) }}" class="input" required></div>
       <div><label for="email" class="label">Email</label><input id="email" type="email" name="email" value="{{ old('email', $user->email) }}" class="input" required></div>
-      <p class="text-[13px] text-slate-500">Role: <span class="font-semibold text-navy">{{ \App\Models\User::ROLES[$user->role] ?? $user->role }}</span></p>
+      <p class="text-[13px] text-slate-500">Role: <span class="font-semibold text-ink">{{ \App\Models\User::ROLES[$user->role] ?? $user->role }}</span></p>
     </div>
   </div>
   <div class="card">
@@ -75,7 +75,7 @@
   <div class="card-body space-y-3 text-[13px]">
     @forelse($sessions as $sess)
       <div class="flex flex-wrap items-center justify-between gap-2">
-        <span><span class="font-semibold text-navy">{{ $sess['agent'] ?: 'Unknown browser' }}</span> <span class="text-slate-500">· {{ $sess['ip'] }}</span></span>
+        <span><span class="font-semibold text-ink">{{ $sess['agent'] ?: 'Unknown browser' }}</span> <span class="text-slate-500">· {{ $sess['ip'] }}</span></span>
         <span class="text-slate-500">@if($sess['current'])<span class="badge-green">This browser</span>@else Active {{ $sess['last']->diffForHumans() }}@endif</span>
       </div>
     @empty

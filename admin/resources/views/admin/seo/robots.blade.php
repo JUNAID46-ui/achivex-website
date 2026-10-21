@@ -14,7 +14,7 @@
     <button class="btn-primary mt-4">Save robots.txt</button>
   </div>
   <div class="card card-body space-y-3 self-start text-[13px] text-slate-600">
-    <p class="font-semibold text-navy">Quick inserts</p>
+    <p class="font-semibold text-ink">Quick inserts</p>
     <button type="button" class="btn-secondary btn-sm w-full justify-start" @click="content = 'User-agent: *\nAllow: /\n\nSitemap: {{ rtrim(config('admin.site_public_url'), '/') }}/sitemap.xml'">Allow everything (recommended)</button>
     <button type="button" class="btn-secondary btn-sm w-full justify-start" @click="content += '\nUser-agent: GPTBot\nDisallow: /'">Block OpenAI crawler</button>
     <button type="button" class="btn-secondary btn-sm w-full justify-start" @click="content += '\nDisallow: /admin/'">Block /admin/</button>

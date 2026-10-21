@@ -8,8 +8,8 @@
 @section('content')
 @php $sum = $run?->summary ?? []; @endphp
 <div class="mb-6 rounded-lg border border-slate-200 bg-white px-5 py-4 text-[13px] text-slate-600">
-  <p><span class="font-semibold text-navy">What this measures.</span> Things the admin can observe: what the website serves to crawlers, robots.txt rules for AI crawlers, llms.txt, organization data, indexing settings and the structure of your content.</p>
-  <p class="mt-1"><span class="font-semibold text-navy">What it does not measure.</span> AI citations, AI rankings, crawler visits and competitor data. No data source for these is connected, so none are shown. No tool can guarantee that a website will appear in ChatGPT, Google AI Overviews or other AI products.</p>
+  <p><span class="font-semibold text-ink">What this measures.</span> Things the admin can observe: what the website serves to crawlers, robots.txt rules for AI crawlers, llms.txt, organization data, indexing settings and the structure of your content.</p>
+  <p class="mt-1"><span class="font-semibold text-ink">What it does not measure.</span> AI citations, AI rankings, crawler visits and competitor data. No data source for these is connected, so none are shown. No tool can guarantee that a website will appear in ChatGPT, Google AI Overviews or other AI products.</p>
 </div>
 
 <div class="mb-6 grid gap-6 lg:grid-cols-2">
@@ -22,7 +22,7 @@
         <tbody>
           @foreach($sum['access'] as $bot => $a)
             <tr>
-              <td class="font-semibold text-navy">{{ $bot }}<span class="block text-xs font-normal text-slate-500">{{ $a['purpose'] }}</span></td>
+              <td class="font-semibold text-ink">{{ $bot }}<span class="block text-xs font-normal text-slate-500">{{ $a['purpose'] }}</span></td>
               <td class="text-right">
                 @if($a['allowed'])<span class="badge-green">Allowed</span>@else<span class="badge-red">Blocked</span>@endif
                 @if($a['rule'])<span class="block font-mono text-[11px] text-slate-400">{{ $a['rule'] }}</span>@endif
@@ -51,6 +51,6 @@
   </div>
 </div>
 
-<h2 class="mb-3 text-[15px] font-semibold text-navy">Findings</h2>
+<h2 class="mb-3 text-[15px] font-semibold text-ink">Findings</h2>
 @include('admin.seo.partials.audit-findings')
 @endsection

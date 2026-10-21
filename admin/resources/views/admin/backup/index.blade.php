@@ -63,7 +63,7 @@
       @if($ready)
         <p>Choose an AchiveX backup file (.json). It is uploaded to private storage and checked. You see exactly what will change before anything is restored.</p>
         <input type="file" accept=".json,application/json" class="input" x-ref="file" aria-label="Backup file">
-        <div x-show="progress !== null" class="h-2 rounded bg-slate-100"><div class="h-2 rounded bg-navy" :style="`width:${progress}%`"></div></div>
+        <div x-show="progress !== null" class="h-2 rounded bg-slate-100"><div class="h-2 rounded bg-ink" :style="`width:${progress}%`"></div></div>
         <p class="error" x-show="error" x-text="error"></p>
       @else
         <form method="POST" action="{{ route('admin.backup.restore-upload') }}" enctype="multipart/form-data" class="space-y-3" x-data="{ mode: 'merge' }">
@@ -124,7 +124,7 @@
   <div class="card-header"><h2 class="card-title">What a backup contains</h2></div>
   <div class="card-body grid gap-4 text-[13px] md:grid-cols-2">
     <div>
-      <p class="font-semibold text-navy">Included</p>
+      <p class="font-semibold text-ink">Included</p>
       <ul class="mt-1 list-disc space-y-0.5 pl-5 text-slate-600">
         <li>Pages, page builder sections, posts, case studies, news, guides, careers, team, milestones, locations, hero stats</li>
         <li>Site settings, SEO settings, redirects, custom code, llms.txt</li>
@@ -133,7 +133,7 @@
       </ul>
     </div>
     <div>
-      <p class="font-semibold text-navy">Not included: back these up separately</p>
+      <p class="font-semibold text-ink">Not included: back these up separately</p>
       <ul class="mt-1 list-disc space-y-0.5 pl-5 text-slate-600">
         <li>The uploaded image and PDF files themselves (in the Supabase "media" bucket)</li>
         <li>Admin users, passwords, two-step secrets and sessions (never exported, for safety)</li>

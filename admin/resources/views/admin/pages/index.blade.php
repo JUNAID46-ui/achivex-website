@@ -24,7 +24,7 @@
         @php($score = $scores[$r['path']] ?? null)
         <tr>
           <td class="max-w-[320px]">
-            <a href="{{ $r['kind'] === 'home' ? route('admin.builder', ['page' => '/']) : route('admin.pages.edit', ['path' => $r['path']]) }}" class="block truncate font-semibold text-navy hover:text-amber-600">{{ $r['title'] }}</a>
+            <a href="{{ $r['kind'] === 'home' ? route('admin.builder', ['page' => '/']) : route('admin.pages.edit', ['path' => $r['path']]) }}" class="block truncate font-semibold text-ink hover:text-accent">{{ $r['title'] }}</a>
             <span class="block truncate text-xs text-slate-500">{{ $r['path'] }}</span>
           </td>
           <td class="whitespace-nowrap text-slate-600">{{ $r['type'] }}</td>

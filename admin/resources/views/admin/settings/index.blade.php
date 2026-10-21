@@ -29,7 +29,7 @@
       </div>
     </div>
     <div class="card card-body flex items-center justify-between">
-      <p class="text-[13px] text-slate-500">SEO defaults live under <a href="{{ route('admin.seo.appearance') }}" class="font-semibold text-navy underline">SEO, Search Appearance</a>.</p>
+      <p class="text-[13px] text-slate-500">SEO defaults live under <a href="{{ route('admin.seo.appearance') }}" class="font-semibold text-ink underline">SEO, Search Appearance</a>.</p>
       <button class="btn-primary">Save settings</button>
     </div>
   </div>

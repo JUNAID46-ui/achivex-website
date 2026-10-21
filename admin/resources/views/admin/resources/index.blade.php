@@ -16,7 +16,7 @@
           @continue($key !== 'all' && ! $counts[$key] && request('status') !== $key)
           @php $active = (request('status') ?: 'all') === $key; @endphp
           <a href="{{ request()->fullUrlWithQuery(['status' => $key === 'all' ? null : $key, 'page' => null]) }}"
-             class="rounded-md px-3 py-1.5 {{ $active ? 'bg-navy font-semibold text-white' : 'text-slate-600 hover:bg-white' }}">
+             class="rounded-md px-3 py-1.5 {{ $active ? 'bg-ink font-semibold text-white' : 'text-slate-600 hover:bg-white' }}">
             {{ $label }} <span class="{{ $active ? 'text-white/70' : 'text-slate-400' }}">({{ $counts[$key] }})</span>
           </a>
         @endforeach
@@ -52,7 +52,7 @@
       <table class="table">
         <thead>
           <tr>
-            <th class="w-10"><input type="checkbox" class="rounded border-slate-300 text-navy" x-model="all"
+            <th class="w-10"><input type="checkbox" class="rounded border-slate-300 text-ink" x-model="all"
                  @change="selected = all ? [...$el.closest('table').querySelectorAll('tbody input[type=checkbox]')].map(i => i.value) : []" aria-label="Select all"></th>
             @foreach($resource->columns() as $col)<th>{{ $col['label'] }}</th>@endforeach
             @if($resource->slug !== 'users')<th>Checks</th>@endif
@@ -62,17 +62,17 @@
           @forelse($records as $record)
             @php $editUrl = route('admin.resources.edit', [$resource->slug, $record->getKey()]); $path = $resource->sitePath($record); @endphp
             <tr class="group">
-              <td><input type="checkbox" name="ids[]" value="{{ $record->getKey() }}" x-model="selected" class="rounded border-slate-300 text-navy" aria-label="Select"></td>
+              <td><input type="checkbox" name="ids[]" value="{{ $record->getKey() }}" x-model="selected" class="rounded border-slate-300 text-ink" aria-label="Select"></td>
               @foreach($resource->columns() as $col)
                 @php $v = $record->{$col['name']} ?? null; @endphp
                 <td>
                   @switch($col['type'])
                     @case('title')
-                      <a href="{{ $editUrl }}" class="font-semibold text-navy hover:text-amber-600">{{ $v ?: '(no title)' }}</a>
+                      <a href="{{ $editUrl }}" class="font-semibold text-ink hover:text-accent">{{ $v ?: '(no title)' }}</a>
                       <div class="mt-1 flex gap-2 text-xs text-slate-500 opacity-0 transition group-hover:opacity-100">
-                        <a href="{{ $editUrl }}" class="hover:text-navy">Edit</a>
-                        @if($resource->slug !== 'users')<span>|</span><a href="{{ route('admin.resources.preview', [$resource->slug, $record->getKey()]) }}" target="_blank" class="hover:text-navy">Preview</a>@endif
-                        @if($path && in_array($states[$record->getKey()] ?? 'published', ['published'], true))<span>|</span><a href="{{ rtrim(config('admin.site_url'), '/').$path }}" target="_blank" class="hover:text-navy">View</a>@endif
+                        <a href="{{ $editUrl }}" class="hover:text-ink">Edit</a>
+                        @if($resource->slug !== 'users')<span>|</span><a href="{{ route('admin.resources.preview', [$resource->slug, $record->getKey()]) }}" target="_blank" class="hover:text-ink">Preview</a>@endif
+                        @if($path && in_array($states[$record->getKey()] ?? 'published', ['published'], true))<span>|</span><a href="{{ rtrim(config('admin.site_url'), '/').$path }}" target="_blank" class="hover:text-ink">View</a>@endif
                         <span>|</span>
                         <button type="submit" form="del-{{ md5($record->getKey()) }}" class="text-red-600 hover:underline">Delete</button>
                       </div>
@@ -82,7 +82,7 @@
                       @break
                     @case('status')
                       @php $st = $states[$record->getKey()] ?? ($v ? 'published' : 'draft'); @endphp
-                      <span class="badge-{{ ['published' => 'green', 'scheduled' => 'navy', 'review' => 'amber'][$st] ?? 'gray' }}">{{ \App\Services\ContentWorkflow::STATES[$st] }}</span>
+                      <span class="badge-{{ ['published' => 'green', 'scheduled' => 'accent', 'review' => 'amber'][$st] ?? 'gray' }}">{{ \App\Services\ContentWorkflow::STATES[$st] }}</span>
                       @if($st === 'scheduled')<span class="block text-[11px] text-slate-500">{{ $record->publish_at?->format('M j, H:i') }} UTC</span>@endif
                       @break
                     @case('bool')
@@ -116,7 +116,7 @@
             </tr>
           @empty
             <tr><td colspan="{{ count($resource->columns()) + 2 }}" class="py-14 text-center text-slate-500">
-              Nothing here yet. <a href="{{ route('admin.resources.create', $resource->slug) }}" class="font-semibold text-navy underline">Add the first {{ strtolower($resource->singular) }}</a>.
+              Nothing here yet. <a href="{{ route('admin.resources.create', $resource->slug) }}" class="font-semibold text-ink underline">Add the first {{ strtolower($resource->singular) }}</a>.
             </td></tr>
           @endforelse
         </tbody>
