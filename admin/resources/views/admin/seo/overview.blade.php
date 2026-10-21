@@ -6,6 +6,17 @@
   <a href="{{ route('admin.seo.pages') }}" class="btn-primary">Review all pages</a>
 @endsection
 @section('content')
+@php $lastAudit = \App\Models\AuditRun::where('type', 'seo')->where('status', 'completed')->latest('id')->first(['id', 'summary', 'started_at']); @endphp
+<div class="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white px-5 py-3 text-[13px]">
+  @if($lastAudit)
+    <span>Last technical audit <time datetime="{{ $lastAudit->started_at?->toIso8601String() }}">{{ $lastAudit->started_at?->diffForHumans() }}</time>:
+      <span class="font-semibold text-navy">{{ $lastAudit->summary['total'] ?? 0 }} findings</span>,
+      {{ ($lastAudit->summary['by_severity']['critical'] ?? 0) + ($lastAudit->summary['by_severity']['high'] ?? 0) }} high or critical.</span>
+  @else
+    <span>No technical audit yet. It checks links, redirects, canonicals, sitemap and robots.txt.</span>
+  @endif
+  <a href="{{ route('admin.seo.audit') }}" class="btn-secondary btn-sm">Open SEO Audit</a>
+</div>
 <div class="grid gap-6 lg:grid-cols-[320px_minmax(0,1fr)]">
   <div class="card card-body flex flex-col items-center text-center">
     @php $deg = $avg * 3.6; $color = ['good' => '#10b981', 'ok' => '#F0A500', 'bad' => '#ef4444'][\App\Services\SeoAnalyzer::grade($avg)]; @endphp

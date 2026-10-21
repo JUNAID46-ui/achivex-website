@@ -10,6 +10,7 @@ Route::redirect('/', '/admin');
 // Public SEO files generated from the admin settings
 Route::get('/sitemap.xml', [PublicSeoController::class, 'sitemap'])->name('sitemap');
 Route::get('/robots.txt', [PublicSeoController::class, 'robots'])->name('robots');
+Route::get('/llms.txt', [PublicSeoController::class, 'llms'])->name('llms');
 
 // New contact messages and guide requests are emailed to the owner (called by a database trigger)
 Route::post('/hooks/inbox', InboxHookController::class)->middleware('throttle:30,1')->name('hooks.inbox');
@@ -110,6 +111,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('local', [Admin\SeoController::class, 'saveSchema']);
             Route::get('webmaster', [Admin\SeoController::class, 'webmaster'])->name('webmaster');
             Route::post('webmaster', [Admin\SeoController::class, 'saveWebmaster']);
+            Route::get('audit', [Admin\AuditController::class, 'seo'])->name('audit');
+            Route::get('ai-visibility', [Admin\AuditController::class, 'ai'])->name('ai');
+            Route::post('audits/{type}', [Admin\AuditController::class, 'run'])->name('audits.run')->middleware('throttle:6,1');
+            Route::get('audits/{run}/download/{format}', [Admin\AuditController::class, 'download'])->whereNumber('run')->name('audits.download');
+            Route::post('llms', [Admin\AuditController::class, 'saveLlms'])->name('llms');
+            Route::get('llms/draft', [Admin\AuditController::class, 'draftLlms'])->name('llms.draft');
         });
 
         Route::get('analytics', [Admin\AnalyticsController::class, 'index'])->name('analytics')->middleware('area:analytics');

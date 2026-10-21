@@ -10,3 +10,8 @@ admin/storage/*.key
 *.zip
 .DS_Store
 Thumbs.db
+
+# Generated at build time by scripts/export-routes.mjs
+website/public/robots.txt
+website/public/sitemap.xml
+website/public/llms.txt

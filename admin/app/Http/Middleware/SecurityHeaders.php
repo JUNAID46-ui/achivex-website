@@ -21,7 +21,7 @@ class SecurityHeaders
             'Cross-Origin-Opener-Policy' => 'same-origin',
         ];
         // The public sitemap and robots files are meant to be read by search engines.
-        if (! $request->routeIs('sitemap', 'robots')) {
+        if (! $request->routeIs('sitemap', 'robots', 'llms')) {
             $headers['X-Robots-Tag'] = 'noindex, nofollow';
         }
         if ($request->isSecure()) {

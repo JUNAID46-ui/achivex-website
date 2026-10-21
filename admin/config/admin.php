@@ -40,6 +40,8 @@ return [
             ['label' => '404 Monitor', 'route' => 'admin.seo.notfound', 'area' => 'seo'],
             ['label' => 'Local SEO', 'route' => 'admin.seo.schema', 'area' => 'seo'],
             ['label' => 'Webmaster Tools', 'route' => 'admin.seo.webmaster', 'area' => 'seo'],
+            ['label' => 'SEO Audit', 'route' => 'admin.seo.audit', 'area' => 'seo'],
+            ['label' => 'AI Visibility', 'route' => 'admin.seo.ai', 'area' => 'seo'],
         ]],
         ['label' => 'Analytics', 'icon' => 'chart', 'route' => 'admin.analytics', 'area' => 'analytics'],
         ['label' => 'Settings', 'icon' => 'settings', 'route' => 'admin.settings', 'area' => 'settings'],

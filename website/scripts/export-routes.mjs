@@ -71,6 +71,21 @@ const urls = [
 ]
 const xml = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
   ...urls.map((u) => `  <url><loc>${base}${u.path}</loc><lastmod>${u.lastmod}</lastmod></url>`), '</urlset>', ''].join('\n')
-writeFileSync('public/sitemap.xml', xml)
-writeFileSync('public/robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${base}/sitemap.xml\n`)
-console.log(`sitemap.xml written with ${urls.length} URLs`)
+// The admin owns robots.txt, sitemap.xml and llms.txt (SEO menu). Use its versions when it can be
+// reached and the file looks right; otherwise keep the files generated above from bundled data.
+const admin = (process.env.ADMIN_URL || 'https://achivex-admin.vercel.app').replace(/\/$/, '')
+async function fromAdmin(file, looksRight) {
+  try {
+    const res = await fetch(`${admin}/${file}`, { signal: AbortSignal.timeout(8000) })
+    const text = await res.text()
+    if (res.ok && !/^\s*<!doctype html/i.test(text) && looksRight(text)) return text
+  } catch {}
+  return null
+}
+const adminSitemap = await fromAdmin('sitemap.xml', (t) => t.includes('<urlset'))
+const adminRobots = await fromAdmin('robots.txt', (t) => /user-agent\s*:/i.test(t))
+const adminLlms = await fromAdmin('llms.txt', (t) => t.trim().length > 0)
+writeFileSync('public/sitemap.xml', adminSitemap ?? xml)
+writeFileSync('public/robots.txt', adminRobots ?? `User-agent: *\nAllow: /\n\nSitemap: ${base}/sitemap.xml\n`)
+if (adminLlms) writeFileSync('public/llms.txt', adminLlms)
+console.log(`sitemap.xml: ${adminSitemap ? 'from the admin' : `bundled, ${urls.length} URLs`}; robots.txt: ${adminRobots ? 'from the admin' : 'default'}; llms.txt: ${adminLlms ? 'from the admin' : 'none'}`)
