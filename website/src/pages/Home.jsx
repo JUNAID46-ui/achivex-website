@@ -96,7 +96,7 @@ function Hero({ d }) {
             />
 
             {/* Dark card in the top left notch */}
-            <div className="absolute left-0 top-0 hidden h-[44%] w-[27%] flex-col justify-between rounded-[22px] bg-ink p-5 ring-[14px] ring-white md:flex lg:p-6">
+            <div className="absolute left-0 top-0 hidden w-[24%] rounded-[20px] bg-ink p-5 ring-[10px] ring-white md:block lg:p-6">
               <HeroStat stat={first} dark />
             </div>
 
