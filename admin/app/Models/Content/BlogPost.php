@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class BlogPost extends Model
 {
+    use Publishable;
+
     protected $table = 'public.blog_posts';
     protected $primaryKey = 'slug';
     public $incrementing = false;
@@ -13,5 +15,5 @@ class BlogPost extends Model
 
     public $timestamps = false;
     protected $guarded = [];
-    protected $casts = ['sections' => 'array', 'featured' => 'boolean', 'published' => 'boolean', 'published_on' => 'date'];
+    protected $casts = ['sections' => 'array', 'featured' => 'boolean', 'published' => 'boolean', 'published_on' => 'date', 'publish_at' => 'datetime'];
 }

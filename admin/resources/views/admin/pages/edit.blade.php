@@ -51,6 +51,7 @@
     <input type="hidden" name="path" value="{{ $page['path'] }}">
   </form>
 @endif
+@include('admin.pages.partials.revisions')
 @endsection
 
 @push('scripts')

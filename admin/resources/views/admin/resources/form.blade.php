@@ -5,7 +5,7 @@
   $siteUrl = rtrim(config('admin.site_url'), '/');
   $publicUrl = rtrim(config('admin.site_public_url'), '/');
   $main = collect($resource->fields())->reject(fn ($f) => $f['side'] ?? false);
-  $side = collect($resource->fields())->filter(fn ($f) => $f['side'] ?? false);
+  $side = collect($resource->fields())->filter(fn ($f) => ($f['side'] ?? false) && ! ($resource->hasPublished && $f['name'] === 'published'));
   $value = fn ($f) => \App\Admin\FieldValues::forForm($f, $record->{$f['name']});
 @endphp
 @section('title', $isNew ? 'Add '.$resource->singular : 'Edit '.$resource->singular)
@@ -17,7 +17,7 @@
 
 @section('content')
 <form method="POST" action="{{ $isNew ? route('admin.resources.store', $resource->slug) : route('admin.resources.update', [$resource->slug, $record->getKey()]) }}"
-      class="grid gap-6 xl:grid-cols-[minmax(0,1fr)_320px]">
+      class="grid gap-6 xl:grid-cols-[minmax(0,1fr)_320px]" data-unsaved-warning>
   @csrf
   @unless($isNew) @method('PUT') @endunless
 
@@ -108,15 +108,51 @@
 
   <aside class="space-y-6">
     <div class="card xl:sticky xl:top-16">
-      <div class="card-header"><h2 class="card-title">{{ $resource->hasPublished ? 'Publish' : 'Save' }}</h2></div>
+      <div class="card-header"><h2 class="card-title">{{ $resource->hasPublished ? 'Publish' : 'Save' }}</h2>
+        @if($state)<span class="badge-{{ ['published' => 'green', 'scheduled' => 'navy', 'review' => 'amber', 'archived' => 'gray', 'draft' => 'gray'][$state] }}">{{ \App\Services\ContentWorkflow::STATES[$state] }}</span>@endif
+      </div>
       <div class="card-body space-y-4">
+        @if($resource->hasPublished)
+          @php $chosen = old('workflow_status', $state ?? 'draft'); @endphp
+          <div x-data="{ status: @js($chosen) }" class="space-y-3">
+            <div>
+              <label for="workflow_status" class="label">Status</label>
+              <select id="workflow_status" name="workflow_status" x-model="status" class="input">
+                @foreach(\App\Services\ContentWorkflow::STATES as $k => $label)
+                  @php $locked = in_array($k, ['published', 'scheduled'], true) && ! $canPublish && $k !== $state; @endphp
+                  <option value="{{ $k }}" @disabled($locked)>{{ $label }}{{ $locked ? ' (editors only)' : '' }}</option>
+                @endforeach
+              </select>
+              @error('workflow_status')<p class="error">{{ $message }}</p>@enderror
+              <p class="help" x-show="status === 'review'">Editors get a notification to review it. It stays off the website.</p>
+              <p class="help" x-show="status === 'archived'">Archived items stay saved but are hidden from the website.</p>
+            </div>
+            <div x-show="status === 'scheduled'" x-cloak>
+              <label for="publish_at" class="label">Go live at (UTC)</label>
+              <input type="datetime-local" id="publish_at" name="publish_at" class="input" value="{{ old('publish_at', $record->publish_at?->format('Y-m-d\TH:i')) }}">
+              @error('publish_at')<p class="error">{{ $message }}</p>@enderror
+              <p class="help">The website shows it automatically at this time.</p>
+            </div>
+          </div>
+        @endif
         @foreach($side as $field)
           @include('admin.partials.field', ['field' => $field, 'value' => $value($field)])
         @endforeach
-        @if($path)
+        @unless($isNew)
+          <a href="{{ route('admin.resources.preview', [$resource->slug, $record->getKey()]) }}" target="_blank" class="flex items-center gap-1.5 text-[13px] font-semibold text-navy hover:text-amber-600">
+            @include('admin.partials.icon', ['name' => 'eye']) Preview (saved version)
+          </a>
+        @endunless
+        @if($path && in_array($state, [null, 'published'], true))
           <a href="{{ $siteUrl.$path }}" target="_blank" class="flex items-center gap-1.5 text-[13px] font-semibold text-navy hover:text-amber-600">
             @include('admin.partials.icon', ['name' => 'external']) View on website
           </a>
+        @endif
+        @if($meta)
+          <dl class="space-y-1 border-t border-slate-100 pt-3 text-xs text-slate-500">
+            <div>Created by <span class="font-semibold text-slate-700">{{ $meta->created_by_name ?? 'unknown (before tracking)' }}</span>@if($meta->created_by_name) on {{ $meta->created_at?->format('M j, Y') }}@endif</div>
+            <div>Last changed by <span class="font-semibold text-slate-700">{{ $meta->updated_by_name ?? 'unknown' }}</span>, <time datetime="{{ $meta->updated_at?->toIso8601String() }}" title="{{ $meta->updated_at?->format('Y-m-d H:i') }} UTC">{{ $meta->updated_at?->diffForHumans() }}</time></div>
+          </dl>
         @endif
       </div>
       <div class="flex items-center justify-between gap-2 border-t border-slate-200 bg-slate-50 px-5 py-3">
@@ -125,15 +161,44 @@
         @else
           <span></span>
         @endunless
-        <button class="btn-primary">{{ $isNew ? ($resource->hasPublished ? 'Publish' : 'Create') : 'Update' }}</button>
+        <button class="btn-primary" data-loading>{{ $isNew ? 'Save' : 'Update' }}</button>
       </div>
     </div>
+
+    @if($health)
+      <div class="card">
+        <div class="card-header"><h2 class="card-title">Checks</h2><span class="badge-{{ collect($health)->contains('level', 'warning') ? 'amber' : 'gray' }}">{{ count($health) }}</span></div>
+        <ul class="card-body space-y-2.5 text-[13px]">
+          @foreach($health as $h)
+            <li class="flex gap-2">
+              <span class="mt-1.5 h-2 w-2 shrink-0 rounded-full {{ $h['level'] === 'warning' ? 'bg-amber' : 'bg-slate-300' }}"></span>
+              <span><span class="font-semibold text-slate-700">{{ $h['label'] }}</span><span class="block text-xs text-slate-500">{{ $h['fix'] }}</span></span>
+            </li>
+          @endforeach
+        </ul>
+      </div>
+    @endif
+
+    @unless($isNew || $resource->slug === 'users')
+      <div class="card">
+        <div class="card-header"><h2 class="card-title">Revisions</h2>
+          @if($revisions->isNotEmpty())<a href="{{ route('admin.resources.revisions', [$resource->slug, $record->getKey()]) }}" class="text-[13px] font-semibold text-navy hover:underline">View all</a>@endif
+        </div>
+        <div class="card-body text-[13px]">
+          @forelse($revisions as $rev)
+            <p class="flex justify-between gap-2 py-0.5"><span class="text-slate-600">{{ $rev->user_name ?? 'System' }}</span><time class="text-slate-400" datetime="{{ $rev->created_at?->toIso8601String() }}" title="{{ $rev->created_at?->format('Y-m-d H:i') }} UTC">{{ $rev->created_at?->diffForHumans() }}</time></p>
+          @empty
+            <p class="text-slate-500">No earlier versions yet. A copy is saved every time this item changes.</p>
+          @endforelse
+        </div>
+      </div>
+    @endunless
   </aside>
 </form>
 
 @unless($isNew)
   <form id="delete-form" method="POST" action="{{ route('admin.resources.destroy', [$resource->slug, $record->getKey()]) }}"
-        onsubmit="return confirm('Delete this {{ strtolower($resource->singular) }}? This cannot be undone.')" class="hidden">
+        onsubmit="return confirm('Delete this {{ strtolower($resource->singular) }}?{{ $resource->slug === 'users' ? ' This cannot be undone.' : ' A copy is kept under Recently deleted.' }}')" class="hidden">
     @csrf @method('DELETE')
   </form>
 @endunless

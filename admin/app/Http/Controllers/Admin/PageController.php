@@ -9,6 +9,7 @@ use App\Models\Content\PageSection;
 use App\Models\Content\SeoMeta;
 use App\Services\ContentSchema;
 use App\Services\PageCatalog;
+use App\Services\Revisions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -96,7 +97,8 @@ class PageController extends Controller
         }
         $saved = Page::find($page['path']);
         $viewData = ['page' => $page, 'saved' => $saved, 'siteUrl' => rtrim(config('admin.site_url'), '/'),
-            'sectionCount' => PageSection::where('page', $page['path'])->count()];
+            'sectionCount' => PageSection::where('page', $page['path'])->count(),
+            'revisions' => Revisions::for('pages', $page['path'])->where('action', 'update')->limit(10)->get()];
 
         if ($page['kind'] === 'custom') {
             return view('admin.pages.custom', $viewData);
@@ -123,9 +125,12 @@ class PageController extends Controller
         abort_unless(is_array($input), 422, 'The form could not be read. Reload the page and try again.');
         $content = ContentSchema::clean(ContentSchema::fields($defaults), $input, $defaults);
 
+        if ($old = Page::find($page['path'])) {
+            Revisions::snapshot('pages', $old, 'update');
+        }
         Page::updateOrCreate(['path' => $page['path']], ['kind' => 'builtin', 'title' => $page['title'], 'published' => true, 'content' => $content]);
         Cache::forget('seo-index');
-        ActivityLog::record('updated', 'Page', $page['title'], $page['path']);
+        ActivityLog::record('updated', 'Page', $page['title'], $page['path'], ['module' => 'Pages', 'id' => $page['path']]);
 
         return back()->with('status', 'Page saved. The website shows the new content on its next load.');
     }
@@ -143,7 +148,9 @@ class PageController extends Controller
         }
         DB::transaction(function () use ($page, $newPath, $data, $request) {
             $row = Page::findOrFail($page['path']);
+            Revisions::snapshot('pages', $row, 'update');
             if ($newPath !== $page['path']) {
+                \App\Models\ContentRevision::where('resource', 'pages')->where('record_key', $page['path'])->update(['record_key' => $newPath]);
                 Page::create(['path' => $newPath, 'kind' => 'custom', 'title' => $data['title'], 'published' => $request->boolean('published'), 'content' => ['description' => $data['description'] ?? '']]);
                 PageSection::where('page', $page['path'])->update(['page' => $newPath]);
                 SeoMeta::where('path', $page['path'])->update(['path' => $newPath]);
@@ -153,7 +160,7 @@ class PageController extends Controller
             }
         });
         Cache::forget('seo-index');
-        ActivityLog::record('updated', 'Page', $data['title'], $newPath);
+        ActivityLog::record('updated', 'Page', $data['title'], $newPath, ['module' => 'Pages', 'id' => $newPath]);
 
         return redirect()->route('admin.pages.edit', ['path' => $newPath])->with('status', 'Page settings saved.');
     }
@@ -162,11 +169,33 @@ class PageController extends Controller
     {
         $page = PageCatalog::find((string) $request->input('path'));
         abort_unless($page && $page['kind'] === 'builtin', 404);
-        Page::where('path', $page['path'])->delete();
+        if ($old = Page::find($page['path'])) {
+            Revisions::snapshot('pages', $old, 'update');
+            $old->delete();
+        }
         Cache::forget('seo-index');
-        ActivityLog::record('updated', 'Page', $page['title'], 'Restored original content');
+        ActivityLog::record('updated', 'Page', $page['title'], 'Restored original content', ['module' => 'Pages', 'id' => $page['path']]);
 
         return back()->with('status', 'The original content of this page has been restored.');
+    }
+
+    // Puts an earlier saved copy of a page's content back. The current content is kept as a revision first.
+    public function restoreRevision(Request $request, int $revision)
+    {
+        $request->validate(['confirm' => 'accepted'], ['confirm.accepted' => 'Tick the box to confirm the restore.']);
+        $rev = \App\Models\ContentRevision::where('resource', 'pages')->where('action', 'update')->findOrFail($revision);
+        $page = PageCatalog::find($rev->record_key);
+        abort_unless($page && $page['kind'] !== 'home', 404);
+        DB::transaction(function () use ($rev) {
+            if ($current = Page::find($rev->record_key)) {
+                Revisions::snapshot('pages', $current, 'update');
+            }
+            Page::updateOrCreate(['path' => $rev->record_key], collect($rev->data)->only(['kind', 'title', 'published', 'content'])->all());
+        });
+        Cache::forget('seo-index');
+        ActivityLog::record('restored', 'Page', $page['title'], 'Restored the copy from '.$rev->created_at?->format('Y-m-d H:i'), ['module' => 'Pages', 'id' => $rev->record_key]);
+
+        return redirect()->route('admin.pages.edit', ['path' => $rev->record_key])->with('status', 'Earlier version of the page restored.');
     }
 
     public function destroy(Request $request)
@@ -174,12 +203,15 @@ class PageController extends Controller
         $page = PageCatalog::find((string) $request->input('path'));
         abort_unless($page && $page['kind'] === 'custom', 404);
         DB::transaction(function () use ($page) {
+            if ($row = Page::find($page['path'])) {
+                Revisions::snapshot('pages', $row, 'delete');
+            }
             PageSection::where('page', $page['path'])->delete();
             SeoMeta::where('path', $page['path'])->delete();
             Page::where('path', $page['path'])->delete();
         });
         Cache::forget('seo-index');
-        ActivityLog::record('deleted', 'Page', $page['title'], $page['path']);
+        ActivityLog::record('deleted', 'Page', $page['title'], $page['path'], ['module' => 'Pages', 'id' => $page['path']]);
 
         return redirect()->route('admin.pages.index')->with('status', 'Page deleted.');
     }

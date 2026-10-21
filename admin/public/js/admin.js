@@ -183,3 +183,31 @@ async function imageSize(file) {
     return {}
   }
 }
+
+// Forms marked data-unsaved-warning ask before leaving with unsaved changes.
+// Buttons marked data-loading show progress and block double submits.
+document.addEventListener('DOMContentLoaded', () => {
+  let dirty = false
+  document.querySelectorAll('form[data-unsaved-warning]').forEach((form) => {
+    form.addEventListener('input', () => { dirty = true })
+    form.addEventListener('change', () => { dirty = true })
+    form.addEventListener('submit', () => { dirty = false })
+  })
+  window.addEventListener('beforeunload', (e) => {
+    if (!dirty) return
+    e.preventDefault()
+    e.returnValue = ''
+  })
+})
+
+document.addEventListener('submit', (e) => {
+  if (e.defaultPrevented) return
+  const button = e.submitter && e.submitter.matches('[data-loading]') ? e.submitter : e.target.querySelector('button[data-loading]:not([name])')
+  if (!button) return
+  // Let the browser send the form first, then lock the button.
+  setTimeout(() => {
+    button.disabled = true
+    button.dataset.label = button.innerHTML
+    button.textContent = 'Working…'
+  }, 0)
+})

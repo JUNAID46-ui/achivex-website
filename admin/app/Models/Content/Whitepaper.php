@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Whitepaper extends Model
 {
+    use Publishable;
+
     protected $table = 'public.whitepapers';
     protected $primaryKey = 'slug';
     public $incrementing = false;
@@ -13,7 +15,7 @@ class Whitepaper extends Model
 
     public $timestamps = false;
     protected $guarded = [];
-    protected $casts = ['inside' => 'array', 'published' => 'boolean'];
+    protected $casts = ['inside' => 'array', 'published' => 'boolean', 'publish_at' => 'datetime'];
 
     public function requests()
     {

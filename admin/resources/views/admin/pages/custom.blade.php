@@ -49,4 +49,5 @@
     </form>
   </aside>
 </div>
+@include('admin.pages.partials.revisions')
 @endsection

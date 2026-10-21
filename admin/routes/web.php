@@ -49,6 +49,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('pages/update', [Admin\PageController::class, 'update'])->name('pages.update');
             Route::post('pages/reset', [Admin\PageController::class, 'reset'])->name('pages.reset');
             Route::post('pages/delete', [Admin\PageController::class, 'destroy'])->name('pages.destroy');
+            Route::post('pages/revisions/{revision}', [Admin\PageController::class, 'restoreRevision'])->whereNumber('revision')->name('pages.restore-revision');
         });
 
         // Generic content types
@@ -59,6 +60,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('r/{resource}/{id}/edit', [Admin\ResourceController::class, 'edit'])->name('resources.edit');
         Route::put('r/{resource}/{id}', [Admin\ResourceController::class, 'update'])->name('resources.update');
         Route::delete('r/{resource}/{id}', [Admin\ResourceController::class, 'destroy'])->name('resources.destroy');
+        Route::get('r/{resource}/deleted', [Admin\ResourceController::class, 'deleted'])->name('resources.deleted');
+        Route::post('r/{resource}/deleted/{revision}', [Admin\ResourceController::class, 'restoreDeleted'])->whereNumber('revision')->name('resources.restore-deleted');
+        Route::get('r/{resource}/{id}/revisions', [Admin\ResourceController::class, 'revisions'])->name('resources.revisions');
+        Route::post('r/{resource}/{id}/revisions/{revision}', [Admin\ResourceController::class, 'restore'])->whereNumber('revision')->name('resources.restore');
+        Route::get('r/{resource}/{id}/preview', [Admin\ResourceController::class, 'preview'])->name('resources.preview');
 
         // Media library
         Route::middleware('area:media')->group(function () {

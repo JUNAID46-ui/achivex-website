@@ -28,7 +28,7 @@ class SeoIndex
 
         // Pages made in the admin, scored on the text of their sections.
         $sections = \App\Models\Content\PageSection::where('visible', true)->where('page', '!=', 'home')->get()->groupBy('page');
-        foreach (\App\Models\Content\Page::where('kind', 'custom')->where('published', true)->get() as $page) {
+        foreach (\App\Models\Content\Page::where('kind', 'custom')->live()->get() as $page) {
             $parts = $sections->get($page->path, collect());
             $text = $parts->map(fn ($sec) => collect($sec->data ?? [])->flatten()->filter(fn ($v) => is_string($v) && ! str_starts_with($v, 'http') && ! str_starts_with($v, '/'))->implode(' '))->implode(' ');
             $headings = $parts->map(fn ($sec) => $sec->data['heading'] ?? null)->filter()->values()->all();
