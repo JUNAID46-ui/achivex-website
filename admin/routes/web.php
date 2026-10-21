@@ -15,6 +15,9 @@ Route::get('/llms.txt', [PublicSeoController::class, 'llms'])->name('llms');
 // New contact messages and guide requests are emailed to the owner (called by a database trigger)
 Route::post('/hooks/inbox', InboxHookController::class)->middleware('throttle:30,1')->name('hooks.inbox');
 
+// Daily maintenance, called by Vercel Cron (vercel.json)
+Route::match(['get', 'post'], '/hooks/daily', \App\Http\Controllers\DailyHookController::class)->middleware('throttle:5,1')->name('hooks.daily');
+
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('guest')->group(function () {
         Route::get('login', [Admin\AuthController::class, 'showLogin'])->name('login');
@@ -133,6 +136,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('activity', [Admin\ActivityController::class, 'index'])->name('activity')->middleware('area:activity');
         Route::get('activity/export', [Admin\ActivityController::class, 'export'])->name('activity.export')->middleware(['area:activity', 'throttle:10,1']);
 
+        // System Health (administrators only)
+        Route::middleware('area:tools')->group(function () {
+            Route::get('health', [Admin\HealthController::class, 'index'])->name('health');
+            Route::post('health/thresholds', [Admin\HealthController::class, 'saveThresholds'])->name('health.thresholds');
+        });
+
         // Security Center (administrators only)
         Route::middleware('area:security')->group(function () {
             Route::get('security', [Admin\SecurityController::class, 'index'])->name('security');
@@ -144,7 +153,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::middleware('area:tools')->group(function () {
             Route::get('backup', [Admin\BackupController::class, 'index'])->name('backup');
             Route::get('backup/download', [Admin\BackupController::class, 'download'])->name('backup.download')->middleware('throttle:10,1');
-            Route::post('backup/restore', [Admin\BackupController::class, 'restore'])->name('backup.restore')->middleware('throttle:5,1');
+            Route::post('backup/setup', [Admin\BackupController::class, 'setup'])->name('backup.setup');
+            Route::post('backup/runs', [Admin\BackupController::class, 'store'])->name('backup.store')->middleware('throttle:6,1');
+            Route::post('backup/settings', [Admin\BackupController::class, 'saveSettings'])->name('backup.settings');
+            Route::post('backup/runs/{run}/verify', [Admin\BackupController::class, 'verify'])->name('backup.verify')->middleware('throttle:10,1');
+            Route::get('backup/runs/{run}/download', [Admin\BackupController::class, 'downloadStored'])->name('backup.stored')->middleware('throttle:10,1');
+            Route::post('backup/runs/{run}/delete', [Admin\BackupController::class, 'destroy'])->name('backup.destroy');
+            Route::get('backup/runs/{run}/preview', [Admin\BackupController::class, 'preview'])->name('backup.preview');
+            Route::post('backup/runs/{run}/restore', [Admin\BackupController::class, 'restore'])->name('backup.restore')->middleware('throttle:5,1');
+            Route::post('backup/upload/sign', [Admin\BackupController::class, 'uploadSign'])->name('backup.upload.sign')->middleware('throttle:10,1');
+            Route::post('backup/upload/{run}/complete', [Admin\BackupController::class, 'uploadComplete'])->name('backup.upload.complete');
+            Route::post('backup/restore', [Admin\BackupController::class, 'restoreUpload'])->name('backup.restore-upload')->middleware('throttle:5,1');
             Route::get('cache', [Admin\CacheController::class, 'index'])->name('cache');
             Route::post('cache/clear', [Admin\CacheController::class, 'clear'])->name('cache.clear');
             Route::get('custom-code', [Admin\CustomCodeController::class, 'index'])->name('custom-code');

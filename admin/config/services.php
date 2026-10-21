@@ -41,4 +41,7 @@ return [
         'secret_key' => env('SUPABASE_SECRET_KEY'),
     ],
 
+    // Vercel Cron sends this as a bearer token to /hooks/daily when it is set.
+    'cron_secret' => env('CRON_SECRET'),
+
 ];

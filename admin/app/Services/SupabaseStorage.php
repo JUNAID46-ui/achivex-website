@@ -31,7 +31,7 @@ class SupabaseStorage
         return static::baseUrl().'/storage/v1/object/public/'.static::BUCKET.'/'.$path;
     }
 
-    private static function client(?string $key = null)
+    public static function client(?string $key = null)
     {
         $key ??= static::key();
         // New "sb_secret_" keys go in the apikey header only; older JWT keys also go in Authorization.

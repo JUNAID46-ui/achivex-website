@@ -13,6 +13,8 @@ use Tests\TestCase;
 // Two-step login and password rules. Runs on an in-memory SQLite database, never on Supabase.
 class TwoFactorTest extends TestCase
 {
+    use \Tests\SqliteTables;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -36,16 +38,7 @@ class TwoFactorTest extends TestCase
             $t->rememberToken();
             $t->timestamps();
         });
-        Schema::create('activity_logs', function ($t) {
-            $t->id();
-            $t->foreignId('user_id')->nullable();
-            $t->string('action');
-            $t->string('subject_type')->nullable();
-            $t->string('subject_label')->nullable();
-            $t->string('description')->nullable();
-            $t->string('ip')->nullable();
-            $t->timestamps();
-        });
+        $this->createActivityLogs();
     }
 
     private function user(bool $twoFactor): User

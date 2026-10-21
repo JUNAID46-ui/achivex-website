@@ -13,6 +13,8 @@ use Tests\TestCase;
 // Security regression tests. They run on an in-memory SQLite database, never on Supabase.
 class SecurityTest extends TestCase
 {
+    use \Tests\SqliteTables;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -41,6 +43,7 @@ class SecurityTest extends TestCase
             $t->longText('payload');
             $t->integer('last_activity');
         });
+        $this->createActivityLogs();
         Schema::create('app_settings', function ($t) {
             $t->string('key')->primary();
             $t->text('value');

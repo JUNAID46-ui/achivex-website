@@ -11,6 +11,8 @@ use Tests\TestCase;
 
 class MediaUploadTest extends TestCase
 {
+    use \Tests\SqliteTables;
+
     private User $admin;
 
     protected function setUp(): void
@@ -35,10 +37,7 @@ class MediaUploadTest extends TestCase
             $t->bigInteger('size')->default(0); $t->integer('width')->nullable(); $t->integer('height')->nullable(); $t->string('alt')->nullable();
             $t->bigInteger('uploaded_by')->nullable(); $t->timestamps();
         });
-        Schema::create('activity_logs', function ($t) {
-            $t->id(); $t->bigInteger('user_id')->nullable(); $t->string('action'); $t->string('subject_type')->nullable(); $t->string('subject_label')->nullable();
-            $t->string('description')->nullable(); $t->string('ip')->nullable(); $t->timestamp('created_at')->nullable();
-        });
+        $this->createActivityLogs();
         $this->admin = User::create(['name' => 'Owner', 'email' => 'owner@example.com', 'password' => 'secret-pass', 'role' => 'administrator']);
     }
 

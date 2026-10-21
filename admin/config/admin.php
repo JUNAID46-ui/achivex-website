@@ -49,6 +49,7 @@ return [
         ['label' => 'Activity Log', 'icon' => 'activity', 'route' => 'admin.activity', 'area' => 'activity'],
         ['label' => 'Security Center', 'icon' => 'shield', 'route' => 'admin.security', 'area' => 'security'],
         ['label' => 'Tools', 'icon' => 'refresh', 'area' => 'tools', 'children' => [
+            ['label' => 'System Health', 'route' => 'admin.health', 'area' => 'tools'],
             ['label' => 'Backup and Restore', 'route' => 'admin.backup', 'area' => 'tools'],
             ['label' => 'Cache', 'route' => 'admin.cache', 'area' => 'tools'],
             ['label' => 'Custom Code', 'route' => 'admin.custom-code', 'area' => 'tools'],

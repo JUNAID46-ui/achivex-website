@@ -27,6 +27,10 @@ class BackupTest extends TestCase
         config(['database.connections.pgsql' => $base + ['database' => 'achivex_backup_test'], 'database.default' => 'pgsql', 'cache.default' => 'array']);
         DB::purge('pgsql');
         DB::unprepared(file_get_contents(base_path('tests/fixtures/schema.sql')));
+        foreach (['0001_01_01_000000_create_users_table', '0001_01_01_000001_create_cache_table', '0001_01_01_000002_create_jobs_table', '0001_01_01_000003_create_site_content_tables', '2026_10_19_000001_create_admin_tables', '2026_10_20_000001_create_pages_and_settings', '2026_10_21_000001_add_inbox_notifications', '2026_10_22_000001_add_two_factor_to_users'] as $m) {
+            DB::table('migrations')->insert(['migration' => $m, 'batch' => 1]);
+        }
+        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
         $this->seedSite();
     }
 
@@ -150,12 +154,12 @@ class BackupTest extends TestCase
 
         DB::table('public.blog_posts')->delete();
         $file = UploadedFile::fake()->createWithContent('backup.json', $json);
-        $this->actingAs($admin)->post('/admin/backup/restore', ['file' => $file, 'mode' => 'merge'])->assertSessionHasErrors('confirm');
+        $this->actingAs($admin)->post('/admin/backup/restore', ['file' => $file, 'mode' => 'merge'])->assertSessionHasErrors('confirm_text');
         $this->assertSame(0, DB::table('public.blog_posts')->count());
-        $this->actingAs($admin)->post('/admin/backup/restore', ['file' => $file, 'mode' => 'merge', 'confirm' => '1'])->assertSessionHasNoErrors();
+        $this->actingAs($admin)->post('/admin/backup/restore', ['file' => $file, 'mode' => 'merge', 'confirm_text' => 'RESTORE'])->assertSessionHasNoErrors();
         $this->assertSame(2, DB::table('public.blog_posts')->count());
 
-        $this->actingAs($admin)->get('/admin/backup')->assertOk()->assertSee('Restore from a backup');
+        $this->actingAs($admin)->get('/admin/backup')->assertOk()->assertSee('Restore from a file');
         $this->actingAs($admin)->get('/admin/cache')->assertOk()->assertSee('Clear all cache');
     }
 }

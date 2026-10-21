@@ -1,13 +1,36 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "regions": ["sfo1"],
+  "regions": [
+    "sfo1"
+  ],
   "builds": [
-    { "src": "api/index.php", "use": "vercel-php@0.7.4" },
-    { "src": "public/**", "use": "@vercel/static" }
+    {
+      "src": "api/index.php",
+      "use": "vercel-php@0.7.4"
+    },
+    {
+      "src": "public/**",
+      "use": "@vercel/static"
+    }
   ],
   "routes": [
-    { "src": "/(css|js|brand|vendor)/(.*)", "dest": "/public/$1/$2" },
-    { "src": "/favicon.ico", "dest": "/public/favicon.ico" },
-    { "src": "/(.*)", "dest": "/api/index.php" }
+    {
+      "src": "/(css|js|brand|vendor)/(.*)",
+      "dest": "/public/$1/$2"
+    },
+    {
+      "src": "/favicon.ico",
+      "dest": "/public/favicon.ico"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.php"
+    }
+  ],
+  "crons": [
+    {
+      "path": "/hooks/daily",
+      "schedule": "17 6 * * *"
+    }
   ]
 }
