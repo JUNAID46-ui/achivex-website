@@ -30,7 +30,7 @@ class CustomCodeController extends Controller
     {
         $data = $request->validate(array_fill_keys(array_keys(self::FIELDS), 'nullable|string|max:50000'));
         SiteSetting::put('custom_code', array_map(fn ($v) => (string) $v, $data));
-        ActivityLog::record('updated', 'Custom Code', 'Website custom code');
+        ActivityLog::record('settings', 'Custom Code', 'Website custom code', null, ['module' => 'Custom Code', 'context' => ['fields' => array_keys(array_filter($data))]]);
 
         return back()->with('status', 'Custom code saved. It shows on the website on the next page load.');
     }

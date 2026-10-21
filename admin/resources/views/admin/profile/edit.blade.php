@@ -69,4 +69,24 @@
     @endif
   </div>
 </div>
+
+<div id="sessions" class="card mt-6 max-w-4xl">
+  <div class="card-header"><h2 class="card-title">Where you are signed in</h2></div>
+  <div class="card-body space-y-3 text-[13px]">
+    @forelse($sessions as $sess)
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <span><span class="font-semibold text-navy">{{ $sess['agent'] ?: 'Unknown browser' }}</span> <span class="text-slate-500">· {{ $sess['ip'] }}</span></span>
+        <span class="text-slate-500">@if($sess['current'])<span class="badge-green">This browser</span>@else Active {{ $sess['last']->diffForHumans() }}@endif</span>
+      </div>
+    @empty
+      <p class="text-slate-500">Session list is available when sessions are stored in the database (production).</p>
+    @endforelse
+    <form method="POST" action="{{ route('admin.profile.sessions') }}" class="flex flex-wrap items-end gap-3 border-t border-slate-100 pt-3" onsubmit="return confirm('Sign out on all your other devices?')">
+      @csrf
+      <div><label for="sessions_password" class="label">Your password</label><input id="sessions_password" type="password" name="password" class="input" autocomplete="current-password" required></div>
+      <button class="btn-secondary">Sign out other devices</button>
+    </form>
+    @error('sessions_password')<p class="error">{{ $message }}</p>@enderror
+  </div>
+</div>
 @endsection

@@ -27,7 +27,9 @@ class AuthController extends Controller
         ]);
 
         $key = Str::lower($request->input('email')).'|'.$request->ip();
+        $email = Str::lower(mb_substr($request->input('email'), 0, 120));
         if (RateLimiter::tooManyAttempts($key, 5)) {
+            ActivityLog::failure('login_failed', 'User', $email, 'Blocked: too many attempts', ['module' => 'Security', 'user_name' => $email]);
             throw ValidationException::withMessages([
                 'email' => 'Too many attempts. Try again in '.RateLimiter::availableIn($key).' seconds.',
             ]);
@@ -35,6 +37,8 @@ class AuthController extends Controller
 
         if (! Auth::validate($credentials)) {
             RateLimiter::hit($key, 60);
+            // The email typed is kept so repeated guessing shows up in the Security Center; the password never is.
+            ActivityLog::failure('login_failed', 'User', $email, 'Wrong email or password', ['module' => 'Security', 'user_name' => $email]);
             throw ValidationException::withMessages(['email' => 'These details do not match our records.']);
         }
 
@@ -79,6 +83,7 @@ class AuthController extends Controller
             : TwoFactor::useRecoveryCode($user, $code);
         if (! $ok) {
             RateLimiter::hit($key, 60);
+            ActivityLog::failure('login_failed', 'User', $user->email, 'Wrong two-step code', ['module' => 'Security', 'user_name' => $user->name, 'id' => $user->id]);
             throw ValidationException::withMessages(['code' => 'This code is not correct.']);
         }
 
@@ -104,13 +109,16 @@ class AuthController extends Controller
         Auth::login($user, $remember);
         $request->session()->regenerate();
         $user->forceFill(['last_login_at' => now()])->save();
-        ActivityLog::record('login', 'User', $user->name, 'Signed in');
+        ActivityLog::record('login', 'User', $user->name, $user->hasTwoFactor() ? 'Signed in with two-step login' : 'Signed in', ['module' => 'Security', 'id' => $user->id, 'context' => ['agent' => mb_substr((string) $request->userAgent(), 0, 150)]]);
 
         return redirect()->intended(route('admin.dashboard'));
     }
 
     public function logout(Request $request)
     {
+        if ($user = $request->user()) {
+            ActivityLog::record('logout', 'User', $user->name, 'Signed out', ['module' => 'Security', 'id' => $user->id]);
+        }
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();

@@ -164,7 +164,7 @@ class SeoController extends Controller
     {
         $data = $request->validate(['content' => 'required|max:5000']);
         SiteSetting::put('robots', ['content' => str_replace("\r\n", "\n", $data['content'])]);
-        ActivityLog::record('updated', 'SEO', 'robots.txt');
+        ActivityLog::record('settings', 'SEO', 'robots.txt', null, ['module' => 'SEO']);
 
         return back()->with('status', 'robots.txt saved.');
     }
@@ -183,7 +183,7 @@ class SeoController extends Controller
         $data = $request->validate(['from_path' => 'required|max:300', 'to_path' => ['required', 'max:500', 'regex:#^(/(?![/\\\\])|https?://)#i']]);
         $from = '/'.trim($data['from_path'], '/').'/';
         Redirect::updateOrCreate(['from_path' => $from], ['to_path' => $data['to_path'], 'status_code' => 301, 'active' => true]);
-        ActivityLog::record('created', 'Redirect', $from.' to '.$data['to_path']);
+        ActivityLog::record('created', 'Redirect', $from.' to '.$data['to_path'], null, ['module' => 'Redirects']);
 
         return back()->with('status', "Redirect created from {$from}.");
     }

@@ -21,6 +21,7 @@ class ProfileController extends Controller
             'setupQr' => $pending ? TwoFactor::qrSvg($pending, $user->email) : null,
             'setupSecret' => $pending,
             'recoveryCodes' => session('2fa-recovery'),
+            'sessions' => \App\Services\Security\Sessions::forUser($user),
         ]);
     }
 
@@ -39,8 +40,9 @@ class ProfileController extends Controller
             }
             $user->password = $data['password'];
         }
+        $passwordChanged = $user->isDirty('password');
         $user->fill(['name' => $data['name'], 'email' => $data['email']])->save();
-        ActivityLog::record('updated', 'Profile', $user->name);
+        ActivityLog::record($passwordChanged ? 'password_changed' : 'updated', 'Profile', $user->name, $passwordChanged ? 'Changed own password; other sessions were signed out' : null, ['module' => 'Security', 'id' => $user->id]);
 
         return back()->with('status', 'Profile updated.');
     }
@@ -66,7 +68,7 @@ class ProfileController extends Controller
         $codes = TwoFactor::recoveryCodes();
         $user->forceFill(['two_factor_secret' => $secret, 'two_factor_recovery_codes' => $codes, 'two_factor_confirmed_at' => now()])->save();
         $request->session()->forget('2fa-setup');
-        ActivityLog::record('updated', 'Profile', $user->name, 'Turned on two-step login');
+        ActivityLog::record('two_factor', 'Profile', $user->name, 'Turned on two-step login', ['module' => 'Security', 'id' => $user->id]);
 
         return redirect()->to(route('admin.profile').'#two-factor')->with('2fa-recovery', $codes)->with('status', 'Two-step login is on.');
     }
@@ -80,8 +82,20 @@ class ProfileController extends Controller
         }
 
         $user->forceFill(['two_factor_secret' => null, 'two_factor_recovery_codes' => null, 'two_factor_confirmed_at' => null])->save();
-        ActivityLog::record('updated', 'Profile', $user->name, 'Turned off two-step login');
+        ActivityLog::record('two_factor', 'Profile', $user->name, 'Turned off two-step login', ['module' => 'Security', 'id' => $user->id]);
 
         return redirect()->to(route('admin.profile').'#two-factor')->with('status', 'Two-step login is off.');
+    }
+
+    public function endOtherSessions(Request $request)
+    {
+        $request->validate(['password' => 'required']);
+        if (! Hash::check($request->input('password'), $request->user()->password)) {
+            return redirect()->to(route('admin.profile').'#sessions')->withErrors(['sessions_password' => 'Your password is not correct.']);
+        }
+        $count = \App\Services\Security\Sessions::endOthers($request->user());
+        ActivityLog::record('logout_all', 'Profile', $request->user()->name, "Signed out other devices ({$count} sessions)", ['module' => 'Security', 'id' => $request->user()->id]);
+
+        return redirect()->to(route('admin.profile').'#sessions')->with('status', 'You have been signed out on your other devices.');
     }
 }

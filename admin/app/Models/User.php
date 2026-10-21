@@ -47,6 +47,9 @@ class User extends Authenticatable
             }
         });
         static::updated(function (User $user) {
+            if ($user->wasChanged('role')) {
+                ActivityLog::record('role_changed', 'User', $user->name, 'Role changed from '.($user->getOriginal('role') ?? '?').' to '.$user->role, ['module' => 'Users', 'id' => $user->id]);
+            }
             if ($user->wasChanged(['password', 'role']) && config('session.driver') === 'database') {
                 DB::table(config('session.table', 'sessions'))
                     ->where('user_id', $user->getKey())

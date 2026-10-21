@@ -47,7 +47,7 @@ class PasswordResetController extends Controller
 
         $status = Password::reset($request->only('email', 'password', 'password_confirmation', 'token'), function (User $user, string $password) {
             $user->forceFill(['password' => $password])->save();
-            ActivityLog::record('updated', 'User', $user->name, 'Password reset by email');
+            ActivityLog::record('password_changed', 'User', $user->name, 'Password reset by email', ['module' => 'Security', 'id' => $user->id]);
         });
 
         return $status === Password::PASSWORD_RESET

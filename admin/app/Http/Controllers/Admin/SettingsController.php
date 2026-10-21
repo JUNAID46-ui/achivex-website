@@ -32,7 +32,7 @@ class SettingsController extends Controller
             return back()->withErrors(['secretKey' => $error])->withFragment('storage');
         }
         AppSetting::put('storage', ['secretKey' => $key]);
-        ActivityLog::record('updated', 'Settings', 'Image storage');
+        ActivityLog::record('settings', 'Settings', 'Image storage', null, ['module' => 'Settings']);
 
         return redirect()->to(route('admin.settings').'#storage')->with('status', 'Image storage connected. New uploads now go to Supabase and show on the live website.');
     }
@@ -61,7 +61,7 @@ class SettingsController extends Controller
         $data['password'] = str_replace(' ', '', (string) ($data['password'] ?? '')) ?: (AppSetting::group('mail')['password'] ?? '');
         $data['from_address'] = ($data['from_address'] ?? null) ?: $data['username'];
         AppSetting::put('mail', $data);
-        ActivityLog::record('updated', 'Settings', 'Email server');
+        ActivityLog::record('settings', 'Settings', 'Email server', null, ['module' => 'Settings']);
 
         return redirect()->to(route('admin.settings').'#email')->with('status', 'Email settings saved. Use "Send test email" to check them.');
     }
@@ -84,7 +84,7 @@ class SettingsController extends Controller
         ]);
         SiteSetting::put('general', $data['general']);
         SiteSetting::put('social', $data['social'] ?? []);
-        ActivityLog::record('updated', 'Settings', 'General settings');
+        ActivityLog::record('settings', 'Settings', 'General settings', null, ['module' => 'Settings']);
 
         return back()->with('status', 'Settings saved. The website shows the new details on its next load.');
     }

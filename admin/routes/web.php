@@ -133,6 +133,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('activity', [Admin\ActivityController::class, 'index'])->name('activity')->middleware('area:activity');
         Route::get('activity/export', [Admin\ActivityController::class, 'export'])->name('activity.export')->middleware(['area:activity', 'throttle:10,1']);
 
+        // Security Center (administrators only)
+        Route::middleware('area:security')->group(function () {
+            Route::get('security', [Admin\SecurityController::class, 'index'])->name('security');
+            Route::post('security/scan', [Admin\SecurityController::class, 'run'])->name('security.run')->middleware('throttle:6,1');
+            Route::post('security/users/{user}/sessions', [Admin\SecurityController::class, 'endSessions'])->name('security.sessions')->middleware('throttle:10,1');
+        });
+
         // Backup and cache tools (administrators only)
         Route::middleware('area:tools')->group(function () {
             Route::get('backup', [Admin\BackupController::class, 'index'])->name('backup');
@@ -153,6 +160,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('profile', [Admin\ProfileController::class, 'edit'])->name('profile');
         Route::post('profile', [Admin\ProfileController::class, 'update']);
         Route::post('profile/two-factor', [Admin\ProfileController::class, 'startTwoFactor'])->name('profile.two-factor');
+        Route::post('profile/sessions', [Admin\ProfileController::class, 'endOtherSessions'])->name('profile.sessions')->middleware('throttle:10,1');
         Route::post('profile/two-factor/confirm', [Admin\ProfileController::class, 'confirmTwoFactor'])->name('profile.two-factor.confirm')->middleware('throttle:10,1');
         Route::post('profile/two-factor/disable', [Admin\ProfileController::class, 'disableTwoFactor'])->name('profile.two-factor.disable')->middleware('throttle:10,1');
     });
