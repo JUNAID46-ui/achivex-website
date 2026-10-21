@@ -29,7 +29,7 @@
       </div>
     </div>
     <div class="card card-body flex items-center justify-between">
-      <p class="text-[13px] text-slate-500">SEO defaults live under <a href="{{ route('admin.seo.appearance') }}" class="font-semibold text-ink underline">SEO, Search Appearance</a>.</p>
+      <p class="text-[13px] text-neutral-500">SEO defaults live under <a href="{{ route('admin.seo.appearance') }}" class="font-semibold text-ink underline">SEO, Search Appearance</a>.</p>
       <button class="btn-primary">Save settings</button>
     </div>
   </div>
@@ -43,14 +43,14 @@
       <span class="badge-{{ $storageReady ? 'green' : 'warn' }}">{{ $storageReady ? 'Connected' : 'Not connected' }}</span>
     </div>
     <div class="card-body space-y-4 text-[13px]">
-      <p class="text-slate-600">Images you upload are stored in Supabase so the live website can show them. This needs your Supabase <strong>secret key</strong>, entered once.</p>
-      <ol class="list-decimal space-y-1 pl-5 text-slate-600">
+      <p class="text-neutral-600">Images you upload are stored in Supabase so the live website can show them. This needs your Supabase <strong>secret key</strong>, entered once.</p>
+      <ol class="list-decimal space-y-1 pl-5 text-neutral-600">
         <li>Open your project on supabase.com.</li>
         <li>Click <strong>Project Settings</strong>, then <strong>API Keys</strong>.</li>
         <li>Under <strong>Secret keys</strong>, click the eye or copy button next to the key (it starts with <code>sb_secret_</code>).</li>
         <li>Paste it below and click Connect.</li>
       </ol>
-      @if($storageKeyHint)<p class="text-slate-500">Saved key: <code>{{ $storageKeyHint }}</code></p>@endif
+      @if($storageKeyHint)<p class="text-neutral-500">Saved key: <code>{{ $storageKeyHint }}</code></p>@endif
       <div>
         <label for="secretKey" class="label">Supabase secret key</label>
         <input id="secretKey" name="secretKey" type="password" autocomplete="off" class="input" placeholder="sb_secret_...">

@@ -49,16 +49,16 @@
            }">
         <div class="card-header">
           <h2 class="card-title">SEO</h2>
-          <span class="score" :class="result.score >= 80 ? 'bg-emerald-500' : result.score >= 50 ? 'bg-ink' : 'bg-red-500'" x-text="result.score"></span>
+          <span class="score" :class="result.score >= 80 ? 'bg-green-500' : result.score >= 50 ? 'bg-ink' : 'bg-red-500'" x-text="result.score"></span>
         </div>
         <div class="card-body grid gap-6 lg:grid-cols-2">
           <div class="space-y-4">
             <div>
               <p class="label">Google preview</p>
-              <div class="border border-slate-200 bg-white p-4">
-                <p class="truncate text-xs text-slate-600">{{ parse_url($publicUrl, PHP_URL_HOST) }}{{ $path ?? '/' }}</p>
+              <div class="border border-neutral-200 bg-white p-4">
+                <p class="truncate text-xs text-neutral-600">{{ parse_url($publicUrl, PHP_URL_HOST) }}{{ $path ?? '/' }}</p>
                 <p class="mt-1 truncate text-[18px] leading-snug text-[#1a0dab]" x-text="fullTitle"></p>
-                <p class="mt-1 line-clamp-2 text-[13px] leading-snug text-slate-600" x-text="fullDesc"></p>
+                <p class="mt-1 line-clamp-2 text-[13px] leading-snug text-neutral-600" x-text="fullDesc"></p>
               </div>
             </div>
             <div>
@@ -66,12 +66,12 @@
               <input id="seo_keyword" name="seo_keyword" x-model="keyword" class="input" placeholder="e.g. cloud migration">
             </div>
             <div>
-              <label for="seo_title" class="label">SEO title <span class="font-normal text-slate-400" x-text="'(' + fullTitle.length + ' of 60)'"></span></label>
+              <label for="seo_title" class="label">SEO title <span class="font-normal text-neutral-400" x-text="'(' + fullTitle.length + ' of 60)'"></span></label>
               <input id="seo_title" name="seo_title" x-model="title" class="input" :placeholder="fallbackTitle">
               <p class="help">Leave empty to use the {{ strtolower($resource->singular) }} title.</p>
             </div>
             <div>
-              <label for="seo_description" class="label">Meta description <span class="font-normal text-slate-400" x-text="'(' + fullDesc.length + ' of 160)'"></span></label>
+              <label for="seo_description" class="label">Meta description <span class="font-normal text-neutral-400" x-text="'(' + fullDesc.length + ' of 160)'"></span></label>
               <textarea id="seo_description" name="seo_description" x-model="desc" rows="3" class="input" :placeholder="fallbackDesc"></textarea>
             </div>
             @include('admin.partials.field', ['field' => ['name' => 'seo_og_image', 'label' => 'Social share image (optional)', 'type' => 'image'], 'value' => $seoMeta?->og_image])
@@ -82,19 +82,19 @@
             <ul class="space-y-2">
               <template x-for="c in result.checks" :key="c.label">
                 <li class="flex gap-2 text-[13px]">
-                  <span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full" :class="c.status === 'good' ? 'bg-emerald-500' : c.status === 'ok' ? 'bg-ink' : 'bg-red-500'"></span>
+                  <span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full" :class="c.status === 'good' ? 'bg-green-500' : c.status === 'ok' ? 'bg-ink' : 'bg-red-500'"></span>
                   <span x-text="c.label"></span>
                 </li>
               </template>
             </ul>
             @if($analysis)
-              <details class="mt-5  bg-slate-50 p-3 text-[13px]">
+              <details class="mt-5  bg-neutral-50 p-3 text-[13px]">
                 <summary class="cursor-pointer font-semibold text-ink">Full content analysis (last save, score {{ $analysis['score'] }})</summary>
                 <ul class="mt-3 space-y-2">
                   @foreach($analysis['checks'] as $c)
                     <li class="flex gap-2">
-                      <span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full {{ ['good' => 'bg-emerald-500', 'ok' => 'bg-ink', 'bad' => 'bg-red-500'][$c['status']] }}"></span>
-                      <span>{{ $c['label'] }} @if($c['tip'])<span class="text-slate-500">{{ $c['tip'] }}</span>@endif</span>
+                      <span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full {{ ['good' => 'bg-green-500', 'ok' => 'bg-ink', 'bad' => 'bg-red-500'][$c['status']] }}"></span>
+                      <span>{{ $c['label'] }} @if($c['tip'])<span class="text-neutral-500">{{ $c['tip'] }}</span>@endif</span>
                     </li>
                   @endforeach
                 </ul>
@@ -149,9 +149,9 @@
           </a>
         @endif
         @if($meta)
-          <dl class="space-y-1 border-t border-slate-100 pt-3 text-xs text-slate-500">
-            <div>Created by <span class="font-semibold text-slate-700">{{ $meta->created_by_name ?? 'unknown (before tracking)' }}</span>@if($meta->created_by_name) on {{ $meta->created_at?->format('M j, Y') }}@endif</div>
-            <div>Last changed by <span class="font-semibold text-slate-700">{{ $meta->updated_by_name ?? 'unknown' }}</span>, <time datetime="{{ $meta->updated_at?->toIso8601String() }}" title="{{ $meta->updated_at?->format('Y-m-d H:i') }} UTC">{{ $meta->updated_at?->diffForHumans() }}</time></div>
+          <dl class="space-y-1 border-t border-neutral-100 pt-3 text-xs text-neutral-500">
+            <div>Created by <span class="font-semibold text-neutral-700">{{ $meta->created_by_name ?? 'unknown (before tracking)' }}</span>@if($meta->created_by_name) on {{ $meta->created_at?->format('M j, Y') }}@endif</div>
+            <div>Last changed by <span class="font-semibold text-neutral-700">{{ $meta->updated_by_name ?? 'unknown' }}</span>, <time datetime="{{ $meta->updated_at?->toIso8601String() }}" title="{{ $meta->updated_at?->format('Y-m-d H:i') }} UTC">{{ $meta->updated_at?->diffForHumans() }}</time></div>
           </dl>
         @endif
       </div>
@@ -171,8 +171,8 @@
         <ul class="card-body space-y-2.5 text-[13px]">
           @foreach($health as $h)
             <li class="flex gap-2">
-              <span class="mt-1.5 h-2 w-2 shrink-0 rounded-full {{ $h['level'] === 'warning' ? 'bg-ink' : 'bg-slate-300' }}"></span>
-              <span><span class="font-semibold text-slate-700">{{ $h['label'] }}</span><span class="block text-xs text-slate-500">{{ $h['fix'] }}</span></span>
+              <span class="mt-1.5 h-2 w-2 shrink-0 rounded-full {{ $h['level'] === 'warning' ? 'bg-ink' : 'bg-neutral-300' }}"></span>
+              <span><span class="font-semibold text-neutral-700">{{ $h['label'] }}</span><span class="block text-xs text-neutral-500">{{ $h['fix'] }}</span></span>
             </li>
           @endforeach
         </ul>
@@ -186,9 +186,9 @@
         </div>
         <div class="card-body text-[13px]">
           @forelse($revisions as $rev)
-            <p class="flex justify-between gap-2 py-0.5"><span class="text-slate-600">{{ $rev->user_name ?? 'System' }}</span><time class="text-slate-400" datetime="{{ $rev->created_at?->toIso8601String() }}" title="{{ $rev->created_at?->format('Y-m-d H:i') }} UTC">{{ $rev->created_at?->diffForHumans() }}</time></p>
+            <p class="flex justify-between gap-2 py-0.5"><span class="text-neutral-600">{{ $rev->user_name ?? 'System' }}</span><time class="text-neutral-400" datetime="{{ $rev->created_at?->toIso8601String() }}" title="{{ $rev->created_at?->format('Y-m-d H:i') }} UTC">{{ $rev->created_at?->diffForHumans() }}</time></p>
           @empty
-            <p class="text-slate-500">No earlier versions yet. A copy is saved every time this item changes.</p>
+            <p class="text-neutral-500">No earlier versions yet. A copy is saved every time this item changes.</p>
           @endforelse
         </div>
       </div>

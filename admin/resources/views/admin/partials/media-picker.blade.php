@@ -16,11 +16,11 @@
      @keydown.escape.window="open = false"
      x-show="open" x-cloak class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" role="dialog" aria-modal="true" aria-label="Media library">
   <div class="flex max-h-[85vh] w-full max-w-4xl flex-col overflow-hidden  bg-white shadow-2xl" @click.outside="open = false">
-    <div class="flex items-center justify-between border-b border-slate-200 px-5 py-3">
+    <div class="flex items-center justify-between border-b border-neutral-200 px-5 py-3">
       <h2 class="text-base font-bold text-ink">Choose a file</h2>
       <button class="btn-ghost" @click="open = false" aria-label="Close">@include('admin.partials.icon', ['name' => 'x'])</button>
     </div>
-    <div class="flex flex-wrap items-center gap-2 border-b border-slate-200 px-5 py-3">
+    <div class="flex flex-wrap items-center gap-2 border-b border-neutral-200 px-5 py-3">
       <input x-model="q" @input.debounce.300ms="load()" class="input w-56 py-1.5" placeholder="Search files">
       <label class="btn-primary cursor-pointer">
         @include('admin.partials.icon', ['name' => 'upload']) <span x-text="uploading ? 'Uploading ' + progress : 'Upload files'"></span>
@@ -30,14 +30,14 @@
     </div>
     <div class="flex-1 overflow-y-auto p-5"
          @dragover.prevent @drop.prevent="upload($event.dataTransfer.files)">
-      <p x-show="loading" class="py-10 text-center text-sm text-slate-500">Loading...</p>
-      <p x-show="!loading && !items.length" class="py-10 text-center text-sm text-slate-500">No files yet. Upload one, or drop files here.</p>
+      <p x-show="loading" class="py-10 text-center text-sm text-neutral-500">Loading...</p>
+      <p x-show="!loading && !items.length" class="py-10 text-center text-sm text-neutral-500">No files yet. Upload one, or drop files here.</p>
       <div class="grid grid-cols-3 gap-3 sm:grid-cols-5">
         <template x-for="m in items" :key="m.id">
-          <button type="button" @click="choose(m)" class="group overflow-hidden  border border-slate-200 text-left hover:ring-2 hover:ring-ink">
-            <template x-if="(m.mime || '').startsWith('image/')"><img :src="url(m)" :alt="m.alt || ''" class="aspect-square w-full bg-slate-100 object-cover"></template>
-            <template x-if="!(m.mime || '').startsWith('image/')"><div class="flex aspect-square w-full items-center justify-center bg-slate-100 text-xs font-bold uppercase text-slate-500" x-text="m.filename.split('.').pop()"></div></template>
-            <p class="truncate px-2 py-1 text-[11px] text-slate-600" x-text="m.filename"></p>
+          <button type="button" @click="choose(m)" class="group overflow-hidden  border border-neutral-200 text-left hover:ring-2 hover:ring-ink">
+            <template x-if="(m.mime || '').startsWith('image/')"><img :src="url(m)" :alt="m.alt || ''" class="aspect-square w-full bg-neutral-100 object-cover"></template>
+            <template x-if="!(m.mime || '').startsWith('image/')"><div class="flex aspect-square w-full items-center justify-center bg-neutral-100 text-xs font-bold uppercase text-neutral-500" x-text="m.filename.split('.').pop()"></div></template>
+            <p class="truncate px-2 py-1 text-[11px] text-neutral-600" x-text="m.filename"></p>
           </button>
         </template>
       </div>

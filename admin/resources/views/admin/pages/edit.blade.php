@@ -24,18 +24,18 @@
       <div class="card-header"><h2 class="card-title">Save</h2>
         @if($saved)<span class="badge-warn">Edited</span>@else<span class="badge-gray">Original</span>@endif
       </div>
-      <div class="card-body space-y-3 text-[13px] text-slate-600">
-        <p><span class="text-slate-500">Address:</span> <span class="font-semibold">{{ $page['path'] }}</span></p>
-        <p><span class="text-slate-500">Type:</span> {{ $page['type'] }}</p>
-        @if($saved)<p><span class="text-slate-500">Last saved:</span> {{ $saved->updated_at?->diffForHumans() }}</p>@endif
-        <p :class="dirty ? 'font-semibold text-ink' : 'text-slate-400'" x-text="dirty ? 'Unsaved changes' : 'No unsaved changes'"></p>
+      <div class="card-body space-y-3 text-[13px] text-neutral-600">
+        <p><span class="text-neutral-500">Address:</span> <span class="font-semibold">{{ $page['path'] }}</span></p>
+        <p><span class="text-neutral-500">Type:</span> {{ $page['type'] }}</p>
+        @if($saved)<p><span class="text-neutral-500">Last saved:</span> {{ $saved->updated_at?->diffForHumans() }}</p>@endif
+        <p :class="dirty ? 'font-semibold text-ink' : 'text-neutral-400'" x-text="dirty ? 'Unsaved changes' : 'No unsaved changes'"></p>
       </div>
       <div class="flex items-center justify-end gap-2 pt-2">
         <button class="btn-primary">Save and publish</button>
       </div>
     </div>
     <div class="card card-body space-y-3 text-[13px]">
-      <p class="text-slate-600">Want more on this page? Add extra sections such as text blocks, image galleries or cards. They appear at the bottom, above the footer.</p>
+      <p class="text-neutral-600">Want more on this page? Add extra sections such as text blocks, image galleries or cards. They appear at the bottom, above the footer.</p>
       <a href="{{ route('admin.builder', ['page' => $page['path']]) }}" class="btn-secondary w-full justify-center">@include('admin.partials.icon', ['name' => 'layout']) Add sections ({{ $sectionCount }})</a>
     </div>
     @if($saved)

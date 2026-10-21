@@ -31,19 +31,19 @@
 
     @case('toggle')
       <label class="flex cursor-pointer items-center justify-between gap-3 py-1">
-        <span class="text-[13px] font-semibold text-slate-700">{{ $field['label'] }}</span>
+        <span class="text-[13px] font-semibold text-neutral-700">{{ $field['label'] }}</span>
         <input type="hidden" name="{{ $name }}" value="0">
         <input id="{{ $id }}" type="checkbox" name="{{ $name }}" value="1" @checked($val) class="peer sr-only">
-        <span class="relative h-5 w-9 rounded-full bg-slate-300 transition after:absolute after:left-0.5 after:top-0.5 after:h-4 after:w-4 after:rounded-full after:bg-white after:transition peer-checked:bg-emerald-500 peer-checked:after:translate-x-4 peer-focus-visible:ring-2 peer-focus-visible:ring-ink"></span>
+        <span class="relative h-5 w-9 rounded-full bg-neutral-300 transition after:absolute after:left-0.5 after:top-0.5 after:h-4 after:w-4 after:rounded-full after:bg-white after:transition peer-checked:bg-green-500 peer-checked:after:translate-x-4 peer-focus-visible:ring-2 peer-focus-visible:ring-ink"></span>
       </label>
       @break
 
     @case('slug')
       <div class="flex  " x-data="{ touched: {{ $record->exists ? 'true' : 'false' }} }"
            x-init="$nextTick(() => { const src = document.getElementById('f-{{ $field['from'] }}'); if (src) src.addEventListener('input', () => { if (!touched) $refs.slug.value = slugify(src.value) }) })">
-        @if(!empty($field['prefix']))<span class="inline-flex items-center  border border-r-0 border-slate-300 bg-slate-50 px-3 text-xs text-slate-500">{{ $field['prefix'] }}</span>@endif
+        @if(!empty($field['prefix']))<span class="inline-flex items-center  border border-r-0 border-neutral-300 bg-neutral-50 px-3 text-xs text-neutral-500">{{ $field['prefix'] }}</span>@endif
         <input id="{{ $id }}" x-ref="slug" name="{{ $name }}" value="{{ $val }}" @input="touched = true" @readonly($locked)
-               class="input {{ !empty($field['prefix']) ? 'rounded-l-none' : '' }} {{ $locked ? 'bg-slate-50 text-slate-500' : '' }}">
+               class="input {{ !empty($field['prefix']) ? 'rounded-l-none' : '' }} {{ $locked ? 'bg-neutral-50 text-neutral-500' : '' }}">
       </div>
       @if($locked)<p class="help">The URL cannot change after people have requested this item.</p>@endif
       @break
@@ -51,7 +51,7 @@
     @case('image')
       <div x-data="{ url: @js($val) }" class="space-y-2">
         <template x-if="url && /\.(png|jpe?g|gif|webp|avif|svg)(\?|$)|images\.unsplash/i.test(url)">
-          <img :src="url" alt="" class="max-h-40 w-full  bg-slate-100 object-cover ring-1 ring-slate-200">
+          <img :src="url" alt="" class="max-h-40 w-full  bg-neutral-100 object-cover ring-1 ring-neutral-200">
         </template>
         <div class="flex gap-2">
           <input id="{{ $id }}" name="{{ $name }}" x-model="url" class="input text-[13px]" placeholder="https://...">
@@ -62,10 +62,10 @@
 
     @case('tags')
       @php $selected = (array) old($name, $val ?? []); @endphp
-      <div class="grid max-h-64 gap-1 overflow-y-auto  border border-slate-200 p-3 sm:grid-cols-2">
+      <div class="grid max-h-64 gap-1 overflow-y-auto  border border-neutral-200 p-3 sm:grid-cols-2">
         @foreach($field['options'] as $optValue => $optLabel)
           <label class="flex items-center gap-2 text-[13px]">
-            <input type="checkbox" name="{{ $name }}[]" value="{{ $optValue }}" @checked(in_array($optValue, $selected)) class="border-slate-300 text-ink focus:ring-ink">
+            <input type="checkbox" name="{{ $name }}[]" value="{{ $optValue }}" @checked(in_array($optValue, $selected)) class="border-neutral-300 text-ink focus:ring-ink">
             {{ $optLabel }}
           </label>
         @endforeach

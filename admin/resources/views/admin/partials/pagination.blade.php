@@ -1,6 +1,6 @@
 @if ($paginator->hasPages())
 <nav class="flex items-center justify-between text-[13px]" aria-label="Pagination">
-  <p class="text-slate-500">Page {{ $paginator->currentPage() }} of {{ $paginator->lastPage() }}</p>
+  <p class="text-neutral-500">Page {{ $paginator->currentPage() }} of {{ $paginator->lastPage() }}</p>
   <div class="flex gap-1">
     @if ($paginator->onFirstPage())
       <span class="btn-secondary btn-sm opacity-50">&lsaquo; Previous</span>

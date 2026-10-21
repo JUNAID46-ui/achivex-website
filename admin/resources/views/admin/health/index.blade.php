@@ -7,28 +7,28 @@
 @endsection
 @section('content')
 @php
-  $pill = ['ok' => 'bg-emerald-50 text-emerald-700 ring-emerald-200', 'warning' => 'bg-slate-50 text-ink ring-slate-300', 'critical' => 'bg-red-50 text-red-700 ring-red-200', 'unknown' => 'bg-slate-50 text-slate-600 ring-slate-200'];
-  $dot = ['ok' => 'bg-neon-green', 'warning' => 'bg-ink', 'critical' => 'bg-red-500', 'unknown' => 'bg-slate-400'];
+  $pill = ['ok' => 'bg-green-50 text-green-700 ring-green-200', 'warning' => 'bg-neutral-50 text-ink ring-neutral-300', 'critical' => 'bg-red-50 text-red-700 ring-red-200', 'unknown' => 'bg-neutral-50 text-neutral-600 ring-neutral-200'];
+  $dot = ['ok' => 'bg-green-600', 'warning' => 'bg-ink', 'critical' => 'bg-red-500', 'unknown' => 'bg-neutral-400'];
   $label = ['ok' => 'OK', 'warning' => 'Warning', 'critical' => 'Critical', 'unknown' => 'Unknown'];
 @endphp
-<p class="mb-4 text-xs text-slate-500">Measured <time datetime="{{ $measuredAt->toIso8601String() }}">{{ $measuredAt->format('Y-m-d H:i:s') }} UTC</time>{{ $live ? ', including live connection checks.' : '. Live checks (storage key, website) run only when you click the button.' }}</p>
+<p class="mb-4 text-xs text-neutral-500">Measured <time datetime="{{ $measuredAt->toIso8601String() }}">{{ $measuredAt->format('Y-m-d H:i:s') }} UTC</time>{{ $live ? ', including live connection checks.' : '. Live checks (storage key, website) run only when you click the button.' }}</p>
 <div class="grid gap-x-10 sm:grid-cols-2 xl:grid-cols-3">
   @foreach($checks as $c)
-    <div class="border-t border-slate-100 py-4">
+    <div class="border-t border-neutral-100 py-4">
       <div class="flex items-start justify-between gap-2">
-        <p class="text-[13px] font-semibold text-slate-600">{{ $c['label'] }}</p>
+        <p class="text-[13px] font-semibold text-neutral-600">{{ $c['label'] }}</p>
         <span class="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold ring-1 {{ $pill[$c['status']] }}">
           <span class="h-1.5 w-1.5 rounded-full {{ $dot[$c['status']] }}"></span>{{ $label[$c['status']] }}
         </span>
       </div>
-      <p class="mt-1 text-xl font-extrabold tracking-tight {{ ['ok' => 'text-ink', 'warning' => 'text-ink', 'critical' => 'text-neon-red', 'unknown' => 'text-slate-400'][$c['status']] }}">{{ $c['value'] }}</p>
+      <p class="mt-1 text-xl font-extrabold tracking-tight {{ ['ok' => 'text-ink', 'warning' => 'text-ink', 'critical' => 'text-red-600', 'unknown' => 'text-neutral-400'][$c['status']] }}">{{ $c['value'] }}</p>
       @if($c['percent'] !== null)
-        <div class="mt-2 h-2 rounded-full bg-slate-100" role="progressbar" aria-valuenow="{{ $c['percent'] }}" aria-valuemin="0" aria-valuemax="100" aria-label="{{ $c['label'] }} used">
+        <div class="mt-2 h-2 rounded-full bg-neutral-100" role="progressbar" aria-valuenow="{{ $c['percent'] }}" aria-valuemin="0" aria-valuemax="100" aria-label="{{ $c['label'] }} used">
           <div class="h-2 rounded-full {{ $dot[$c['status']] }}" style="width: {{ min(100, $c['percent']) }}%"></div>
         </div>
-        <p class="mt-1 text-xs text-slate-500">{{ $c['percent'] }}% used · warning at {{ $thresholds['warn'] }}%, critical at {{ $thresholds['critical'] }}%</p>
+        <p class="mt-1 text-xs text-neutral-500">{{ $c['percent'] }}% used · warning at {{ $thresholds['warn'] }}%, critical at {{ $thresholds['critical'] }}%</p>
       @endif
-      @if($c['detail'])<p class="mt-1 text-xs text-slate-500">{{ $c['detail'] }}</p>@endif
+      @if($c['detail'])<p class="mt-1 text-xs text-neutral-500">{{ $c['detail'] }}</p>@endif
     </div>
   @endforeach
 </div>
@@ -37,7 +37,7 @@
   <div class="card">
     <div class="card-header"><h2 class="card-title">Application</h2></div>
     <dl class="card-body grid grid-cols-2 gap-x-4 gap-y-2 text-[13px]">
-      @foreach($env as $k => $v)<dt class="text-slate-500">{{ $k }}</dt><dd class="font-semibold text-ink">{{ $v }}</dd>@endforeach
+      @foreach($env as $k => $v)<dt class="text-neutral-500">{{ $k }}</dt><dd class="font-semibold text-ink">{{ $v }}</dd>@endforeach
     </dl>
   </div>
   <div class="card">
@@ -47,11 +47,11 @@
         <p>Last run {{ \Carbon\Carbon::parse($daily['last_run'])->format('Y-m-d H:i') }} UTC.</p>
         <ul class="mt-2 space-y-1">
           @foreach($daily['results'] ?? [] as $step => $r)
-            <li class="flex gap-2"><span class="{{ $r['ok'] ? 'text-emerald-600' : 'text-red-600' }}">{{ $r['ok'] ? '✓' : '✗' }}</span><span><span class="font-semibold">{{ ucfirst(str_replace('_', ' ', $step)) }}</span>: {{ $r['detail'] }}</span></li>
+            <li class="flex gap-2"><span class="{{ $r['ok'] ? 'text-green-600' : 'text-red-600' }}">{{ $r['ok'] ? '✓' : '✗' }}</span><span><span class="font-semibold">{{ ucfirst(str_replace('_', ' ', $step)) }}</span>: {{ $r['detail'] }}</span></li>
           @endforeach
         </ul>
       @else
-        <p class="text-slate-500">Not run yet. Vercel calls it once a day (06:17 UTC) after the admin is deployed with the cron setting.</p>
+        <p class="text-neutral-500">Not run yet. Vercel calls it once a day (06:17 UTC) after the admin is deployed with the cron setting.</p>
       @endif
     </div>
   </div>
@@ -71,19 +71,19 @@
 </form>
 
 <div class="card mt-6 overflow-x-auto">
-  <div class="card-header"><h2 class="card-title">Recent application errors</h2><span class="text-xs text-slate-500">Messages are shortened; SQL values and credentials are removed. Kept 90 days.</span></div>
+  <div class="card-header"><h2 class="card-title">Recent application errors</h2><span class="text-xs text-neutral-500">Messages are shortened; SQL values and credentials are removed. Kept 90 days.</span></div>
   <table class="table">
     <thead><tr><th>When (UTC)</th><th>Error</th><th>Where</th><th>Request</th></tr></thead>
     <tbody>
       @forelse($errorLogs as $e)
         <tr>
-          <td class="whitespace-nowrap text-slate-500">{{ $e->created_at?->format('Y-m-d H:i') }}</td>
-          <td><span class="font-semibold text-ink">{{ class_basename($e->exception) }}</span><span class="block max-w-xl break-words text-[12.5px] text-slate-600">{{ $e->message }}</span></td>
-          <td class="font-mono text-[11px] text-slate-500">{{ $e->location }}</td>
-          <td class="text-[12.5px] text-slate-500">{{ $e->method }} {{ $e->path }}</td>
+          <td class="whitespace-nowrap text-neutral-500">{{ $e->created_at?->format('Y-m-d H:i') }}</td>
+          <td><span class="font-semibold text-ink">{{ class_basename($e->exception) }}</span><span class="block max-w-xl break-words text-[12.5px] text-neutral-600">{{ $e->message }}</span></td>
+          <td class="font-mono text-[11px] text-neutral-500">{{ $e->location }}</td>
+          <td class="text-[12.5px] text-neutral-500">{{ $e->method }} {{ $e->path }}</td>
         </tr>
       @empty
-        <tr><td colspan="4" class="py-10 text-center text-slate-500">No errors recorded.</td></tr>
+        <tr><td colspan="4" class="py-10 text-center text-neutral-500">No errors recorded.</td></tr>
       @endforelse
     </tbody>
   </table>

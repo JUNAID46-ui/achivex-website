@@ -49,11 +49,11 @@
         <tr>
           <td class="font-mono text-xs">{{ \Illuminate\Support\Str::limit($e->key, 60) }}</td>
           <td>{{ $e->label }}</td>
-          <td class="whitespace-nowrap text-slate-500">{{ number_format($e->size / 1024, 1) }} KB</td>
-          <td class="whitespace-nowrap {{ $e->expired ? 'text-red-600' : 'text-slate-500' }}">{{ $e->expires ? ($e->expired ? 'Expired' : $e->expires->diffForHumans()) : 'Never' }}</td>
+          <td class="whitespace-nowrap text-neutral-500">{{ number_format($e->size / 1024, 1) }} KB</td>
+          <td class="whitespace-nowrap {{ $e->expired ? 'text-red-600' : 'text-neutral-500' }}">{{ $e->expires ? ($e->expired ? 'Expired' : $e->expires->diffForHumans()) : 'Never' }}</td>
         </tr>
       @empty
-        <tr><td colspan="4" class="py-10 text-center text-slate-500">The cache is empty.</td></tr>
+        <tr><td colspan="4" class="py-10 text-center text-neutral-500">The cache is empty.</td></tr>
       @endforelse
     </tbody>
   </table>

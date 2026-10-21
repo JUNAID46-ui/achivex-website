@@ -14,11 +14,11 @@
       <img src="{{ asset('brand/logo-dark.png') }}" alt="AchiveX LLC" class="h-24">
     </div>
     @if(session('status'))
-      <div class="mb-4  border-l-4 border-emerald-500 bg-white px-4 py-3 text-sm ">{{ session('status') }}</div>
+      <div class="mb-4  border-l-4 border-green-500 bg-white px-4 py-3 text-sm ">{{ session('status') }}</div>
     @endif
     <form method="POST" action="{{ route('admin.password.email') }}" class="card card-body space-y-5">
       @csrf
-      <p class="text-[13px] text-slate-600">Enter the email of your admin account. We will send you a link to choose a new password.</p>
+      <p class="text-[13px] text-neutral-600">Enter the email of your admin account. We will send you a link to choose a new password.</p>
       <div>
         <label for="email" class="label">Email address</label>
         <input id="email" name="email" type="email" value="{{ old('email') }}" required autofocus class="input">

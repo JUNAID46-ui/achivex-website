@@ -14,7 +14,7 @@
         <tr>
           <td class="font-semibold text-ink">{{ $rev->data[$resource->titleField] ?? $rev->record_key }}</td>
           <td>{{ $rev->user_name ?? 'System' }}</td>
-          <td class="whitespace-nowrap text-slate-500">{{ $rev->created_at?->format('Y-m-d H:i') }}</td>
+          <td class="whitespace-nowrap text-neutral-500">{{ $rev->created_at?->format('Y-m-d H:i') }}</td>
           <td class="text-right">
             <form method="POST" action="{{ route('admin.resources.restore-deleted', [$resource->slug, $rev->id]) }}" onsubmit="return confirm('Restore this item as a draft?')">
               @csrf <input type="hidden" name="confirm" value="1">
@@ -23,7 +23,7 @@
           </td>
         </tr>
       @empty
-        <tr><td colspan="4" class="py-14 text-center text-slate-500">Nothing deleted recently.</td></tr>
+        <tr><td colspan="4" class="py-14 text-center text-neutral-500">Nothing deleted recently.</td></tr>
       @endforelse
     </tbody>
   </table>

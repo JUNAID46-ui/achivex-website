@@ -22,7 +22,7 @@
     @if($image && $record->{$image['name']})
       <img src="{{ $record->{$image['name']} }}" alt="" class="mt-6 w-full  object-cover">
     @endif
-    <div class="mt-6 space-y-5 text-[16px] leading-relaxed text-slate-800">
+    <div class="mt-6 space-y-5 text-[16px] leading-relaxed text-neutral-800">
       @foreach($fields as $f)
         @php $v = $record->{$f['name']}; @endphp
         @continue(blank($v) || $f['type'] === 'image')
@@ -34,16 +34,16 @@
           @endforeach
         @elseif(is_array($v))
           <div>
-            <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">{{ $f['label'] }}</p>
+            <p class="text-xs font-semibold uppercase tracking-wide text-neutral-500">{{ $f['label'] }}</p>
             <ul class="mt-1 list-disc space-y-1 pl-6">
               @foreach($v as $item)<li>{{ is_array($item) ? collect($item)->filter(fn ($x) => is_scalar($x))->implode(' · ') : $item }}</li>@endforeach
             </ul>
           </div>
         @elseif($f['type'] === 'date')
-          <p class="text-sm text-slate-500">{{ $f['label'] }}: {{ \Illuminate\Support\Carbon::parse($v)->format('M j, Y') }}</p>
+          <p class="text-sm text-neutral-500">{{ $f['label'] }}: {{ \Illuminate\Support\Carbon::parse($v)->format('M j, Y') }}</p>
         @else
           <div>
-            @if(! in_array($f['type'], ['textarea', 'paragraphs'], true))<p class="text-xs font-semibold uppercase tracking-wide text-slate-500">{{ $f['label'] }}</p>@endif
+            @if(! in_array($f['type'], ['textarea', 'paragraphs'], true))<p class="text-xs font-semibold uppercase tracking-wide text-neutral-500">{{ $f['label'] }}</p>@endif
             <p class="whitespace-pre-line">{{ $v }}</p>
           </div>
         @endif

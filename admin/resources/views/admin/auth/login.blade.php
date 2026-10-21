@@ -14,7 +14,7 @@
       <img src="{{ asset('brand/logo-dark.png') }}" alt="AchiveX LLC" class="h-24">
     </div>
     @if(session('status'))
-      <div class="mb-4  border-l-4 border-emerald-500 bg-white px-4 py-3 text-sm ">{{ session('status') }}</div>
+      <div class="mb-4  border-l-4 border-green-500 bg-white px-4 py-3 text-sm ">{{ session('status') }}</div>
     @endif
     <form method="POST" action="{{ route('admin.login') }}" class="card card-body space-y-5">
       @csrf
@@ -28,14 +28,14 @@
         <input id="password" name="password" type="password" required autocomplete="current-password" class="input">
       </div>
       <div class="flex items-center justify-between">
-        <label class="flex items-center gap-2 text-[13px] text-slate-600">
-          <input type="checkbox" name="remember" class="border-slate-300 text-ink focus:ring-ink"> Remember me
+        <label class="flex items-center gap-2 text-[13px] text-neutral-600">
+          <input type="checkbox" name="remember" class="border-neutral-300 text-ink focus:ring-ink"> Remember me
         </label>
         <button class="btn-primary">Log In</button>
       </div>
     </form>
     <p class="mt-4 text-center text-[13px]"><a href="{{ route('admin.password.request') }}" class="font-semibold text-ink hover:underline">Forgot your password?</a></p>
-    <p class="mt-3 text-center text-xs text-slate-500">
+    <p class="mt-3 text-center text-xs text-neutral-500">
       <a href="{{ config('admin.site_url') }}" class="hover:text-ink">&larr; Go to AchiveX website</a>
     </p>
   </div>

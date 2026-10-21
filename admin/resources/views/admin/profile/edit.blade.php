@@ -9,7 +9,7 @@
     <div class="card-body space-y-4">
       <div><label for="name" class="label">Full name</label><input id="name" name="name" value="{{ old('name', $user->name) }}" class="input" required></div>
       <div><label for="email" class="label">Email</label><input id="email" type="email" name="email" value="{{ old('email', $user->email) }}" class="input" required></div>
-      <p class="text-[13px] text-slate-500">Role: <span class="font-semibold text-ink">{{ \App\Models\User::ROLES[$user->role] ?? $user->role }}</span></p>
+      <p class="text-[13px] text-neutral-500">Role: <span class="font-semibold text-ink">{{ \App\Models\User::ROLES[$user->role] ?? $user->role }}</span></p>
     </div>
   </div>
   <div class="card">
@@ -30,7 +30,7 @@
   </div>
   <div class="card-body space-y-4 text-[13px]">
     @if($recoveryCodes)
-      <div class="border border-ink bg-slate-50 p-4">
+      <div class="border border-ink bg-neutral-50 p-4">
         <p class="font-semibold text-ink">Save these recovery codes now. They are shown only once.</p>
         <p class="mt-1 text-ink">Each code works one time if you lose your phone.</p>
         <div class="mt-3 grid grid-cols-2 gap-2 font-mono text-[14px] sm:grid-cols-4">@foreach($recoveryCodes as $c)<span>{{ $c }}</span>@endforeach</div>
@@ -38,7 +38,7 @@
     @endif
 
     @if($user->hasTwoFactor())
-      <p class="text-slate-600">When you log in, you also enter a code from your authenticator app.</p>
+      <p class="text-neutral-600">When you log in, you also enter a code from your authenticator app.</p>
       <form method="POST" action="{{ route('admin.profile.two-factor.disable') }}" class="flex flex-wrap items-end gap-3">
         @csrf
         <div><label for="disable_password" class="label">Your password</label><input id="disable_password" type="password" name="password" class="input" autocomplete="current-password" required></div>
@@ -46,13 +46,13 @@
       </form>
       @error('disable_password')<p class="error">{{ $message }}</p>@enderror
     @elseif($setupSecret)
-      <ol class="list-decimal space-y-1 pl-5 text-slate-600">
+      <ol class="list-decimal space-y-1 pl-5 text-neutral-600">
         <li>Open Google Authenticator, Microsoft Authenticator or a similar app on your phone.</li>
         <li>Scan this QR code, or type the setup key.</li>
         <li>Enter the 6 digit code the app shows.</li>
       </ol>
       <div class="flex flex-wrap items-center gap-6">
-        <div class="border border-slate-200 bg-white p-2">{!! $setupQr !!}</div>
+        <div class="border border-neutral-200 bg-white p-2">{!! $setupQr !!}</div>
         <div class="space-y-3">
           <p>Setup key: <span class="font-mono font-semibold tracking-wider">{{ trim(chunk_split($setupSecret, 4, ' ')) }}</span></p>
           <form method="POST" action="{{ route('admin.profile.two-factor.confirm') }}" class="flex flex-wrap items-end gap-3">
@@ -64,7 +64,7 @@
         </div>
       </div>
     @else
-      <p class="text-slate-600">Protect your account with a code from your phone, so a stolen password is not enough to log in.</p>
+      <p class="text-neutral-600">Protect your account with a code from your phone, so a stolen password is not enough to log in.</p>
       <form method="POST" action="{{ route('admin.profile.two-factor') }}">@csrf<button class="btn-primary">Set up two-step login</button></form>
     @endif
   </div>
@@ -75,13 +75,13 @@
   <div class="card-body space-y-3 text-[13px]">
     @forelse($sessions as $sess)
       <div class="flex flex-wrap items-center justify-between gap-2">
-        <span><span class="font-semibold text-ink">{{ $sess['agent'] ?: 'Unknown browser' }}</span> <span class="text-slate-500">· {{ $sess['ip'] }}</span></span>
-        <span class="text-slate-500">@if($sess['current'])<span class="badge-green">This browser</span>@else Active {{ $sess['last']->diffForHumans() }}@endif</span>
+        <span><span class="font-semibold text-ink">{{ $sess['agent'] ?: 'Unknown browser' }}</span> <span class="text-neutral-500">· {{ $sess['ip'] }}</span></span>
+        <span class="text-neutral-500">@if($sess['current'])<span class="badge-green">This browser</span>@else Active {{ $sess['last']->diffForHumans() }}@endif</span>
       </div>
     @empty
-      <p class="text-slate-500">Session list is available when sessions are stored in the database (production).</p>
+      <p class="text-neutral-500">Session list is available when sessions are stored in the database (production).</p>
     @endforelse
-    <form method="POST" action="{{ route('admin.profile.sessions') }}" class="flex flex-wrap items-end gap-3 border-t border-slate-100 pt-3" onsubmit="return confirm('Sign out on all your other devices?')">
+    <form method="POST" action="{{ route('admin.profile.sessions') }}" class="flex flex-wrap items-end gap-3 border-t border-neutral-100 pt-3" onsubmit="return confirm('Sign out on all your other devices?')">
       @csrf
       <div><label for="sessions_password" class="label">Your password</label><input id="sessions_password" type="password" name="password" class="input" autocomplete="current-password" required></div>
       <button class="btn-secondary">Sign out other devices</button>

@@ -12,19 +12,19 @@
           catch (e) { this.error = e.message; this.busy = false }
         } }" class="space-y-4">
   @unless($cloud)
-    <div class="border-l-4 border-ink bg-slate-100 px-4 py-3 text-[13px] text-slate-700">
+    <div class="border-l-4 border-ink bg-neutral-100 px-4 py-3 text-[13px] text-neutral-700">
       <strong>Images are saved on this computer only.</strong> The live website cannot show them until image storage is connected.
       @if(auth()->user()->canAccess('settings'))<a href="{{ route('admin.settings') }}#storage" class="font-semibold text-ink underline">Connect image storage in Settings</a>@endif
     </div>
   @endunless
   <div
         class="card flex flex-col items-center justify-center gap-3 border-2 border-dashed px-6 py-10 text-center transition"
-        :class="dragging ? 'border-ink bg-slate-100' : 'border-slate-300'"
+        :class="dragging ? 'border-ink bg-neutral-100' : 'border-neutral-300'"
         @dragover.prevent="dragging = true" @dragleave.prevent="dragging = false"
         @drop.prevent="dragging = false; send($event.dataTransfer.files)">
-    <span class="text-slate-400">@include('admin.partials.icon', ['name' => 'upload', 'class' => 'h-8 w-8'])</span>
+    <span class="text-neutral-400">@include('admin.partials.icon', ['name' => 'upload', 'class' => 'h-8 w-8'])</span>
     <p class="text-[14px] font-semibold text-ink">Drop files to upload</p>
-    <p class="text-xs text-slate-500">Images, PDFs, documents and videos, up to {{ $maxUpload >= 1024 ? round($maxUpload / 1024, 1).' GB' : $maxUpload.' MB' }} each</p>
+    <p class="text-xs text-neutral-500">Images, PDFs, documents and videos, up to {{ $maxUpload >= 1024 ? round($maxUpload / 1024, 1).' GB' : $maxUpload.' MB' }} each</p>
     <label class="btn-primary cursor-pointer" :class="busy && 'pointer-events-none opacity-60'"><span x-text="busy ? 'Uploading ' + progress : 'Select files'">Select files</span>
       <input type="file" multiple class="sr-only" @change="send($event.target.files); $event.target.value = ''">
     </label>
@@ -34,7 +34,7 @@
   <div class="flex flex-wrap items-center justify-between gap-3">
     <div class="flex gap-1 text-[13px]">
       @foreach(['' => 'All', 'image' => 'Images', 'document' => 'Documents'] as $k => $l)
-        <a href="{{ request()->fullUrlWithQuery(['type' => $k ?: null, 'page' => null]) }}" class="px-3 py-1.5 {{ request('type', '') === $k ? 'bg-ink font-semibold text-white' : 'text-slate-600 hover:bg-white' }}">{{ $l }}</a>
+        <a href="{{ request()->fullUrlWithQuery(['type' => $k ?: null, 'page' => null]) }}" class="px-3 py-1.5 {{ request('type', '') === $k ? 'bg-ink font-semibold text-white' : 'text-neutral-600 hover:bg-white' }}">{{ $l }}</a>
       @endforeach
     </div>
     <form method="GET" class="flex gap-2">
@@ -45,16 +45,16 @@
 
   <div class="grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-6">
     @forelse($media as $m)
-      <button type="button" @click="selected = @js($m)" class="group overflow-hidden  border border-slate-200 bg-white text-left  hover:ring-2 hover:ring-ink">
+      <button type="button" @click="selected = @js($m)" class="group overflow-hidden  border border-neutral-200 bg-white text-left  hover:ring-2 hover:ring-ink">
         @if($m->isImage())
-          <img src="{{ $m->url }}" alt="{{ $m->alt }}" class="aspect-square w-full bg-slate-100 object-cover" loading="lazy">
+          <img src="{{ $m->url }}" alt="{{ $m->alt }}" class="aspect-square w-full bg-neutral-100 object-cover" loading="lazy">
         @else
-          <div class="flex aspect-square w-full items-center justify-center bg-slate-100 text-sm font-bold uppercase text-slate-500">{{ pathinfo($m->filename, PATHINFO_EXTENSION) }}</div>
+          <div class="flex aspect-square w-full items-center justify-center bg-neutral-100 text-sm font-bold uppercase text-neutral-500">{{ pathinfo($m->filename, PATHINFO_EXTENSION) }}</div>
         @endif
-        <p class="truncate px-2.5 py-1.5 text-xs text-slate-600">{{ $m->filename }}</p>
+        <p class="truncate px-2.5 py-1.5 text-xs text-neutral-600">{{ $m->filename }}</p>
       </button>
     @empty
-      <p class="col-span-full py-12 text-center text-slate-500">The library is empty. Upload your first file above.</p>
+      <p class="col-span-full py-12 text-center text-neutral-500">The library is empty. Upload your first file above.</p>
     @endforelse
   </div>
   {{ $media->links('admin.partials.pagination') }}
@@ -66,14 +66,14 @@
         <div class="space-y-4">
           <div class="flex items-center justify-between"><h2 class="text-lg font-bold text-ink">File details</h2>
             <button class="btn-ghost" @click="selected = null">@include('admin.partials.icon', ['name' => 'x'])</button></div>
-          <template x-if="(selected.mime || '').startsWith('image/')"><img :src="selected.url" class="w-full  bg-slate-100 ring-1 ring-slate-200" alt=""></template>
+          <template x-if="(selected.mime || '').startsWith('image/')"><img :src="selected.url" class="w-full  bg-neutral-100 ring-1 ring-neutral-200" alt=""></template>
           <dl class="grid grid-cols-3 gap-y-2 text-[13px]">
-            <dt class="text-slate-500">File name</dt><dd class="col-span-2 break-all" x-text="selected.filename"></dd>
-            <dt class="text-slate-500">Type</dt><dd class="col-span-2" x-text="selected.mime"></dd>
-            <dt class="text-slate-500">Size</dt><dd class="col-span-2" x-text="selected.human_size"></dd>
-            <template x-if="selected.width"><dt class="text-slate-500">Dimensions</dt></template>
+            <dt class="text-neutral-500">File name</dt><dd class="col-span-2 break-all" x-text="selected.filename"></dd>
+            <dt class="text-neutral-500">Type</dt><dd class="col-span-2" x-text="selected.mime"></dd>
+            <dt class="text-neutral-500">Size</dt><dd class="col-span-2" x-text="selected.human_size"></dd>
+            <template x-if="selected.width"><dt class="text-neutral-500">Dimensions</dt></template>
             <template x-if="selected.width"><dd class="col-span-2" x-text="selected.width + ' x ' + selected.height"></dd></template>
-            <dt class="text-slate-500">Uploaded</dt><dd class="col-span-2" x-text="new Date(selected.created_at).toLocaleString()"></dd>
+            <dt class="text-neutral-500">Uploaded</dt><dd class="col-span-2" x-text="new Date(selected.created_at).toLocaleString()"></dd>
           </dl>
           <div>
             <label class="label">File URL</label>

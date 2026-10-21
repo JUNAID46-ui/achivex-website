@@ -9,7 +9,7 @@
 @endphp
 
 @if(! $ready)
-  <div class="mb-6  border {{ $storage['public'] ? 'border-red-200 bg-red-50 text-red-800' : 'border-ink bg-slate-50 text-ink' }} px-5 py-4 text-[13px]">
+  <div class="mb-6  border {{ $storage['public'] ? 'border-red-200 bg-red-50 text-red-800' : 'border-ink bg-neutral-50 text-ink' }} px-5 py-4 text-[13px]">
     @if($storage['public'])
       <p class="font-semibold">The "backups" bucket in Supabase is public.</p>
       <p class="mt-1">Backups contain inbox messages and must not be public. Make the bucket private in Supabase (Storage, backups, Edit bucket). Until then, backups are not stored there.</p>
@@ -63,7 +63,7 @@
       @if($ready)
         <p>Choose an AchiveX backup file (.json). It is uploaded to private storage and checked. You see exactly what will change before anything is restored.</p>
         <input type="file" accept=".json,application/json" class="input" x-ref="file" aria-label="Backup file">
-        <div x-show="progress !== null" class="h-2  bg-slate-100"><div class="h-2  bg-ink" :style="`width:${progress}%`"></div></div>
+        <div x-show="progress !== null" class="h-2  bg-neutral-100"><div class="h-2  bg-ink" :style="`width:${progress}%`"></div></div>
         <p class="error" x-show="error" x-text="error"></p>
       @else
         <form method="POST" action="{{ route('admin.backup.restore-upload') }}" enctype="multipart/form-data" class="space-y-3" x-data="{ mode: 'merge' }">
@@ -86,21 +86,21 @@
 </div>
 
 <div class="card mt-6 overflow-x-auto">
-  <div class="card-header"><h2 class="card-title">Backup history</h2><span class="text-xs text-slate-500">Times in UTC</span></div>
+  <div class="card-header"><h2 class="card-title">Backup history</h2><span class="text-xs text-neutral-500">Times in UTC</span></div>
   <table class="table">
     <thead><tr><th>#</th><th>Created</th><th>Type</th><th>Scope</th><th>Size</th><th>Status</th><th></th></tr></thead>
     <tbody>
       @forelse($runs as $r)
         <tr>
-          <td class="text-slate-500">{{ $r->id }}</td>
-          <td class="whitespace-nowrap">{{ $r->created_at?->format('Y-m-d H:i') }}<span class="block text-xs text-slate-500">{{ $r->user?->name ?? ($r->trigger === 'scheduled' ? 'Daily task' : 'System') }}</span></td>
+          <td class="text-neutral-500">{{ $r->id }}</td>
+          <td class="whitespace-nowrap">{{ $r->created_at?->format('Y-m-d H:i') }}<span class="block text-xs text-neutral-500">{{ $r->user?->name ?? ($r->trigger === 'scheduled' ? 'Daily task' : 'System') }}</span></td>
           <td>{{ ['manual' => 'Manual', 'scheduled' => 'Daily', 'pre-restore' => 'Safety copy before restore', 'upload' => 'Uploaded file'][$r->trigger] ?? $r->trigger }}</td>
-          <td class="text-slate-600">{{ implode(', ', $r->scope ?? []) ?: '–' }}</td>
-          <td class="whitespace-nowrap">{{ $r->size ? \App\Services\Health\HealthCheck::mb((int) $r->size) : '–' }}@if($r->sha256)<span class="block font-mono text-[11px] text-slate-400" title="SHA-256 {{ $r->sha256 }}">{{ substr($r->sha256, 0, 12) }}…</span>@endif</td>
+          <td class="text-neutral-600">{{ implode(', ', $r->scope ?? []) ?: '–' }}</td>
+          <td class="whitespace-nowrap">{{ $r->size ? \App\Services\Health\HealthCheck::mb((int) $r->size) : '–' }}@if($r->sha256)<span class="block font-mono text-[11px] text-neutral-400" title="SHA-256 {{ $r->sha256 }}">{{ substr($r->sha256, 0, 12) }}…</span>@endif</td>
           <td>
             <span class="badge-{{ $badge[$r->status] ?? 'gray' }}">{{ $r->status === 'verified' ? 'Verified' : ucfirst($r->status) }}</span>
-            @if($r->verified_at)<span class="block text-[11px] text-slate-500">checked {{ $r->verified_at->diffForHumans() }}</span>@endif
-            @if($r->error && $r->status !== 'verified')<span class="block max-w-xs text-[11px] text-slate-500">{{ $r->error }}</span>@endif
+            @if($r->verified_at)<span class="block text-[11px] text-neutral-500">checked {{ $r->verified_at->diffForHumans() }}</span>@endif
+            @if($r->error && $r->status !== 'verified')<span class="block max-w-xs text-[11px] text-neutral-500">{{ $r->error }}</span>@endif
           </td>
           <td class="whitespace-nowrap text-right">
             @if($r->path && ! $r->deleted_at && $r->status === 'verified')
@@ -114,7 +114,7 @@
           </td>
         </tr>
       @empty
-        <tr><td colspan="7" class="py-10 text-center text-slate-500">No stored backups yet.</td></tr>
+        <tr><td colspan="7" class="py-10 text-center text-neutral-500">No stored backups yet.</td></tr>
       @endforelse
     </tbody>
   </table>
@@ -125,7 +125,7 @@
   <div class="card-body grid gap-4 text-[13px] md:grid-cols-2">
     <div>
       <p class="font-semibold text-ink">Included</p>
-      <ul class="mt-1 list-disc space-y-0.5 pl-5 text-slate-600">
+      <ul class="mt-1 list-disc space-y-0.5 pl-5 text-neutral-600">
         <li>Pages, page builder sections, posts, case studies, news, guides, careers, team, milestones, locations, hero stats</li>
         <li>Site settings, SEO settings, redirects, custom code, llms.txt</li>
         <li>The media library list (file names, links, alt text)</li>
@@ -134,14 +134,14 @@
     </div>
     <div>
       <p class="font-semibold text-ink">Not included: back these up separately</p>
-      <ul class="mt-1 list-disc space-y-0.5 pl-5 text-slate-600">
+      <ul class="mt-1 list-disc space-y-0.5 pl-5 text-neutral-600">
         <li>The uploaded image and PDF files themselves (in the Supabase "media" bucket)</li>
         <li>Admin users, passwords, two-step secrets and sessions (never exported, for safety)</li>
         <li>Saved email and storage keys, and Vercel environment variables</li>
         <li>Content revisions, notifications, activity log and audit history</li>
         <li>The website and admin code (in GitHub)</li>
       </ul>
-      <p class="mt-2 text-xs text-slate-500">Supabase also keeps its own daily database backups on paid plans.</p>
+      <p class="mt-2 text-xs text-neutral-500">Supabase also keeps its own daily database backups on paid plans.</p>
     </div>
   </div>
 </div>

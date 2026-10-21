@@ -13,12 +13,12 @@
     <textarea id="content" name="content" x-model="content" rows="16" class="input font-mono text-[13px]"></textarea>
     <button class="btn-primary mt-4">Save robots.txt</button>
   </div>
-  <div class="card card-body space-y-3 self-start text-[13px] text-slate-600">
+  <div class="card card-body space-y-3 self-start text-[13px] text-neutral-600">
     <p class="font-semibold text-ink">Quick inserts</p>
     <button type="button" class="btn-secondary btn-sm w-full justify-start" @click="content = 'User-agent: *\nAllow: /\n\nSitemap: {{ rtrim(config('admin.site_public_url'), '/') }}/sitemap.xml'">Allow everything (recommended)</button>
     <button type="button" class="btn-secondary btn-sm w-full justify-start" @click="content += '\nUser-agent: GPTBot\nDisallow: /'">Block OpenAI crawler</button>
     <button type="button" class="btn-secondary btn-sm w-full justify-start" @click="content += '\nDisallow: /admin/'">Block /admin/</button>
-    <p class="border-t border-slate-100 pt-3">Copy the saved file into the website's <code>public</code> folder, or serve it from this admin at <code>{{ route('robots') }}</code>.</p>
+    <p class="border-t border-neutral-100 pt-3">Copy the saved file into the website's <code>public</code> folder, or serve it from this admin at <code>{{ route('robots') }}</code>.</p>
   </div>
 </form>
 @endsection

@@ -2,9 +2,9 @@
 <div x-data="repeater(@js($items ?? []), @js($sub))" class="space-y-3">
   <input type="hidden" name="{{ $name }}" :value="json">
   <template x-for="(item, i) in items" :key="item._k">
-    <div class="border border-slate-200 bg-slate-50/60">
-      <div class="flex items-center gap-2 border-b border-slate-200 px-3 py-2">
-        <span class="text-xs font-semibold text-slate-500">{{ $itemLabel }} <span x-text="i + 1"></span></span>
+    <div class="border border-neutral-200 bg-neutral-50/60">
+      <div class="flex items-center gap-2 border-b border-neutral-200 px-3 py-2">
+        <span class="text-xs font-semibold text-neutral-500">{{ $itemLabel }} <span x-text="i + 1"></span></span>
         <span class="truncate text-[13px] font-semibold text-ink" x-text="item[fields[0].name]"></span>
         <div class="ml-auto flex items-center gap-1">
           <button type="button" class="btn-ghost btn-sm" @click="move(i, -1)" :disabled="i === 0" title="Move up">@include('admin.partials.icon', ['name' => 'arrow-up'])</button>
