@@ -118,6 +118,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
 
         Route::get('activity', [Admin\ActivityController::class, 'index'])->name('activity')->middleware('area:activity');
+        Route::get('activity/export', [Admin\ActivityController::class, 'export'])->name('activity.export')->middleware(['area:activity', 'throttle:10,1']);
 
         // Backup and cache tools (administrators only)
         Route::middleware('area:tools')->group(function () {
@@ -129,6 +130,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('custom-code', [Admin\CustomCodeController::class, 'index'])->name('custom-code');
             Route::post('custom-code', [Admin\CustomCodeController::class, 'save']);
         });
+
+        // Notifications (every signed in user, own notifications only)
+        Route::get('notifications', [Admin\NotificationController::class, 'index'])->name('notifications');
+        Route::post('notifications/read-all', [Admin\NotificationController::class, 'readAll'])->name('notifications.read-all');
+        Route::get('notifications/{id}/open', [Admin\NotificationController::class, 'open'])->whereNumber('id')->name('notifications.open');
+        Route::post('notifications/{id}', [Admin\NotificationController::class, 'update'])->whereNumber('id')->name('notifications.update');
 
         Route::get('profile', [Admin\ProfileController::class, 'edit'])->name('profile');
         Route::post('profile', [Admin\ProfileController::class, 'update']);

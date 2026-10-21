@@ -55,6 +55,13 @@ class AppServiceProvider extends ServiceProvider
                 // The inbox column may not exist before the first migration.
             }
             $view->with('unreadCount', $count);
+            $notes = 0;
+            try {
+                $notes = auth()->check() ? \App\Services\Notifier::unread(auth()->user()) : 0;
+            } catch (\Throwable) {
+                // Notifications table not created yet.
+            }
+            $view->with('notificationCount', $notes);
         });
     }
 }

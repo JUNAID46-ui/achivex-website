@@ -64,6 +64,11 @@
     </a>
     @endif
   </div>
+  <div class="flex items-center gap-1">
+  <a href="{{ route('admin.notifications') }}" class="relative flex items-center rounded px-2 py-1.5 hover:bg-white/10 hover:text-amber" title="Notifications" aria-label="Notifications, {{ $notificationCount ?? 0 }} unread">
+    @include('admin.partials.icon', ['name' => 'bell'])
+    @if(($notificationCount ?? 0) > 0)<span class="absolute -right-0.5 -top-0.5 rounded-full bg-amber px-1 text-[10px] font-bold leading-4 text-navy">{{ $notificationCount > 99 ? '99+' : $notificationCount }}</span>@endif
+  </a>
   <div class="relative" x-data="{ open: false }" @click.outside="open = false">
     <button @click="open = !open" class="flex items-center gap-2 rounded px-2 py-1.5 hover:bg-white/10">
       <span class="hidden sm:inline">Howdy, {{ explode(' ', $user->name)[0] }}</span>
@@ -79,6 +84,7 @@
         <button class="block w-full px-4 py-2 text-left hover:bg-white/10 hover:text-amber">Log Out</button>
       </form>
     </div>
+  </div>
   </div>
 </header>
 
