@@ -58,7 +58,7 @@
         <p class="help">Keep this key private. It is stored in the private admin area of the database and is never sent to the website.</p>
       </div>
     </div>
-    <div class="flex justify-end border-t border-slate-200 bg-slate-50 px-5 py-3"><button class="btn-primary">{{ $storageReady ? 'Update key' : 'Connect' }}</button></div>
+    <div class="flex justify-end pt-2"><button class="btn-primary">{{ $storageReady ? 'Update key' : 'Connect' }}</button></div>
   </form>
 
   {{-- Email --}}
@@ -83,7 +83,7 @@
           <div class="rounded-md border-l-4 border-red-600 bg-red-50 px-3 py-2 text-red-700 sm:col-span-2"><strong>The last new-message email failed</strong> ({{ \Illuminate\Support\Carbon::parse($notifyError['at'])->diffForHumans() }}): {{ $notifyError['message'] }}</div>
         @endif
       </div>
-      <div class="flex flex-wrap items-center justify-between gap-2 border-t border-slate-200 bg-slate-50 px-5 py-3">
+      <div class="flex flex-wrap items-center justify-between gap-2 pt-2">
         <button type="submit" form="test-email" class="btn-secondary">@include('admin.partials.icon', ['name' => 'mail']) Send test email</button>
         <button class="btn-primary">Save email settings</button>
       </div>

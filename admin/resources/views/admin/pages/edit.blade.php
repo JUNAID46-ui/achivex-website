@@ -30,7 +30,7 @@
         @if($saved)<p><span class="text-slate-500">Last saved:</span> {{ $saved->updated_at?->diffForHumans() }}</p>@endif
         <p :class="dirty ? 'font-semibold text-amber-600' : 'text-slate-400'" x-text="dirty ? 'Unsaved changes' : 'No unsaved changes'"></p>
       </div>
-      <div class="flex items-center justify-end gap-2 border-t border-slate-200 bg-slate-50 px-5 py-3">
+      <div class="flex items-center justify-end gap-2 pt-2">
         <button class="btn-primary">Save and publish</button>
       </div>
     </div>

@@ -35,7 +35,7 @@
         @endforelse
       </div>
       @if($diff)
-        <form method="POST" action="{{ route('admin.resources.restore', [$resource->slug, $record->getKey(), $compare->id]) }}" class="flex flex-wrap items-center justify-between gap-3 border-t border-slate-200 bg-slate-50 px-5 py-3">
+        <form method="POST" action="{{ route('admin.resources.restore', [$resource->slug, $record->getKey(), $compare->id]) }}" class="flex flex-wrap items-center justify-between gap-3 pt-2">
           @csrf
           <label class="flex items-center gap-2 text-[13px]"><input type="checkbox" name="confirm" value="1" class="rounded border-slate-300" required> I want to replace the current version with this copy</label>
           <button class="btn-primary" data-loading>Restore this copy</button>

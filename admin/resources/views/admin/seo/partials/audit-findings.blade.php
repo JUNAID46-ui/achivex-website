@@ -7,18 +7,18 @@
 <div class="grid gap-6 xl:grid-cols-[minmax(0,1fr)_300px]">
   <div class="min-w-0 space-y-4">
     @if($run)
-      <div class="grid gap-3 sm:grid-cols-3 lg:grid-cols-6">
+      <div class="grid gap-6 border-b border-slate-100 pb-6 sm:grid-cols-3 lg:grid-cols-6">
         @foreach(['critical', 'high', 'medium', 'low', 'info'] as $s)
           @php $n = $sum['by_severity'][$s] ?? 0; $d = $prev ? $n - ($prev['by_severity'][$s] ?? 0) : null; @endphp
-          <a href="{{ request()->fullUrlWithQuery(['severity' => $s]) }}" class="card px-4 py-3 hover:ring-1 hover:ring-ink">
-            <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">{{ ucfirst($s) }}</p>
-            <p class="text-2xl font-bold text-ink">{{ $n }}</p>
+          <a href="{{ request()->fullUrlWithQuery(['severity' => $s]) }}" class="group py-1">
+            <p class="stat-label group-hover:text-ink">{{ ucfirst($s) }}</p>
+            <p class="stat-value {{ ['critical' => 'text-neon-red', 'high' => 'text-neon-red', 'medium' => 'text-amber', 'low' => 'text-neon-blue', 'info' => 'text-slate-400'][$s] }}">{{ $n }}</p>
             @if($d)<p class="text-xs {{ $d > 0 ? 'text-red-600' : 'text-emerald-600' }}">{{ $d > 0 ? '+'.$d : $d }} since last run</p>@endif
           </a>
         @endforeach
-        <div class="card px-4 py-3">
-          <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Verified / advice</p>
-          <p class="text-2xl font-bold text-ink">{{ $sum['verified'] ?? 0 }} <span class="text-base font-semibold text-slate-400">/ {{ $sum['recommendations'] ?? 0 }}</span></p>
+        <div class="py-1">
+          <p class="stat-label">Verified / advice</p>
+          <p class="stat-value text-neon-green">{{ $sum['verified'] ?? 0 }} <span class="text-base font-semibold text-slate-400">/ {{ $sum['recommendations'] ?? 0 }}</span></p>
         </div>
       </div>
 

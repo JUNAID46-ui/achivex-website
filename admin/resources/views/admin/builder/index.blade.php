@@ -89,7 +89,7 @@
             </div>
           </template>
         </div>
-        <div class="flex items-center justify-between gap-2 border-t border-slate-200 bg-slate-50 px-5 py-3">
+        <div class="flex items-center justify-between gap-2 pt-2">
           <span class="text-xs" :class="dirty || statsDirty ? 'text-amber-600 font-semibold' : 'text-slate-400'" x-text="dirty || statsDirty ? 'Unsaved changes' : 'All changes saved'"></span>
           <button type="button" class="btn-primary" @click="save()" :disabled="saving" x-text="saving ? 'Saving...' : 'Save and publish'"></button>
         </div>

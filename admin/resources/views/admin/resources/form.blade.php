@@ -155,7 +155,7 @@
           </dl>
         @endif
       </div>
-      <div class="flex items-center justify-between gap-2 border-t border-slate-200 bg-slate-50 px-5 py-3">
+      <div class="flex items-center justify-between gap-2 pt-2">
         @unless($isNew)
           <button type="submit" form="delete-form" class="text-[13px] font-semibold text-red-600 hover:underline">Delete</button>
         @else

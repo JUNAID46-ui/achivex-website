@@ -36,7 +36,7 @@
     <input id="confirm_text" name="confirm_text" class="input w-60" autocomplete="off" required>
     @error('confirm_text')<p class="error">{{ $message }}</p>@enderror
   </div>
-  <div class="flex justify-end border-t border-slate-200 bg-slate-50 px-5 py-3">
+  <div class="flex justify-end pt-2">
     <button class="{{ $replace ? 'btn-danger' : 'btn-primary' }}" data-loading>{{ $replace ? 'Replace with this backup' : 'Merge this backup' }}</button>
   </div>
 </form>

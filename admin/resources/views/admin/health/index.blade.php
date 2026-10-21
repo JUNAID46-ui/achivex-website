@@ -8,20 +8,20 @@
 @section('content')
 @php
   $pill = ['ok' => 'bg-emerald-50 text-emerald-700 ring-emerald-200', 'warning' => 'bg-amber-50 text-amber-700 ring-amber-200', 'critical' => 'bg-red-50 text-red-700 ring-red-200', 'unknown' => 'bg-slate-50 text-slate-600 ring-slate-200'];
-  $dot = ['ok' => 'bg-emerald-500', 'warning' => 'bg-amber-500', 'critical' => 'bg-red-500', 'unknown' => 'bg-slate-400'];
+  $dot = ['ok' => 'bg-neon-green', 'warning' => 'bg-amber-500', 'critical' => 'bg-red-500', 'unknown' => 'bg-slate-400'];
   $label = ['ok' => 'OK', 'warning' => 'Warning', 'critical' => 'Critical', 'unknown' => 'Unknown'];
 @endphp
 <p class="mb-4 text-xs text-slate-500">Measured <time datetime="{{ $measuredAt->toIso8601String() }}">{{ $measuredAt->format('Y-m-d H:i:s') }} UTC</time>{{ $live ? ', including live connection checks.' : '. Live checks (storage key, website) run only when you click the button.' }}</p>
-<div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+<div class="grid gap-x-10 sm:grid-cols-2 xl:grid-cols-3">
   @foreach($checks as $c)
-    <div class="card px-5 py-4">
+    <div class="border-t border-slate-100 py-4">
       <div class="flex items-start justify-between gap-2">
         <p class="text-[13px] font-semibold text-slate-600">{{ $c['label'] }}</p>
         <span class="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold ring-1 {{ $pill[$c['status']] }}">
           <span class="h-1.5 w-1.5 rounded-full {{ $dot[$c['status']] }}"></span>{{ $label[$c['status']] }}
         </span>
       </div>
-      <p class="mt-1 text-lg font-bold text-ink">{{ $c['value'] }}</p>
+      <p class="mt-1 text-xl font-extrabold tracking-tight {{ ['ok' => 'text-ink', 'warning' => 'text-amber-600', 'critical' => 'text-neon-red', 'unknown' => 'text-slate-400'][$c['status']] }}">{{ $c['value'] }}</p>
       @if($c['percent'] !== null)
         <div class="mt-2 h-2 rounded-full bg-slate-100" role="progressbar" aria-valuenow="{{ $c['percent'] }}" aria-valuemin="0" aria-valuemax="100" aria-label="{{ $c['label'] }} used">
           <div class="h-2 rounded-full {{ $dot[$c['status']] }}" style="width: {{ min(100, $c['percent']) }}%"></div>
@@ -67,7 +67,7 @@
     <div><label class="label" for="critical">Critical at (%)</label><input id="critical" type="number" name="critical" value="{{ $thresholds['critical'] }}" class="input"></div>
     <div><label class="label" for="backup_days">Warn if no backup for (days)</label><input id="backup_days" type="number" name="backup_days" value="{{ $thresholds['backup_days'] }}" class="input"></div>
   </div>
-  <div class="flex justify-end border-t border-slate-200 bg-slate-50 px-5 py-3"><button class="btn-secondary">Save thresholds</button></div>
+  <div class="flex justify-end pt-2"><button class="btn-secondary">Save thresholds</button></div>
 </form>
 
 <div class="card mt-6 overflow-x-auto">

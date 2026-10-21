@@ -34,7 +34,7 @@
       </div>
       <label class="flex items-center gap-2 text-[13px]"><input type="hidden" name="published" value="0"><input type="checkbox" name="published" value="1" class="rounded border-slate-300 text-ink" @checked(old('published', $page['published']))> Published on the website</label>
     </div>
-    <div class="flex justify-end border-t border-slate-200 bg-slate-50 px-5 py-3"><button class="btn-primary">Save settings</button></div>
+    <div class="flex justify-end pt-2"><button class="btn-primary">Save settings</button></div>
   </form>
 
   <aside class="space-y-6">

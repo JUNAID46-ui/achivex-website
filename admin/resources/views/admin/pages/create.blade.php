@@ -49,7 +49,7 @@
         <label class="flex items-center gap-2 text-[13px]"><input type="hidden" name="published" value="0"><input type="checkbox" name="published" value="1" class="rounded border-slate-300 text-ink" @checked(old('published', true))> Publish on the website now</label>
         <p class="help mt-2">Leave unticked to keep it as a draft while you work on it.</p>
       </div>
-      <div class="flex justify-end border-t border-slate-200 bg-slate-50 px-5 py-3"><button class="btn-primary">Create page</button></div>
+      <div class="flex justify-end pt-2"><button class="btn-primary">Create page</button></div>
     </div>
   </aside>
 </form>

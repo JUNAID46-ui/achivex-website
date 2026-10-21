@@ -34,7 +34,7 @@
       <label class="flex items-start gap-2"><input type="checkbox" name="analytics" value="1" class="mt-0.5"> <span><strong>Analytics</strong> ({{ number_format($counts['analytics']) }} rows). Can make the file large.</span></label>
       @error('backup')<p class="error">{{ $message }}</p>@enderror
     </div>
-    <div class="flex flex-wrap justify-end gap-2 border-t border-slate-200 bg-slate-50 px-5 py-3">
+    <div class="flex flex-wrap justify-end gap-2 pt-2">
       <button formaction="{{ route('admin.backup.download') }}" formmethod="GET" class="btn-secondary">@include('admin.partials.icon', ['name' => 'download']) Download only</button>
       <button class="btn-primary" data-loading @disabled(! $ready)>Save and verify</button>
     </div>
@@ -54,7 +54,7 @@
         <div class="flex items-center gap-2"><input id="keep" type="number" name="keep" min="1" max="100" value="{{ $settings['keep'] }}" class="input w-24"> <span>backups. Older backup files are deleted; their history stays.</span></div>
       </div>
     </div>
-    <div class="flex justify-end border-t border-slate-200 bg-slate-50 px-5 py-3"><button class="btn-secondary">Save settings</button></div>
+    <div class="flex justify-end pt-2"><button class="btn-secondary">Save settings</button></div>
   </form>
 
   <div class="card" x-data="backupUpload()">
@@ -80,7 +80,7 @@
       @endif
     </div>
     @if($ready)
-      <div class="flex justify-end border-t border-slate-200 bg-slate-50 px-5 py-3"><button type="button" class="btn-primary" @click="start()" :disabled="busy">@include('admin.partials.icon', ['name' => 'upload']) <span x-text="busy ? 'Uploading…' : 'Upload and preview'"></span></button></div>
+      <div class="flex justify-end pt-2"><button type="button" class="btn-primary" @click="start()" :disabled="busy">@include('admin.partials.icon', ['name' => 'upload']) <span x-text="busy ? 'Uploading…' : 'Upload and preview'"></span></button></div>
     @endif
   </div>
 </div>

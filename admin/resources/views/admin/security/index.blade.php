@@ -7,14 +7,14 @@
 @endsection
 @section('content')
 @php $sev = ['critical' => 'red', 'high' => 'red', 'medium' => 'amber', 'low' => 'gray', 'info' => 'gray']; $sum = $run?->summary ?? []; @endphp
-<div class="mb-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-  <div class="card px-4 py-3"><p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Failed sign ins, 24 h</p><p class="text-2xl font-bold {{ $failed24 >= 10 ? 'text-red-600' : 'text-ink' }}">{{ $failed24 }}</p><p class="text-xs text-slate-500">{{ $failed7 }} in 7 days</p></div>
-  <div class="card px-4 py-3"><p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Accounts with two-step login</p><p class="text-2xl font-bold text-ink">{{ $users->filter->hasTwoFactor()->count() }} <span class="text-base text-slate-400">/ {{ $users->count() }}</span></p></div>
-  <div class="card px-4 py-3"><p class="text-xs font-semibold uppercase tracking-wide text-slate-500">High or critical findings</p><p class="text-2xl font-bold text-ink">{{ $run ? ($sum['by_severity']['critical'] ?? 0) + ($sum['by_severity']['high'] ?? 0) : '–' }}</p><p class="text-xs text-slate-500">{{ $run ? 'Last check '.$run->started_at?->diffForHumans() : 'Not checked yet' }}</p></div>
-  <div class="card px-4 py-3"><p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Administrators</p><p class="text-2xl font-bold text-ink">{{ $users->where('role', 'administrator')->count() }}</p></div>
+<div class="mb-10 grid gap-6 border-b border-slate-100 pb-8 sm:grid-cols-2 lg:grid-cols-4">
+  <div class="py-1"><p class="stat-label">Failed sign ins, 24 h</p><p class="stat-value {{ $failed24 >= 10 ? 'text-neon-red' : 'text-neon-purple' }}">{{ $failed24 }}</p><p class="text-xs text-slate-500">{{ $failed7 }} in 7 days</p></div>
+  <div class="py-1"><p class="stat-label">Accounts with two-step login</p><p class="stat-value {{ $users->filter->hasTwoFactor()->count() === $users->count() ? 'text-neon-green' : 'text-neon-red' }}">{{ $users->filter->hasTwoFactor()->count() }} <span class="text-base text-slate-400">/ {{ $users->count() }}</span></p></div>
+  <div class="py-1"><p class="stat-label">High or critical findings</p><p class="stat-value text-neon-red">{{ $run ? ($sum['by_severity']['critical'] ?? 0) + ($sum['by_severity']['high'] ?? 0) : '–' }}</p><p class="text-xs text-slate-500">{{ $run ? 'Last check '.$run->started_at?->diffForHumans() : 'Not checked yet' }}</p></div>
+  <div class="py-1"><p class="stat-label">Administrators</p><p class="stat-value text-neon-blue">{{ $users->where('role', 'administrator')->count() }}</p></div>
 </div>
 
-<div class="card mb-6">
+<div class="card mb-10">
   <div class="card-header"><h2 class="card-title">Security check findings</h2>
     @if($runs->count())
       <form method="GET" class="flex items-center gap-2 text-[13px]"><label for="run" class="text-slate-500">Run</label>
@@ -45,7 +45,7 @@
   @endif
 </div>
 
-<div class="mb-6 grid gap-6 xl:grid-cols-2">
+<div class="mb-10 grid gap-x-10 gap-y-10 xl:grid-cols-2">
   <div class="card overflow-x-auto">
     <div class="card-header"><h2 class="card-title">Users and access</h2><a href="{{ route('admin.resources.index', 'users') }}" class="text-[13px] font-semibold text-ink hover:underline">Manage users</a></div>
     <table class="table">

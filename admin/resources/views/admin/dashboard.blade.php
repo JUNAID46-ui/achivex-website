@@ -17,26 +17,26 @@
 @endphp
 
 {{-- Key figures --}}
-<div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-  <div class="card card-body">
-    <p class="text-[13px] font-semibold text-slate-500">Page views (30 days)</p>
-    <p class="mt-2 text-3xl font-extrabold text-ink">{{ number_format($summary['views']) }}</p>
+<div class="grid gap-x-10 gap-y-6 border-b border-slate-100 pb-8 sm:grid-cols-2 xl:grid-cols-4">
+  <div class="py-2">
+    <p class="stat-label">Page views, 30 days</p>
+    <p class="stat-value text-neon-purple">{{ number_format($summary['views']) }}</p>
     <p class="mt-1 text-xs">{!! $change($summary['views_change']) !!}</p>
   </div>
-  <div class="card card-body">
-    <p class="text-[13px] font-semibold text-slate-500">Visitors (30 days)</p>
-    <p class="mt-2 text-3xl font-extrabold text-ink">{{ number_format($summary['visitors']) }}</p>
+  <div class="py-2">
+    <p class="stat-label">Visitors, 30 days</p>
+    <p class="stat-value text-neon-blue">{{ number_format($summary['visitors']) }}</p>
     <p class="mt-1 text-xs">{!! $change($summary['visitors_change']) !!}</p>
   </div>
-  <a href="{{ route('admin.inbox.messages') }}" class="card card-body transition hover:ring-2 hover:ring-accent">
-    <p class="text-[13px] font-semibold text-slate-500">Unread messages</p>
-    <p class="mt-2 text-3xl font-extrabold {{ $unread ? 'text-amber-600' : 'text-ink' }}">{{ $unread }}</p>
+  <a href="{{ route('admin.inbox.messages') }}" class="group py-2">
+    <p class="stat-label group-hover:text-ink">Unread messages</p>
+    <p class="stat-value {{ $unread ? 'text-neon-red' : 'text-neon-green' }}">{{ $unread }}</p>
     <p class="mt-1 text-xs text-slate-400">{{ $requests30 }} guide requests in 30 days</p>
   </a>
-  <a href="{{ route('admin.seo.overview') }}" class="card card-body flex items-center gap-4 transition hover:ring-2 hover:ring-accent">
+  <a href="{{ route('admin.seo.overview') }}" class="group flex items-center gap-4 py-2">
     <span class="score h-14 w-14 text-base {{ \App\Services\SeoAnalyzer::color($seoAvg) }}">{{ $seoAvg }}</span>
     <div>
-      <p class="text-[13px] font-semibold text-slate-500">Average SEO score</p>
+      <p class="stat-label group-hover:text-ink">Average SEO score</p>
       <p class="mt-1 text-xs text-slate-500">
         <span class="text-emerald-600">{{ $seoCounts['good'] ?? 0 }} good</span> ·
         <span class="text-amber-600">{{ $seoCounts['ok'] ?? 0 }} need work</span> ·
@@ -46,7 +46,7 @@
   </a>
 </div>
 
-<div class="mt-6 grid gap-6 xl:grid-cols-3">
+<div class="mt-10 grid gap-x-10 gap-y-10 xl:grid-cols-3">
   {{-- Traffic chart --}}
   <div class="card xl:col-span-2">
     <div class="card-header">
@@ -59,11 +59,11 @@
   {{-- At a glance --}}
   <div class="card">
     <div class="card-header"><h2 class="card-title">At a glance</h2></div>
-    <ul class="grid grid-cols-2 gap-px bg-slate-100">
+    <ul class="grid grid-cols-2">
       @foreach($glance as $g)
         <li class="bg-white">
-          <a href="{{ $g['route'] }}" class="block px-5 py-4 hover:bg-slate-50">
-            <span class="block text-2xl font-extrabold text-ink">{{ $g['count'] }}</span>
+          <a href="{{ $g['route'] }}" class="group block py-4 pr-4">
+            <span class="block text-2xl font-extrabold text-ink group-hover:text-accent">{{ $g['count'] }}</span>
             <span class="text-[13px] text-slate-500">{{ $g['label'] }}</span>
           </a>
         </li>
@@ -72,7 +72,7 @@
   </div>
 </div>
 
-<div class="mt-6 grid gap-6 xl:grid-cols-3">
+<div class="mt-10 grid gap-x-10 gap-y-10 xl:grid-cols-3">
   {{-- Top pages --}}
   <div class="card">
     <div class="card-header"><h2 class="card-title">Top pages</h2><span class="text-xs text-slate-400">30 days</span></div>
@@ -118,7 +118,7 @@
   </div>
 </div>
 
-<div class="mt-6 grid gap-6 xl:grid-cols-3">
+<div class="mt-10 grid gap-x-10 gap-y-10 xl:grid-cols-3">
   {{-- Recent messages --}}
   <div class="card">
     <div class="card-header"><h2 class="card-title">Latest messages</h2><a href="{{ route('admin.inbox.messages') }}" class="text-[13px] font-semibold text-ink hover:text-accent">Inbox &rarr;</a></div>
@@ -186,17 +186,17 @@
       data: {
         labels: daily.labels,
         datasets: [
-          { label: 'Page views', data: daily.views, borderColor: '#111111', backgroundColor: 'rgba(8,32,50,0.08)', fill: true, tension: 0.35, pointRadius: 0, borderWidth: 2 },
-          { label: 'Visitors', data: daily.uniques, borderColor: '#6B3FA0', backgroundColor: 'transparent', tension: 0.35, pointRadius: 0, borderWidth: 2 },
+          { label: 'Page views', data: daily.views, borderColor: '#A855F7', backgroundColor: 'rgba(168,85,247,0.12)', fill: true, tension: 0.4, pointRadius: 0, borderWidth: 2.5 },
+          { label: 'Visitors', data: daily.uniques, borderColor: '#22C55E', backgroundColor: 'transparent', tension: 0.4, pointRadius: 0, borderWidth: 2.5 },
         ],
       },
       options: { maintainAspectRatio: false, interaction: { mode: 'index', intersect: false }, plugins: { legend: { position: 'bottom', labels: { boxWidth: 10 } } },
-        scales: { x: { grid: { display: false }, ticks: { maxTicksLimit: 8 } }, y: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#EEF1F3' } } } },
+        scales: { x: { grid: { display: false }, ticks: { maxTicksLimit: 8 } }, y: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#F1F5F9' }, border: { display: false } } } },
     })
     const dev = document.getElementById('deviceChart')
     if (dev) {
       const d = @json($devices);
-      new Chart(dev, { type: 'doughnut', data: { labels: Object.keys(d), datasets: [{ data: Object.values(d), backgroundColor: ['#111111', '#6B3FA0', '#9CA3AF'], borderWidth: 0 }] },
+      new Chart(dev, { type: 'doughnut', data: { labels: Object.keys(d), datasets: [{ data: Object.values(d), backgroundColor: ['#A855F7', '#3B82F6', '#22C55E', '#EF4444'], borderWidth: 0 }] },
         options: { maintainAspectRatio: false, cutout: '65%', plugins: { legend: { position: 'bottom', labels: { boxWidth: 10 } } } } })
     }
   })

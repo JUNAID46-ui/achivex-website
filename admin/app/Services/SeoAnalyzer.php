@@ -98,6 +98,6 @@ class SeoAnalyzer
 
     public static function color(int $score): string
     {
-        return ['good' => 'bg-emerald-500', 'ok' => 'bg-amber', 'bad' => 'bg-red-500'][static::grade($score)];
+        return ['good' => 'bg-neon-green', 'ok' => 'bg-amber', 'bad' => 'bg-neon-red'][static::grade($score)];
     }
 }

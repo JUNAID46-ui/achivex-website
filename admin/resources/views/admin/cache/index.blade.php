@@ -25,7 +25,7 @@
         <button class="btn-secondary">Remove</button>
       </form>
     </div>
-    <div class="flex justify-end border-t border-slate-200 bg-slate-50 px-5 py-3">
+    <div class="flex justify-end pt-2">
       <form method="POST" action="{{ route('admin.cache.clear') }}" onsubmit="return confirm('Clear all cached data? Login attempt counters are reset too.')">
         @csrf <input type="hidden" name="target" value="all">
         <button class="btn-primary">@include('admin.partials.icon', ['name' => 'refresh']) Clear all cache</button>
