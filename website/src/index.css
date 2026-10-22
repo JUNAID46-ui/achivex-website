@@ -113,20 +113,27 @@ html[data-theme='light'] [class~='bg-mist'] {
 }
 
 /* Closing call to action: diagonal panels that only show where the pointer is. */
-.cta-shine { background-color: #000000; }
+/* Registered so the light glides between positions instead of jumping. */
+@property --mx { syntax: '<length-percentage>'; inherits: true; initial-value: 66%; }
+@property --my { syntax: '<length-percentage>'; inherits: true; initial-value: 58%; }
+.cta-shine {
+  background-color: #000000;
+  /* Light position: a resting spot right of the text, then the pointer while hovering. */
+  --mx: 66%;
+  --my: 58%;
+  transition: --mx 0.9s ease-out, --my 0.9s ease-out;
+}
+.cta-shine.is-tracking { transition-duration: 0.15s; }
 .cta-shine-glow {
   position: absolute;
   inset: -10% -5%;
   pointer-events: none;
-  background: radial-gradient(ellipse 820px 600px at var(--mx, -2000px) var(--my, -2000px),
+  background: radial-gradient(ellipse 820px 600px at var(--mx) var(--my),
     rgba(226, 232, 255, 0.95) 0%, rgba(150, 170, 255, 0.85) 18%, rgba(59, 91, 255, 0.7) 38%,
     rgba(15, 44, 156, 0.45) 60%, rgba(15, 44, 156, 0.12) 80%, transparent 100%);
   -webkit-mask-image: repeating-linear-gradient(118deg, transparent 0, rgba(0, 0, 0, 0.15) 30px, rgba(0, 0, 0, 0.55) 80px, #000 122px, #000 128px, rgba(0, 0, 0, 0.2) 132px, transparent 136px, transparent 150px);
   mask-image: repeating-linear-gradient(118deg, transparent 0, rgba(0, 0, 0, 0.15) 30px, rgba(0, 0, 0, 0.55) 80px, #000 122px, #000 128px, rgba(0, 0, 0, 0.2) 132px, transparent 136px, transparent 150px);
-  opacity: 0;
-  transition: opacity 0.6s;
 }
-.cta-shine:hover .cta-shine-glow { opacity: 1; }
 .cta-shine-grain {
   position: absolute;
   inset: 0;
@@ -135,6 +142,6 @@ html[data-theme='light'] [class~='bg-mist'] {
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
-@media (hover: none), (prefers-reduced-motion: reduce) {
-  .cta-shine-glow { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .cta-shine { transition: none; }
 }

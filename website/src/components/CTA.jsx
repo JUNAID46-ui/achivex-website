@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import FadeUp from './FadeUp'
 
-// Closing call to action. Plain black at rest; diagonal panels light up around the pointer on hover.
+// Closing call to action. Diagonal panels are lit at a resting spot; on hover the light follows the pointer
+// and glides back when the pointer leaves.
 // `variant` is kept so existing pages keep working; every page now uses the same design.
 export default function CTA({
   title = "Let's build what your business needs next.",
@@ -12,16 +13,26 @@ export default function CTA({
   to = '/contact-us/',
 }) {
   const ref = useRef(null)
+  const glow = useRef(null)
   const move = (e) => {
     const el = ref.current
-    if (!el) return
-    const r = el.getBoundingClientRect()
+    const g = glow.current
+    if (!el || !g || e.pointerType === 'touch') return
+    const r = g.getBoundingClientRect()
+    el.classList.add('is-tracking')
     el.style.setProperty('--mx', `${e.clientX - r.left}px`)
     el.style.setProperty('--my', `${e.clientY - r.top}px`)
   }
+  const leave = () => {
+    const el = ref.current
+    if (!el) return
+    el.classList.remove('is-tracking')
+    el.style.removeProperty('--mx')
+    el.style.removeProperty('--my')
+  }
   return (
-    <section ref={ref} onPointerMove={move} className="cta-shine relative overflow-hidden bg-ink text-white">
-      <div className="cta-shine-glow" aria-hidden="true" />
+    <section ref={ref} onPointerMove={move} onPointerLeave={leave} className="cta-shine relative overflow-hidden bg-ink text-white">
+      <div ref={glow} className="cta-shine-glow" aria-hidden="true" />
       <div className="cta-shine-grain" aria-hidden="true" />
       <FadeUp className="container-site relative py-24 md:py-32">
         <h2 className="h-display max-w-2xl text-4xl text-white md:text-6xl">{title}</h2>
