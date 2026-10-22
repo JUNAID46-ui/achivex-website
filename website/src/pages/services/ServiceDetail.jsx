@@ -11,6 +11,7 @@ import NotFound from '../NotFound'
 import { getService, servicePath, servicesByCategory } from '../../data/services'
 import { getCategory } from '../../data/categories'
 import { getCaseStudy } from '../../data/caseStudies'
+import { permalink } from '../../lib/permalinks'
 
 export default function ServiceDetail({ singleSlug }) {
   const params = useParams()
@@ -114,14 +115,14 @@ export default function ServiceDetail({ singleSlug }) {
         <section className="bg-mist py-20 md:py-28">
           <div className="container-site">
             <FadeUp className="grid items-center gap-10 md:grid-cols-[1fr_1fr]">
-              <Link to={`/insights/case-studies/${cs.slug}/`} className="group block overflow-hidden">
+              <Link to={permalink(`/insights/case-studies/${cs.slug}/`)} className="group block overflow-hidden">
                 <Img src={cs.image.replace('w=2000', 'w=1200')} alt={cs.title} className="aspect-[16/11] w-full object-cover transition-transform duration-700 group-hover:scale-105" />
               </Link>
               <div>
                 <h2 className="h-display text-4xl">{cs.title}</h2>
                 <p className="mt-3 text-sm font-semibold text-accent">Related case study / {cs.clientType}</p>
                 <p className="mt-5 text-lg leading-relaxed text-body/70">{cs.summary}</p>
-                <Link to={`/insights/case-studies/${cs.slug}/`} className="group mt-8 inline-flex items-center gap-2 font-semibold text-white hover:text-accent">
+                <Link to={permalink(`/insights/case-studies/${cs.slug}/`)} className="group mt-8 inline-flex items-center gap-2 font-semibold text-white hover:text-accent">
                   Read Case Study <ArrowRight className="h-4 w-4 text-accent transition-transform group-hover:translate-x-1" aria-hidden="true" />
                 </Link>
               </div>

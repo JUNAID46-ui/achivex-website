@@ -23,6 +23,7 @@ import { heroStats } from '../data/about'
 import { homeSections } from '../data/homeSections'
 import PageSections from '../components/PageSections'
 import { safeHref } from '../utils/safeHref'
+import { permalink } from '../lib/permalinks'
 
 const mainAreas = ['digital', 'data-and-analytics', 'cloud', 'security', 'business-process-services']
 const areaName = (slug) => categories.find((c) => c.slug === slug).name
@@ -409,7 +410,7 @@ function FeaturedCase({ d }) {
                 <dd className="mt-2 leading-relaxed text-white/65">{cs.solution[1]}</dd>
               </div>
             </dl>
-            <div className="mt-10"><Button to={`/insights/case-studies/${cs.slug}/`} variant="light">Read Case Study</Button></div>
+            <div className="mt-10"><Button to={permalink(`/insights/case-studies/${cs.slug}/`)} variant="light">Read Case Study</Button></div>
           </div>
         </FadeUp>
       </div>
@@ -421,8 +422,8 @@ function FeaturedCase({ d }) {
 function LatestInsights({ d }) {
   const paper = whitepapers[0]
   const items = [
-    ...caseStudies.slice(1, 2).map((c) => ({ key: c.slug, to: `/insights/case-studies/${c.slug}/`, image: c.image.replace('w=2000', 'w=900'), kicker: `Case study / ${c.clientType}`, title: c.title, cta: 'Read Case Study' })),
-    ...blogs.slice(0, 2).map((b) => ({ key: b.slug, to: `/insights/blogs/${b.slug}/`, image: b.image.replace('w=2000', 'w=900'), kicker: `Blog / ${b.category}`, title: b.title, cta: 'Read Article' })),
+    ...caseStudies.slice(1, 2).map((c) => ({ key: c.slug, to: permalink(`/insights/case-studies/${c.slug}/`), image: c.image.replace('w=2000', 'w=900'), kicker: `Case study / ${c.clientType}`, title: c.title, cta: 'Read Case Study' })),
+    ...blogs.slice(0, 2).map((b) => ({ key: b.slug, to: permalink(`/insights/blogs/${b.slug}/`), image: b.image.replace('w=2000', 'w=900'), kicker: `Blog / ${b.category}`, title: b.title, cta: 'Read Article' })),
   ]
   return (
     <section className="bg-mist py-24 md:py-32">
@@ -430,7 +431,7 @@ function LatestInsights({ d }) {
         <SectionHead
           title={d.title}
           text={d.text}
-          link={<ArrowLink to="/insights/blogs/" className="text-[15px] font-medium text-white">View all insights</ArrowLink>}
+          link={<ArrowLink to={permalink('/insights/blogs/')} className="text-[15px] font-medium text-white">View all insights</ArrowLink>}
         />
         <div className="grid gap-12 pt-12 md:grid-cols-3 md:gap-8">
           {items.map((it) => (
@@ -444,7 +445,7 @@ function LatestInsights({ d }) {
             <p className="text-xl font-semibold text-white">Free guide: {paper.title}</p>
             <p className="mt-2 max-w-xl text-body/60">{paper.description}</p>
           </div>
-          <Button to={`/insights/whitepapers/${paper.slug}/`} variant="outline">Download the guide</Button>
+          <Button to={permalink(`/insights/whitepapers/${paper.slug}/`)} variant="outline">Download the guide</Button>
         </FadeUp>}
       </div>
     </section>

@@ -20,6 +20,10 @@ export const settings = {
     region: 'WY',
     country: 'US',
   },
+  // Content address prefixes (Settings, Permalinks). Empty means the defaults in lib/permalinks.js.
+  permalinks: {},
+  // Colours and fonts (Settings, Colors and Fonts). Empty means the defaults in index.css.
+  theme: {},
   // Code added in the admin under Tools, Custom Code.
   customCode: {
     head: '',

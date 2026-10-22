@@ -24,6 +24,12 @@ class SiteSetting extends Model
         return static::$loaded[$key] ??= static::find($key)?->value ?? [];
     }
 
+    // Forget what was read, for long-running processes and tests.
+    public static function flush(): void
+    {
+        static::$loaded = [];
+    }
+
     // Save one settings group, merging with what is already stored.
     public static function put(string $key, array $value): void
     {

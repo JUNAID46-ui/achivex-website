@@ -33,6 +33,8 @@ function applySettings(rows) {
   Object.assign(settings.seo, byKey.seo || {})
   Object.assign(settings.schema, byKey.schema || {})
   Object.assign(settings.customCode, byKey.custom_code || {})
+  Object.assign(settings.permalinks, byKey.permalinks || {})
+  Object.assign(settings.theme, byKey.theme || {})
 }
 
 // Loads the editable content from the database and swaps it into the data arrays

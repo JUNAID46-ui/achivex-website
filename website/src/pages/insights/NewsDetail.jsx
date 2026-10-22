@@ -8,6 +8,7 @@ import ArrowLink from '../../components/ArrowLink'
 import NotFound from '../NotFound'
 import { news, getNews } from '../../data/news'
 import { formatDate } from '../../utils/format'
+import { permalink } from '../../lib/permalinks'
 
 export default function NewsDetail() {
   const { slug } = useParams()
@@ -19,7 +20,7 @@ export default function NewsDetail() {
   return (
     <article className="bg-canvas pb-24 pt-12">
       <div className="container-site">
-        <Breadcrumb items={[{ label: 'Insights' }, { label: 'Newsroom', to: '/insights/newsroom/' }, { label: 'Article' }]} />
+        <Breadcrumb items={[{ label: 'Insights' }, { label: 'Newsroom', to: permalink('/insights/newsroom/') }, { label: 'Article' }]} />
       </div>
       <header className="mx-auto mt-14 max-w-read px-5">
         <h1 className="text-4xl font-extrabold leading-tight tracking-tight md:text-5xl">{n.title}</h1>
@@ -39,7 +40,7 @@ export default function NewsDetail() {
         <h2 className="text-lg font-bold">More from the newsroom</h2>
         <ul className="mt-4 space-y-3">
           {more.map((m) => (
-            <li key={m.slug}><ArrowLink to={`/insights/newsroom/${m.slug}/`} className="text-white">{m.title}</ArrowLink></li>
+            <li key={m.slug}><ArrowLink to={permalink(`/insights/newsroom/${m.slug}/`)} className="text-white">{m.title}</ArrowLink></li>
           ))}
         </ul>
       </aside>

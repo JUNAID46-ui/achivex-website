@@ -22,9 +22,11 @@
   $user = auth()->user();
   $current = request()->route()?->getName();
   $currentResource = request()->route('resource');
-  $isActive = function ($item) use ($current, $currentResource) {
+  // When the current page is itself a menu entry, only that entry is active; otherwise its parent route is.
+  $menuRoutes = collect(config('admin.menu'))->flatMap(fn ($i) => array_merge([$i], $i['children'] ?? []))->pluck('route')->filter()->all();
+  $isActive = function ($item) use ($current, $currentResource, $menuRoutes) {
       if (isset($item['resource'])) return $currentResource === $item['resource'];
-      if (isset($item['route'])) return $current === $item['route'] || str_starts_with((string) $current, $item['route'].'.');
+      if (isset($item['route'])) return $current === $item['route'] || (! in_array($current, $menuRoutes, true) && str_starts_with((string) $current, $item['route'].'.'));
       return false;
   };
   $itemUrl = fn ($item) => isset($item['resource']) ? route('admin.resources.index', $item['resource']) : route($item['route']);

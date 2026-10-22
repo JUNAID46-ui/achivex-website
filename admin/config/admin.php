@@ -44,7 +44,11 @@ return [
             ['label' => 'AI Visibility', 'route' => 'admin.seo.ai', 'area' => 'seo'],
         ]],
         ['label' => 'Analytics', 'icon' => 'chart', 'route' => 'admin.analytics', 'area' => 'analytics'],
-        ['label' => 'Settings', 'icon' => 'settings', 'route' => 'admin.settings', 'area' => 'settings'],
+        ['label' => 'Settings', 'icon' => 'settings', 'area' => 'settings', 'children' => [
+            ['label' => 'General', 'route' => 'admin.settings', 'area' => 'settings'],
+            ['label' => 'Colors and Fonts', 'route' => 'admin.settings.theme', 'area' => 'settings'],
+            ['label' => 'Permalinks', 'route' => 'admin.settings.permalinks', 'area' => 'settings'],
+        ]],
         ['label' => 'Users', 'icon' => 'users', 'resource' => 'users', 'area' => 'users'],
         ['label' => 'Activity Log', 'icon' => 'activity', 'route' => 'admin.activity', 'area' => 'activity'],
         ['label' => 'Security Center', 'icon' => 'shield', 'route' => 'admin.security', 'area' => 'security'],

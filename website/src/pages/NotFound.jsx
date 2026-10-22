@@ -8,6 +8,7 @@ import Button from '../components/Button'
 import ArrowLink from '../components/ArrowLink'
 import PageSections from '../components/PageSections'
 import { customPages, pageSections } from '../data/customPages'
+import { permalink, fromOldBase } from '../lib/permalinks'
 
 // A page made in the admin ("Add New Page") has no fixed route, so it lands here first.
 function CustomPage({ page }) {
@@ -27,8 +28,11 @@ function Missing({ pathname }) {
 
   // Follow a redirect from the admin Redirects manager, otherwise record the missing URL.
   useEffect(() => {
+    const moved = fromOldBase(pathname)
     const match = redirects.find((r) => r.from === normalizePath(pathname))
-    if (match) {
+    if (moved) {
+      navigate(moved, { replace: true })
+    } else if (match) {
       if (/^https?:/.test(match.to)) window.location.replace(match.to)
       else navigate(match.to, { replace: true })
     } else {
@@ -54,7 +58,7 @@ function Missing({ pathname }) {
         <div className="mt-10"><Button to="/">Back to Home</Button></div>
         <ul className="mt-12 flex flex-wrap justify-center gap-x-10 gap-y-4 border-t border-white/15 pt-8 font-semibold">
           <li><ArrowLink to="/services/" className="text-white">Services</ArrowLink></li>
-          <li><ArrowLink to="/insights/case-studies/" className="text-white">Insights</ArrowLink></li>
+          <li><ArrowLink to={permalink('/insights/case-studies/')} className="text-white">Insights</ArrowLink></li>
           <li><ArrowLink to="/contact-us/" className="text-white">Contact</ArrowLink></li>
         </ul>
       </div>

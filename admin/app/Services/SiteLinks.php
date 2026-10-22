@@ -14,7 +14,7 @@ class SiteLinks
     {
         return Cache::remember('site-known-paths', 600, function () {
             $paths = collect(SeoIndex::all())->pluck('path');
-            $paths = $paths->merge(collect(SiteRoutes::pages())->pluck('path'));
+            $paths = $paths->merge(collect(SiteRoutes::pages())->pluck('path')->map(fn ($x) => \App\Support\Permalinks::map($x)));
             $paths = $paths->merge(Page::live()->pluck('path'));
 
             return $paths->map(fn ($p) => static::normalize($p))->filter()->unique()->values()->all();
@@ -94,7 +94,7 @@ class SiteLinks
         $redirects = static::redirects();
         $out = [];
         foreach (static::extract($value) as $path) {
-            $out[$path] = isset($known[$path]) ? 'ok' : (isset($redirects[$path]) ? 'redirect' : 'broken');
+            $out[$path] = isset($known[$path]) ? 'ok' : (isset($redirects[$path]) || \App\Support\Permalinks::fromOldBase($path) ? 'redirect' : 'broken');
         }
 
         return $out;

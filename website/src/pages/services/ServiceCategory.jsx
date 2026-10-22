@@ -8,6 +8,7 @@ import ServiceCard from '../../components/ServiceCard'
 import CTA from '../../components/CTA'
 import { getService } from '../../data/services'
 import { getCaseStudy } from '../../data/caseStudies'
+import { permalink } from '../../lib/permalinks'
 
 export default function ServiceCategory({ category }) {
   useSeo(category.name.endsWith('Services') ? category.name : `${category.name} Services`, `${category.short} AchiveX ${category.name.toLowerCase()} services for businesses in the USA and beyond.`)
@@ -55,7 +56,7 @@ export default function ServiceCategory({ category }) {
         <section className="bg-canvas py-20 md:py-28">
           <div className="container-site">
             <FadeUp>
-              <Link to={`/insights/case-studies/${cs.slug}/`} className="group grid border-y border-body/15 md:grid-cols-2">
+              <Link to={permalink(`/insights/case-studies/${cs.slug}/`)} className="group grid border-y border-body/15 md:grid-cols-2">
                 <div className="overflow-hidden">
                   <Img src={cs.image} alt={cs.title} className="h-full min-h-[280px] w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 </div>

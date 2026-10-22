@@ -2,9 +2,10 @@ import { Link } from 'react-router-dom'
 import Img from './Img'
 import { formatDate } from '../utils/format'
 import { readTime } from '../data/blogs'
+import { permalink } from '../lib/permalinks'
 
 export default function BlogCard({ post }) {
-  const to = `/insights/blogs/${post.slug}/`
+  const to = permalink(`/insights/blogs/${post.slug}/`)
   return (
     <article className="group flex h-full flex-col">
       <Link to={to} className="block overflow-hidden">

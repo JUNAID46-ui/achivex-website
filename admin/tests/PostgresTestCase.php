@@ -32,6 +32,7 @@ abstract class PostgresTestCase extends TestCase
             DB::table('migrations')->insert(['migration' => $m, 'batch' => 1]);
         }
         Artisan::call('migrate', ['--force' => true]);
+        \App\Models\Content\SiteSetting::flush();
     }
 
     protected function makeUser(string $role = 'administrator', string $email = null): User

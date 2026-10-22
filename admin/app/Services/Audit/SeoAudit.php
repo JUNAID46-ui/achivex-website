@@ -135,7 +135,7 @@ class SeoAudit
         }
 
         // Important pages with few links from editable content
-        foreach (['/services/', '/contact-us/', '/about-us/', '/insights/blogs/'] as $p) {
+        foreach (['/services/', '/contact-us/', '/about-us/', \App\Support\Permalinks::base('blogs')] as $p) {
             if (count(array_unique($inbound[$p] ?? [])) < 2) {
                 $f[] = Finding::make('Important page with few internal links', 'Links', 'info', $p, 'Linked from '.count(array_unique($inbound[$p] ?? [])).' items of editable content. Menus and fixed templates are not counted.', 'Link to this page from related posts and pages.', 'recommendation');
             }

@@ -11,8 +11,8 @@ class Sitemap
     public static function urls(): array
     {
         $base = rtrim(config('admin.site_public_url'), '/');
-        $dates = BlogPost::pluck('published_on', 'slug')->mapWithKeys(fn ($d, $s) => ["/insights/blogs/{$s}/" => $d])
-            ->merge(NewsPost::pluck('published_on', 'slug')->mapWithKeys(fn ($d, $s) => ["/insights/newsroom/{$s}/" => $d]));
+        $dates = BlogPost::pluck('published_on', 'slug')->mapWithKeys(fn ($d, $s) => [\App\Support\Permalinks::base('blogs').$s.'/' => $d])
+            ->merge(NewsPost::pluck('published_on', 'slug')->mapWithKeys(fn ($d, $s) => [\App\Support\Permalinks::base('newsroom').$s.'/' => $d]));
 
         return collect(SeoIndex::all())->reject(fn ($r) => $r['noindex'])->map(function ($r) use ($base, $dates) {
             $depth = substr_count(trim($r['path'], '/'), '/') + ($r['path'] === '/' ? -1 : 0);

@@ -9,6 +9,7 @@ import { caseStudies } from '../../data/caseStudies'
 import { getService } from '../../data/services'
 import { industries } from '../../data/industries'
 import { pageContent } from '../../data/pageContent'
+import { permalink } from '../../lib/permalinks'
 
 function Select({ id, label, value, onChange, options }) {
   return (
@@ -81,7 +82,7 @@ export default function CaseStudies() {
               {list.map((c, i) => (
                 <FadeUp key={c.slug} delay={(i % 3) * 0.06}>
                   <InsightCard
-                    to={`/insights/case-studies/${c.slug}/`}
+                    to={permalink(`/insights/case-studies/${c.slug}/`)}
                     image={c.image.replace('w=2000', 'w=900')}
                     kicker={c.clientType}
                     title={c.title}

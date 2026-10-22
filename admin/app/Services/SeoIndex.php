@@ -21,7 +21,7 @@ class SeoIndex
         $rows = [];
 
         foreach (SiteRoutes::pages() as $p) {
-            $rows[] = static::row($p['path'], $p['title'], $p['description'], $p['type'], $meta, $template, $seo, [
+            $rows[] = static::row(\App\Support\Permalinks::map($p['path']), $p['title'], $p['description'], $p['type'], $meta, $template, $seo, [
                 'text' => $p['content'] ?? '', 'headings' => $p['headings'] ?? [], 'first' => '', 'defaultKeyword' => $p['focus'] ?? '',
             ]);
         }

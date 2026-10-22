@@ -10,6 +10,7 @@ import NotFound from '../NotFound'
 import { caseStudies } from '../../data/caseStudies'
 import { getService, servicePath } from '../../data/services'
 import { industries } from '../../data/industries'
+import { permalink } from '../../lib/permalinks'
 
 export default function CaseStudyDetail() {
   const { slug } = useParams()
@@ -24,7 +25,7 @@ export default function CaseStudyDetail() {
     <>
       <section className="bg-canvas pt-12">
         <div className="container-site">
-          <Breadcrumb items={[{ label: 'Insights' }, { label: 'Case Studies', to: '/insights/case-studies/' }, { label: 'Case study' }]} />
+          <Breadcrumb items={[{ label: 'Insights' }, { label: 'Case Studies', to: permalink('/insights/case-studies/') }, { label: 'Case study' }]} />
           <FadeUp className="mt-12 max-w-4xl">
             <h1 className="h-display text-5xl md:text-7xl">{cs.title}</h1>
           </FadeUp>
@@ -98,7 +99,7 @@ export default function CaseStudyDetail() {
         </div>
       </section>
 
-      <Link to={`/insights/case-studies/${next.slug}/`} className="group block bg-mist">
+      <Link to={permalink(`/insights/case-studies/${next.slug}/`)} className="group block bg-mist">
         <div className="container-site flex flex-col justify-between gap-6 py-14 md:flex-row md:items-center">
           <p className="font-display text-3xl text-white group-hover:text-accent md:text-4xl">{next.title}</p>
           <span className="flex shrink-0 items-center gap-4 font-semibold text-white">

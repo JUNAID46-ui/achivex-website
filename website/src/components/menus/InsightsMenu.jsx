@@ -5,6 +5,7 @@ import ArrowLink from '../ArrowLink'
 import { insightsLinks } from '../../data/menus'
 import { caseStudies } from '../../data/caseStudies'
 import { blogs } from '../../data/blogs'
+import { permalink } from '../../lib/permalinks'
 
 export default function InsightsMenu({ onNavigate }) {
   const featured = blogs.find((b) => b.featured) || blogs[0]
@@ -12,7 +13,7 @@ export default function InsightsMenu({ onNavigate }) {
     <div className="grid grid-cols-[minmax(260px,30%)_1fr]">
       <aside className="bg-cloud px-10 py-10">
         <p className="font-display text-3xl text-body">Insights</p>
-        <Link to={`/insights/blogs/${featured.slug}/`} onClick={onNavigate} className="group mt-6 block">
+        <Link to={permalink(`/insights/blogs/${featured.slug}/`)} onClick={onNavigate} className="group mt-6 block">
           <div className="overflow-hidden">
             <Img src={featured.image.replace('w=2000', 'w=800')} alt={featured.title} className="aspect-[16/9] w-full object-cover transition-transform duration-700 group-hover:scale-105" />
           </div>
@@ -41,7 +42,7 @@ export default function InsightsMenu({ onNavigate }) {
           <ul className="mt-4 space-y-3">
             {caseStudies.slice(0, 4).map((c) => (
               <li key={c.slug}>
-                <ArrowLink to={`/insights/case-studies/${c.slug}/`} onClick={onNavigate} className="text-[15px] text-body/75">{c.title}</ArrowLink>
+                <ArrowLink to={permalink(`/insights/case-studies/${c.slug}/`)} onClick={onNavigate} className="text-[15px] text-body/75">{c.title}</ArrowLink>
               </li>
             ))}
           </ul>

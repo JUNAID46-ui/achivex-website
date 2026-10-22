@@ -11,6 +11,7 @@ import NotFound from '../NotFound'
 import { blogs, getBlog, readTime } from '../../data/blogs'
 import { formatDate } from '../../utils/format'
 import jumpTo from '../../utils/jumpTo'
+import { permalink } from '../../lib/permalinks'
 
 export default function BlogPost() {
   const { slug } = useParams()
@@ -41,7 +42,7 @@ export default function BlogPost() {
     <>
       <article className="bg-canvas pb-20 pt-12">
         <div className="container-site">
-          <Breadcrumb items={[{ label: 'Insights' }, { label: 'Blogs', to: '/insights/blogs/' }, { label: post.category }]} />
+          <Breadcrumb items={[{ label: 'Insights' }, { label: 'Blogs', to: permalink('/insights/blogs/') }, { label: post.category }]} />
         </div>
 
         <header className="mx-auto mt-12 max-w-read px-5 text-center">

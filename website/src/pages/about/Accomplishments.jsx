@@ -12,6 +12,7 @@ import { services } from '../../data/services'
 import { blogs } from '../../data/blogs'
 import { whitepapers } from '../../data/whitepapers'
 import { industries } from '../../data/industries'
+import { permalink } from '../../lib/permalinks'
 
 export default function Accomplishments() {
   useSeo('Our Accomplishments', 'Milestones and what AchiveX LLC has built so far: service areas, services, guides and articles.')
@@ -23,8 +24,8 @@ export default function Accomplishments() {
     { value: categories.length, label: labels[0] ?? 'Service areas', to: '/services/' },
     { value: services.length, label: labels[1] ?? 'Individual services', to: '/services/' },
     { value: industries.length, label: labels[2] ?? 'Industries served', to: `/industries/${industries[0].slug}/` },
-    { value: whitepapers.length, label: labels[3] ?? 'Free guides published', to: '/insights/whitepapers/' },
-    { value: blogs.length, label: labels[4] ?? 'Articles published', to: '/insights/blogs/' },
+    { value: whitepapers.length, label: labels[3] ?? 'Free guides published', to: permalink('/insights/whitepapers/') },
+    { value: blogs.length, label: labels[4] ?? 'Articles published', to: permalink('/insights/blogs/') },
   ]
 
   return (
@@ -80,7 +81,7 @@ export default function Accomplishments() {
               <span className="absolute -left-[49px] top-2 h-4 w-4 rounded-full border-2 border-body/20 bg-mist md:-left-[65px]" aria-hidden="true" />
               <p className="text-lg font-semibold text-white">{c.nextTitle}</p>
               <p className="mt-2 max-w-xl leading-relaxed text-body/65">{c.nextText}</p>
-              <div className="mt-4"><ArrowLink to="/insights/newsroom/" className="font-medium text-white">{c.nextLinkText}</ArrowLink></div>
+              <div className="mt-4"><ArrowLink to={permalink('/insights/newsroom/')} className="font-medium text-white">{c.nextLinkText}</ArrowLink></div>
             </FadeUp>
           </ol>
         </div>

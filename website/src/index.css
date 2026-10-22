@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Brand colours and fonts. lib/theme.js overrides these with the values saved in the admin. */
+:root {
+  --c-navy: 15 44 156;
+  --c-mist: 255 255 255;
+  --c-ink: 0 0 0;
+  --c-cloud: 238 241 243;
+  --font-sans: 'Manrope', system-ui, sans-serif;
+  --font-display: 'Geist', 'Manrope', system-ui, sans-serif;
+}
+
 /* Dark is the default. White sections (bg-mist) switch headings and body text to black, cards to silver
    and the green accent to blue so it stays readable. Blue sections switch back to the dark set. */
 :root,

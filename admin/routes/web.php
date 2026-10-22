@@ -129,6 +129,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('settings', [Admin\SettingsController::class, 'index'])->name('settings');
             Route::post('settings', [Admin\SettingsController::class, 'save']);
             Route::post('settings/storage', [Admin\SettingsController::class, 'saveStorage'])->name('settings.storage');
+            Route::get('settings/appearance', [Admin\AppearanceController::class, 'theme'])->name('settings.theme');
+            Route::post('settings/appearance', [Admin\AppearanceController::class, 'saveTheme']);
+            Route::post('settings/appearance/reset', [Admin\AppearanceController::class, 'resetTheme'])->name('settings.theme.reset');
+            Route::get('settings/permalinks', [Admin\AppearanceController::class, 'permalinks'])->name('settings.permalinks');
+            Route::post('settings/permalinks', [Admin\AppearanceController::class, 'savePermalinks']);
             Route::post('settings/mail', [Admin\SettingsController::class, 'saveMail'])->name('settings.mail');
             Route::post('settings/test-email', [Admin\MailController::class, 'test'])->name('settings.test-email')->middleware('throttle:5,1');
         });

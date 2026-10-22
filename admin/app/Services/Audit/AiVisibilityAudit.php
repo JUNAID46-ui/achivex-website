@@ -38,7 +38,7 @@ class AiVisibilityAudit
         $samplePost = BlogPost::live()->orderByDesc('published_on')->first();
         $paths = ['/', '/robots.txt', '/llms.txt', '/sitemap.xml'];
         if ($samplePost) {
-            $paths[] = "/insights/blogs/{$samplePost->slug}/";
+            $paths[] = \App\Support\Permalinks::base('blogs').$samplePost->slug.'/';
         }
         $live ??= LiveSite::fetch($paths);
         $reachable = $live['/']['ok'] ?? false;
@@ -127,7 +127,7 @@ class AiVisibilityAudit
         $rows = collect(SeoIndex::all())->keyBy('path');
         $inSitemap = collect(Sitemap::urls())->pluck('path')->flip();
         $known = array_flip(SiteLinks::known());
-        foreach (self::IMPORTANT as $p) {
+        foreach (array_map([\App\Support\Permalinks::class, 'map'], self::IMPORTANT) as $p) {
             if (! isset($known[$p])) {
                 $f[] = Finding::make('Important page not found', 'Indexing', 'high', $p, 'Not in the list of live pages.', 'Check the address.');
             } elseif ($rows[$p]['noindex'] ?? false) {
@@ -162,7 +162,7 @@ class AiVisibilityAudit
         // 7. Topical depth: blog categories with little content
         foreach (BlogPost::live()->get()->groupBy('category') as $cat => $posts) {
             if ($posts->count() < 3) {
-                $f[] = Finding::make('Thin topic cluster', 'Topical authority', 'info', '/insights/blogs/', "Category \"{$cat}\" has {$posts->count()} published ".\Illuminate\Support\Str::plural('post', $posts->count()).'.', 'Publish several in-depth posts per topic you want to be known for, and link them to the matching service page.', 'recommendation');
+                $f[] = Finding::make('Thin topic cluster', 'Topical authority', 'info', \App\Support\Permalinks::base('blogs'), "Category \"{$cat}\" has {$posts->count()} published ".\Illuminate\Support\Str::plural('post', $posts->count()).'.', 'Publish several in-depth posts per topic you want to be known for, and link them to the matching service page.', 'recommendation');
             }
         }
 

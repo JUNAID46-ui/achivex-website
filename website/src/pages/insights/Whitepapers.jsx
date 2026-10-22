@@ -7,6 +7,7 @@ import Breadcrumb from '../../components/Breadcrumb'
 import CTA from '../../components/CTA'
 import { whitepapers } from '../../data/whitepapers'
 import { pageContent } from '../../data/pageContent'
+import { permalink } from '../../lib/permalinks'
 
 export function BookCover({ paper, className = '' }) {
   return (
@@ -43,15 +44,15 @@ export default function Whitepapers() {
         <div className="container-site grid gap-x-10 gap-y-16 sm:grid-cols-2 lg:grid-cols-4">
           {whitepapers.map((w, i) => (
             <FadeUp key={w.slug} delay={(i % 4) * 0.06} className="group flex flex-col">
-              <Link to={`/insights/whitepapers/${w.slug}/`} aria-label={w.title}>
+              <Link to={permalink(`/insights/whitepapers/${w.slug}/`)} aria-label={w.title}>
                 <BookCover paper={w} className="aspect-[3/4] transition-transform duration-500 group-hover:-translate-y-1" />
               </Link>
               <h2 className="mt-7 text-xl font-bold leading-snug">
-                <Link to={`/insights/whitepapers/${w.slug}/`} className="hover:text-accent">{w.title}</Link>
+                <Link to={permalink(`/insights/whitepapers/${w.slug}/`)} className="hover:text-accent">{w.title}</Link>
               </h2>
               <p className="mt-2 flex-1 text-[15px] leading-relaxed text-body/70">{w.description}</p>
               <Link
-                to={`/insights/whitepapers/${w.slug}/`}
+                to={permalink(`/insights/whitepapers/${w.slug}/`)}
                 className="mt-6 inline-flex w-fit items-center gap-2 bg-accent px-5 py-2.5 text-sm font-semibold text-onaccent transition-colors hover:bg-white hover:text-onaccent"
               >
                 <Download className="h-4 w-4" aria-hidden="true" /> {pc.downloadText}

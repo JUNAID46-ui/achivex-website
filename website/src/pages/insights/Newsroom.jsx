@@ -9,6 +9,7 @@ import CTA from '../../components/CTA'
 import { news } from '../../data/news'
 import { shortDate } from '../../utils/format'
 import { pageContent } from '../../data/pageContent'
+import { permalink } from '../../lib/permalinks'
 
 export default function Newsroom() {
   useSeo('Newsroom', 'Company announcements and news from AchiveX LLC.')
@@ -48,7 +49,7 @@ export default function Newsroom() {
               const d = shortDate(n.date)
               return (
                 <FadeUp as="li" key={n.slug}>
-                  <Link to={`/insights/newsroom/${n.slug}/`} className="group grid items-center gap-6 py-10 md:grid-cols-[140px_1fr_260px] md:gap-10">
+                  <Link to={permalink(`/insights/newsroom/${n.slug}/`)} className="group grid items-center gap-6 py-10 md:grid-cols-[140px_1fr_260px] md:gap-10">
                     <time dateTime={n.date} className="flex items-baseline gap-3 md:block">
                       <span className="font-display text-5xl text-white">{d.day}</span>
                       <span className="block text-sm font-semibold uppercase tracking-wide text-body/60">{d.month} {d.year}</span>

@@ -12,6 +12,7 @@ import { BookCover } from './Whitepapers'
 import { whitepapers, getWhitepaper } from '../../data/whitepapers'
 import { requestWhitepaper } from '../../lib/content'
 import { site } from '../../data/site'
+import { permalink } from '../../lib/permalinks'
 
 const fields = [
   { name: 'name', label: 'Full name', type: 'text', auto: 'name' },
@@ -49,7 +50,7 @@ export default function WhitepaperDetail() {
     <>
       <section className="bg-canvas pb-24 pt-12">
         <div className="container-site">
-          <Breadcrumb items={[{ label: 'Insights' }, { label: 'Whitepapers and eBooks', to: '/insights/whitepapers/' }, { label: paper.title }]} />
+          <Breadcrumb items={[{ label: 'Insights' }, { label: 'Whitepapers and eBooks', to: permalink('/insights/whitepapers/') }, { label: paper.title }]} />
           <div className="mt-12 grid gap-14 lg:grid-cols-2 lg:gap-20">
             <FadeUp>
               <div className="flex flex-col gap-10 sm:flex-row lg:flex-col xl:flex-row">
@@ -122,7 +123,7 @@ export default function WhitepaperDetail() {
         <div className="container-site flex flex-wrap items-center gap-x-8 gap-y-3">
           <span className="font-semibold text-white">More guides:</span>
           {whitepapers.filter((w) => w.slug !== slug).map((w) => (
-            <ArrowLink key={w.slug} to={`/insights/whitepapers/${w.slug}/`} className="text-white">{w.title}</ArrowLink>
+            <ArrowLink key={w.slug} to={permalink(`/insights/whitepapers/${w.slug}/`)} className="text-white">{w.title}</ArrowLink>
           ))}
         </div>
       </section>

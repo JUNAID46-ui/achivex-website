@@ -8,15 +8,16 @@ import { caseStudies } from '../data/caseStudies'
 import { blogs } from '../data/blogs'
 import { whitepapers } from '../data/whitepapers'
 import { industries } from '../data/industries'
+import { permalink } from '../lib/permalinks'
 
 // Builds a small search index from the data files.
 const index = [
   ...multiCategories.map((c) => ({ type: 'Service area', title: c.name, text: c.short, to: `/services/${c.slug}/` })),
   ...services.map((s) => ({ type: 'Service', title: s.name, text: s.short, to: servicePath(s) })),
   ...industries.map((i) => ({ type: 'Industry', title: i.name, text: i.summary, to: `/industries/${i.slug}/` })),
-  ...caseStudies.map((c) => ({ type: 'Case study', title: c.title, text: c.summary, to: `/insights/case-studies/${c.slug}/` })),
-  ...blogs.map((b) => ({ type: 'Blog', title: b.title, text: b.excerpt, to: `/insights/blogs/${b.slug}/` })),
-  ...whitepapers.map((w) => ({ type: w.type, title: w.title, text: w.description, to: `/insights/whitepapers/${w.slug}/` })),
+  ...caseStudies.map((c) => ({ type: 'Case study', title: c.title, text: c.summary, to: permalink(`/insights/case-studies/${c.slug}/`) })),
+  ...blogs.map((b) => ({ type: 'Blog', title: b.title, text: b.excerpt, to: permalink(`/insights/blogs/${b.slug}/`) })),
+  ...whitepapers.map((w) => ({ type: w.type, title: w.title, text: w.description, to: permalink(`/insights/whitepapers/${w.slug}/`) })),
   { type: 'Page', title: 'Contact us', text: 'Phone, email and contact form', to: '/contact-us/' },
   { type: 'Page', title: 'Careers', text: 'Working at AchiveX', to: '/careers/' },
   { type: 'Page', title: 'Who We Are', text: 'Our story, mission and values', to: '/about-us/' },

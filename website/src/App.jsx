@@ -24,6 +24,7 @@ import Careers from './pages/Careers'
 import PrivacyPolicy from './pages/legal/PrivacyPolicy'
 import Terms from './pages/legal/Terms'
 import NotFound from './pages/NotFound'
+import { permalink, routePath } from './lib/permalinks'
 
 export default function App() {
   return (
@@ -48,17 +49,16 @@ export default function App() {
 
         <Route path="industries/:slug" element={<Industry />} />
 
-        <Route path="insights">
-          <Route index element={<Navigate to="/insights/case-studies/" replace />} />
-          <Route path="case-studies" element={<CaseStudies />} />
-          <Route path="case-studies/:slug" element={<CaseStudyDetail />} />
-          <Route path="newsroom" element={<Newsroom />} />
-          <Route path="newsroom/:slug" element={<NewsDetail />} />
-          <Route path="whitepapers" element={<Whitepapers />} />
-          <Route path="whitepapers/:slug" element={<WhitepaperDetail />} />
-          <Route path="blogs" element={<Blogs />} />
-          <Route path="blogs/:slug" element={<BlogPost />} />
-        </Route>
+        {/* Content addresses follow the prefixes saved under Settings, Permalinks in the admin. */}
+        <Route path="insights" element={<Navigate to={permalink('/insights/case-studies/')} replace />} />
+        <Route path={routePath('caseStudies')} element={<CaseStudies />} />
+        <Route path={`${routePath('caseStudies')}/:slug`} element={<CaseStudyDetail />} />
+        <Route path={routePath('newsroom')} element={<Newsroom />} />
+        <Route path={`${routePath('newsroom')}/:slug`} element={<NewsDetail />} />
+        <Route path={routePath('whitepapers')} element={<Whitepapers />} />
+        <Route path={`${routePath('whitepapers')}/:slug`} element={<WhitepaperDetail />} />
+        <Route path={routePath('blogs')} element={<Blogs />} />
+        <Route path={`${routePath('blogs')}/:slug`} element={<BlogPost />} />
 
         <Route path="contact-us" element={<Contact />} />
         <Route path="careers" element={<Careers />} />
