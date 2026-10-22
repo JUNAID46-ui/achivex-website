@@ -1,5 +1,5 @@
 import { pageContent } from './pageContent.js'
-import { services, servicePath, categoryPath } from './services.js'
+import { services, defaultServicePath, categoryPath } from './services.js'
 import { categories } from './categories.js'
 import { industries } from './industries.js'
 import { alliances } from './alliances.js'
@@ -9,7 +9,7 @@ import { alliances } from './alliances.js'
 export function contentTargets() {
   const targets = { ...pageContent }
   categories.filter((c) => !c.single).forEach((c) => { targets[categoryPath(c)] = c })
-  services.forEach((s) => { targets[servicePath(s)] = s })
+  services.forEach((s) => { targets[defaultServicePath(s)] = s })
   industries.forEach((i) => { targets[`/industries/${i.slug}/`] = i })
   alliances.forEach((a) => { targets[`/about-us/alliances/${a.slug}/`] = a })
   return targets

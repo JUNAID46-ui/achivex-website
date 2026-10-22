@@ -59,15 +59,11 @@ class AppearanceController extends Controller
 
     public function permalinks()
     {
-        $bases = Permalinks::all();
-
         return view('admin.settings.permalinks', [
-            'bases' => $bases, 'defaults' => Permalinks::DEFAULTS, 'labels' => Permalinks::LABELS,
+            'bases' => Permalinks::all(), 'defaults' => Permalinks::DEFAULTS, 'labels' => Permalinks::LABELS,
+            'serviceMode' => Permalinks::serviceMode(), 'serviceModes' => Permalinks::SERVICE_MODES,
             'site' => rtrim((string) config('admin.site_url'), '/'),
-            'counts' => [
-                'blogs' => \App\Models\Content\BlogPost::count(), 'caseStudies' => \App\Models\Content\CaseStudy::count(),
-                'newsroom' => \App\Models\Content\NewsPost::count(), 'whitepapers' => \App\Models\Content\Whitepaper::count(),
-            ],
+            'counts' => collect(Permalinks::MODELS)->map(fn ($model) => $model::count())->all() + ['services' => count(Permalinks::serviceDefaults())],
         ]);
     }
 
@@ -76,62 +72,93 @@ class AppearanceController extends Controller
         $input = [];
         foreach (Permalinks::DEFAULTS as $type => $default) {
             $raw = strtolower(trim((string) $request->input("bases.{$type}", $default)));
-            $raw = '/'.trim(preg_replace('#/+#', '/', $raw), '/').'/';
-            $input[$type] = $raw;
+            $raw = trim(preg_replace('#/+#', '/', $raw), '/');
+            $input[$type] = $raw === '' ? '/' : '/'.$raw.'/';
         }
-        $this->validateBases($input);
+        $mode = (string) $request->input('services', Permalinks::serviceMode());
+        if (! isset(Permalinks::SERVICE_MODES[$mode])) {
+            throw ValidationException::withMessages(['services' => 'Choose one of the listed service address formats.']);
+        }
+        $this->validateBases($input, $mode);
+
         $old = Permalinks::all();
+        $oldMode = Permalinks::serviceMode();
         $changes = array_filter($input, fn ($new, $type) => $new !== $old[$type], ARRAY_FILTER_USE_BOTH);
-        if (! $changes) {
+        if (! $changes && $mode === $oldMode) {
             return back()->with('status', 'Nothing changed.');
         }
 
-        $moved = 0;
-        DB::transaction(function () use ($input, $old, $changes, &$moved) {
-            foreach ($changes as $type => $new) {
-                $from = $old[$type];
-                // SEO titles and descriptions follow their pages to the new address.
-                $rows = SeoMeta::where('path', 'like', addcslashes($from, '%_').'%')->get();
-                foreach ($rows as $row) {
-                    $target = $new.substr($row->path, strlen($from));
-                    if (SeoMeta::where('path', $target)->exists()) {
-                        throw ValidationException::withMessages(["bases.{$type}" => "SEO settings already exist for {$target}. Remove them first under SEO, Pages and Posts."]);
-                    }
-                    SeoMeta::where('path', $row->path)->update(['path' => $target]);
-                    $moved++;
-                }
-                // Redirects that pointed into the old prefix now point straight at the new one.
-                Redirect::where('to_path', 'like', addcslashes($from, '%_').'%')->get()->each(function ($r) use ($from, $new) {
-                    $r->update(['to_path' => $new.substr($r->to_path, strlen($from))]);
-                });
+        // Every address that changes: list pages, each item, and each service.
+        $moves = [];
+        foreach ($changes as $type => $new) {
+            $moves[Permalinks::listPath($type, $old[$type])] = Permalinks::listPath($type, $new);
+            foreach (Permalinks::MODELS[$type]::pluck('slug') as $slug) {
+                $moves[$old[$type].$slug.'/'] = $new.$slug.'/';
             }
-            SiteSetting::put('permalinks', $input);
+        }
+        if ($mode !== $oldMode) {
+            foreach (Permalinks::serviceDefaults() as $slug => $default) {
+                $moves[Permalinks::servicePath($slug, $default, $oldMode)] = Permalinks::servicePath($slug, $default, $mode);
+            }
+        }
+        $moves = array_filter($moves, fn ($to, $from) => $to !== $from, ARRAY_FILTER_USE_BOTH);
+
+        $moved = 0;
+        DB::transaction(function () use ($input, $mode, $moves, &$moved) {
+            // SEO titles and descriptions follow their pages to the new address.
+            foreach (SeoMeta::whereIn('path', array_keys($moves))->get() as $row) {
+                $target = $moves[$row->path];
+                if (! isset($moves[$target]) && SeoMeta::where('path', $target)->exists()) {
+                    throw ValidationException::withMessages(['bases' => "SEO settings already exist for {$target}. Remove them first under SEO, Pages and Posts."]);
+                }
+                SeoMeta::where('path', $row->path)->update(['path' => $target]);
+                $moved++;
+            }
+            // Redirects that pointed at an old address now point straight at the new one.
+            foreach (Redirect::whereIn('to_path', array_keys($moves))->get() as $r) {
+                $r->update(['to_path' => $moves[$r->to_path]]);
+            }
+            SiteSetting::put('permalinks', $input + ['services' => $mode]);
         });
         Cache::forget('seo-index');
         SiteLinks::forget();
-        $summary = collect($changes)->map(fn ($new, $type) => Permalinks::LABELS[$type].': '.$old[$type].' to '.$new)->implode('; ');
+        $summary = collect($changes)->map(fn ($new, $type) => Permalinks::LABELS[$type].': '.$old[$type].' to '.$new)
+            ->when($mode !== $oldMode, fn ($c) => $c->push('Services: '.Permalinks::SERVICE_MODES[$oldMode].' to '.Permalinks::SERVICE_MODES[$mode]))->implode('; ');
         ActivityLog::record('settings', 'Permalinks', 'Content addresses', $summary, ['module' => 'Permalinks', 'context' => ['moved_seo_rows' => $moved]]);
 
         return back()->with('status', 'Permalinks saved. Old addresses send visitors to the new ones. Publish the website again so its sitemap.xml copy updates.');
     }
 
-    private function validateBases(array $bases): void
+    private function validateBases(array $bases, string $serviceMode): void
     {
         $errors = [];
         $custom = Page::where('kind', 'custom')->pluck('path')->map(fn ($p) => SiteLinks::normalize($p))->all();
         foreach ($bases as $type => $base) {
             $key = "bases.{$type}";
             if (! preg_match(Permalinks::PATTERN, $base)) {
-                $errors[$key] = 'Use lowercase letters, numbers and dashes, for example /blog/ or /resources/articles/.';
+                $errors[$key] = 'Use lowercase letters, numbers and dashes, for example /blog/, or / for the root of the site.';
+            } elseif ($base === '/') {
+                continue;
             } elseif (in_array($base, Permalinks::RESERVED, true) || collect(Permalinks::RESERVED)->contains(fn ($r) => $r !== '/insights/' && str_starts_with($base, $r))) {
                 $errors[$key] = "{$base} is used by a fixed page of the website.";
             } elseif (in_array($base, $custom, true)) {
                 $errors[$key] = "A custom page already uses {$base}.";
             }
             foreach ($bases as $other => $otherBase) {
-                if ($other !== $type && ! isset($errors[$key]) && (str_starts_with($base, $otherBase) || str_starts_with($otherBase, $base))) {
+                if ($other !== $type && $otherBase !== '/' && ! isset($errors[$key]) && (str_starts_with($base, $otherBase) || str_starts_with($otherBase, $base))) {
                     $errors[$key] = 'Two content types cannot share or nest their addresses ('.Permalinks::LABELS[$other].' uses '.$otherBase.').';
                 }
+            }
+        }
+        // Items at the root of the site share one set of addresses, so their slugs must not clash.
+        if (! $errors) {
+            $seen = [];
+            foreach (Permalinks::rootClaims($bases, $serviceMode) as [$slug, $owner]) {
+                if (isset($seen[$slug]) && $seen[$slug] !== $owner) {
+                    $errors['bases'] = "/{$slug}/ would be the address of both {$seen[$slug]} and {$owner}. Change one of the slugs first, or keep a prefix.";
+                    break;
+                }
+                $seen[$slug] ??= $owner;
             }
         }
         if ($errors) {

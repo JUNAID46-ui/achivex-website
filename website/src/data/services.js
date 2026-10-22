@@ -1,5 +1,6 @@
 import { img } from './images'
 import { categories } from './categories'
+import { serviceMode } from '../lib/permalinks'
 
 // Every individual service page is generated from this list.
 // To add a service: add an object here and add its slug to the matching category in categories.js.
@@ -817,9 +818,17 @@ export const services = [
 
 export const getService = (slug) => services.find((s) => s.slug === slug)
 
-// Path helper keeps URLs consistent across menus, cards and the search.
-export const servicePath = (service) =>
+// Address the service had before permalinks could change. Saved page edits are keyed by it.
+export const defaultServicePath = (service) =>
   service.category ? `/services/${service.category}/${service.slug}/` : `/services/${service.slug}/`
+
+// Path helper keeps URLs consistent across menus, cards and the search. Follows Settings, Permalinks.
+export const servicePath = (service) => {
+  const mode = serviceMode()
+  if (mode === 'root') return `/${service.slug}/`
+  if (mode === 'flat') return `/services/${service.slug}/`
+  return defaultServicePath(service)
+}
 
 export const categoryPath = (category) => `/services/${category.slug}/`
 

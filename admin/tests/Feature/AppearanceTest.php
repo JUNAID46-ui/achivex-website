@@ -93,4 +93,44 @@ class AppearanceTest extends PostgresTestCase
         $this->assertSame('ok', SiteLinks::check(['x' => '<a href="/blog/cloud/">new</a>'])['/blog/cloud/']);
         $this->assertDatabaseHas('activity_logs', ['module' => 'Permalinks']);
     }
+
+    public function test_blog_posts_and_services_can_live_at_the_root(): void
+    {
+        $admin = $this->makeUser();
+        BlogPost::create(['slug' => 'cloud-tips', 'title' => 'Cloud', 'category' => 'Cloud', 'excerpt' => 'e', 'intro_keyword' => 'k', 'intro_text' => ' t', 'published' => true]);
+        SeoMeta::create(['path' => '/insights/blogs/cloud-tips/', 'title' => 'Post title']);
+        SeoMeta::create(['path' => '/services/cloud/managed-services/', 'title' => 'Service title']);
+
+        $this->actingAs($admin)->post('/admin/settings/permalinks', ['bases' => ['blogs' => '/'] + Permalinks::DEFAULTS, 'services' => 'root'])->assertSessionHasNoErrors();
+
+        $this->assertSame('/cloud-tips/', Registry::get('blog-posts')->sitePath(BlogPost::find('cloud-tips')));
+        $this->assertSame('/insights/blogs/', Permalinks::listPath('blogs'), 'The blog list keeps its address');
+        $this->assertSame('/insights/blogs/', Permalinks::map('/insights/blogs/'));
+        $this->assertSame('/managed-services/', Permalinks::map('/services/cloud/managed-services/'));
+        $this->assertSame('/services/cloud/', Permalinks::map('/services/cloud/'), 'Service area pages keep their address');
+        $this->assertSame('Post title', SeoMeta::find('/cloud-tips/')?->title);
+        $this->assertSame('Service title', SeoMeta::find('/managed-services/')?->title);
+        $this->assertSame('/managed-services/', Permalinks::fromOldBase('/services/cloud/managed-services/'));
+        $this->assertSame('/cloud-tips/', Permalinks::fromOldBase('/insights/blogs/cloud-tips/'));
+        $this->assertNull(Permalinks::fromOldBase('/insights/blogs/'));
+        $this->assertSame('ok', SiteLinks::check(['x' => '<a href="/managed-services/">s</a>'])['/managed-services/']);
+
+        // A new post cannot take the address of a service or a fixed page.
+        foreach (['managed-services', 'contact-us'] as $taken) {
+            $this->actingAs($admin)->post('/admin/r/blog-posts', ['title' => 'T', 'slug' => $taken, 'category' => 'Cloud', 'excerpt' => 'e', 'intro_keyword' => 'k', 'intro_text' => 't', 'published_on' => '2026-10-01'])
+                ->assertSessionHasErrors('slug');
+        }
+        // And a custom page cannot take the address of a post.
+        $this->actingAs($admin)->post('/admin/pages', ['title' => 'Landing', 'slug' => 'cloud-tips', 'layout' => 'blank'])->assertSessionHasErrors('slug');
+    }
+
+    public function test_root_addresses_that_would_clash_are_refused(): void
+    {
+        $admin = $this->makeUser();
+        BlogPost::create(['slug' => 'security', 'title' => 'S', 'category' => 'Security', 'excerpt' => 'e', 'intro_keyword' => 'k', 'intro_text' => ' t', 'published' => true]);
+        $this->actingAs($admin)->post('/admin/settings/permalinks', ['bases' => ['blogs' => '/'] + Permalinks::DEFAULTS, 'services' => 'root'])->assertSessionHasErrors('bases');
+        $this->actingAs($admin)->post('/admin/settings/permalinks', ['bases' => Permalinks::DEFAULTS, 'services' => 'anything'])->assertSessionHasErrors('services');
+        $this->assertSame('category', Permalinks::serviceMode());
+        $this->assertSame(Permalinks::DEFAULTS, Permalinks::all());
+    }
 }

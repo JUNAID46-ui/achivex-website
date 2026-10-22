@@ -25,7 +25,7 @@ class BlogPostResource extends Resource
     {
         return [
             ['name' => 'title', 'label' => 'Title', 'type' => 'text', 'rules' => 'required|max:200', 'big' => true],
-            ['name' => 'slug', 'label' => 'URL slug', 'type' => 'slug', 'from' => 'title', 'rules' => 'required|max:200|alpha_dash', 'prefix' => \App\Support\Permalinks::base('blogs')],
+            ['name' => 'slug', 'label' => 'URL slug', 'type' => 'slug', 'from' => 'title', 'rules' => 'required|max:200|alpha_dash'.\App\Support\Permalinks::slugRule('blogs'), 'prefix' => \App\Support\Permalinks::base('blogs')],
             ['name' => 'excerpt', 'label' => 'Excerpt', 'type' => 'textarea', 'rows' => 2, 'rules' => 'required|max:400', 'help' => 'Shown on blog cards and in search results.'],
             ['name' => 'intro_keyword', 'label' => 'Opening keyword (shown in bold)', 'type' => 'text', 'rules' => 'required|max:120'],
             ['name' => 'intro_text', 'label' => 'Rest of the first paragraph', 'type' => 'textarea', 'rows' => 3, 'rules' => 'required', 'help' => 'Starts right after the bold keyword. Begin with a space, for example " is the process of..."'],

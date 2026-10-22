@@ -22,7 +22,7 @@ class CaseStudyResource extends Resource
     {
         return [
             ['name' => 'title', 'label' => 'Title', 'type' => 'text', 'rules' => 'required|max:200', 'big' => true],
-            ['name' => 'slug', 'label' => 'URL slug', 'type' => 'slug', 'from' => 'title', 'rules' => 'required|max:200|alpha_dash', 'prefix' => \App\Support\Permalinks::base('caseStudies')],
+            ['name' => 'slug', 'label' => 'URL slug', 'type' => 'slug', 'from' => 'title', 'rules' => 'required|max:200|alpha_dash'.\App\Support\Permalinks::slugRule('caseStudies'), 'prefix' => \App\Support\Permalinks::base('caseStudies')],
             ['name' => 'summary', 'label' => 'Summary', 'type' => 'textarea', 'rows' => 2, 'rules' => 'required|max:400'],
             ['name' => 'overview', 'label' => 'The situation', 'type' => 'textarea', 'rows' => 3, 'rules' => 'required'],
             ['name' => 'challenge', 'label' => 'The challenge', 'type' => 'paragraphs', 'help' => 'Leave a blank line between paragraphs.'],

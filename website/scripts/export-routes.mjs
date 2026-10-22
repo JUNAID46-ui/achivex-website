@@ -1,9 +1,10 @@
-// Writes public/site-routes.json: every fixed page of the website with its default SEO text.
+// Writes public/site-routes.json: every fixed page of the website with its default SEO text and default address
+// (the admin maps addresses to the saved permalinks).
 // The admin panel reads this file for the SEO page list and the sitemap.
 // Run with: npm run export-routes
 import { writeFileSync } from 'node:fs'
 import { categories } from '../src/data/categories.js'
-import { services, servicePath, categoryPath } from '../src/data/services.js'
+import { services, defaultServicePath as servicePath, categoryPath } from '../src/data/services.js'
 import { industries } from '../src/data/industries.js'
 import { alliances } from '../src/data/alliances.js'
 import { contentTargets } from '../src/data/contentTargets.js'

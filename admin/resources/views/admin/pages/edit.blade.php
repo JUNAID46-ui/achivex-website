@@ -4,8 +4,8 @@
 @section('subheading', 'Change the text and images of this page. Click Replace on an image to pick a new one, or Remove to take it off.')
 @section('actions')
   <a href="{{ route('admin.pages.index') }}" class="btn-secondary">&larr; All pages</a>
-  <a href="{{ route('admin.seo.pages.edit', ['path' => $page['path']]) }}" class="btn-secondary">@include('admin.partials.icon', ['name' => 'search']) Fix SEO</a>
-  <a href="{{ $siteUrl.$page['path'] }}" target="_blank" class="btn-secondary">@include('admin.partials.icon', ['name' => 'external']) View</a>
+  <a href="{{ route('admin.seo.pages.edit', ['path' => \App\Support\Permalinks::map($page['path'])]) }}" class="btn-secondary">@include('admin.partials.icon', ['name' => 'search']) Fix SEO</a>
+  <a href="{{ $siteUrl.\App\Support\Permalinks::map($page['path']) }}" target="_blank" class="btn-secondary">@include('admin.partials.icon', ['name' => 'external']) View</a>
 @endsection
 
 @section('content')
@@ -25,7 +25,7 @@
         @if($saved)<span class="badge-warn">Edited</span>@else<span class="badge-gray">Original</span>@endif
       </div>
       <div class="card-body space-y-3 text-[13px] text-neutral-600">
-        <p><span class="text-neutral-500">Address:</span> <span class="font-semibold">{{ $page['path'] }}</span></p>
+        <p><span class="text-neutral-500">Address:</span> <span class="font-semibold">{{ \App\Support\Permalinks::map($page['path']) }}</span></p>
         <p><span class="text-neutral-500">Type:</span> {{ $page['type'] }}</p>
         @if($saved)<p><span class="text-neutral-500">Last saved:</span> {{ $saved->updated_at?->diffForHumans() }}</p>@endif
         <p :class="dirty ? 'font-semibold text-ink' : 'text-neutral-400'" x-text="dirty ? 'Unsaved changes' : 'No unsaved changes'"></p>

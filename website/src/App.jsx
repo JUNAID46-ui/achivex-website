@@ -24,7 +24,8 @@ import Careers from './pages/Careers'
 import PrivacyPolicy from './pages/legal/PrivacyPolicy'
 import Terms from './pages/legal/Terms'
 import NotFound from './pages/NotFound'
-import { permalink, routePath } from './lib/permalinks'
+import RootResolver from './pages/RootResolver'
+import { permalink, routePath, listRoutePath, isRoot } from './lib/permalinks'
 
 export default function App() {
   return (
@@ -51,19 +52,18 @@ export default function App() {
 
         {/* Content addresses follow the prefixes saved under Settings, Permalinks in the admin. */}
         <Route path="insights" element={<Navigate to={permalink('/insights/case-studies/')} replace />} />
-        <Route path={routePath('caseStudies')} element={<CaseStudies />} />
-        <Route path={`${routePath('caseStudies')}/:slug`} element={<CaseStudyDetail />} />
-        <Route path={routePath('newsroom')} element={<Newsroom />} />
-        <Route path={`${routePath('newsroom')}/:slug`} element={<NewsDetail />} />
-        <Route path={routePath('whitepapers')} element={<Whitepapers />} />
-        <Route path={`${routePath('whitepapers')}/:slug`} element={<WhitepaperDetail />} />
-        <Route path={routePath('blogs')} element={<Blogs />} />
-        <Route path={`${routePath('blogs')}/:slug`} element={<BlogPost />} />
+        {Object.entries({ caseStudies: [CaseStudies, CaseStudyDetail], newsroom: [Newsroom, NewsDetail], whitepapers: [Whitepapers, WhitepaperDetail], blogs: [Blogs, BlogPost] })
+          .flatMap(([type, [List, Detail]]) => [
+            <Route key={type} path={listRoutePath(type)} element={<List />} />,
+            // A root prefix ("/") has no route of its own: RootResolver below picks the item.
+            isRoot(type) ? null : <Route key={`${type}-item`} path={`${routePath(type)}/:slug`} element={<Detail />} />,
+          ])}
 
         <Route path="contact-us" element={<Contact />} />
         <Route path="careers" element={<Careers />} />
         <Route path="privacy-policy" element={<PrivacyPolicy />} />
         <Route path="terms-of-service" element={<Terms />} />
+        <Route path=":slug" element={<RootResolver />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

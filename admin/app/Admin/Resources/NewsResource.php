@@ -22,7 +22,7 @@ class NewsResource extends Resource
     {
         return [
             ['name' => 'title', 'label' => 'Headline', 'type' => 'text', 'rules' => 'required|max:200', 'big' => true],
-            ['name' => 'slug', 'label' => 'URL slug', 'type' => 'slug', 'from' => 'title', 'rules' => 'required|max:200|alpha_dash', 'prefix' => \App\Support\Permalinks::base('newsroom')],
+            ['name' => 'slug', 'label' => 'URL slug', 'type' => 'slug', 'from' => 'title', 'rules' => 'required|max:200|alpha_dash'.\App\Support\Permalinks::slugRule('newsroom'), 'prefix' => \App\Support\Permalinks::base('newsroom')],
             ['name' => 'summary', 'label' => 'Summary', 'type' => 'textarea', 'rows' => 2, 'rules' => 'required|max:400'],
             ['name' => 'body', 'label' => 'Article', 'type' => 'paragraphs', 'rows' => 12, 'help' => 'Leave a blank line between paragraphs.'],
             ['name' => 'published', 'label' => 'Published', 'type' => 'toggle', 'side' => true],

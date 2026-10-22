@@ -56,6 +56,9 @@ class PageController extends Controller
         if (PageCatalog::find($path)) {
             return back()->withInput()->withErrors(['slug' => "A page already uses {$path}. Choose another address."]);
         }
+        if ($owner = \App\Support\Permalinks::contentAt($path)) {
+            return back()->withInput()->withErrors(['slug' => "{$path} is the address of {$owner} (see Settings, Permalinks). Choose another address."]);
+        }
 
         DB::transaction(function () use ($data, $path, $request) {
             Page::create([
@@ -145,6 +148,9 @@ class PageController extends Controller
         $newPath = '/'.trim($data['slug'], '/').'/';
         if ($newPath !== $page['path'] && PageCatalog::find($newPath)) {
             return back()->withInput()->withErrors(['slug' => "A page already uses {$newPath}."]);
+        }
+        if ($newPath !== $page['path'] && ($owner = \App\Support\Permalinks::contentAt($newPath))) {
+            return back()->withInput()->withErrors(['slug' => "{$newPath} is the address of {$owner} (see Settings, Permalinks)."]);
         }
         DB::transaction(function () use ($page, $newPath, $data, $request) {
             $row = Page::findOrFail($page['path']);

@@ -162,7 +162,7 @@ class AiVisibilityAudit
         // 7. Topical depth: blog categories with little content
         foreach (BlogPost::live()->get()->groupBy('category') as $cat => $posts) {
             if ($posts->count() < 3) {
-                $f[] = Finding::make('Thin topic cluster', 'Topical authority', 'info', \App\Support\Permalinks::base('blogs'), "Category \"{$cat}\" has {$posts->count()} published ".\Illuminate\Support\Str::plural('post', $posts->count()).'.', 'Publish several in-depth posts per topic you want to be known for, and link them to the matching service page.', 'recommendation');
+                $f[] = Finding::make('Thin topic cluster', 'Topical authority', 'info', \App\Support\Permalinks::listPath('blogs'), "Category \"{$cat}\" has {$posts->count()} published ".\Illuminate\Support\Str::plural('post', $posts->count()).'.', 'Publish several in-depth posts per topic you want to be known for, and link them to the matching service page.', 'recommendation');
             }
         }
 

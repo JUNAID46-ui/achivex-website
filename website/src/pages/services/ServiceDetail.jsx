@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom'
+import { Link, Navigate, useLocation, useParams } from 'react-router-dom'
 import { Check, ArrowRight } from 'lucide-react'
 import useSeo from '../../hooks/useSeo'
 import FadeUp from '../../components/FadeUp'
@@ -16,9 +16,13 @@ import { permalink } from '../../lib/permalinks'
 export default function ServiceDetail({ singleSlug }) {
   const params = useParams()
   const service = getService(singleSlug || params.slug)
-  const valid = service && (singleSlug ? !service.category : service.category === params.category)
+  const { pathname } = useLocation()
+  const valid = service && (!params.category || service.category === params.category)
   useSeo(valid ? service.name : 'Page Not Found', valid ? `${service.short} ${service.heroLine}` : undefined)
   if (!valid) return <NotFound />
+  // Old or other-format addresses (after a permalink change) go to the current one.
+  const canonical = servicePath(service)
+  if ((pathname.endsWith('/') ? pathname : `${pathname}/`) !== canonical) return <Navigate to={canonical} replace />
 
   const category = service.category ? getCategory(service.category) : null
   const cs = getCaseStudy(service.caseStudy)
