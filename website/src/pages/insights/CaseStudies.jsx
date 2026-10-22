@@ -36,14 +36,14 @@ export default function CaseStudies() {
   const [industry, setIndustry] = useState('')
 
   const serviceOptions = useMemo(() => {
-    const slugs = [...new Set(caseStudies.flatMap((c) => c.services))]
+    const slugs = [...new Set(caseStudies.flatMap((c) => c.services).map((s) => getService(s)?.slug || s))]
     return slugs.map((s) => ({ value: s, label: getService(s)?.name || s })).sort((a, b) => a.label.localeCompare(b.label))
   }, [])
   const industryOptions = industries
     .filter((i) => caseStudies.some((c) => c.industry === i.slug))
     .map((i) => ({ value: i.slug, label: i.name }))
 
-  const list = caseStudies.filter((c) => (!service || c.services.includes(service)) && (!industry || c.industry === industry))
+  const list = caseStudies.filter((c) => (!service || c.services.some((s) => (getService(s)?.slug || s) === service)) && (!industry || c.industry === industry))
 
   return (
     <>

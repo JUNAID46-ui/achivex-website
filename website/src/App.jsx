@@ -6,11 +6,12 @@ import Accomplishments from './pages/about/Accomplishments'
 import Esg from './pages/about/Esg'
 import Leadership from './pages/about/Leadership'
 import GlobalPresence from './pages/about/GlobalPresence'
-import Alliance from './pages/about/Alliance'
 import ServicesOverview from './pages/services/ServicesOverview'
 import ServiceResolver from './pages/services/ServiceResolver'
 import ServiceDetail from './pages/services/ServiceDetail'
 import Industry from './pages/Industry'
+import Industries from './pages/Industries'
+import Insights from './pages/insights/Insights'
 import CaseStudies from './pages/insights/CaseStudies'
 import CaseStudyDetail from './pages/insights/CaseStudyDetail'
 import Newsroom from './pages/insights/Newsroom'
@@ -25,7 +26,7 @@ import PrivacyPolicy from './pages/legal/PrivacyPolicy'
 import Terms from './pages/legal/Terms'
 import NotFound from './pages/NotFound'
 import RootResolver from './pages/RootResolver'
-import { permalink, routePath, listRoutePath, isRoot } from './lib/permalinks'
+import { routePath, listRoutePath, isRoot } from './lib/permalinks'
 
 export default function App() {
   return (
@@ -39,7 +40,8 @@ export default function App() {
           <Route path="esg" element={<Esg />} />
           <Route path="leadership" element={<Leadership />} />
           <Route path="global-presence" element={<GlobalPresence />} />
-          <Route path="alliances/:slug" element={<Alliance />} />
+          {/* The Alliance pages were removed; old links go to the services page. */}
+          <Route path="alliances/*" element={<Navigate to="/services/" replace />} />
         </Route>
 
         <Route path="services">
@@ -48,10 +50,11 @@ export default function App() {
           <Route path=":category/:slug" element={<ServiceDetail />} />
         </Route>
 
+        <Route path="industries" element={<Industries />} />
         <Route path="industries/:slug" element={<Industry />} />
 
         {/* Content addresses follow the prefixes saved under Settings, Permalinks in the admin. */}
-        <Route path="insights" element={<Navigate to={permalink('/insights/case-studies/')} replace />} />
+        <Route path="insights" element={<Insights />} />
         {Object.entries({ caseStudies: [CaseStudies, CaseStudyDetail], newsroom: [Newsroom, NewsDetail], whitepapers: [Whitepapers, WhitepaperDetail], blogs: [Blogs, BlogPost] })
           .flatMap(([type, [List, Detail]]) => [
             <Route key={type} path={listRoutePath(type)} element={<List />} />,

@@ -15,17 +15,17 @@ import { site } from '../data/site'
 import { categories } from '../data/categories'
 import { services, getService, servicePath, categoryPath } from '../data/services'
 import { industries } from '../data/industries'
-import { alliances } from '../data/alliances'
 import { caseStudies } from '../data/caseStudies'
 import { blogs } from '../data/blogs'
 import { whitepapers } from '../data/whitepapers'
 import { heroStats } from '../data/about'
 import { homeSections } from '../data/homeSections'
+import { isLight } from '../theme'
 import PageSections from '../components/PageSections'
 import { safeHref } from '../utils/safeHref'
 import { permalink } from '../lib/permalinks'
 
-const mainAreas = ['digital', 'data-and-analytics', 'cloud', 'security', 'business-process-services']
+const mainAreas = categories.map((c) => c.slug)
 const areaName = (slug) => categories.find((c) => c.slug === slug).name
 const pathFor = (slug) => {
   const c = categories.find((x) => x.slug === slug)
@@ -98,7 +98,8 @@ function Hero({ d }) {
             />
 
             {/* Dark card in the top left notch */}
-            <div className="absolute left-0 top-0 hidden h-[44%] w-[27%] flex-col justify-between rounded-[22px] bg-ink p-5 ring-[14px] ring-canvas md:flex lg:p-6">
+            {/* The ring matches the page background; bg-ink switches the colour variables inside the card, so it is set here. */}
+            <div className="absolute left-0 top-0 hidden h-[44%] w-[27%] flex-col justify-between rounded-[22px] bg-ink p-5 ring-[14px] md:flex lg:p-6" style={{ '--tw-ring-color': isLight ? '#FFFFFF' : '#0B0D12' }}>
               <HeroStat stat={first} dark />
             </div>
 
@@ -272,7 +273,7 @@ function ServiceExplorer({ d }) {
 /* 5. Why AchiveX */
 function WhyAchivex({ d }) {
   return (
-    <section className="bg-navy py-24 text-white md:py-32">
+    <section className="bg-ink py-24 text-white md:py-32">
       <div className="container-site">
         <SectionHead light title={d.title} text={d.text} />
         <div className="grid gap-x-16 sm:grid-cols-2">
@@ -362,32 +363,6 @@ function Industries({ d }) {
   )
 }
 
-/* 9. Platforms */
-function Platforms({ d }) {
-  return (
-    <section className="border-y border-body/10 bg-canvas py-16">
-      <div className="container-site grid gap-8 lg:grid-cols-[260px_1fr] lg:items-center">
-        <FadeUp>
-          <h2 className="text-xl font-semibold text-white">{d.title}</h2>
-          {d.note && <p className="mt-2 text-sm text-body/55">{d.note}</p>}
-        </FadeUp>
-        <ul className="grid grid-cols-2 border-l border-t border-body/10 sm:grid-cols-3 lg:grid-cols-6">
-          {alliances.map((a) => (
-            <li key={a.slug} className="border-b border-r border-body/10">
-              <Link
-                to={`/about-us/alliances/${a.slug}/`}
-                className="flex h-24 items-center justify-center text-lg font-semibold tracking-tight text-slate transition-colors hover:bg-navy hover:text-white"
-              >
-                {a.logo ? <img src={a.logo} alt={a.name} className="max-h-8" /> : a.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  )
-}
-
 /* 10. Featured case study */
 function FeaturedCase({ d }) {
   const cs = caseStudies.find((c) => c.slug === d.caseSlug) || caseStudies[0]
@@ -456,7 +431,7 @@ function LatestInsights({ d }) {
 function HomeFaq({ d }) {
   return (
     <section className="bg-canvas py-24 md:py-32">
-      <div className="container-site grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+      <div className="container-site grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
         <FadeUp>
           <h2 className="h-display text-4xl md:text-5xl">{d.title}</h2>
           {d.text && <p className="mt-6 max-w-sm text-[17px] leading-relaxed text-body/60">{d.text}</p>}
@@ -509,7 +484,6 @@ const layouts = {
   spotlights: Spotlights,
   process: Process,
   industries: Industries,
-  platforms: Platforms,
   featured_case: FeaturedCase,
   insights: LatestInsights,
   faq: HomeFaq,
@@ -522,7 +496,7 @@ export const homeLayouts = layouts
 export default function Home() {
   useSeo(
     null,
-    'AchiveX LLC is a Wyoming based marketing and software solutions company offering digital strategy, data and analytics, cloud, security and business process services.',
+    'AchiveX LLC is a Wyoming based marketing and software solutions company offering web development, custom software, AI and automation, CRM, SEO, social media and ads management.',
   )
   return <PageSections sections={homeSections} />
 }

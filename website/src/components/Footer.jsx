@@ -4,11 +4,9 @@ import Logo from './Logo'
 import SocialIcons from './SocialIcons'
 import { site, quickLinks } from '../data/site'
 import { categories } from '../data/categories'
-import { getService, servicePath, categoryPath } from '../data/services'
+import { categoryPath } from '../data/services'
 import { insightsLinks } from '../data/menus'
 import { safeHref } from '../utils/safeHref'
-
-const footerServices = ['digital', 'data-and-analytics', 'cloud', 'security', 'business-process-services']
 
 function Col({ title, children }) {
   return (
@@ -24,10 +22,10 @@ const linkCls = 'text-[15px] text-white/75 transition-colors hover:text-accent'
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-canvas text-white">
+    <footer className="border-t border-white/15 bg-ink text-white">
       <div className="container-site grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1.1fr_1.1fr_1.3fr] lg:gap-10 lg:py-20">
         <div>
-          <Logo variant="full" />
+          <Logo variant="full" light />
           <p className="mt-6 max-w-xs text-[15px] leading-relaxed text-white/75">{site.tagline}</p>
           <SocialIcons className="mt-7" />
         </div>
@@ -42,11 +40,10 @@ export default function Footer() {
 
         <Col title="Services">
           <ul className="space-y-3">
-            {footerServices.map((slug) => {
-              const c = categories.find((x) => x.slug === slug)
-              const to = c.single ? servicePath(getService(c.slug)) : categoryPath(c)
-              return <li key={slug}><Link to={to} className={linkCls}>{c.name}</Link></li>
-            })}
+            {categories.map((c) => (
+              <li key={c.slug}><Link to={categoryPath(c)} className={linkCls}>{c.name}</Link></li>
+            ))}
+            <li><Link to="/services/" className={linkCls}>All services</Link></li>
           </ul>
         </Col>
 

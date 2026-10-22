@@ -17,7 +17,10 @@ export default function ServiceDetail({ singleSlug }) {
   const params = useParams()
   const service = getService(singleSlug || params.slug)
   const { pathname } = useLocation()
-  const valid = service && (!params.category || service.category === params.category)
+  const slug = singleSlug || params.slug
+  // An old address from the earlier catalog is valid too; it is sent on to the current page below.
+  const legacy = service && service.slug !== slug
+  const valid = service && (legacy || !params.category || service.category === params.category)
   useSeo(valid ? service.name : 'Page Not Found', valid ? `${service.short} ${service.heroLine}` : undefined)
   if (!valid) return <NotFound />
   // Old or other-format addresses (after a permalink change) go to the current one.
@@ -135,9 +138,11 @@ export default function ServiceDetail({ singleSlug }) {
         </section>
       )}
 
+      <CTA title={`Ready to talk about ${service.name.toLowerCase()}?`} />
+
       {/* FAQ */}
       <section className="bg-canvas py-20 md:py-28">
-        <div className="container-site grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+        <div className="container-site grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
           <FadeUp>
             <h2 className="h-display text-4xl md:text-5xl">Questions we often hear</h2>
             {siblings.length > 0 && (
@@ -155,7 +160,6 @@ export default function ServiceDetail({ singleSlug }) {
         </div>
       </section>
 
-      <CTA title={`Ready to talk about ${service.name.toLowerCase()}?`} />
     </>
   )
 }

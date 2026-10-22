@@ -6,7 +6,6 @@ import { writeFileSync } from 'node:fs'
 import { categories } from '../src/data/categories.js'
 import { services, defaultServicePath as servicePath, categoryPath } from '../src/data/services.js'
 import { industries } from '../src/data/industries.js'
-import { alliances } from '../src/data/alliances.js'
 import { contentTargets } from '../src/data/contentTargets.js'
 import { blogs } from '../src/data/blogs.js'
 import { caseStudies } from '../src/data/caseStudies.js'
@@ -14,13 +13,15 @@ import { news } from '../src/data/news.js'
 import { whitepapers } from '../src/data/whitepapers.js'
 
 const pages = [
-  { path: '/', title: 'Home', description: 'AchiveX LLC is a Wyoming based marketing and software solutions company offering digital strategy, data and analytics, cloud, security and business process services.', type: 'Page' },
+  { path: '/', title: 'Home', description: 'AchiveX LLC is a Wyoming based marketing and software solutions company offering web development, custom software, AI and automation, CRM, SEO, social media and ads management.', type: 'Page' },
   { path: '/about-us/', title: 'Who We Are', description: 'Learn about AchiveX LLC, a Wyoming based technology services company, its story, mission, vision and the values that guide its work.', type: 'Page' },
   { path: '/about-us/accomplishments/', title: 'Our Accomplishments', description: 'Milestones and what AchiveX LLC has built so far: service areas, services, guides and articles.', type: 'Page' },
   { path: '/about-us/esg/', title: 'Our Commitment to ESG', description: 'How AchiveX LLC approaches environmental, social and governance responsibilities.', type: 'Page' },
   { path: '/about-us/leadership/', title: 'Our Leadership', description: 'The leadership team at AchiveX LLC and how they work with clients.', type: 'Page' },
   { path: '/about-us/global-presence/', title: 'Our Global Presence', description: 'AchiveX LLC is headquartered in Wyoming, USA.', type: 'Page' },
-  { path: '/services/', title: 'Services', description: 'Explore AchiveX services across digital, data and analytics, cloud, infrastructure, security, emerging technologies and business process services.', type: 'Page' },
+  { path: '/services/', title: 'Services', description: 'Explore AchiveX services: web development, custom software, AI and intelligent systems, automation, CRM, SEO, AEO and GEO, social media and ads management.', type: 'Page' },
+  { path: '/industries/', title: 'Industries', description: 'The industries AchiveX works with, from financial services and healthcare to retail, manufacturing, logistics and education.', type: 'Page' },
+  { path: '/insights/', title: 'Insights', description: 'Case studies, company news, free guides and practical articles from AchiveX LLC.', type: 'Page' },
   { path: '/insights/case-studies/', title: 'Case Studies', description: 'Examples of how AchiveX approaches client challenges across digital, data, cloud, security and business process services.', type: 'Page' },
   { path: '/insights/newsroom/', title: 'Newsroom', description: 'Company announcements and news from AchiveX LLC.', type: 'Page' },
   { path: '/insights/whitepapers/', title: 'Whitepapers and eBooks', description: 'Free practical guides from AchiveX on cloud migration, data quality, generative AI and security.', type: 'Page' },
@@ -38,9 +39,6 @@ for (const s of services) {
 }
 for (const i of industries) {
   pages.push({ path: `/industries/${i.slug}/`, title: i.name, description: `${i.summary} See how AchiveX supports ${i.name.toLowerCase()} organisations.`, type: 'Industry' })
-}
-for (const a of alliances) {
-  pages.push({ path: `/about-us/alliances/${a.slug}/`, title: `${a.name} Services`, description: `How AchiveX works with ${a.name} technology. ${a.intro}`, type: 'Alliance' })
 }
 
 // Default text and images of every editable page, so the admin can build the "Edit Page" form.

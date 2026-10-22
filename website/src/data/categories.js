@@ -1,79 +1,40 @@
 import { img } from './images'
 
-// Service categories in menu order.
-// `single: true` means the category is itself a service page with no sub items.
+// Service areas in menu order. Each area groups the individual services listed in services.js.
+// `single: true` would mean the area is itself a service page with no sub items (none at the moment).
 export const categories = [
   {
-    slug: 'digital',
-    name: 'Digital',
-    short: 'Strategy, commerce and business applications that fit the way your teams already work.',
+    slug: 'web-and-software',
+    name: 'Web and Software',
+    short: 'Websites, web apps and internal systems built around how your business works.',
     description:
-      'Digital work starts with a clear picture of where you are and where you want to be. We help you set priorities, build the online channels your customers use and configure the business applications your staff rely on every day.',
-    image: img('1531482615713-2afd69097998'),
-    heroImage: img('1517245386807-bb43f82c33c4', 2000),
-    services: ['digital-consulting-and-strategy', 'digital-commerce', 'business-applications'],
+      'Your website is often the first thing a customer sees, and your internal tools shape how your team spends its day. We design, build and maintain both, using WordPress, WooCommerce, Laravel and React.',
+    image: img('1498050108023-c5249f4df085'),
+    heroImage: img('1517694712202-14dd9538aa97', 2000),
+    services: ['web-development', 'custom-software'],
     caseStudy: 'retail-storefront-rebuild',
   },
   {
-    slug: 'data-and-analytics',
-    name: 'Data and Analytics',
-    short: 'Reliable data foundations, useful reporting and practical uses of AI.',
+    slug: 'ai-and-automation',
+    name: 'AI and Automation',
+    short: 'AI, automation and CRM systems that take repetitive work off your team.',
     description:
-      'Good decisions need data people can trust. We clean up and modernise data platforms, build reporting that answers real questions, connect operational data from devices and systems, and help you apply generative AI where it makes sense.',
-    image: img('1551288049-bebda4e38f71'),
-    heroImage: img('1526628953301-3e589a6a8b74', 2000),
-    services: ['data-modernization', 'advanced-analytics', 'connected-intelligence', 'data-management', 'generative-ai'],
-    caseStudy: 'finance-reporting-consolidation',
-  },
-  {
-    slug: 'cloud',
-    name: 'Cloud',
-    short: 'Migration, cloud native development and day to day operations.',
-    description:
-      'Moving to the cloud is only the first step. We plan and carry out migrations, build and integrate applications designed for cloud platforms, and look after the environment once it is live so your team can focus on the product.',
-    image: img('1544197150-b99a580bb7a8'),
-    heroImage: img('1558346490-a72e53ae2d4f', 2000),
-    services: ['cloud-operations-and-migration', 'cloud-application-development-and-integration', 'managed-services'],
-    caseStudy: 'logistics-cloud-migration',
-  },
-  {
-    slug: 'digital-infrastructure-services',
-    name: 'Digital Infrastructure Services',
-    single: true,
-    short: 'Networks, end user computing and data center support.',
-    image: img('1597852074816-d933c7d2b988'),
-  },
-  {
-    slug: 'security',
-    name: 'Security',
-    single: true,
-    short: 'Assessments, monitoring and practical controls to reduce risk.',
-    image: img('1550751827-4bd374c3f58b'),
-  },
-  {
-    slug: 'emerging-technologies',
-    name: 'Emerging Technologies',
-    single: true,
-    short: 'Careful evaluation of new technology before you commit budget.',
-    image: img('1535223289827-42f1e9919769'),
-  },
-  {
-    slug: 'business-process-services',
-    name: 'Business Process Services',
-    short: 'Dedicated teams for customer support, marketing, finance, legal and hiring.',
-    description:
-      'Some work is essential but does not need to sit inside your core team. We provide trained people and clear processes for customer contact, marketing, accounting, legal support, staffing and recruitment, with reporting so you always know what is happening.',
-    image: img('1600880292203-757bb62b4baf'),
-    heroImage: img('1556761175-b413da4baf72', 2000),
-    services: [
-      'contact-center',
-      'digital-marketing',
-      'finance-and-accounting',
-      'staff-augmentation',
-      'legal-process-outsourcing',
-      'recruitment-process-outsourcing',
-    ],
+      'Many hours in a week go into copying data, chasing leads and answering the same questions. We build AI systems, automations and CRM setups that handle that work and keep every lead moving.',
+    image: img('1677442136019-21780ecad995'),
+    heroImage: img('1620712943543-bcc4688e7485', 2000),
+    services: ['ai-automation', 'crm-and-lead-management'],
     caseStudy: 'healthcare-patient-support',
+  },
+  {
+    slug: 'growth-marketing',
+    name: 'Growth Marketing',
+    short: 'SEO, AI search visibility, social media and ads that bring in qualified leads.',
+    description:
+      'Customers find businesses through Google, AI assistants, social media and ads. We work across all of them, with reporting that shows what is bringing in leads and what is not.',
+    image: img('1557838923-2985c318be48'),
+    heroImage: img('1551288049-bebda4e38f71', 2000),
+    services: ['seo', 'aeo-and-geo', 'social-media-management', 'ads-management'],
+    caseStudy: 'retail-storefront-rebuild',
   },
 ]
 

@@ -83,14 +83,6 @@ return [
             ['name' => 'text', 'label' => 'Supporting text', 'type' => 'textarea'],
         ],
     ],
-    'platforms' => [
-        'label' => 'Platforms and partners',
-        'description' => 'Row of technology platforms linking to the alliance pages.',
-        'fields' => [
-            ['name' => 'title', 'label' => 'Heading', 'type' => 'text'],
-            ['name' => 'note', 'label' => 'Small note', 'type' => 'text'],
-        ],
-    ],
     'featured_case' => [
         'label' => 'Featured case study',
         'description' => 'One case study shown large.',

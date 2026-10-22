@@ -27,7 +27,7 @@ export const homeSections = [
   },
   {
     key: 'explorer', label: 'What we do (service explorer)', sort: 2, visible: true,
-    data: { title: 'What we do', text: 'Seven service areas, one team. Pick one area or combine several.' },
+    data: { title: 'What we do', text: 'Eight services in three areas, one team. Pick one or combine several.' },
   },
   {
     key: 'why', label: 'Why AchiveX', sort: 3, visible: true,
@@ -47,22 +47,22 @@ export const homeSections = [
     data: {
       items: [
         {
-          title: 'Data and AI, used carefully',
-          text: 'Clean, well governed data comes first. From there we build reporting people trust and apply generative AI only where it saves real time.',
-          points: ['Data platforms that replace manual spreadsheets', 'Dashboards built around real decisions', 'Generative AI pilots with clear success measures'],
+          title: 'AI and automation that save real time',
+          text: 'We point AI at the repetitive work that slows your team down, from reading documents to answering calls, and connect your tools so leads never slip through.',
+          points: ['Chatbots and assistants that answer from your own data', 'A 24/7 AI receptionist for calls and bookings', 'CRM follow ups that run on their own'],
           image: img('1526628953301-3e589a6a8b74', 1400),
           alt: 'Screens showing data dashboards',
-          to: '/services/data-and-analytics/',
-          link: 'Explore Data and Analytics',
+          to: '/services/ai-and-automation/',
+          link: 'Explore AI and Automation',
         },
         {
-          title: 'Cloud you can run with confidence',
-          text: 'We plan migrations workload by workload, test every cutover and keep the environment healthy once it is live.',
-          points: ['Migration plans with tested rollback', 'Monitoring, backups and patching', 'Cost reviews that keep bills predictable'],
+          title: 'Growth you can measure',
+          text: 'SEO, AI search visibility, social media and ads, run together and reported every month, so you can see which channels bring in customers.',
+          points: ['Technical, local and on-page SEO', 'Visibility in ChatGPT, Gemini and AI Overviews', 'Google and Meta Ads with conversion tracking'],
           image: img('1558494949-ef010cbdcc31', 1400),
-          alt: 'Server room with network cabling',
-          to: '/services/cloud/',
-          link: 'Explore Cloud',
+          alt: 'Marketing results on a laptop screen',
+          to: '/services/growth-marketing/',
+          link: 'Explore Growth Marketing',
         },
       ],
     },
@@ -85,10 +85,6 @@ export const homeSections = [
     data: { title: 'Industries we serve', text: 'Each sector has its own rules and pressures. We adapt our services to fit them.' },
   },
   {
-    key: 'platforms', label: 'Platforms', sort: 7, visible: true,
-    data: { title: 'Platforms we work with', note: 'Product names are trademarks of their owners.' },
-  },
-  {
     key: 'featured_case', label: 'Featured case study', sort: 8, visible: true,
     data: { caseSlug: 'retail-storefront-rebuild' },
   },
@@ -97,22 +93,22 @@ export const homeSections = [
     data: { title: 'Latest insights', text: 'Case studies, practical articles and guides from our team.' },
   },
   {
-    key: 'faq', label: 'Common questions', sort: 10, visible: true,
+    key: 'faq', label: 'Common questions', sort: 11, visible: true,
     data: {
       title: 'Common questions',
       text: 'Do not see your question here? Call or email us and we will answer it directly.',
       items: [
         { q: 'What size of business do you work with?', a: 'We work with small and mid sized companies as well as larger teams that need extra capacity. The scope of each engagement is set to fit your size and budget.' },
-        { q: 'Can we start with one service and add more later?', a: 'Yes. Many clients start with a single need, such as a cloud migration or contact center support, and add other services as they grow.' },
+        { q: 'Can we start with one service and add more later?', a: 'Yes. Many clients start with a single need, such as a new website or an SEO plan, and add other services as they grow.' },
         { q: 'Do you work with clients outside Wyoming?', a: 'Yes. Our headquarters is in Wyoming, USA, and engagements can be delivered remotely. Contact us to discuss your location and needs.' },
         { q: 'How does the free consultation work?', a: 'It is a conversation with our team about your goals and current setup. There is no obligation, and if we are not the right fit we will tell you.' },
         { q: 'Who owns the work you deliver?', a: 'Ownership terms are set in each client agreement. In most cases code, accounts and documentation are held in your name.' },
       ],
     },
   },
-  { key: 'contact_strip', label: 'Contact strip', sort: 11, visible: true, data: {} },
+  { key: 'contact_strip', label: 'Contact strip', sort: 12, visible: true, data: {} },
   {
-    key: 'cta', label: 'Call to action', sort: 12, visible: true,
+    key: 'cta', label: 'Call to action', sort: 10, visible: true,
     data: {
       title: 'Have a project in mind?',
       text: 'Book a free consultation and we will talk through your goals, your current setup and where we can help.',

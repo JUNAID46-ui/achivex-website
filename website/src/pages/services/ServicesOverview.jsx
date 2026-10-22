@@ -11,7 +11,7 @@ import jumpTo from '../../utils/jumpTo'
 import { pageContent } from '../../data/pageContent'
 
 export default function ServicesOverview() {
-  useSeo('Services', 'Explore AchiveX services across digital, data and analytics, cloud, infrastructure, security, emerging technologies and business process services.')
+  useSeo('Services', 'Explore AchiveX services: web development, custom software, AI and intelligent systems, automation, CRM, SEO, AEO and GEO, social media and ads management.')
   const pc = pageContent['/services/']
   const multi = categories.filter((c) => !c.single)
   const singles = categories.filter((c) => c.single)
@@ -71,7 +71,7 @@ export default function ServicesOverview() {
         )
       })}
 
-      <section className="bg-canvas py-20 text-white md:py-28">
+      {singles.length > 0 && <section className="bg-canvas py-20 text-white md:py-28">
         <div className="container-site">
           <FadeUp>
             <h2 className="h-display max-w-2xl text-5xl text-white md:text-6xl">{pc.specialistTitle}</h2>
@@ -95,7 +95,7 @@ export default function ServicesOverview() {
             })}
           </div>
         </div>
-      </section>
+      </section>}
 
       <CTA />
     </>

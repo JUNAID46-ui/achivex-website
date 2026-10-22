@@ -96,18 +96,42 @@ const tables = [
   })))],
 ]
 
-export async function loadContent(timeoutMs = 3000) {
+const CACHE_KEY = 'achivex_content_v1'
+
+const applyAll = (byTable) => {
+  tables.forEach(([name, , apply]) => { if (Array.isArray(byTable[name])) apply(byTable[name]) })
+}
+
+// Content saved from the previous visit, applied before the first render so returning
+// visitors never see old built in text flash on screen.
+export function applyCachedContent() {
+  try {
+    const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null')
+    if (cached && typeof cached === 'object') applyAll(cached)
+  } catch {
+    // Private mode or bad data: keep the built in content.
+  }
+}
+
+// Fetches the latest content. Resolves true only when it differs from what is on screen,
+// so the page re-renders once at most, and only when something actually changed.
+export async function loadContent(timeoutMs = 8000) {
   if (!supabase) return false
   const work = Promise.all(
-    tables.map(async ([name, order, apply, ascending = true]) => {
+    tables.map(async ([name, order, , ascending = true]) => {
       const { data, error } = await supabase.from(name).select('*').order(order, { ascending })
       if (error) throw error
-      return () => apply(data)
+      return [name, data]
     }),
-  ).then((appliers) => {
+  ).then((rows) => {
+    const byTable = Object.fromEntries(rows)
+    const json = JSON.stringify(byTable)
+    let previous = null
+    try { previous = localStorage.getItem(CACHE_KEY) } catch { /* storage blocked */ }
     // Apply only when every table loaded, so content is never half from each source.
-    appliers.forEach((fn) => fn())
-    return true
+    applyAll(byTable)
+    try { localStorage.setItem(CACHE_KEY, json) } catch { /* storage full or blocked */ }
+    return previous !== json
   })
   const timeout = new Promise((resolve) => setTimeout(() => resolve(false), timeoutMs))
   try {

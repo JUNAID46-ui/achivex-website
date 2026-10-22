@@ -4,7 +4,7 @@ export const settings = {
   seo: {
     titleTemplate: '%title% | AchiveX LLC',
     homeTitle: 'AchiveX LLC | Empowering Businesses Through Digital Innovation',
-    defaultDescription: 'AchiveX LLC is a Wyoming based marketing and software solutions company offering digital, data, cloud, security and business process services.',
+    defaultDescription: 'AchiveX LLC is a Wyoming based marketing and software solutions company offering web development, custom software, AI and automation, CRM, SEO, social media and ads management.',
     ogImage: '',
     twitterHandle: '@achivexllc',
     googleVerification: '',

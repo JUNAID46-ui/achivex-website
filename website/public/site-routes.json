@@ -1,10 +1,10 @@
 {
-  "generated": "2026-10-22T12:04:16.539Z",
+  "generated": "2026-10-22T18:06:55.319Z",
   "pages": [
     {
       "path": "/",
       "title": "Home",
-      "description": "AchiveX LLC is a Wyoming based marketing and software solutions company offering digital strategy, data and analytics, cloud, security and business process services.",
+      "description": "AchiveX LLC is a Wyoming based marketing and software solutions company offering web development, custom software, AI and automation, CRM, SEO, social media and ads management.",
       "type": "Page"
     },
     {
@@ -171,13 +171,25 @@
     {
       "path": "/services/",
       "title": "Services",
-      "description": "Explore AchiveX services across digital, data and analytics, cloud, infrastructure, security, emerging technologies and business process services.",
+      "description": "Explore AchiveX services: web development, custom software, AI and intelligent systems, automation, CRM, SEO, AEO and GEO, social media and ads management.",
       "type": "Page",
       "editable": {
         "heroTitle": "What we do",
-        "heroText": "Seven service areas, one team. Pick a single service or combine several. Either way you get the same people, the same standards and one point of contact.",
+        "heroText": "Eight services in three areas, one team. Pick a single service or combine several. Either way you get the same people, the same standards and one point of contact.",
         "specialistTitle": "Focused specialist services"
       }
+    },
+    {
+      "path": "/industries/",
+      "title": "Industries",
+      "description": "The industries AchiveX works with, from financial services and healthcare to retail, manufacturing, logistics and education.",
+      "type": "Page"
+    },
+    {
+      "path": "/insights/",
+      "title": "Insights",
+      "description": "Case studies, company news, free guides and practical articles from AchiveX LLC.",
+      "type": "Page"
     },
     {
       "path": "/insights/case-studies/",
@@ -469,191 +481,71 @@
       }
     },
     {
-      "path": "/services/digital/",
-      "title": "Digital Services",
-      "description": "Strategy, commerce and business applications that fit the way your teams already work. AchiveX digital services for businesses in the USA and beyond.",
+      "path": "/services/web-and-software/",
+      "title": "Web and Software Services",
+      "description": "Websites, web apps and internal systems built around how your business works. AchiveX web and software services for businesses in the USA and beyond.",
       "type": "Service area",
       "editable": {
-        "slug": "digital",
-        "name": "Digital",
-        "short": "Strategy, commerce and business applications that fit the way your teams already work.",
-        "description": "Digital work starts with a clear picture of where you are and where you want to be. We help you set priorities, build the online channels your customers use and configure the business applications your staff rely on every day.",
-        "image": "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1600&q=80",
-        "heroImage": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=2000&q=80",
+        "slug": "web-and-software",
+        "name": "Web and Software",
+        "short": "Websites, web apps and internal systems built around how your business works.",
+        "description": "Your website is often the first thing a customer sees, and your internal tools shape how your team spends its day. We design, build and maintain both, using WordPress, WooCommerce, Laravel and React.",
+        "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&q=80",
+        "heroImage": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=2000&q=80",
         "services": [
-          "digital-consulting-and-strategy",
-          "digital-commerce",
-          "business-applications"
+          "web-development",
+          "custom-software"
         ],
         "caseStudy": "retail-storefront-rebuild"
       }
     },
     {
-      "path": "/services/data-and-analytics/",
-      "title": "Data and Analytics Services",
-      "description": "Reliable data foundations, useful reporting and practical uses of AI. AchiveX data and analytics services for businesses in the USA and beyond.",
+      "path": "/services/ai-and-automation/",
+      "title": "AI and Automation Services",
+      "description": "AI, automation and CRM systems that take repetitive work off your team. AchiveX ai and automation services for businesses in the USA and beyond.",
       "type": "Service area",
       "editable": {
-        "slug": "data-and-analytics",
-        "name": "Data and Analytics",
-        "short": "Reliable data foundations, useful reporting and practical uses of AI.",
-        "description": "Good decisions need data people can trust. We clean up and modernise data platforms, build reporting that answers real questions, connect operational data from devices and systems, and help you apply generative AI where it makes sense.",
-        "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80",
-        "heroImage": "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&w=2000&q=80",
+        "slug": "ai-and-automation",
+        "name": "AI and Automation",
+        "short": "AI, automation and CRM systems that take repetitive work off your team.",
+        "description": "Many hours in a week go into copying data, chasing leads and answering the same questions. We build AI systems, automations and CRM setups that handle that work and keep every lead moving.",
+        "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1600&q=80",
+        "heroImage": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=2000&q=80",
         "services": [
-          "data-modernization",
-          "advanced-analytics",
-          "connected-intelligence",
-          "data-management",
-          "generative-ai"
-        ],
-        "caseStudy": "finance-reporting-consolidation"
-      }
-    },
-    {
-      "path": "/services/cloud/",
-      "title": "Cloud Services",
-      "description": "Migration, cloud native development and day to day operations. AchiveX cloud services for businesses in the USA and beyond.",
-      "type": "Service area",
-      "editable": {
-        "slug": "cloud",
-        "name": "Cloud",
-        "short": "Migration, cloud native development and day to day operations.",
-        "description": "Moving to the cloud is only the first step. We plan and carry out migrations, build and integrate applications designed for cloud platforms, and look after the environment once it is live so your team can focus on the product.",
-        "image": "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1600&q=80",
-        "heroImage": "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&w=2000&q=80",
-        "services": [
-          "cloud-operations-and-migration",
-          "cloud-application-development-and-integration",
-          "managed-services"
-        ],
-        "caseStudy": "logistics-cloud-migration"
-      }
-    },
-    {
-      "path": "/services/business-process-services/",
-      "title": "Business Process Services",
-      "description": "Dedicated teams for customer support, marketing, finance, legal and hiring. AchiveX business process services services for businesses in the USA and beyond.",
-      "type": "Service area",
-      "editable": {
-        "slug": "business-process-services",
-        "name": "Business Process Services",
-        "short": "Dedicated teams for customer support, marketing, finance, legal and hiring.",
-        "description": "Some work is essential but does not need to sit inside your core team. We provide trained people and clear processes for customer contact, marketing, accounting, legal support, staffing and recruitment, with reporting so you always know what is happening.",
-        "image": "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1600&q=80",
-        "heroImage": "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=2000&q=80",
-        "services": [
-          "contact-center",
-          "digital-marketing",
-          "finance-and-accounting",
-          "staff-augmentation",
-          "legal-process-outsourcing",
-          "recruitment-process-outsourcing"
+          "ai-automation",
+          "crm-and-lead-management"
         ],
         "caseStudy": "healthcare-patient-support"
       }
     },
     {
-      "path": "/services/digital/digital-consulting-and-strategy/",
-      "title": "Digital Consulting and Strategy",
-      "description": "A clear, prioritised plan for technology investment based on your goals and budget. Decide what to build, what to buy and what to leave alone, before money is spent.",
-      "type": "Service",
-      "focus": "digital consulting and strategy",
-      "content": "Most companies do not lack ideas. They lack a shared view of which ideas matter most and what it will take to deliver them. Our consulting work gives leadership a plain language plan that connects business goals to specific technology decisions. We spend time with the people who do the work, review the systems you already pay for and look at how information moves between teams. The result is a roadmap with costs, owners and a realistic order of work. Interviews with leadership and frontline teams Review of current systems, licences and contracts Process mapping for the areas that matter most Options analysis with rough cost and effort for each A phased roadmap for the next 12 to 24 months Support for vendor selection and business cases Fewer wasted projects. Initiatives are ranked by value and effort, so the team works on what moves the business first. Shared understanding. Leadership and staff see the same plan, written without jargon. Better use of existing tools. We often find features you already pay for that solve problems without new spend. A plan you can act on. Each phase has scope, owners and measures, not just recommendations. How long does a strategy engagement take? Most engagements run between four and eight weeks depending on the size of the organisation and the number of teams involved. Do you only recommend things you can deliver? No. If another provider or an off the shelf product is the better fit, the roadmap will say so. Who needs to be involved from our side? A sponsor from leadership, plus access to the people who run the key processes. We keep time requests reasonable. What do we receive at the end? A written report, a prioritised roadmap and a walkthrough session with your leadership team.",
-      "headings": [
-        "Overview",
-        "What is included",
-        "What you can expect",
-        "Our process",
-        "Questions we often hear"
-      ],
+      "path": "/services/growth-marketing/",
+      "title": "Growth Marketing Services",
+      "description": "SEO, AI search visibility, social media and ads that bring in qualified leads. AchiveX growth marketing services for businesses in the USA and beyond.",
+      "type": "Service area",
       "editable": {
-        "slug": "digital-consulting-and-strategy",
-        "name": "Digital Consulting and Strategy",
-        "category": "digital",
-        "short": "A clear, prioritised plan for technology investment based on your goals and budget.",
-        "heroImage": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=2000&q=80",
-        "images": [
-          "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1600&q=80",
-          "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=1600&q=80"
-        ],
-        "heroLine": "Decide what to build, what to buy and what to leave alone, before money is spent.",
-        "overview": [
-          "Most companies do not lack ideas. They lack a shared view of which ideas matter most and what it will take to deliver them. Our consulting work gives leadership a plain language plan that connects business goals to specific technology decisions.",
-          "We spend time with the people who do the work, review the systems you already pay for and look at how information moves between teams. The result is a roadmap with costs, owners and a realistic order of work."
-        ],
-        "included": [
-          "Interviews with leadership and frontline teams",
-          "Review of current systems, licences and contracts",
-          "Process mapping for the areas that matter most",
-          "Options analysis with rough cost and effort for each",
-          "A phased roadmap for the next 12 to 24 months",
-          "Support for vendor selection and business cases"
-        ],
-        "benefits": [
-          {
-            "title": "Fewer wasted projects",
-            "text": "Initiatives are ranked by value and effort, so the team works on what moves the business first."
-          },
-          {
-            "title": "Shared understanding",
-            "text": "Leadership and staff see the same plan, written without jargon."
-          },
-          {
-            "title": "Better use of existing tools",
-            "text": "We often find features you already pay for that solve problems without new spend."
-          },
-          {
-            "title": "A plan you can act on",
-            "text": "Each phase has scope, owners and measures, not just recommendations."
-          }
-        ],
-        "process": [
-          {
-            "title": "Listen",
-            "text": "Workshops and interviews to understand goals, pain points and constraints."
-          },
-          {
-            "title": "Assess",
-            "text": "A review of systems, data and processes against what the business needs."
-          },
-          {
-            "title": "Prioritise",
-            "text": "Options are scored together with your team and turned into a sequence."
-          },
-          {
-            "title": "Plan",
-            "text": "A written roadmap with budget ranges, timelines and next steps."
-          }
-        ],
-        "faqs": [
-          {
-            "q": "How long does a strategy engagement take?",
-            "a": "Most engagements run between four and eight weeks depending on the size of the organisation and the number of teams involved."
-          },
-          {
-            "q": "Do you only recommend things you can deliver?",
-            "a": "No. If another provider or an off the shelf product is the better fit, the roadmap will say so."
-          },
-          {
-            "q": "Who needs to be involved from our side?",
-            "a": "A sponsor from leadership, plus access to the people who run the key processes. We keep time requests reasonable."
-          },
-          {
-            "q": "What do we receive at the end?",
-            "a": "A written report, a prioritised roadmap and a walkthrough session with your leadership team."
-          }
+        "slug": "growth-marketing",
+        "name": "Growth Marketing",
+        "short": "SEO, AI search visibility, social media and ads that bring in qualified leads.",
+        "description": "Customers find businesses through Google, AI assistants, social media and ads. We work across all of them, with reporting that shows what is bringing in leads and what is not.",
+        "image": "https://images.unsplash.com/photo-1557838923-2985c318be48?auto=format&fit=crop&w=1600&q=80",
+        "heroImage": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=2000&q=80",
+        "services": [
+          "seo",
+          "aeo-and-geo",
+          "social-media-management",
+          "ads-management"
         ],
         "caseStudy": "retail-storefront-rebuild"
       }
     },
     {
-      "path": "/services/digital/digital-commerce/",
-      "title": "Digital Commerce",
-      "description": "Online stores and ordering experiences that are easy to run and easy to buy from. Storefronts built around how your customers buy and how your team fulfils orders.",
+      "path": "/services/web-and-software/web-development/",
+      "title": "Web Development",
+      "description": "Fast, mobile friendly websites built to turn visitors into customers. WordPress, WooCommerce, Laravel and React websites that load quickly and make it easy to get in touch or buy.",
       "type": "Service",
-      "focus": "digital commerce",
-      "content": "A good online store is more than a nice homepage. It needs accurate product data, a checkout that works on any phone, payment and shipping options that suit your market, and a back end your staff can manage without calling a developer. We design, build and improve commerce sites on established platforms, connect them to inventory and accounting systems, and set up the tracking you need to see what is working. Platform selection and setup Storefront design and development Product catalogue structure and data import Payment, tax and shipping configuration Integration with inventory, ERP and accounting tools Analytics and conversion tracking Simpler operations. Orders, stock and customer records stay in sync across systems. Mobile friendly checkout. Fewer steps and clear forms make it easier to complete a purchase on a phone. Room to grow. The catalogue and integrations are structured so new products and channels can be added later. Clear reporting. You can see traffic, conversion and revenue in one place. Which platforms do you work with? We work with widely used commerce platforms and will recommend one based on your catalogue size, budget and integration needs. Can you move our existing store to a new platform? Yes. We plan the migration of products, customers and order history, and set up redirects to protect search traffic. Do you handle B2B ordering? Yes. Customer specific pricing, quote requests and account based ordering can all be configured. Who owns the site after launch? You do. All accounts, code and content are in your name.",
+      "focus": "web development",
+      "content": "A website has one main job: help the right visitors take the next step, whether that is calling you, booking a meeting or placing an order. We plan each site around that step, then build it to load quickly and work properly on every phone. We build on WordPress and WooCommerce when you want to edit content yourself, and on custom PHP, Laravel or React when the site needs features an off the shelf setup cannot handle. Redesigns of existing sites, speed work and ongoing maintenance are part of the service. Page structure and content plan based on your goals Design for desktop, tablet and phone WordPress and WooCommerce builds you can edit yourself Custom PHP, Laravel and React development Speed optimization and basic technical SEO setup Hosting setup, backups and ongoing maintenance Built to convert. Clear pages, simple forms and visible calls to action make it easy for visitors to contact you or buy. Fast on every device. Images, code and hosting are tuned so pages load quickly on phones as well as desktops. Easy to update. You can change text, images and products yourself without calling a developer for every edit. Looked after. Updates, backups and fixes continue after launch, so the site keeps working. How long does a new website take? Most business websites take four to ten weeks. Online stores and custom builds can take longer. We give you a timeline after the first consultation. Can you redesign our existing site? Yes. We can keep what works, improve what does not and move your content across without losing pages that already rank. WordPress or custom code? WordPress suits most marketing sites and stores. Custom Laravel or React suits sites with complex features. We recommend one based on what you need, not on habit. How much does a website cost? It depends on the number of pages, features and content. We quote a fixed price after a free consultation.",
       "headings": [
         "Overview",
         "What is included",
@@ -662,374 +554,92 @@
         "Questions we often hear"
       ],
       "editable": {
-        "slug": "digital-commerce",
-        "name": "Digital Commerce",
-        "category": "digital",
-        "short": "Online stores and ordering experiences that are easy to run and easy to buy from.",
-        "heroImage": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=2000&q=80",
+        "slug": "web-development",
+        "name": "Web Development",
+        "category": "web-and-software",
+        "short": "Fast, mobile friendly websites built to turn visitors into customers.",
+        "heroImage": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=2000&q=80",
         "images": [
-          "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=1600&q=80",
-          "https://images.unsplash.com/photo-1556745753-b2904692b3cd?auto=format&fit=crop&w=1600&q=80"
-        ],
-        "heroLine": "Storefronts built around how your customers buy and how your team fulfils orders.",
-        "overview": [
-          "A good online store is more than a nice homepage. It needs accurate product data, a checkout that works on any phone, payment and shipping options that suit your market, and a back end your staff can manage without calling a developer.",
-          "We design, build and improve commerce sites on established platforms, connect them to inventory and accounting systems, and set up the tracking you need to see what is working."
-        ],
-        "included": [
-          "Platform selection and setup",
-          "Storefront design and development",
-          "Product catalogue structure and data import",
-          "Payment, tax and shipping configuration",
-          "Integration with inventory, ERP and accounting tools",
-          "Analytics and conversion tracking"
-        ],
-        "benefits": [
-          {
-            "title": "Simpler operations",
-            "text": "Orders, stock and customer records stay in sync across systems."
-          },
-          {
-            "title": "Mobile friendly checkout",
-            "text": "Fewer steps and clear forms make it easier to complete a purchase on a phone."
-          },
-          {
-            "title": "Room to grow",
-            "text": "The catalogue and integrations are structured so new products and channels can be added later."
-          },
-          {
-            "title": "Clear reporting",
-            "text": "You can see traffic, conversion and revenue in one place."
-          }
-        ],
-        "process": [
-          {
-            "title": "Discovery",
-            "text": "We review your products, customers, order flow and existing tools."
-          },
-          {
-            "title": "Design",
-            "text": "Wireframes and visual design for key pages, tested on mobile first."
-          },
-          {
-            "title": "Build and integrate",
-            "text": "Development, data import and connections to your back office systems."
-          },
-          {
-            "title": "Launch and improve",
-            "text": "Go live support, then regular reviews of performance data."
-          }
-        ],
-        "faqs": [
-          {
-            "q": "Which platforms do you work with?",
-            "a": "We work with widely used commerce platforms and will recommend one based on your catalogue size, budget and integration needs."
-          },
-          {
-            "q": "Can you move our existing store to a new platform?",
-            "a": "Yes. We plan the migration of products, customers and order history, and set up redirects to protect search traffic."
-          },
-          {
-            "q": "Do you handle B2B ordering?",
-            "a": "Yes. Customer specific pricing, quote requests and account based ordering can all be configured."
-          },
-          {
-            "q": "Who owns the site after launch?",
-            "a": "You do. All accounts, code and content are in your name."
-          }
-        ],
-        "caseStudy": "retail-storefront-rebuild"
-      }
-    },
-    {
-      "path": "/services/digital/business-applications/",
-      "title": "Business Applications",
-      "description": "ERP, CRM and workflow tools configured to match your processes. Configure the systems your staff use all day so they help, not slow people down.",
-      "type": "Service",
-      "focus": "business applications",
-      "content": "ERP and CRM systems hold a company together, but they often end up customised in ways nobody remembers or underused because training never happened. We help you select, configure, extend and support these applications. Our focus is on fit. We start with your processes, then set up the application to support them, connect it to the rest of your stack and make sure people know how to use it. Requirements gathering and solution design ERP and CRM configuration Workflow and approval automation Data migration from legacy systems Integration with finance, sales and operations tools User training and ongoing admin support Less double entry. Connected systems mean data is entered once and shared where it is needed. Consistent processes. Approvals and workflows run the same way every time. Higher adoption. Training and sensible defaults help staff actually use the tools. Easier upgrades. We favour configuration over heavy customisation so future updates are simpler. Do you work with Microsoft Dynamics and Salesforce? Yes, along with other widely used ERP and CRM platforms. See our Alliances pages for more detail. Can you fix an implementation that went wrong? Yes. We often start with a health check to understand what is configured and what is causing problems. How do you handle data migration? We profile the source data, agree mapping rules with you, run trial loads and reconcile results before the final cutover. Do you offer support after go live? Yes, on a monthly basis with an agreed number of hours and response times.",
-      "headings": [
-        "Overview",
-        "What is included",
-        "What you can expect",
-        "Our process",
-        "Questions we often hear"
-      ],
-      "editable": {
-        "slug": "business-applications",
-        "name": "Business Applications",
-        "category": "digital",
-        "short": "ERP, CRM and workflow tools configured to match your processes.",
-        "heroImage": "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=2000&q=80",
-        "images": [
-          "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1600&q=80",
-          "https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?auto=format&fit=crop&w=1600&q=80"
-        ],
-        "heroLine": "Configure the systems your staff use all day so they help, not slow people down.",
-        "overview": [
-          "ERP and CRM systems hold a company together, but they often end up customised in ways nobody remembers or underused because training never happened. We help you select, configure, extend and support these applications.",
-          "Our focus is on fit. We start with your processes, then set up the application to support them, connect it to the rest of your stack and make sure people know how to use it."
-        ],
-        "included": [
-          "Requirements gathering and solution design",
-          "ERP and CRM configuration",
-          "Workflow and approval automation",
-          "Data migration from legacy systems",
-          "Integration with finance, sales and operations tools",
-          "User training and ongoing admin support"
-        ],
-        "benefits": [
-          {
-            "title": "Less double entry",
-            "text": "Connected systems mean data is entered once and shared where it is needed."
-          },
-          {
-            "title": "Consistent processes",
-            "text": "Approvals and workflows run the same way every time."
-          },
-          {
-            "title": "Higher adoption",
-            "text": "Training and sensible defaults help staff actually use the tools."
-          },
-          {
-            "title": "Easier upgrades",
-            "text": "We favour configuration over heavy customisation so future updates are simpler."
-          }
-        ],
-        "process": [
-          {
-            "title": "Map",
-            "text": "Document current processes and agree the target state."
-          },
-          {
-            "title": "Configure",
-            "text": "Set up the application in short cycles with regular demos."
-          },
-          {
-            "title": "Migrate and test",
-            "text": "Move data, run user acceptance testing and fix issues."
-          },
-          {
-            "title": "Train and support",
-            "text": "Role based training, go live support and an admin plan."
-          }
-        ],
-        "faqs": [
-          {
-            "q": "Do you work with Microsoft Dynamics and Salesforce?",
-            "a": "Yes, along with other widely used ERP and CRM platforms. See our Alliances pages for more detail."
-          },
-          {
-            "q": "Can you fix an implementation that went wrong?",
-            "a": "Yes. We often start with a health check to understand what is configured and what is causing problems."
-          },
-          {
-            "q": "How do you handle data migration?",
-            "a": "We profile the source data, agree mapping rules with you, run trial loads and reconcile results before the final cutover."
-          },
-          {
-            "q": "Do you offer support after go live?",
-            "a": "Yes, on a monthly basis with an agreed number of hours and response times."
-          }
-        ],
-        "caseStudy": "finance-reporting-consolidation"
-      }
-    },
-    {
-      "path": "/services/data-and-analytics/data-modernization/",
-      "title": "Data Modernization",
-      "description": "Move from scattered spreadsheets and ageing databases to a platform built for analysis. Replace fragile data setups with a platform your team can trust and maintain.",
-      "type": "Service",
-      "focus": "data modernization",
-      "content": "Many companies run reporting off old databases, manual exports and spreadsheets passed between inboxes. It works until someone leaves or a number does not match. Data modernization replaces that with a structured platform that is easier to manage and scale. We assess your current sources, design a target architecture on a modern cloud data platform and move data across in stages, so reporting keeps working throughout. Current state assessment of data sources and flows Target architecture design Data warehouse or lakehouse setup Pipeline development for loading and transforming data Staged migration with validation checks Documentation and handover to your team One source of truth. Teams report from the same data rather than their own copies. Faster reporting. Queries that used to take hours can run in minutes on a platform built for analysis. Lower maintenance. Automated pipelines replace manual exports and copy and paste. Ready for AI. Clean, structured data is the starting point for machine learning and generative AI. Which data platforms do you use? We work with the main cloud data warehouses and lakehouse platforms and choose based on your existing cloud provider, skills and budget. Will our existing reports break? We plan the migration so current reports keep running until the new ones are tested and approved. How do you check the data is correct? Each wave includes reconciliation checks on row counts, totals and key metrics against the old source. Can our team run the platform afterwards? Yes. We document everything and run handover sessions. Ongoing support is optional.",
-      "headings": [
-        "Overview",
-        "What is included",
-        "What you can expect",
-        "Our process",
-        "Questions we often hear"
-      ],
-      "editable": {
-        "slug": "data-modernization",
-        "name": "Data Modernization",
-        "category": "data-and-analytics",
-        "short": "Move from scattered spreadsheets and ageing databases to a platform built for analysis.",
-        "heroImage": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2000&q=80",
-        "images": [
-          "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=1600&q=80",
-          "https://images.unsplash.com/photo-1504639725590-34d0984388bd?auto=format&fit=crop&w=1600&q=80"
-        ],
-        "heroLine": "Replace fragile data setups with a platform your team can trust and maintain.",
-        "overview": [
-          "Many companies run reporting off old databases, manual exports and spreadsheets passed between inboxes. It works until someone leaves or a number does not match. Data modernization replaces that with a structured platform that is easier to manage and scale.",
-          "We assess your current sources, design a target architecture on a modern cloud data platform and move data across in stages, so reporting keeps working throughout."
-        ],
-        "included": [
-          "Current state assessment of data sources and flows",
-          "Target architecture design",
-          "Data warehouse or lakehouse setup",
-          "Pipeline development for loading and transforming data",
-          "Staged migration with validation checks",
-          "Documentation and handover to your team"
-        ],
-        "benefits": [
-          {
-            "title": "One source of truth",
-            "text": "Teams report from the same data rather than their own copies."
-          },
-          {
-            "title": "Faster reporting",
-            "text": "Queries that used to take hours can run in minutes on a platform built for analysis."
-          },
-          {
-            "title": "Lower maintenance",
-            "text": "Automated pipelines replace manual exports and copy and paste."
-          },
-          {
-            "title": "Ready for AI",
-            "text": "Clean, structured data is the starting point for machine learning and generative AI."
-          }
-        ],
-        "process": [
-          {
-            "title": "Inventory",
-            "text": "List every source, owner and downstream report."
-          },
-          {
-            "title": "Design",
-            "text": "Agree the platform, data model and security approach."
-          },
-          {
-            "title": "Migrate in waves",
-            "text": "Move data area by area, validating each against the old system."
-          },
-          {
-            "title": "Retire and hand over",
-            "text": "Switch off legacy pieces and train your team on the new setup."
-          }
-        ],
-        "faqs": [
-          {
-            "q": "Which data platforms do you use?",
-            "a": "We work with the main cloud data warehouses and lakehouse platforms and choose based on your existing cloud provider, skills and budget."
-          },
-          {
-            "q": "Will our existing reports break?",
-            "a": "We plan the migration so current reports keep running until the new ones are tested and approved."
-          },
-          {
-            "q": "How do you check the data is correct?",
-            "a": "Each wave includes reconciliation checks on row counts, totals and key metrics against the old source."
-          },
-          {
-            "q": "Can our team run the platform afterwards?",
-            "a": "Yes. We document everything and run handover sessions. Ongoing support is optional."
-          }
-        ],
-        "caseStudy": "finance-reporting-consolidation"
-      }
-    },
-    {
-      "path": "/services/data-and-analytics/advanced-analytics/",
-      "title": "Advanced Analytics",
-      "description": "Dashboards, forecasting and statistical models that answer real business questions. Turn the data you already collect into answers your managers can act on.",
-      "type": "Service",
-      "focus": "advanced analytics",
-      "content": "Analytics should start with a question, not a tool. We work with your managers to define the questions that matter, then build the reports, forecasts and models that answer them. That can be as simple as a well designed sales dashboard or as involved as a demand forecasting model. In every case we explain how the numbers are calculated so people trust them. KPI definition workshops Dashboard and report design Forecasting and trend analysis Customer segmentation and churn analysis Statistical and machine learning models Training for report users and analysts Clear metrics. Everyone uses the same definitions for revenue, margin and other key numbers. Earlier warnings. Trends and exceptions show up in reports before they become problems. Better planning. Forecasts give finance and operations a sounder basis for budgets and stock. Self service. Managers can filter and explore data without waiting for an analyst. Which BI tools do you support? We work with common tools such as Power BI, Tableau and Looker, and can recommend one if you do not have a standard yet. Do we need a data warehouse first? Not always. For smaller scopes we can work from existing sources. For larger ones we usually suggest a data modernization step. Can you build predictive models? Yes, where there is enough historical data to support them. We will tell you honestly if there is not. How do you make sure reports get used? We involve users from the first workshop and keep reports focused on decisions they actually make.",
-      "headings": [
-        "Overview",
-        "What is included",
-        "What you can expect",
-        "Our process",
-        "Questions we often hear"
-      ],
-      "editable": {
-        "slug": "advanced-analytics",
-        "name": "Advanced Analytics",
-        "category": "data-and-analytics",
-        "short": "Dashboards, forecasting and statistical models that answer real business questions.",
-        "heroImage": "https://images.unsplash.com/photo-1543286386-713bdd548da4?auto=format&fit=crop&w=2000&q=80",
-        "images": [
-          "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=1600&q=80",
+          "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&q=80",
           "https://images.unsplash.com/photo-1555421689-491a97ff2040?auto=format&fit=crop&w=1600&q=80"
         ],
-        "heroLine": "Turn the data you already collect into answers your managers can act on.",
+        "heroLine": "WordPress, WooCommerce, Laravel and React websites that load quickly and make it easy to get in touch or buy.",
         "overview": [
-          "Analytics should start with a question, not a tool. We work with your managers to define the questions that matter, then build the reports, forecasts and models that answer them.",
-          "That can be as simple as a well designed sales dashboard or as involved as a demand forecasting model. In every case we explain how the numbers are calculated so people trust them."
+          "A website has one main job: help the right visitors take the next step, whether that is calling you, booking a meeting or placing an order. We plan each site around that step, then build it to load quickly and work properly on every phone.",
+          "We build on WordPress and WooCommerce when you want to edit content yourself, and on custom PHP, Laravel or React when the site needs features an off the shelf setup cannot handle. Redesigns of existing sites, speed work and ongoing maintenance are part of the service."
         ],
         "included": [
-          "KPI definition workshops",
-          "Dashboard and report design",
-          "Forecasting and trend analysis",
-          "Customer segmentation and churn analysis",
-          "Statistical and machine learning models",
-          "Training for report users and analysts"
+          "Page structure and content plan based on your goals",
+          "Design for desktop, tablet and phone",
+          "WordPress and WooCommerce builds you can edit yourself",
+          "Custom PHP, Laravel and React development",
+          "Speed optimization and basic technical SEO setup",
+          "Hosting setup, backups and ongoing maintenance"
         ],
         "benefits": [
           {
-            "title": "Clear metrics",
-            "text": "Everyone uses the same definitions for revenue, margin and other key numbers."
+            "title": "Built to convert",
+            "text": "Clear pages, simple forms and visible calls to action make it easy for visitors to contact you or buy."
           },
           {
-            "title": "Earlier warnings",
-            "text": "Trends and exceptions show up in reports before they become problems."
+            "title": "Fast on every device",
+            "text": "Images, code and hosting are tuned so pages load quickly on phones as well as desktops."
           },
           {
-            "title": "Better planning",
-            "text": "Forecasts give finance and operations a sounder basis for budgets and stock."
+            "title": "Easy to update",
+            "text": "You can change text, images and products yourself without calling a developer for every edit."
           },
           {
-            "title": "Self service",
-            "text": "Managers can filter and explore data without waiting for an analyst."
+            "title": "Looked after",
+            "text": "Updates, backups and fixes continue after launch, so the site keeps working."
           }
         ],
         "process": [
           {
-            "title": "Define",
-            "text": "Agree the questions, metrics and audiences for each report."
+            "title": "Plan",
+            "text": "Agree goals, pages, content and the features the site needs."
           },
           {
-            "title": "Prepare",
-            "text": "Check data quality and build the model that feeds the reports."
+            "title": "Design",
+            "text": "Layouts for key pages, reviewed with you before development starts."
           },
           {
             "title": "Build",
-            "text": "Create dashboards or models and review them with users."
+            "text": "Development, content entry and testing on real devices."
           },
           {
-            "title": "Adopt",
-            "text": "Train users, gather feedback and refine."
+            "title": "Launch and care",
+            "text": "Go live, monitor and keep the site updated and backed up."
           }
         ],
         "faqs": [
           {
-            "q": "Which BI tools do you support?",
-            "a": "We work with common tools such as Power BI, Tableau and Looker, and can recommend one if you do not have a standard yet."
+            "q": "How long does a new website take?",
+            "a": "Most business websites take four to ten weeks. Online stores and custom builds can take longer. We give you a timeline after the first consultation."
           },
           {
-            "q": "Do we need a data warehouse first?",
-            "a": "Not always. For smaller scopes we can work from existing sources. For larger ones we usually suggest a data modernization step."
+            "q": "Can you redesign our existing site?",
+            "a": "Yes. We can keep what works, improve what does not and move your content across without losing pages that already rank."
           },
           {
-            "q": "Can you build predictive models?",
-            "a": "Yes, where there is enough historical data to support them. We will tell you honestly if there is not."
+            "q": "WordPress or custom code?",
+            "a": "WordPress suits most marketing sites and stores. Custom Laravel or React suits sites with complex features. We recommend one based on what you need, not on habit."
           },
           {
-            "q": "How do you make sure reports get used?",
-            "a": "We involve users from the first workshop and keep reports focused on decisions they actually make."
+            "q": "How much does a website cost?",
+            "a": "It depends on the number of pages, features and content. We quote a fixed price after a free consultation."
           }
         ],
-        "caseStudy": "finance-reporting-consolidation"
+        "caseStudy": "retail-storefront-rebuild"
       }
     },
     {
-      "path": "/services/data-and-analytics/connected-intelligence/",
-      "title": "Connected Intelligence",
-      "description": "Collect and use data from machines, sensors and operational systems. Bring data from equipment and field operations into the same view as the rest of the business.",
+      "path": "/services/web-and-software/custom-software/",
+      "title": "Custom Software",
+      "description": "Web apps, SaaS platforms, dashboards, admin panels and APIs built around your business. Software shaped around how your team works, built on Laravel and React.",
       "type": "Service",
-      "focus": "connected intelligence",
-      "content": "Machines, vehicles and building systems produce useful data, but it often stays locked in vendor software or never leaves the device. Connected intelligence is about capturing that data, combining it with business data and using it to make operational decisions. We help you choose sensors and gateways where needed, set up secure data collection and build monitoring and alerting that operations teams can use. Assessment of existing equipment and data sources Device connectivity and gateway setup Secure data ingestion to the cloud Real time monitoring dashboards Alerting rules and notifications Integration with maintenance and ERP systems Visibility. Operations teams see equipment status without walking the floor. Planned maintenance. Usage and condition data support maintenance based on real wear rather than fixed schedules. Faster response. Alerts reach the right person when readings move outside normal ranges. Combined insight. Operational data sits alongside sales and finance data for fuller analysis. Do we need to replace our equipment? Usually not. Many machines already expose data, and retrofit sensors can cover the rest. How is device data secured? We use encrypted connections, device identity and network segmentation in line with the cloud provider's guidance. Can you start small? Yes. We recommend a pilot on a limited set of assets before a wider rollout. Which cloud platforms do you use? We work with the IoT services offered by the major cloud providers and pick based on what you already use.",
+      "focus": "custom software",
+      "content": "Off the shelf tools cover common needs, but many businesses end up stitching together spreadsheets and apps that do not talk to each other. Custom software replaces that with one system built for your process. We build web apps, SaaS platforms, internal systems, dashboards, admin panels and APIs on Laravel and React. Each project starts with how your team works today and grows in small, usable releases. Discovery workshops and written requirements Web applications and SaaS platforms Internal systems and admin panels Dashboards and reporting screens APIs and integrations with your existing tools Testing, deployment and ongoing support Fits your process. Screens and steps follow how your team works instead of forcing a new routine. One source of truth. Data lives in one system rather than scattered spreadsheets and apps. You own it. The code and data belong to you, with no per seat licence for the core system. Grows with you. New features are added in small releases as the business changes. How long does a custom system take? A first usable version usually takes eight to sixteen weeks. Larger platforms are built in stages after that. Which technologies do you use? Mainly Laravel for the back end and React for the front end, with standard hosting and databases. Can it connect to the tools we already use? Usually yes, through APIs. We check each tool during discovery. Who owns the code? You do. The code and data are handed over and documented.",
       "headings": [
         "Overview",
         "What is included",
@@ -1038,656 +648,92 @@
         "Questions we often hear"
       ],
       "editable": {
-        "slug": "connected-intelligence",
-        "name": "Connected Intelligence",
-        "category": "data-and-analytics",
-        "short": "Collect and use data from machines, sensors and operational systems.",
-        "heroImage": "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=2000&q=80",
+        "slug": "custom-software",
+        "name": "Custom Software",
+        "category": "web-and-software",
+        "short": "Web apps, SaaS platforms, dashboards, admin panels and APIs built around your business.",
+        "heroImage": "https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=2000&q=80",
         "images": [
-          "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1600&q=80",
-          "https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&w=1600&q=80"
+          "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1600&q=80",
+          "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80"
         ],
-        "heroLine": "Bring data from equipment and field operations into the same view as the rest of the business.",
+        "heroLine": "Software shaped around how your team works, built on Laravel and React.",
         "overview": [
-          "Machines, vehicles and building systems produce useful data, but it often stays locked in vendor software or never leaves the device. Connected intelligence is about capturing that data, combining it with business data and using it to make operational decisions.",
-          "We help you choose sensors and gateways where needed, set up secure data collection and build monitoring and alerting that operations teams can use."
+          "Off the shelf tools cover common needs, but many businesses end up stitching together spreadsheets and apps that do not talk to each other. Custom software replaces that with one system built for your process.",
+          "We build web apps, SaaS platforms, internal systems, dashboards, admin panels and APIs on Laravel and React. Each project starts with how your team works today and grows in small, usable releases."
         ],
         "included": [
-          "Assessment of existing equipment and data sources",
-          "Device connectivity and gateway setup",
-          "Secure data ingestion to the cloud",
-          "Real time monitoring dashboards",
-          "Alerting rules and notifications",
-          "Integration with maintenance and ERP systems"
+          "Discovery workshops and written requirements",
+          "Web applications and SaaS platforms",
+          "Internal systems and admin panels",
+          "Dashboards and reporting screens",
+          "APIs and integrations with your existing tools",
+          "Testing, deployment and ongoing support"
         ],
         "benefits": [
           {
-            "title": "Visibility",
-            "text": "Operations teams see equipment status without walking the floor."
+            "title": "Fits your process",
+            "text": "Screens and steps follow how your team works instead of forcing a new routine."
           },
           {
-            "title": "Planned maintenance",
-            "text": "Usage and condition data support maintenance based on real wear rather than fixed schedules."
+            "title": "One source of truth",
+            "text": "Data lives in one system rather than scattered spreadsheets and apps."
           },
           {
-            "title": "Faster response",
-            "text": "Alerts reach the right person when readings move outside normal ranges."
+            "title": "You own it",
+            "text": "The code and data belong to you, with no per seat licence for the core system."
           },
           {
-            "title": "Combined insight",
-            "text": "Operational data sits alongside sales and finance data for fuller analysis."
-          }
-        ],
-        "process": [
-          {
-            "title": "Survey",
-            "text": "Identify assets, protocols and the decisions the data should support."
-          },
-          {
-            "title": "Pilot",
-            "text": "Connect a small set of assets and prove the data flow end to end."
-          },
-          {
-            "title": "Scale",
-            "text": "Roll out to more sites and assets with standard configuration."
-          },
-          {
-            "title": "Operate",
-            "text": "Monitor data quality and tune alerts over time."
-          }
-        ],
-        "faqs": [
-          {
-            "q": "Do we need to replace our equipment?",
-            "a": "Usually not. Many machines already expose data, and retrofit sensors can cover the rest."
-          },
-          {
-            "q": "How is device data secured?",
-            "a": "We use encrypted connections, device identity and network segmentation in line with the cloud provider's guidance."
-          },
-          {
-            "q": "Can you start small?",
-            "a": "Yes. We recommend a pilot on a limited set of assets before a wider rollout."
-          },
-          {
-            "q": "Which cloud platforms do you use?",
-            "a": "We work with the IoT services offered by the major cloud providers and pick based on what you already use."
-          }
-        ],
-        "caseStudy": "manufacturing-equipment-monitoring"
-      }
-    },
-    {
-      "path": "/services/data-and-analytics/data-management/",
-      "title": "Data Management",
-      "description": "Governance, quality and master data practices that keep information accurate. Put rules, owners and checks in place so your data stays accurate after the cleanup.",
-      "type": "Service",
-      "focus": "data management",
-      "content": "Cleaning data once is easy. Keeping it clean is the hard part. Data management covers the policies, ownership, tools and routines that stop errors from creeping back in. We help you define who owns which data, set quality rules, manage master records such as customers and products, and meet the privacy obligations that apply to you. Data governance framework and roles Data quality rules and monitoring Master data management for customers, products and suppliers Data catalogue and business glossary Access control and privacy reviews Retention and archiving policies Trusted records. Duplicate and conflicting records are reduced and kept under control. Clear ownership. Each data area has a named owner responsible for its quality. Easier compliance. You know where sensitive data lives and who can access it. Faster onboarding. A catalogue helps new staff find and understand data quickly. Is data governance only for large companies? No. Smaller teams benefit from a light version with a few owners and simple rules. Do we need a dedicated tool? Not always. Some organisations start with existing platforms and add specialist tools later. Can you help with privacy regulations? We help map personal data and put controls in place. Legal interpretation should come from your counsel. How long before we see results? Quick fixes to high impact issues can show within weeks. Lasting change takes a few months of steady routines.",
-      "headings": [
-        "Overview",
-        "What is included",
-        "What you can expect",
-        "Our process",
-        "Questions we often hear"
-      ],
-      "editable": {
-        "slug": "data-management",
-        "name": "Data Management",
-        "category": "data-and-analytics",
-        "short": "Governance, quality and master data practices that keep information accurate.",
-        "heroImage": "https://images.unsplash.com/photo-1544256718-3bcf237f3974?auto=format&fit=crop&w=2000&q=80",
-        "images": [
-          "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=1600&q=80",
-          "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?auto=format&fit=crop&w=1600&q=80"
-        ],
-        "heroLine": "Put rules, owners and checks in place so your data stays accurate after the cleanup.",
-        "overview": [
-          "Cleaning data once is easy. Keeping it clean is the hard part. Data management covers the policies, ownership, tools and routines that stop errors from creeping back in.",
-          "We help you define who owns which data, set quality rules, manage master records such as customers and products, and meet the privacy obligations that apply to you."
-        ],
-        "included": [
-          "Data governance framework and roles",
-          "Data quality rules and monitoring",
-          "Master data management for customers, products and suppliers",
-          "Data catalogue and business glossary",
-          "Access control and privacy reviews",
-          "Retention and archiving policies"
-        ],
-        "benefits": [
-          {
-            "title": "Trusted records",
-            "text": "Duplicate and conflicting records are reduced and kept under control."
-          },
-          {
-            "title": "Clear ownership",
-            "text": "Each data area has a named owner responsible for its quality."
-          },
-          {
-            "title": "Easier compliance",
-            "text": "You know where sensitive data lives and who can access it."
-          },
-          {
-            "title": "Faster onboarding",
-            "text": "A catalogue helps new staff find and understand data quickly."
-          }
-        ],
-        "process": [
-          {
-            "title": "Assess",
-            "text": "Measure current data quality and identify the biggest issues."
-          },
-          {
-            "title": "Define",
-            "text": "Agree owners, standards and quality rules."
-          },
-          {
-            "title": "Implement",
-            "text": "Set up tools, workflows and master data processes."
-          },
-          {
-            "title": "Monitor",
-            "text": "Track quality scores and review them regularly with owners."
-          }
-        ],
-        "faqs": [
-          {
-            "q": "Is data governance only for large companies?",
-            "a": "No. Smaller teams benefit from a light version with a few owners and simple rules."
-          },
-          {
-            "q": "Do we need a dedicated tool?",
-            "a": "Not always. Some organisations start with existing platforms and add specialist tools later."
-          },
-          {
-            "q": "Can you help with privacy regulations?",
-            "a": "We help map personal data and put controls in place. Legal interpretation should come from your counsel."
-          },
-          {
-            "q": "How long before we see results?",
-            "a": "Quick fixes to high impact issues can show within weeks. Lasting change takes a few months of steady routines."
-          }
-        ],
-        "caseStudy": "finance-reporting-consolidation"
-      }
-    },
-    {
-      "path": "/services/data-and-analytics/generative-ai/",
-      "title": "Generative AI",
-      "description": "Practical uses of large language models with sensible guardrails. Find the tasks where generative AI genuinely saves time, then build it carefully.",
-      "type": "Service",
-      "focus": "generative ai",
-      "content": "Generative AI can draft documents, summarise long records, answer questions over your own content and help staff find information faster. It can also produce confident wrong answers if it is set up carelessly. We help you pick use cases with clear value, build them on established model providers, connect them to your data with appropriate access controls and test them before wider rollout. Use case discovery and prioritisation Proof of concept builds Retrieval over your documents and knowledge bases Integration with existing apps and workflows Evaluation and testing of output quality Usage policies and staff guidance Time back for staff. Repetitive drafting, searching and summarising tasks take less effort. Grounded answers. Responses are based on your approved content, with sources shown where possible. Controlled risk. Access rules, logging and human review are designed in from the start. Measured value. Each pilot has clear success measures before scaling. Will our data be used to train public models? We configure enterprise offerings from model providers that state customer data is not used for training. We review each provider's terms with you. Which models do you use? We choose from established commercial and open models based on the task, data sensitivity and cost. How do you reduce wrong answers? By grounding responses in your content, testing against known questions and keeping a human in the loop for important outputs. Do we need a big budget to start? No. A focused proof of concept is a sensible first step before larger investment.",
-      "headings": [
-        "Overview",
-        "What is included",
-        "What you can expect",
-        "Our process",
-        "Questions we often hear"
-      ],
-      "editable": {
-        "slug": "generative-ai",
-        "name": "Generative AI",
-        "category": "data-and-analytics",
-        "short": "Practical uses of large language models with sensible guardrails.",
-        "heroImage": "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=2000&q=80",
-        "images": [
-          "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1600&q=80",
-          "https://images.unsplash.com/photo-1591696205602-2f950c417cb9?auto=format&fit=crop&w=1600&q=80"
-        ],
-        "heroLine": "Find the tasks where generative AI genuinely saves time, then build it carefully.",
-        "overview": [
-          "Generative AI can draft documents, summarise long records, answer questions over your own content and help staff find information faster. It can also produce confident wrong answers if it is set up carelessly.",
-          "We help you pick use cases with clear value, build them on established model providers, connect them to your data with appropriate access controls and test them before wider rollout."
-        ],
-        "included": [
-          "Use case discovery and prioritisation",
-          "Proof of concept builds",
-          "Retrieval over your documents and knowledge bases",
-          "Integration with existing apps and workflows",
-          "Evaluation and testing of output quality",
-          "Usage policies and staff guidance"
-        ],
-        "benefits": [
-          {
-            "title": "Time back for staff",
-            "text": "Repetitive drafting, searching and summarising tasks take less effort."
-          },
-          {
-            "title": "Grounded answers",
-            "text": "Responses are based on your approved content, with sources shown where possible."
-          },
-          {
-            "title": "Controlled risk",
-            "text": "Access rules, logging and human review are designed in from the start."
-          },
-          {
-            "title": "Measured value",
-            "text": "Each pilot has clear success measures before scaling."
-          }
-        ],
-        "process": [
-          {
-            "title": "Explore",
-            "text": "Workshops to list and rank possible use cases."
-          },
-          {
-            "title": "Prototype",
-            "text": "Build a small working version with real data and users."
-          },
-          {
-            "title": "Evaluate",
-            "text": "Test accuracy, cost and risk against agreed criteria."
-          },
-          {
-            "title": "Deploy",
-            "text": "Harden the solution, add monitoring and roll out in stages."
-          }
-        ],
-        "faqs": [
-          {
-            "q": "Will our data be used to train public models?",
-            "a": "We configure enterprise offerings from model providers that state customer data is not used for training. We review each provider's terms with you."
-          },
-          {
-            "q": "Which models do you use?",
-            "a": "We choose from established commercial and open models based on the task, data sensitivity and cost."
-          },
-          {
-            "q": "How do you reduce wrong answers?",
-            "a": "By grounding responses in your content, testing against known questions and keeping a human in the loop for important outputs."
-          },
-          {
-            "q": "Do we need a big budget to start?",
-            "a": "No. A focused proof of concept is a sensible first step before larger investment."
-          }
-        ],
-        "caseStudy": "healthcare-patient-support"
-      }
-    },
-    {
-      "path": "/services/cloud/cloud-operations-and-migration/",
-      "title": "Cloud Operations and Migration",
-      "description": "Planned moves to the cloud and dependable operation once you are there. Move workloads with a plan, then run them with clear costs and fewer surprises.",
-      "type": "Service",
-      "focus": "cloud operations and migration",
-      "content": "A cloud migration done in a hurry can leave you with higher bills and the same old problems. We plan migrations application by application, decide the right approach for each and move them with tested rollback plans. Once workloads are live, we set up monitoring, backups, patching and cost controls so the environment stays healthy. Application and infrastructure discovery Migration strategy for each workload Landing zone and network setup Migration execution and cutover planning Monitoring, backup and disaster recovery setup Cost reviews and optimisation Lower risk moves. Every cutover has a test plan and a way back. Predictable spend. Tagging, budgets and rightsizing keep costs visible and under control. Better resilience. Backups and recovery plans are tested, not just configured. Less legacy hardware. Fewer servers to maintain, replace and power. Which cloud providers do you support? We work with AWS, Microsoft Azure and Google Cloud. Will there be downtime? We plan cutovers to minimise downtime, usually outside business hours, and agree windows with you in advance. Is cloud always cheaper? Not always. We give you an honest cost comparison during planning. Can you manage a mix of cloud and on premises systems? Yes. Hybrid environments are common and we support both sides.",
-      "headings": [
-        "Overview",
-        "What is included",
-        "What you can expect",
-        "Our process",
-        "Questions we often hear"
-      ],
-      "editable": {
-        "slug": "cloud-operations-and-migration",
-        "name": "Cloud Operations and Migration",
-        "category": "cloud",
-        "short": "Planned moves to the cloud and dependable operation once you are there.",
-        "heroImage": "https://images.unsplash.com/photo-1484557052118-f32bd25b45b5?auto=format&fit=crop&w=2000&q=80",
-        "images": [
-          "https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=1600&q=80",
-          "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?auto=format&fit=crop&w=1600&q=80"
-        ],
-        "heroLine": "Move workloads with a plan, then run them with clear costs and fewer surprises.",
-        "overview": [
-          "A cloud migration done in a hurry can leave you with higher bills and the same old problems. We plan migrations application by application, decide the right approach for each and move them with tested rollback plans.",
-          "Once workloads are live, we set up monitoring, backups, patching and cost controls so the environment stays healthy."
-        ],
-        "included": [
-          "Application and infrastructure discovery",
-          "Migration strategy for each workload",
-          "Landing zone and network setup",
-          "Migration execution and cutover planning",
-          "Monitoring, backup and disaster recovery setup",
-          "Cost reviews and optimisation"
-        ],
-        "benefits": [
-          {
-            "title": "Lower risk moves",
-            "text": "Every cutover has a test plan and a way back."
-          },
-          {
-            "title": "Predictable spend",
-            "text": "Tagging, budgets and rightsizing keep costs visible and under control."
-          },
-          {
-            "title": "Better resilience",
-            "text": "Backups and recovery plans are tested, not just configured."
-          },
-          {
-            "title": "Less legacy hardware",
-            "text": "Fewer servers to maintain, replace and power."
+            "title": "Grows with you",
+            "text": "New features are added in small releases as the business changes."
           }
         ],
         "process": [
           {
             "title": "Discover",
-            "text": "Inventory applications, dependencies and current costs."
-          },
-          {
-            "title": "Plan",
-            "text": "Choose rehost, replatform or refactor for each workload."
-          },
-          {
-            "title": "Migrate",
-            "text": "Move in waves with testing and business sign off."
-          },
-          {
-            "title": "Operate",
-            "text": "Monitor, patch, back up and optimise on an ongoing basis."
-          }
-        ],
-        "faqs": [
-          {
-            "q": "Which cloud providers do you support?",
-            "a": "We work with AWS, Microsoft Azure and Google Cloud."
-          },
-          {
-            "q": "Will there be downtime?",
-            "a": "We plan cutovers to minimise downtime, usually outside business hours, and agree windows with you in advance."
-          },
-          {
-            "q": "Is cloud always cheaper?",
-            "a": "Not always. We give you an honest cost comparison during planning."
-          },
-          {
-            "q": "Can you manage a mix of cloud and on premises systems?",
-            "a": "Yes. Hybrid environments are common and we support both sides."
-          }
-        ],
-        "caseStudy": "logistics-cloud-migration"
-      }
-    },
-    {
-      "path": "/services/cloud/cloud-application-development-and-integration/",
-      "title": "Cloud Application Development and Integration",
-      "description": "Custom applications and APIs built for cloud platforms and connected to your systems. Build software that fits your business and talks to the systems you already run.",
-      "type": "Service",
-      "focus": "cloud application development and integration",
-      "content": "When off the shelf software does not cover a need, a custom application can. We design and build web applications, APIs and integrations using cloud services that scale with use and are straightforward to maintain. Integration is often the bigger challenge. We connect applications through documented APIs and event based messaging so data moves reliably between them. Solution architecture and technical design Web application and API development Containers and serverless deployment System integration and API management Automated testing and CI/CD pipelines Code documentation and handover Built for your process. Software shaped around how your team works rather than forcing a workaround. Scales with demand. Cloud services handle busy periods without buying more servers. Reliable data flow. Integrations include retries, logging and alerts when something fails. Maintainable code. Tests, pipelines and documentation make future changes safer. Which technologies do you use? Common choices include TypeScript, Python, .NET and Java on major cloud platforms. We match your team's skills where possible. Who owns the source code? You do, under the terms agreed in your contract. Can you integrate with older systems? Yes. Where modern APIs do not exist, we use file transfers, database connectors or middleware. Do you provide maintenance? Yes, through a support agreement or as part of Managed Services.",
-      "headings": [
-        "Overview",
-        "What is included",
-        "What you can expect",
-        "Our process",
-        "Questions we often hear"
-      ],
-      "editable": {
-        "slug": "cloud-application-development-and-integration",
-        "name": "Cloud Application Development and Integration",
-        "category": "cloud",
-        "short": "Custom applications and APIs built for cloud platforms and connected to your systems.",
-        "heroImage": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=2000&q=80",
-        "images": [
-          "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1600&q=80",
-          "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1600&q=80"
-        ],
-        "heroLine": "Build software that fits your business and talks to the systems you already run.",
-        "overview": [
-          "When off the shelf software does not cover a need, a custom application can. We design and build web applications, APIs and integrations using cloud services that scale with use and are straightforward to maintain.",
-          "Integration is often the bigger challenge. We connect applications through documented APIs and event based messaging so data moves reliably between them."
-        ],
-        "included": [
-          "Solution architecture and technical design",
-          "Web application and API development",
-          "Containers and serverless deployment",
-          "System integration and API management",
-          "Automated testing and CI/CD pipelines",
-          "Code documentation and handover"
-        ],
-        "benefits": [
-          {
-            "title": "Built for your process",
-            "text": "Software shaped around how your team works rather than forcing a workaround."
-          },
-          {
-            "title": "Scales with demand",
-            "text": "Cloud services handle busy periods without buying more servers."
-          },
-          {
-            "title": "Reliable data flow",
-            "text": "Integrations include retries, logging and alerts when something fails."
-          },
-          {
-            "title": "Maintainable code",
-            "text": "Tests, pipelines and documentation make future changes safer."
-          }
-        ],
-        "process": [
-          {
-            "title": "Scope",
-            "text": "Define users, features and integrations for a first release."
+            "text": "Map the current process, users and must have features."
           },
           {
             "title": "Design",
-            "text": "Agree architecture, data model and user interface."
+            "text": "Screens and data structure agreed before coding starts."
           },
           {
-            "title": "Build in sprints",
-            "text": "Short cycles with demos so you see progress every two weeks."
-          },
-          {
-            "title": "Release and support",
-            "text": "Deploy, monitor and plan the next round of improvements."
-          }
-        ],
-        "faqs": [
-          {
-            "q": "Which technologies do you use?",
-            "a": "Common choices include TypeScript, Python, .NET and Java on major cloud platforms. We match your team's skills where possible."
-          },
-          {
-            "q": "Who owns the source code?",
-            "a": "You do, under the terms agreed in your contract."
-          },
-          {
-            "q": "Can you integrate with older systems?",
-            "a": "Yes. Where modern APIs do not exist, we use file transfers, database connectors or middleware."
-          },
-          {
-            "q": "Do you provide maintenance?",
-            "a": "Yes, through a support agreement or as part of Managed Services."
-          }
-        ],
-        "caseStudy": "logistics-cloud-migration"
-      }
-    },
-    {
-      "path": "/services/cloud/managed-services/",
-      "title": "Managed Services",
-      "description": "Ongoing support for your applications and infrastructure with agreed service levels. Hand over routine IT operations to a team that reports clearly and responds on time.",
-      "type": "Service",
-      "focus": "managed services",
-      "content": "Keeping systems patched, backed up and monitored is necessary work that pulls your team away from projects. Managed services take that load on, with clear service levels and regular reporting. We agree a scope that matches your environment, set up monitoring and ticketing, and meet with you regularly to review incidents, changes and improvements. Service desk for users and IT staff Infrastructure and application monitoring Patch and update management Backup checks and restore testing Incident and problem management Monthly service reports and reviews Predictable support. A fixed monthly scope with agreed response and resolution targets. Fewer surprises. Monitoring catches many issues before users notice them. Time for projects. Your internal team can focus on improvements rather than routine tasks. Clear reporting. You see what was done, what is outstanding and what we recommend. What hours do you cover? Coverage hours are agreed in your service contract and can include extended or after hours support. Can you work alongside our internal IT team? Yes. Many clients use us to cover specific systems or hours while their team handles the rest. How are service levels measured? Through ticket data on response and resolution times, shared in monthly reports. Is there a minimum contract length? Terms are agreed per client. Ask us for details during your consultation.",
-      "headings": [
-        "Overview",
-        "What is included",
-        "What you can expect",
-        "Our process",
-        "Questions we often hear"
-      ],
-      "editable": {
-        "slug": "managed-services",
-        "name": "Managed Services",
-        "category": "cloud",
-        "short": "Ongoing support for your applications and infrastructure with agreed service levels.",
-        "heroImage": "https://images.unsplash.com/photo-1550439062-609e1531270e?auto=format&fit=crop&w=2000&q=80",
-        "images": [
-          "https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?auto=format&fit=crop&w=1600&q=80",
-          "https://images.unsplash.com/photo-1527689368864-3a821dbccc34?auto=format&fit=crop&w=1600&q=80"
-        ],
-        "heroLine": "Hand over routine IT operations to a team that reports clearly and responds on time.",
-        "overview": [
-          "Keeping systems patched, backed up and monitored is necessary work that pulls your team away from projects. Managed services take that load on, with clear service levels and regular reporting.",
-          "We agree a scope that matches your environment, set up monitoring and ticketing, and meet with you regularly to review incidents, changes and improvements."
-        ],
-        "included": [
-          "Service desk for users and IT staff",
-          "Infrastructure and application monitoring",
-          "Patch and update management",
-          "Backup checks and restore testing",
-          "Incident and problem management",
-          "Monthly service reports and reviews"
-        ],
-        "benefits": [
-          {
-            "title": "Predictable support",
-            "text": "A fixed monthly scope with agreed response and resolution targets."
-          },
-          {
-            "title": "Fewer surprises",
-            "text": "Monitoring catches many issues before users notice them."
-          },
-          {
-            "title": "Time for projects",
-            "text": "Your internal team can focus on improvements rather than routine tasks."
-          },
-          {
-            "title": "Clear reporting",
-            "text": "You see what was done, what is outstanding and what we recommend."
-          }
-        ],
-        "process": [
-          {
-            "title": "Onboard",
-            "text": "Document your environment, access and escalation contacts."
-          },
-          {
-            "title": "Stabilise",
-            "text": "Fix known issues and fill monitoring gaps."
-          },
-          {
-            "title": "Run",
-            "text": "Deliver day to day support against agreed service levels."
-          },
-          {
-            "title": "Review",
-            "text": "Monthly reports and quarterly improvement planning."
-          }
-        ],
-        "faqs": [
-          {
-            "q": "What hours do you cover?",
-            "a": "Coverage hours are agreed in your service contract and can include extended or after hours support."
-          },
-          {
-            "q": "Can you work alongside our internal IT team?",
-            "a": "Yes. Many clients use us to cover specific systems or hours while their team handles the rest."
-          },
-          {
-            "q": "How are service levels measured?",
-            "a": "Through ticket data on response and resolution times, shared in monthly reports."
-          },
-          {
-            "q": "Is there a minimum contract length?",
-            "a": "Terms are agreed per client. Ask us for details during your consultation."
-          }
-        ],
-        "caseStudy": "education-security-program"
-      }
-    },
-    {
-      "path": "/services/digital-infrastructure-services/",
-      "title": "Digital Infrastructure Services",
-      "description": "Networks, end user devices and data center support for a dependable foundation. Keep the networks, devices and servers your business runs on stable and secure.",
-      "type": "Service",
-      "focus": "digital infrastructure services",
-      "content": "Every application depends on the infrastructure underneath it. Slow networks, ageing laptops and unmanaged servers cost time every day. We design, upgrade and support that foundation. Our work covers office and site networks, end user computing, on premises and colocated servers, and the move to hybrid setups where some workloads stay local and others run in the cloud. Network design, upgrade and support Wi-Fi surveys and installation planning End user device provisioning and management Server and storage support Hybrid infrastructure planning Asset inventory and lifecycle planning Stable connectivity. Networks sized and configured for how your sites are actually used. Ready to work devices. New staff receive configured, secured devices on day one. Planned refresh. Hardware replacement is budgeted rather than reactive. Better security baseline. Consistent configuration reduces gaps across devices and network gear. Do you work on site? Remote support covers most needs. On site work can be arranged depending on location and scope. Can you manage devices for remote staff? Yes, using device management tools that let us configure and secure laptops wherever they are. Do you supply hardware? We can advise on specifications and work with your preferred suppliers. Can you document our current network? Yes. An up to date network diagram and inventory is usually the first deliverable.",
-      "headings": [
-        "Overview",
-        "What is included",
-        "What you can expect",
-        "Our process",
-        "Questions we often hear"
-      ],
-      "editable": {
-        "slug": "digital-infrastructure-services",
-        "name": "Digital Infrastructure Services",
-        "category": null,
-        "short": "Networks, end user devices and data center support for a dependable foundation.",
-        "heroImage": "https://images.unsplash.com/photo-1597852074816-d933c7d2b988?auto=format&fit=crop&w=2000&q=80",
-        "images": [
-          "https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=1600&q=80",
-          "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1600&q=80"
-        ],
-        "heroLine": "Keep the networks, devices and servers your business runs on stable and secure.",
-        "overview": [
-          "Every application depends on the infrastructure underneath it. Slow networks, ageing laptops and unmanaged servers cost time every day. We design, upgrade and support that foundation.",
-          "Our work covers office and site networks, end user computing, on premises and colocated servers, and the move to hybrid setups where some workloads stay local and others run in the cloud."
-        ],
-        "included": [
-          "Network design, upgrade and support",
-          "Wi-Fi surveys and installation planning",
-          "End user device provisioning and management",
-          "Server and storage support",
-          "Hybrid infrastructure planning",
-          "Asset inventory and lifecycle planning"
-        ],
-        "benefits": [
-          {
-            "title": "Stable connectivity",
-            "text": "Networks sized and configured for how your sites are actually used."
-          },
-          {
-            "title": "Ready to work devices",
-            "text": "New staff receive configured, secured devices on day one."
-          },
-          {
-            "title": "Planned refresh",
-            "text": "Hardware replacement is budgeted rather than reactive."
-          },
-          {
-            "title": "Better security baseline",
-            "text": "Consistent configuration reduces gaps across devices and network gear."
-          }
-        ],
-        "process": [
-          {
-            "title": "Audit",
-            "text": "Inventory devices, network gear and servers, and note their condition."
-          },
-          {
-            "title": "Design",
-            "text": "Plan upgrades and standard configurations."
-          },
-          {
-            "title": "Implement",
-            "text": "Install and configure with minimal disruption to staff."
+            "title": "Build in releases",
+            "text": "Usable versions delivered every few weeks for feedback."
           },
           {
             "title": "Support",
-            "text": "Ongoing monitoring, maintenance and lifecycle planning."
+            "text": "Hosting, monitoring, fixes and new features after launch."
           }
         ],
         "faqs": [
           {
-            "q": "Do you work on site?",
-            "a": "Remote support covers most needs. On site work can be arranged depending on location and scope."
+            "q": "How long does a custom system take?",
+            "a": "A first usable version usually takes eight to sixteen weeks. Larger platforms are built in stages after that."
           },
           {
-            "q": "Can you manage devices for remote staff?",
-            "a": "Yes, using device management tools that let us configure and secure laptops wherever they are."
+            "q": "Which technologies do you use?",
+            "a": "Mainly Laravel for the back end and React for the front end, with standard hosting and databases."
           },
           {
-            "q": "Do you supply hardware?",
-            "a": "We can advise on specifications and work with your preferred suppliers."
+            "q": "Can it connect to the tools we already use?",
+            "a": "Usually yes, through APIs. We check each tool during discovery."
           },
           {
-            "q": "Can you document our current network?",
-            "a": "Yes. An up to date network diagram and inventory is usually the first deliverable."
+            "q": "Who owns the code?",
+            "a": "You do. The code and data are handed over and documented."
           }
         ],
-        "caseStudy": "manufacturing-equipment-monitoring"
+        "caseStudy": "finance-reporting-consolidation"
       }
     },
     {
-      "path": "/services/security/",
-      "title": "Security",
-      "description": "Assessments, controls and monitoring that reduce real risk. Understand where you are exposed and fix what matters most first.",
+      "path": "/services/ai-and-automation/ai-automation/",
+      "title": "AI & Automation",
+      "description": "Chatbots, document parsing, lead scoring, AI agents and a 24/7 AI receptionist, connected to the tools you already use. Practical AI and automation built on your own data, aimed at the work that takes your team the most time.",
       "type": "Service",
-      "focus": "security",
-      "content": "Security work should be proportionate. A small firm does not need the same programme as a bank, but every business needs strong identity controls, patched systems, tested backups and staff who recognise phishing. We start with an assessment against a recognised framework, then help you close gaps in a sensible order and keep watch afterwards. Security assessments against recognised frameworks Vulnerability scanning and remediation support Identity and access management Endpoint protection and email security Security awareness training for staff Incident response planning Clear priorities. A ranked list of risks and fixes instead of a long, unsorted report. Stronger access control. Multi factor authentication and least privilege reduce the impact of stolen passwords. Prepared staff. Training helps people spot and report suspicious messages. A plan for bad days. An incident response plan means less confusion if something goes wrong. Which frameworks do you use? We commonly reference the NIST Cybersecurity Framework and CIS Controls, adjusted for your size and sector. Do you do penetration testing? We can scope penetration testing and coordinate it with qualified testers as part of a wider programme. Can you help us prepare for a compliance audit? Yes. We help gather evidence and close gaps. The audit itself must be performed by an independent assessor. What should a small business start with? Multi factor authentication, regular patching, tested backups and staff training cover a large share of common risks.",
+      "focus": "ai & automation",
+      "content": "Much of the work in a growing business is repetitive: reading documents, sorting enquiries, answering the same questions and copying information from one system to another. We find those tasks and build AI tools and automations that handle them the same way every time. Our work covers document parsing, prediction and lead scoring, retrieval based AI and custom chatbots that answer from your own documents, integration between your tools, AI agents for routine tasks, and a 24/7 AI receptionist that answers calls, books appointments and qualifies leads. Review of tasks where AI and automation can save time Document parsing, prediction and lead scoring Custom chatbots and retrieval based AI on your own data Integration between your apps, forms, email and CRM AI agents and workflow automation for routine tasks 24/7 AI receptionist for calls, appointments and lead qualification Hours back each week. Repetitive reading, sorting and copying is handled by the system. Answers from your data. Chatbots and assistants respond using your own documents and records. No missed calls. The AI receptionist answers out of hours and books appointments. Connected systems. Your tools share information instead of working in isolation. Will our data be used to train public AI models? No. We set up systems so your data stays within the services and accounts you control. Which tools can you connect? Most modern tools with an API, such as CRMs, booking systems, email, forms and spreadsheets. We confirm each one at the start. How does the AI receptionist work? It answers calls with a script you approve, answers common questions, books appointments in your calendar and passes qualified leads to your team. What does it cost? It depends on scope. We usually start with one focused tool or automation, quoted after a free consultation.",
       "headings": [
         "Overview",
         "What is included",
@@ -1696,280 +742,92 @@
         "Questions we often hear"
       ],
       "editable": {
-        "slug": "security",
-        "name": "Security",
-        "category": null,
-        "short": "Assessments, controls and monitoring that reduce real risk.",
-        "heroImage": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=2000&q=80",
+        "slug": "ai-automation",
+        "name": "AI & Automation",
+        "category": "ai-and-automation",
+        "short": "Chatbots, document parsing, lead scoring, AI agents and a 24/7 AI receptionist, connected to the tools you already use.",
+        "heroImage": "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=2000&q=80",
         "images": [
-          "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&w=1600&q=80",
-          "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=1600&q=80"
+          "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1600&q=80",
+          "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1600&q=80"
         ],
-        "heroLine": "Understand where you are exposed and fix what matters most first.",
+        "heroLine": "Practical AI and automation built on your own data, aimed at the work that takes your team the most time.",
         "overview": [
-          "Security work should be proportionate. A small firm does not need the same programme as a bank, but every business needs strong identity controls, patched systems, tested backups and staff who recognise phishing.",
-          "We start with an assessment against a recognised framework, then help you close gaps in a sensible order and keep watch afterwards."
+          "Much of the work in a growing business is repetitive: reading documents, sorting enquiries, answering the same questions and copying information from one system to another. We find those tasks and build AI tools and automations that handle them the same way every time.",
+          "Our work covers document parsing, prediction and lead scoring, retrieval based AI and custom chatbots that answer from your own documents, integration between your tools, AI agents for routine tasks, and a 24/7 AI receptionist that answers calls, books appointments and qualifies leads."
         ],
         "included": [
-          "Security assessments against recognised frameworks",
-          "Vulnerability scanning and remediation support",
-          "Identity and access management",
-          "Endpoint protection and email security",
-          "Security awareness training for staff",
-          "Incident response planning"
+          "Review of tasks where AI and automation can save time",
+          "Document parsing, prediction and lead scoring",
+          "Custom chatbots and retrieval based AI on your own data",
+          "Integration between your apps, forms, email and CRM",
+          "AI agents and workflow automation for routine tasks",
+          "24/7 AI receptionist for calls, appointments and lead qualification"
         ],
         "benefits": [
           {
-            "title": "Clear priorities",
-            "text": "A ranked list of risks and fixes instead of a long, unsorted report."
+            "title": "Hours back each week",
+            "text": "Repetitive reading, sorting and copying is handled by the system."
           },
           {
-            "title": "Stronger access control",
-            "text": "Multi factor authentication and least privilege reduce the impact of stolen passwords."
+            "title": "Answers from your data",
+            "text": "Chatbots and assistants respond using your own documents and records."
           },
           {
-            "title": "Prepared staff",
-            "text": "Training helps people spot and report suspicious messages."
+            "title": "No missed calls",
+            "text": "The AI receptionist answers out of hours and books appointments."
           },
           {
-            "title": "A plan for bad days",
-            "text": "An incident response plan means less confusion if something goes wrong."
+            "title": "Connected systems",
+            "text": "Your tools share information instead of working in isolation."
           }
         ],
         "process": [
           {
-            "title": "Assess",
-            "text": "Review controls, configurations and policies against a chosen framework."
-          },
-          {
-            "title": "Prioritise",
-            "text": "Rank findings by likelihood and impact."
-          },
-          {
-            "title": "Remediate",
-            "text": "Fix issues with your team or on your behalf."
-          },
-          {
-            "title": "Monitor",
-            "text": "Ongoing scanning, alert review and periodic reassessment."
-          }
-        ],
-        "faqs": [
-          {
-            "q": "Which frameworks do you use?",
-            "a": "We commonly reference the NIST Cybersecurity Framework and CIS Controls, adjusted for your size and sector."
-          },
-          {
-            "q": "Do you do penetration testing?",
-            "a": "We can scope penetration testing and coordinate it with qualified testers as part of a wider programme."
-          },
-          {
-            "q": "Can you help us prepare for a compliance audit?",
-            "a": "Yes. We help gather evidence and close gaps. The audit itself must be performed by an independent assessor."
-          },
-          {
-            "q": "What should a small business start with?",
-            "a": "Multi factor authentication, regular patching, tested backups and staff training cover a large share of common risks."
-          }
-        ],
-        "caseStudy": "education-security-program"
-      }
-    },
-    {
-      "path": "/services/emerging-technologies/",
-      "title": "Emerging Technologies",
-      "description": "Honest evaluation and small pilots for new technology before you commit. Test new technology on a small scale and keep only what proves its worth.",
-      "type": "Service",
-      "focus": "emerging technologies",
-      "content": "Augmented reality, robotics, blockchain and new AI tools all get plenty of attention. Some will be useful for your business and many will not, at least not yet. We help you tell the difference. Our approach is to research options, run small pilots with clear success measures and give you an honest recommendation on whether to proceed. Technology scanning relevant to your sector Feasibility studies Small scale pilots and prototypes Vendor and product evaluation Business case support Scale up planning for successful pilots Lower risk. Small pilots cost far less than a full rollout that does not deliver. Evidence based decisions. Results from real tests rather than vendor claims. Informed leadership. Plain language briefings on what a technology can and cannot do today. Faster follow through. Successful pilots come with a plan for the next step. Which technologies do you cover? Areas such as applied AI, automation, extended reality, IoT and distributed ledgers, depending on your needs. How long is a typical pilot? Most pilots run between six and twelve weeks. What if the pilot fails? That is a useful result. You learn cheaply and avoid a larger investment that would not pay off. Do you sell any of these products? No. Our recommendations are based on fit, not on product sales.",
-      "headings": [
-        "Overview",
-        "What is included",
-        "What you can expect",
-        "Our process",
-        "Questions we often hear"
-      ],
-      "editable": {
-        "slug": "emerging-technologies",
-        "name": "Emerging Technologies",
-        "category": null,
-        "short": "Honest evaluation and small pilots for new technology before you commit.",
-        "heroImage": "https://images.unsplash.com/photo-1535223289827-42f1e9919769?auto=format&fit=crop&w=2000&q=80",
-        "images": [
-          "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1600&q=80",
-          "https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&w=1600&q=80"
-        ],
-        "heroLine": "Test new technology on a small scale and keep only what proves its worth.",
-        "overview": [
-          "Augmented reality, robotics, blockchain and new AI tools all get plenty of attention. Some will be useful for your business and many will not, at least not yet. We help you tell the difference.",
-          "Our approach is to research options, run small pilots with clear success measures and give you an honest recommendation on whether to proceed."
-        ],
-        "included": [
-          "Technology scanning relevant to your sector",
-          "Feasibility studies",
-          "Small scale pilots and prototypes",
-          "Vendor and product evaluation",
-          "Business case support",
-          "Scale up planning for successful pilots"
-        ],
-        "benefits": [
-          {
-            "title": "Lower risk",
-            "text": "Small pilots cost far less than a full rollout that does not deliver."
-          },
-          {
-            "title": "Evidence based decisions",
-            "text": "Results from real tests rather than vendor claims."
-          },
-          {
-            "title": "Informed leadership",
-            "text": "Plain language briefings on what a technology can and cannot do today."
-          },
-          {
-            "title": "Faster follow through",
-            "text": "Successful pilots come with a plan for the next step."
-          }
-        ],
-        "process": [
-          {
-            "title": "Research",
-            "text": "Identify technologies that could address a real business need."
-          },
-          {
-            "title": "Frame",
-            "text": "Define a pilot with scope, budget and success measures."
-          },
-          {
-            "title": "Pilot",
-            "text": "Build and run the test with a small group of users."
-          },
-          {
-            "title": "Recommend",
-            "text": "Share results and a clear go, adjust or stop recommendation."
-          }
-        ],
-        "faqs": [
-          {
-            "q": "Which technologies do you cover?",
-            "a": "Areas such as applied AI, automation, extended reality, IoT and distributed ledgers, depending on your needs."
-          },
-          {
-            "q": "How long is a typical pilot?",
-            "a": "Most pilots run between six and twelve weeks."
-          },
-          {
-            "q": "What if the pilot fails?",
-            "a": "That is a useful result. You learn cheaply and avoid a larger investment that would not pay off."
-          },
-          {
-            "q": "Do you sell any of these products?",
-            "a": "No. Our recommendations are based on fit, not on product sales."
-          }
-        ],
-        "caseStudy": "manufacturing-equipment-monitoring"
-      }
-    },
-    {
-      "path": "/services/business-process-services/contact-center/",
-      "title": "Contact Center",
-      "description": "Trained agents for phone, email and chat support under your brand. Give customers quick, polite and accurate answers on the channels they prefer.",
-      "type": "Service",
-      "focus": "contact center",
-      "content": "Customers judge a company by how it handles their questions. We provide contact center teams that answer calls, emails and chats on your behalf, following your scripts, policies and tone. Agents are trained on your products before going live, supported by knowledge bases and quality reviews, and measured against service levels you agree. Inbound phone, email and chat support Outbound calls for follow ups and reminders Agent recruitment and product training Knowledge base creation and upkeep Call quality monitoring and coaching Daily and monthly performance reporting Flexible capacity. Scale agent numbers up or down with seasonal demand. Consistent quality. Regular reviews and coaching keep answers accurate and on brand. Longer coverage. Extend support hours without hiring a full internal team. Useful feedback. Contact reasons are tracked so you can fix root causes. Can agents use our existing helpdesk software? Yes. Agents can work in your helpdesk and CRM tools, or we can recommend a platform. Which languages are supported? Language coverage depends on staffing for your account. Tell us your needs during the consultation. How do you protect customer data? Agents work under confidentiality agreements with role based access and follow your data handling rules. How quickly can you start? Timelines depend on volume and complexity. A small team can often be ready within a few weeks.",
-      "headings": [
-        "Overview",
-        "What is included",
-        "What you can expect",
-        "Our process",
-        "Questions we often hear"
-      ],
-      "editable": {
-        "slug": "contact-center",
-        "name": "Contact Center",
-        "category": "business-process-services",
-        "short": "Trained agents for phone, email and chat support under your brand.",
-        "heroImage": "https://images.unsplash.com/photo-1600267175161-cfaa711b4a81?auto=format&fit=crop&w=2000&q=80",
-        "images": [
-          "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80",
-          "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=1600&q=80"
-        ],
-        "heroLine": "Give customers quick, polite and accurate answers on the channels they prefer.",
-        "overview": [
-          "Customers judge a company by how it handles their questions. We provide contact center teams that answer calls, emails and chats on your behalf, following your scripts, policies and tone.",
-          "Agents are trained on your products before going live, supported by knowledge bases and quality reviews, and measured against service levels you agree."
-        ],
-        "included": [
-          "Inbound phone, email and chat support",
-          "Outbound calls for follow ups and reminders",
-          "Agent recruitment and product training",
-          "Knowledge base creation and upkeep",
-          "Call quality monitoring and coaching",
-          "Daily and monthly performance reporting"
-        ],
-        "benefits": [
-          {
-            "title": "Flexible capacity",
-            "text": "Scale agent numbers up or down with seasonal demand."
-          },
-          {
-            "title": "Consistent quality",
-            "text": "Regular reviews and coaching keep answers accurate and on brand."
-          },
-          {
-            "title": "Longer coverage",
-            "text": "Extend support hours without hiring a full internal team."
-          },
-          {
-            "title": "Useful feedback",
-            "text": "Contact reasons are tracked so you can fix root causes."
-          }
-        ],
-        "process": [
-          {
-            "title": "Learn",
-            "text": "Study your products, policies and common customer questions."
+            "title": "Find the task",
+            "text": "Map your processes and pick the tasks with clear value."
           },
           {
             "title": "Prepare",
-            "text": "Build scripts, knowledge articles and reporting."
+            "text": "Gather the documents, data and tool access the system needs."
           },
           {
-            "title": "Train and launch",
-            "text": "Train agents, run test contacts and go live."
+            "title": "Build and test",
+            "text": "Build the AI tools and automations and test them on real examples."
           },
           {
-            "title": "Improve",
-            "text": "Review quality and metrics with you on a regular schedule."
+            "title": "Launch and improve",
+            "text": "Go live, monitor results and adjust as your process changes."
           }
         ],
         "faqs": [
           {
-            "q": "Can agents use our existing helpdesk software?",
-            "a": "Yes. Agents can work in your helpdesk and CRM tools, or we can recommend a platform."
+            "q": "Will our data be used to train public AI models?",
+            "a": "No. We set up systems so your data stays within the services and accounts you control."
           },
           {
-            "q": "Which languages are supported?",
-            "a": "Language coverage depends on staffing for your account. Tell us your needs during the consultation."
+            "q": "Which tools can you connect?",
+            "a": "Most modern tools with an API, such as CRMs, booking systems, email, forms and spreadsheets. We confirm each one at the start."
           },
           {
-            "q": "How do you protect customer data?",
-            "a": "Agents work under confidentiality agreements with role based access and follow your data handling rules."
+            "q": "How does the AI receptionist work?",
+            "a": "It answers calls with a script you approve, answers common questions, books appointments in your calendar and passes qualified leads to your team."
           },
           {
-            "q": "How quickly can you start?",
-            "a": "Timelines depend on volume and complexity. A small team can often be ready within a few weeks."
+            "q": "What does it cost?",
+            "a": "It depends on scope. We usually start with one focused tool or automation, quoted after a free consultation."
           }
         ],
         "caseStudy": "healthcare-patient-support"
       }
     },
     {
-      "path": "/services/business-process-services/digital-marketing/",
-      "title": "Digital Marketing",
-      "description": "Search, social, content and email marketing run against clear goals. Reach the right people online and measure what each channel brings in.",
+      "path": "/services/ai-and-automation/crm-and-lead-management/",
+      "title": "CRM & Lead Management",
+      "description": "Custom CRM systems, lead capture and automated follow ups so no lead is lost. Capture every enquiry, follow up on time and see where each lead stands.",
       "type": "Service",
-      "focus": "digital marketing",
-      "content": "Digital marketing works when channels are chosen for your audience and every campaign is tracked against a business goal. We plan and run search, social, content and email marketing with regular, honest reporting. You can hand us the full programme or ask us to support your in house team with specific channels. Marketing audit and channel plan Search engine optimisation Paid search and paid social campaigns Content writing and editorial calendars Email marketing and automation Analytics setup and monthly reporting Focused spend. Budget goes to channels that bring results, based on tracked data. Consistent presence. A steady publishing schedule keeps your brand visible. Clear attribution. Tracking shows which campaigns lead to enquiries and sales. Flexible support. Use us for one channel or the whole programme. Do you guarantee rankings or leads? No honest agency can guarantee rankings. We commit to agreed activity, transparent reporting and steady improvement. Who owns the ad accounts? You do. We work inside accounts registered to your business. How soon will we see results? Paid campaigns can drive traffic quickly. Search and content usually take several months to build. Can you write for technical audiences? Yes. Our writers work with your subject experts to get the detail right.",
+      "focus": "crm & lead management",
+      "content": "Leads often arrive through many channels: website forms, calls, emails, ads and social media. Without one place to track them, follow ups are missed and good enquiries go cold. We set up or build CRM systems that capture leads from every channel, nurture them with timely messages and automate follow ups, so your team always knows who to contact next. Custom CRM systems or setup of an existing CRM Lead capture from forms, calls, ads and email Pipelines and stages that match your sales process Automated follow up emails and reminders Lead nurturing sequences Reports on lead sources and conversion No lost leads. Every enquiry is captured and assigned automatically. Timely follow ups. Reminders and automated messages keep leads warm. Clear pipeline. See every lead, its stage and the next action at a glance. Know what works. Reports show which channels bring leads that turn into customers. Do we need a custom CRM or an existing one? Many businesses do well with an established CRM. We recommend a custom system only when your process needs it. Can you move our existing contacts? Yes. We import contacts and history from spreadsheets or your current system. Will our team find it easy to use? We keep screens simple and train your team before launch. How long does it take? A CRM setup usually takes two to six weeks depending on channels and automations.",
       "headings": [
         "Overview",
         "What is included",
@@ -1978,92 +836,92 @@
         "Questions we often hear"
       ],
       "editable": {
-        "slug": "digital-marketing",
-        "name": "Digital Marketing",
-        "category": "business-process-services",
-        "short": "Search, social, content and email marketing run against clear goals.",
-        "heroImage": "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&w=2000&q=80",
+        "slug": "crm-and-lead-management",
+        "name": "CRM & Lead Management",
+        "category": "ai-and-automation",
+        "short": "Custom CRM systems, lead capture and automated follow ups so no lead is lost.",
+        "heroImage": "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=2000&q=80",
         "images": [
-          "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=1600&q=80",
-          "https://images.unsplash.com/photo-1557838923-2985c318be48?auto=format&fit=crop&w=1600&q=80"
+          "https://images.unsplash.com/photo-1556745753-b2904692b3cd?auto=format&fit=crop&w=1600&q=80",
+          "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80"
         ],
-        "heroLine": "Reach the right people online and measure what each channel brings in.",
+        "heroLine": "Capture every enquiry, follow up on time and see where each lead stands.",
         "overview": [
-          "Digital marketing works when channels are chosen for your audience and every campaign is tracked against a business goal. We plan and run search, social, content and email marketing with regular, honest reporting.",
-          "You can hand us the full programme or ask us to support your in house team with specific channels."
+          "Leads often arrive through many channels: website forms, calls, emails, ads and social media. Without one place to track them, follow ups are missed and good enquiries go cold.",
+          "We set up or build CRM systems that capture leads from every channel, nurture them with timely messages and automate follow ups, so your team always knows who to contact next."
         ],
         "included": [
-          "Marketing audit and channel plan",
-          "Search engine optimisation",
-          "Paid search and paid social campaigns",
-          "Content writing and editorial calendars",
-          "Email marketing and automation",
-          "Analytics setup and monthly reporting"
+          "Custom CRM systems or setup of an existing CRM",
+          "Lead capture from forms, calls, ads and email",
+          "Pipelines and stages that match your sales process",
+          "Automated follow up emails and reminders",
+          "Lead nurturing sequences",
+          "Reports on lead sources and conversion"
         ],
         "benefits": [
           {
-            "title": "Focused spend",
-            "text": "Budget goes to channels that bring results, based on tracked data."
+            "title": "No lost leads",
+            "text": "Every enquiry is captured and assigned automatically."
           },
           {
-            "title": "Consistent presence",
-            "text": "A steady publishing schedule keeps your brand visible."
+            "title": "Timely follow ups",
+            "text": "Reminders and automated messages keep leads warm."
           },
           {
-            "title": "Clear attribution",
-            "text": "Tracking shows which campaigns lead to enquiries and sales."
+            "title": "Clear pipeline",
+            "text": "See every lead, its stage and the next action at a glance."
           },
           {
-            "title": "Flexible support",
-            "text": "Use us for one channel or the whole programme."
+            "title": "Know what works",
+            "text": "Reports show which channels bring leads that turn into customers."
           }
         ],
         "process": [
           {
-            "title": "Audit",
-            "text": "Review current channels, content, analytics and competitors."
+            "title": "Review",
+            "text": "Understand how leads arrive and how your team follows up today."
           },
           {
-            "title": "Plan",
-            "text": "Set goals, budgets and a channel mix."
+            "title": "Set up",
+            "text": "Configure or build the CRM, pipelines and lead capture."
           },
           {
-            "title": "Execute",
-            "text": "Launch campaigns and publish content on schedule."
+            "title": "Automate",
+            "text": "Add follow up sequences, reminders and assignments."
           },
           {
-            "title": "Report and adjust",
-            "text": "Monthly reports with recommended changes."
+            "title": "Train and report",
+            "text": "Train your team and set up regular reports."
           }
         ],
         "faqs": [
           {
-            "q": "Do you guarantee rankings or leads?",
-            "a": "No honest agency can guarantee rankings. We commit to agreed activity, transparent reporting and steady improvement."
+            "q": "Do we need a custom CRM or an existing one?",
+            "a": "Many businesses do well with an established CRM. We recommend a custom system only when your process needs it."
           },
           {
-            "q": "Who owns the ad accounts?",
-            "a": "You do. We work inside accounts registered to your business."
+            "q": "Can you move our existing contacts?",
+            "a": "Yes. We import contacts and history from spreadsheets or your current system."
           },
           {
-            "q": "How soon will we see results?",
-            "a": "Paid campaigns can drive traffic quickly. Search and content usually take several months to build."
+            "q": "Will our team find it easy to use?",
+            "a": "We keep screens simple and train your team before launch."
           },
           {
-            "q": "Can you write for technical audiences?",
-            "a": "Yes. Our writers work with your subject experts to get the detail right."
+            "q": "How long does it take?",
+            "a": "A CRM setup usually takes two to six weeks depending on channels and automations."
           }
         ],
         "caseStudy": "retail-storefront-rebuild"
       }
     },
     {
-      "path": "/services/business-process-services/finance-and-accounting/",
-      "title": "Finance and Accounting",
-      "description": "Bookkeeping, payables, receivables and reporting handled by a dedicated team. Keep your books current and your month end close on schedule.",
+      "path": "/services/growth-marketing/seo/",
+      "title": "SEO",
+      "description": "Technical, on-page, local and off-page SEO with monthly reporting. Help the right customers find you on Google, then turn that traffic into enquiries.",
       "type": "Service",
-      "focus": "finance and accounting",
-      "content": "Accurate, up to date books make every other financial decision easier. Our finance and accounting team handles routine transactional work so your finance leads can focus on planning and control. We work in your accounting system, follow your approval rules and provide clear month end packs. Bookkeeping and bank reconciliations Accounts payable processing Accounts receivable and collections support Payroll processing support Month end close and management reports Process documentation and controls Timely books. Transactions are recorded and reconciled on a regular schedule. Faster close. A documented checklist shortens the month end process. Better cash visibility. Up to date receivables and payables give a clearer cash picture. Stronger controls. Segregation of duties and approval steps are built into the process. Which accounting software do you use? We work in common platforms such as QuickBooks, Xero, NetSuite and Microsoft Dynamics. Do you file taxes? Tax filing should be handled by a licensed tax professional. We prepare clean records that make their work easier. Who approves payments? Your team keeps approval authority. We prepare and process according to your rules. Can you clean up past records? Yes. Catch up bookkeeping is often the first piece of work.",
+      "focus": "seo",
+      "content": "Search engine optimization is steady work across the whole site: making it easy for Google to read, making each page useful for the people searching, and building trust through mentions and links from other sites. We cover technical, on-page, local and off-page SEO, optimize your Google Business Profile and send a monthly report, so you can see how rankings, organic traffic and qualified leads are changing. Technical SEO audit and fixes Keyword research and on-page optimization Local SEO and Google Business Profile optimization Content planning for pages and articles Off-page SEO and quality link building Monthly ranking, traffic and lead reports More qualified traffic. Pages target the searches your customers actually make. Local visibility. An optimized Google Business Profile helps you show up in local results and maps. A healthy site. Technical fixes make the site faster and easier for search engines to read. Clear reporting. Monthly reports show what changed and what we are doing next. How long until we see results? Technical fixes can help within weeks. Ranking for competitive searches usually takes several months of steady work. Can you guarantee first place on Google? No one can honestly guarantee a ranking. We focus on the work that improves visibility and report on progress every month. Do you write content? Yes. We plan and write pages and articles, or work with content your team provides. How is SEO priced? Usually as a monthly retainer based on the size of the site and the competition. We quote after a free consultation.",
       "headings": [
         "Overview",
         "What is included",
@@ -2072,92 +930,92 @@
         "Questions we often hear"
       ],
       "editable": {
-        "slug": "finance-and-accounting",
-        "name": "Finance and Accounting",
-        "category": "business-process-services",
-        "short": "Bookkeeping, payables, receivables and reporting handled by a dedicated team.",
-        "heroImage": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=2000&q=80",
+        "slug": "seo",
+        "name": "SEO",
+        "category": "growth-marketing",
+        "short": "Technical, on-page, local and off-page SEO with monthly reporting.",
+        "heroImage": "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&w=2000&q=80",
         "images": [
-          "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=1600&q=80",
-          "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1600&q=80"
+          "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80",
+          "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=1600&q=80"
         ],
-        "heroLine": "Keep your books current and your month end close on schedule.",
+        "heroLine": "Help the right customers find you on Google, then turn that traffic into enquiries.",
         "overview": [
-          "Accurate, up to date books make every other financial decision easier. Our finance and accounting team handles routine transactional work so your finance leads can focus on planning and control.",
-          "We work in your accounting system, follow your approval rules and provide clear month end packs."
+          "Search engine optimization is steady work across the whole site: making it easy for Google to read, making each page useful for the people searching, and building trust through mentions and links from other sites.",
+          "We cover technical, on-page, local and off-page SEO, optimize your Google Business Profile and send a monthly report, so you can see how rankings, organic traffic and qualified leads are changing."
         ],
         "included": [
-          "Bookkeeping and bank reconciliations",
-          "Accounts payable processing",
-          "Accounts receivable and collections support",
-          "Payroll processing support",
-          "Month end close and management reports",
-          "Process documentation and controls"
+          "Technical SEO audit and fixes",
+          "Keyword research and on-page optimization",
+          "Local SEO and Google Business Profile optimization",
+          "Content planning for pages and articles",
+          "Off-page SEO and quality link building",
+          "Monthly ranking, traffic and lead reports"
         ],
         "benefits": [
           {
-            "title": "Timely books",
-            "text": "Transactions are recorded and reconciled on a regular schedule."
+            "title": "More qualified traffic",
+            "text": "Pages target the searches your customers actually make."
           },
           {
-            "title": "Faster close",
-            "text": "A documented checklist shortens the month end process."
+            "title": "Local visibility",
+            "text": "An optimized Google Business Profile helps you show up in local results and maps."
           },
           {
-            "title": "Better cash visibility",
-            "text": "Up to date receivables and payables give a clearer cash picture."
+            "title": "A healthy site",
+            "text": "Technical fixes make the site faster and easier for search engines to read."
           },
           {
-            "title": "Stronger controls",
-            "text": "Segregation of duties and approval steps are built into the process."
+            "title": "Clear reporting",
+            "text": "Monthly reports show what changed and what we are doing next."
           }
         ],
         "process": [
           {
-            "title": "Review",
-            "text": "Understand your chart of accounts, systems and approval rules."
+            "title": "Audit",
+            "text": "Review the site, rankings, competitors and Google Business Profile."
           },
           {
-            "title": "Transition",
-            "text": "Document processes and run them in parallel with your team."
+            "title": "Plan",
+            "text": "Agree priority keywords, fixes and content for the coming months."
           },
           {
-            "title": "Operate",
-            "text": "Take over agreed tasks on a defined calendar."
+            "title": "Improve",
+            "text": "Fix technical issues, optimize pages and publish content."
           },
           {
             "title": "Report",
-            "text": "Deliver month end packs and review them with you."
+            "text": "Monthly reports on rankings, traffic and leads."
           }
         ],
         "faqs": [
           {
-            "q": "Which accounting software do you use?",
-            "a": "We work in common platforms such as QuickBooks, Xero, NetSuite and Microsoft Dynamics."
+            "q": "How long until we see results?",
+            "a": "Technical fixes can help within weeks. Ranking for competitive searches usually takes several months of steady work."
           },
           {
-            "q": "Do you file taxes?",
-            "a": "Tax filing should be handled by a licensed tax professional. We prepare clean records that make their work easier."
+            "q": "Can you guarantee first place on Google?",
+            "a": "No one can honestly guarantee a ranking. We focus on the work that improves visibility and report on progress every month."
           },
           {
-            "q": "Who approves payments?",
-            "a": "Your team keeps approval authority. We prepare and process according to your rules."
+            "q": "Do you write content?",
+            "a": "Yes. We plan and write pages and articles, or work with content your team provides."
           },
           {
-            "q": "Can you clean up past records?",
-            "a": "Yes. Catch up bookkeeping is often the first piece of work."
+            "q": "How is SEO priced?",
+            "a": "Usually as a monthly retainer based on the size of the site and the competition. We quote after a free consultation."
           }
         ],
-        "caseStudy": "finance-reporting-consolidation"
+        "caseStudy": "retail-storefront-rebuild"
       }
     },
     {
-      "path": "/services/business-process-services/staff-augmentation/",
-      "title": "Staff Augmentation",
-      "description": "Skilled professionals who join your team for as long as you need them. Add experienced people to your team without a long hiring cycle.",
+      "path": "/services/growth-marketing/aeo-and-geo/",
+      "title": "AEO & GEO",
+      "description": "Visibility in featured snippets, voice search and AI answers from ChatGPT, Gemini and Perplexity. Make your business easy for search engines and AI assistants to understand, quote and recommend.",
       "type": "Service",
-      "focus": "staff augmentation",
-      "content": "Sometimes you need an extra developer, analyst or project manager for a few months. Staff augmentation gives you vetted professionals who work as part of your team, under your direction. We match candidates to your skills, tools and working hours, and handle the employment administration on our side. Role definition and skills matching Candidate screening and technical assessment Interviews with your team before selection Onboarding support Performance check ins Replacement if a placement is not working Quick start. Fill skill gaps faster than a traditional hire in many cases. Flexible terms. Scale the team up or down as projects change. Your direction. Augmented staff follow your processes, tools and priorities. Less admin. We handle contracts, payroll and benefits for the people we place. Which roles can you fill? Common roles include developers, QA engineers, data analysts, cloud engineers, designers and project managers. Do augmented staff work in our time zone? Working hours are agreed upfront to give enough overlap with your team. Can we hire them permanently later? Conversion terms can be agreed in your contract. What happens if it is not a good fit? We work with you to resolve issues and can provide a replacement.",
+      "focus": "aeo & geo",
+      "content": "More people now get answers straight from Google AI Overviews, voice assistants and tools like ChatGPT, Gemini and Perplexity. Answer engine optimization (AEO) and generative engine optimization (GEO) help your business appear in those answers. We structure your content to answer real questions clearly, add schema markup so machines understand your pages, work towards featured snippets and voice search results, and track how your brand appears in AI answers over time. Audit of how AI tools currently describe your brand Question based content that answers searches directly Schema markup for your business, services and FAQs Optimization for featured snippets and voice search Brand mentions and consistent business information across the web Regular checks of visibility in AI answers Seen in AI answers. Your business is more likely to be named when people ask AI tools for recommendations. Featured snippets. Clear answers can earn the highlighted box at the top of Google. Voice search ready. Content is written to answer spoken questions directly. Builds on SEO. The same work strengthens your regular search rankings too. What is the difference between AEO and GEO? AEO focuses on direct answers such as featured snippets and voice search. GEO focuses on being cited in AI generated answers from tools like ChatGPT and Gemini. Can you guarantee ChatGPT will mention us? No. AI tools decide their own answers. We improve the signals they rely on and track changes over time. Do we still need SEO? Yes. AEO and GEO build on a site that is already well optimized for search. How long does it take? Schema and content changes can be done in weeks. Visibility in AI answers builds gradually over months.",
       "headings": [
         "Overview",
         "What is included",
@@ -2166,92 +1024,92 @@
         "Questions we often hear"
       ],
       "editable": {
-        "slug": "staff-augmentation",
-        "name": "Staff Augmentation",
-        "category": "business-process-services",
-        "short": "Skilled professionals who join your team for as long as you need them.",
-        "heroImage": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=2000&q=80",
+        "slug": "aeo-and-geo",
+        "name": "AEO & GEO",
+        "category": "growth-marketing",
+        "short": "Visibility in featured snippets, voice search and AI answers from ChatGPT, Gemini and Perplexity.",
+        "heroImage": "https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&w=2000&q=80",
         "images": [
-          "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80",
+          "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1600&q=80",
           "https://images.unsplash.com/photo-1531545514256-b1400bc00f31?auto=format&fit=crop&w=1600&q=80"
         ],
-        "heroLine": "Add experienced people to your team without a long hiring cycle.",
+        "heroLine": "Make your business easy for search engines and AI assistants to understand, quote and recommend.",
         "overview": [
-          "Sometimes you need an extra developer, analyst or project manager for a few months. Staff augmentation gives you vetted professionals who work as part of your team, under your direction.",
-          "We match candidates to your skills, tools and working hours, and handle the employment administration on our side."
+          "More people now get answers straight from Google AI Overviews, voice assistants and tools like ChatGPT, Gemini and Perplexity. Answer engine optimization (AEO) and generative engine optimization (GEO) help your business appear in those answers.",
+          "We structure your content to answer real questions clearly, add schema markup so machines understand your pages, work towards featured snippets and voice search results, and track how your brand appears in AI answers over time."
         ],
         "included": [
-          "Role definition and skills matching",
-          "Candidate screening and technical assessment",
-          "Interviews with your team before selection",
-          "Onboarding support",
-          "Performance check ins",
-          "Replacement if a placement is not working"
+          "Audit of how AI tools currently describe your brand",
+          "Question based content that answers searches directly",
+          "Schema markup for your business, services and FAQs",
+          "Optimization for featured snippets and voice search",
+          "Brand mentions and consistent business information across the web",
+          "Regular checks of visibility in AI answers"
         ],
         "benefits": [
           {
-            "title": "Quick start",
-            "text": "Fill skill gaps faster than a traditional hire in many cases."
+            "title": "Seen in AI answers",
+            "text": "Your business is more likely to be named when people ask AI tools for recommendations."
           },
           {
-            "title": "Flexible terms",
-            "text": "Scale the team up or down as projects change."
+            "title": "Featured snippets",
+            "text": "Clear answers can earn the highlighted box at the top of Google."
           },
           {
-            "title": "Your direction",
-            "text": "Augmented staff follow your processes, tools and priorities."
+            "title": "Voice search ready",
+            "text": "Content is written to answer spoken questions directly."
           },
           {
-            "title": "Less admin",
-            "text": "We handle contracts, payroll and benefits for the people we place."
+            "title": "Builds on SEO",
+            "text": "The same work strengthens your regular search rankings too."
           }
         ],
         "process": [
           {
-            "title": "Define",
-            "text": "Agree role, skills, duration and working hours."
+            "title": "Check",
+            "text": "See how search engines and AI tools describe you today."
           },
           {
-            "title": "Shortlist",
-            "text": "Screen and assess candidates against the brief."
+            "title": "Structure",
+            "text": "Add schema markup and organise content around real questions."
           },
           {
-            "title": "Select",
-            "text": "You interview and choose the right person."
+            "title": "Publish",
+            "text": "Create and update pages that answer questions clearly."
           },
           {
-            "title": "Support",
-            "text": "Regular check ins with you and the team member."
+            "title": "Track",
+            "text": "Check visibility in AI answers and snippets regularly."
           }
         ],
         "faqs": [
           {
-            "q": "Which roles can you fill?",
-            "a": "Common roles include developers, QA engineers, data analysts, cloud engineers, designers and project managers."
+            "q": "What is the difference between AEO and GEO?",
+            "a": "AEO focuses on direct answers such as featured snippets and voice search. GEO focuses on being cited in AI generated answers from tools like ChatGPT and Gemini."
           },
           {
-            "q": "Do augmented staff work in our time zone?",
-            "a": "Working hours are agreed upfront to give enough overlap with your team."
+            "q": "Can you guarantee ChatGPT will mention us?",
+            "a": "No. AI tools decide their own answers. We improve the signals they rely on and track changes over time."
           },
           {
-            "q": "Can we hire them permanently later?",
-            "a": "Conversion terms can be agreed in your contract."
+            "q": "Do we still need SEO?",
+            "a": "Yes. AEO and GEO build on a site that is already well optimized for search."
           },
           {
-            "q": "What happens if it is not a good fit?",
-            "a": "We work with you to resolve issues and can provide a replacement."
+            "q": "How long does it take?",
+            "a": "Schema and content changes can be done in weeks. Visibility in AI answers builds gradually over months."
           }
         ],
-        "caseStudy": "logistics-cloud-migration"
+        "caseStudy": "retail-storefront-rebuild"
       }
     },
     {
-      "path": "/services/business-process-services/legal-process-outsourcing/",
-      "title": "Legal Process Outsourcing",
-      "description": "Support for document review, contract management and legal research. Free up your legal team from high volume, routine document work.",
+      "path": "/services/growth-marketing/social-media-management/",
+      "title": "Social Media Management",
+      "description": "Content planning, reels, graphics, scheduling, engagement and reporting. Regular, on brand posts and a responsive presence, without your team having to manage it daily.",
       "type": "Service",
-      "focus": "legal process outsourcing",
-      "content": "Legal teams spend a large share of their time on tasks such as document review, contract abstraction and research memos. Legal process outsourcing moves that work to a trained support team, supervised by your lawyers. We do not provide legal advice. We provide organised, accurate support work that your attorneys review and own. Document review and coding Contract abstraction and summaries Contract lifecycle administration Legal research support Due diligence document organisation Paralegal and administrative support Lawyer time on legal work. Routine tasks move away from expensive attorney hours. Structured output. Consistent templates make review faster. Capacity for peaks. Handle large reviews without temporary hires. Confidential handling. Secure systems and confidentiality agreements protect sensitive files. Do you give legal advice? No. All work is support work performed under the supervision of your attorneys. How is confidentiality handled? Staff sign confidentiality agreements and work in access controlled systems approved by you. Can you work in our document management system? Yes, with appropriate access provisioned by your team. What volume can you handle? Team size is agreed based on your volume and deadlines.",
+      "focus": "social media management",
+      "content": "Social media works best when it is consistent: a clear plan, posts that look and sound like your brand, and quick replies to comments and messages. That takes time most small teams do not have. We plan your content, create reels and graphics, schedule posts, engage with your community and send a performance report, so your accounts stay active and you can see what is working. Monthly content plan and calendar Reels, short videos and graphics Captions and hashtags written for each platform Post scheduling and publishing Community engagement and replies Monthly performance reports Consistent presence. Posts go out on schedule every week. On brand content. Graphics and captions follow your style and tone. Engaged followers. Comments and messages get timely replies. Measured results. Reports show reach, engagement and the posts that performed best. Which platforms do you manage? Usually Facebook, Instagram, LinkedIn and TikTok. We recommend the ones your customers actually use. Do we approve posts before they go live? Yes. You review the content calendar and posts before publishing. Do you film videos? We create reels from your photos, clips and our graphics. On site filming can be arranged separately. How is it priced? As a monthly package based on platforms and the number of posts. We quote after a free consultation.",
       "headings": [
         "Overview",
         "What is included",
@@ -2260,92 +1118,92 @@
         "Questions we often hear"
       ],
       "editable": {
-        "slug": "legal-process-outsourcing",
-        "name": "Legal Process Outsourcing",
-        "category": "business-process-services",
-        "short": "Support for document review, contract management and legal research.",
-        "heroImage": "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=2000&q=80",
+        "slug": "social-media-management",
+        "name": "Social Media Management",
+        "category": "growth-marketing",
+        "short": "Content planning, reels, graphics, scheduling, engagement and reporting.",
+        "heroImage": "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=2000&q=80",
         "images": [
-          "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1600&q=80",
-          "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1600&q=80"
+          "https://images.unsplash.com/photo-1557838923-2985c318be48?auto=format&fit=crop&w=1600&q=80",
+          "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80"
         ],
-        "heroLine": "Free up your legal team from high volume, routine document work.",
+        "heroLine": "Regular, on brand posts and a responsive presence, without your team having to manage it daily.",
         "overview": [
-          "Legal teams spend a large share of their time on tasks such as document review, contract abstraction and research memos. Legal process outsourcing moves that work to a trained support team, supervised by your lawyers.",
-          "We do not provide legal advice. We provide organised, accurate support work that your attorneys review and own."
+          "Social media works best when it is consistent: a clear plan, posts that look and sound like your brand, and quick replies to comments and messages. That takes time most small teams do not have.",
+          "We plan your content, create reels and graphics, schedule posts, engage with your community and send a performance report, so your accounts stay active and you can see what is working."
         ],
         "included": [
-          "Document review and coding",
-          "Contract abstraction and summaries",
-          "Contract lifecycle administration",
-          "Legal research support",
-          "Due diligence document organisation",
-          "Paralegal and administrative support"
+          "Monthly content plan and calendar",
+          "Reels, short videos and graphics",
+          "Captions and hashtags written for each platform",
+          "Post scheduling and publishing",
+          "Community engagement and replies",
+          "Monthly performance reports"
         ],
         "benefits": [
           {
-            "title": "Lawyer time on legal work",
-            "text": "Routine tasks move away from expensive attorney hours."
+            "title": "Consistent presence",
+            "text": "Posts go out on schedule every week."
           },
           {
-            "title": "Structured output",
-            "text": "Consistent templates make review faster."
+            "title": "On brand content",
+            "text": "Graphics and captions follow your style and tone."
           },
           {
-            "title": "Capacity for peaks",
-            "text": "Handle large reviews without temporary hires."
+            "title": "Engaged followers",
+            "text": "Comments and messages get timely replies."
           },
           {
-            "title": "Confidential handling",
-            "text": "Secure systems and confidentiality agreements protect sensitive files."
+            "title": "Measured results",
+            "text": "Reports show reach, engagement and the posts that performed best."
           }
         ],
         "process": [
           {
-            "title": "Scope",
-            "text": "Agree tasks, volumes, templates and turnaround times."
+            "title": "Plan",
+            "text": "Agree platforms, goals, tone and a monthly content calendar."
           },
           {
-            "title": "Calibrate",
-            "text": "Run a sample batch and refine with your lawyers."
+            "title": "Create",
+            "text": "Produce reels, graphics and captions for your approval."
           },
           {
-            "title": "Deliver",
-            "text": "Process work in agreed batches with quality checks."
+            "title": "Publish and engage",
+            "text": "Schedule posts and respond to your community."
           },
           {
-            "title": "Review",
-            "text": "Regular feedback sessions with your legal team."
+            "title": "Report",
+            "text": "Monthly results and ideas for the next month."
           }
         ],
         "faqs": [
           {
-            "q": "Do you give legal advice?",
-            "a": "No. All work is support work performed under the supervision of your attorneys."
+            "q": "Which platforms do you manage?",
+            "a": "Usually Facebook, Instagram, LinkedIn and TikTok. We recommend the ones your customers actually use."
           },
           {
-            "q": "How is confidentiality handled?",
-            "a": "Staff sign confidentiality agreements and work in access controlled systems approved by you."
+            "q": "Do we approve posts before they go live?",
+            "a": "Yes. You review the content calendar and posts before publishing."
           },
           {
-            "q": "Can you work in our document management system?",
-            "a": "Yes, with appropriate access provisioned by your team."
+            "q": "Do you film videos?",
+            "a": "We create reels from your photos, clips and our graphics. On site filming can be arranged separately."
           },
           {
-            "q": "What volume can you handle?",
-            "a": "Team size is agreed based on your volume and deadlines."
+            "q": "How is it priced?",
+            "a": "As a monthly package based on platforms and the number of posts. We quote after a free consultation."
           }
         ],
-        "caseStudy": "finance-reporting-consolidation"
+        "caseStudy": "retail-storefront-rebuild"
       }
     },
     {
-      "path": "/services/business-process-services/recruitment-process-outsourcing/",
-      "title": "Recruitment Process Outsourcing",
-      "description": "End to end or partial hiring support, from sourcing to offer. Run hiring through a structured process that respects candidates and your managers' time.",
+      "path": "/services/growth-marketing/ads-management/",
+      "title": "Ads Management",
+      "description": "Google Ads and Meta Ads with retargeting, conversion tracking and ROI reporting. Paid campaigns set up to bring in leads and sales, with tracking that shows what each one returns.",
       "type": "Service",
-      "focus": "recruitment process outsourcing",
-      "content": "Hiring takes time and attention that busy managers rarely have. Recruitment process outsourcing gives you a team that manages sourcing, screening and scheduling, while your managers focus on final interviews and decisions. We can run the full process or support specific stages, using your applicant tracking system and employer brand. Job description writing and posting Candidate sourcing and outreach Screening calls and assessments Interview scheduling and coordination Offer and onboarding support Hiring reports and pipeline updates Shorter hiring cycles. A dedicated team keeps candidates moving through each stage. Better candidate experience. Timely updates and clear communication reflect well on your brand. Manager time saved. Managers meet only screened, relevant candidates. Visible pipeline. Regular reports show where every role stands. Do you charge per hire or monthly? Both models are possible. Pricing depends on volume and scope. Can you hire for technical roles? Yes. Technical screening is done with input from specialists. Do you use our applicant tracking system? Yes, where possible, so your records stay in one place. How do you protect our employer brand? All outreach follows your messaging and tone, approved before launch.",
+      "focus": "ads management",
+      "content": "Paid ads can bring in customers quickly, but only when the targeting, budget and tracking are set up properly. Without conversion tracking it is hard to know which ads pay for themselves. We run Google Ads and Meta Ads campaigns, set up retargeting for people who already visited your site, install conversion tracking and report on return on ad spend, so budget moves to what works. Account setup or audit of existing campaigns Google Search, Display and Performance Max campaigns Facebook and Instagram ads through Meta Retargeting campaigns Conversion tracking for calls, forms and sales Monthly ROI reporting and optimization Spend where it works. Budget shifts towards campaigns that bring leads and sales. Second chances. Retargeting reminds past visitors to come back. Accurate tracking. Conversions are measured, so results are based on real numbers. Clear reports. See cost per lead and return on ad spend each month. How much should we spend on ads? It depends on your market and goals. We suggest a starting budget after reviewing your situation and adjust it based on results. Is the ad budget included in your fee? No. Ad spend is paid directly to Google or Meta. Our management fee is separate. How soon will we see results? Ads can bring traffic within days. Campaigns usually need a few weeks of data to settle and improve. Can you take over our existing campaigns? Yes. We start with an audit and keep what is working.",
       "headings": [
         "Overview",
         "What is included",
@@ -2354,83 +1212,83 @@
         "Questions we often hear"
       ],
       "editable": {
-        "slug": "recruitment-process-outsourcing",
-        "name": "Recruitment Process Outsourcing",
-        "category": "business-process-services",
-        "short": "End to end or partial hiring support, from sourcing to offer.",
-        "heroImage": "https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?auto=format&fit=crop&w=2000&q=80",
+        "slug": "ads-management",
+        "name": "Ads Management",
+        "category": "growth-marketing",
+        "short": "Google Ads and Meta Ads with retargeting, conversion tracking and ROI reporting.",
+        "heroImage": "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=2000&q=80",
         "images": [
-          "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1600&q=80",
-          "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1600&q=80"
+          "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80",
+          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1600&q=80"
         ],
-        "heroLine": "Run hiring through a structured process that respects candidates and your managers' time.",
+        "heroLine": "Paid campaigns set up to bring in leads and sales, with tracking that shows what each one returns.",
         "overview": [
-          "Hiring takes time and attention that busy managers rarely have. Recruitment process outsourcing gives you a team that manages sourcing, screening and scheduling, while your managers focus on final interviews and decisions.",
-          "We can run the full process or support specific stages, using your applicant tracking system and employer brand."
+          "Paid ads can bring in customers quickly, but only when the targeting, budget and tracking are set up properly. Without conversion tracking it is hard to know which ads pay for themselves.",
+          "We run Google Ads and Meta Ads campaigns, set up retargeting for people who already visited your site, install conversion tracking and report on return on ad spend, so budget moves to what works."
         ],
         "included": [
-          "Job description writing and posting",
-          "Candidate sourcing and outreach",
-          "Screening calls and assessments",
-          "Interview scheduling and coordination",
-          "Offer and onboarding support",
-          "Hiring reports and pipeline updates"
+          "Account setup or audit of existing campaigns",
+          "Google Search, Display and Performance Max campaigns",
+          "Facebook and Instagram ads through Meta",
+          "Retargeting campaigns",
+          "Conversion tracking for calls, forms and sales",
+          "Monthly ROI reporting and optimization"
         ],
         "benefits": [
           {
-            "title": "Shorter hiring cycles",
-            "text": "A dedicated team keeps candidates moving through each stage."
+            "title": "Spend where it works",
+            "text": "Budget shifts towards campaigns that bring leads and sales."
           },
           {
-            "title": "Better candidate experience",
-            "text": "Timely updates and clear communication reflect well on your brand."
+            "title": "Second chances",
+            "text": "Retargeting reminds past visitors to come back."
           },
           {
-            "title": "Manager time saved",
-            "text": "Managers meet only screened, relevant candidates."
+            "title": "Accurate tracking",
+            "text": "Conversions are measured, so results are based on real numbers."
           },
           {
-            "title": "Visible pipeline",
-            "text": "Regular reports show where every role stands."
+            "title": "Clear reports",
+            "text": "See cost per lead and return on ad spend each month."
           }
         ],
         "process": [
           {
-            "title": "Brief",
-            "text": "Understand the role, team and must have requirements."
+            "title": "Audit",
+            "text": "Review goals, current accounts, tracking and competitors."
           },
           {
-            "title": "Source",
-            "text": "Post, search and reach out to suitable candidates."
+            "title": "Set up",
+            "text": "Build campaigns, audiences, ads and conversion tracking."
           },
           {
-            "title": "Screen",
-            "text": "Assess and present a shortlist with notes."
+            "title": "Optimize",
+            "text": "Test ads, adjust bids and move budget to what performs."
           },
           {
-            "title": "Close",
-            "text": "Coordinate interviews, offers and onboarding steps."
+            "title": "Report",
+            "text": "Monthly ROI reports and next steps."
           }
         ],
         "faqs": [
           {
-            "q": "Do you charge per hire or monthly?",
-            "a": "Both models are possible. Pricing depends on volume and scope."
+            "q": "How much should we spend on ads?",
+            "a": "It depends on your market and goals. We suggest a starting budget after reviewing your situation and adjust it based on results."
           },
           {
-            "q": "Can you hire for technical roles?",
-            "a": "Yes. Technical screening is done with input from specialists."
+            "q": "Is the ad budget included in your fee?",
+            "a": "No. Ad spend is paid directly to Google or Meta. Our management fee is separate."
           },
           {
-            "q": "Do you use our applicant tracking system?",
-            "a": "Yes, where possible, so your records stay in one place."
+            "q": "How soon will we see results?",
+            "a": "Ads can bring traffic within days. Campaigns usually need a few weeks of data to settle and improve."
           },
           {
-            "q": "How do you protect our employer brand?",
-            "a": "All outreach follows your messaging and tone, approved before launch."
+            "q": "Can you take over our existing campaigns?",
+            "a": "Yes. We start with an audit and keep what is working."
           }
         ],
-        "caseStudy": "education-security-program"
+        "caseStudy": "retail-storefront-rebuild"
       }
     },
     {
@@ -2450,9 +1308,9 @@
           "Back office support"
         ],
         "services": [
-          "data-management",
-          "security",
-          "finance-and-accounting"
+          "custom-software",
+          "crm-and-lead-management",
+          "ai-automation"
         ]
       }
     },
@@ -2473,9 +1331,9 @@
           "Staff support"
         ],
         "services": [
-          "contact-center",
-          "cloud-operations-and-migration",
-          "data-modernization"
+          "ai-automation",
+          "web-development",
+          "seo"
         ]
       }
     },
@@ -2496,9 +1354,9 @@
           "Order support"
         ],
         "services": [
-          "digital-commerce",
-          "digital-marketing",
-          "advanced-analytics"
+          "web-development",
+          "ads-management",
+          "social-media-management"
         ]
       }
     },
@@ -2519,9 +1377,9 @@
           "Forecasting"
         ],
         "services": [
-          "connected-intelligence",
-          "business-applications",
-          "digital-infrastructure-services"
+          "custom-software",
+          "ai-automation",
+          "crm-and-lead-management"
         ]
       }
     },
@@ -2542,9 +1400,9 @@
           "Reporting"
         ],
         "services": [
-          "cloud-application-development-and-integration",
-          "contact-center",
-          "advanced-analytics"
+          "custom-software",
+          "ai-automation",
+          "crm-and-lead-management"
         ]
       }
     },
@@ -2565,329 +1423,53 @@
           "Recruitment"
         ],
         "services": [
-          "managed-services",
-          "security",
-          "recruitment-process-outsourcing"
-        ]
-      }
-    },
-    {
-      "path": "/about-us/alliances/microsoft/",
-      "title": "Microsoft Services",
-      "description": "How AchiveX works with Microsoft technology. Many of our clients already run their day on Microsoft tools. We help them get more out of what they own before suggesting anything new.",
-      "type": "Alliance",
-      "editable": {
-        "slug": "microsoft",
-        "name": "Microsoft",
-        "logo": null,
-        "image": "https://images.unsplash.com/photo-1633419461186-7d40a38105ec?auto=format&fit=crop&w=1600&q=80",
-        "intro": "Many of our clients already run their day on Microsoft tools. We help them get more out of what they own before suggesting anything new.",
-        "work": [
-          {
-            "title": "Microsoft 365 setup and governance",
-            "text": "Tenant configuration, user and license management, Teams and SharePoint structure, and sensible retention settings."
-          },
-          {
-            "title": "Azure hosting and migration",
-            "text": "Moving workloads to Azure, setting up resource groups and access policies, and keeping an eye on monthly spend."
-          },
-          {
-            "title": "Power Platform and Dynamics 365",
-            "text": "Building small apps and automated flows with Power Apps and Power Automate, and configuring Dynamics 365 for sales and service teams."
-          },
-          {
-            "title": "Reporting with Power BI",
-            "text": "Connecting data sources, modeling the data and publishing dashboards that people actually open."
-          }
-        ],
-        "services": [
-          "business-applications",
-          "cloud-operations-and-migration",
-          "advanced-analytics"
-        ]
-      }
-    },
-    {
-      "path": "/about-us/alliances/sap/",
-      "title": "SAP Services",
-      "description": "How AchiveX works with SAP technology. SAP sits at the center of finance, supply chain and operations for many companies. Our work focuses on the data and processes around it.",
-      "type": "Alliance",
-      "editable": {
-        "slug": "sap",
-        "name": "SAP",
-        "logo": null,
-        "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80",
-        "intro": "SAP sits at the center of finance, supply chain and operations for many companies. Our work focuses on the data and processes around it.",
-        "work": [
-          {
-            "title": "Process review",
-            "text": "Mapping how finance, procurement and inventory processes run today and where SAP is or is not being used as intended."
-          },
-          {
-            "title": "Data extraction and reporting",
-            "text": "Pulling SAP data into a reporting layer so teams can analyse it without overloading the core system."
-          },
-          {
-            "title": "Integration",
-            "text": "Connecting SAP with ecommerce, CRM and warehouse systems through well documented interfaces."
-          },
-          {
-            "title": "Support",
-            "text": "Ongoing help for users, change requests and small enhancements."
-          }
-        ],
-        "services": [
-          "business-applications",
-          "data-management",
-          "cloud-application-development-and-integration"
-        ]
-      }
-    },
-    {
-      "path": "/about-us/alliances/temenos/",
-      "title": "Temenos Services",
-      "description": "How AchiveX works with Temenos technology. Temenos provides core banking and digital banking software. We support financial institutions with the surrounding data, testing and integration work.",
-      "type": "Alliance",
-      "editable": {
-        "slug": "temenos",
-        "name": "Temenos",
-        "logo": null,
-        "image": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1600&q=80",
-        "intro": "Temenos provides core banking and digital banking software. We support financial institutions with the surrounding data, testing and integration work.",
-        "work": [
-          {
-            "title": "Integration support",
-            "text": "Connecting core banking modules with payment gateways, channels and internal tools."
-          },
-          {
-            "title": "Data migration",
-            "text": "Cleaning, mapping and validating customer and account data before and after a move."
-          },
-          {
-            "title": "Testing",
-            "text": "Functional and regression test planning around releases and configuration changes."
-          },
-          {
-            "title": "Reporting",
-            "text": "Regulatory and management reporting built on reliable extracts."
-          }
-        ],
-        "services": [
-          "data-modernization",
-          "cloud-application-development-and-integration",
-          "security"
-        ]
-      }
-    },
-    {
-      "path": "/about-us/alliances/salesforce/",
-      "title": "Salesforce Services",
-      "description": "How AchiveX works with Salesforce technology. Salesforce works best when it reflects how your sales and service teams really operate. We configure it around your process, not the other way round.",
-      "type": "Alliance",
-      "editable": {
-        "slug": "salesforce",
-        "name": "Salesforce",
-        "logo": null,
-        "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=80",
-        "intro": "Salesforce works best when it reflects how your sales and service teams really operate. We configure it around your process, not the other way round.",
-        "work": [
-          {
-            "title": "Sales Cloud and Service Cloud setup",
-            "text": "Objects, fields, page layouts, permissions and automation set up for your pipeline and case handling."
-          },
-          {
-            "title": "Data cleanup",
-            "text": "Removing duplicates, fixing ownership and setting validation rules so the data stays tidy."
-          },
-          {
-            "title": "Integrations",
-            "text": "Linking Salesforce with marketing tools, ERP systems and your website forms."
-          },
-          {
-            "title": "Admin support",
-            "text": "A named admin resource for change requests, reports and user training."
-          }
-        ],
-        "services": [
-          "business-applications",
-          "digital-marketing",
-          "data-management"
-        ]
-      }
-    },
-    {
-      "path": "/about-us/alliances/ibm/",
-      "title": "IBM Services",
-      "description": "How AchiveX works with IBM technology. Some organisations rely on IBM infrastructure and software that has been in place for years. We help keep it stable and plan what comes next.",
-      "type": "Alliance",
-      "editable": {
-        "slug": "ibm",
-        "name": "IBM",
-        "logo": null,
-        "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1600&q=80",
-        "intro": "Some organisations rely on IBM infrastructure and software that has been in place for years. We help keep it stable and plan what comes next.",
-        "work": [
-          {
-            "title": "Infrastructure assessment",
-            "text": "Reviewing existing servers, storage and middleware to understand risk and cost."
-          },
-          {
-            "title": "Hybrid cloud planning",
-            "text": "Deciding what stays on premises and what moves to the cloud, and in what order."
-          },
-          {
-            "title": "Data and AI tooling",
-            "text": "Evaluating IBM data and AI products against your use case and existing stack."
-          },
-          {
-            "title": "Operations support",
-            "text": "Monitoring, patching and incident response for supported systems."
-          }
-        ],
-        "services": [
-          "digital-infrastructure-services",
-          "managed-services",
-          "emerging-technologies"
-        ]
-      }
-    },
-    {
-      "path": "/about-us/alliances/aws/",
-      "title": "AWS Services",
-      "description": "How AchiveX works with AWS technology. Amazon Web Services offers a very wide set of building blocks. We help teams pick the right ones and run them with care.",
-      "type": "Alliance",
-      "editable": {
-        "slug": "aws",
-        "name": "AWS",
-        "logo": null,
-        "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
-        "intro": "Amazon Web Services offers a very wide set of building blocks. We help teams pick the right ones and run them with care.",
-        "work": [
-          {
-            "title": "Account and landing zone setup",
-            "text": "Organisations, accounts, identity and access, logging and guardrails configured from day one."
-          },
-          {
-            "title": "Migration",
-            "text": "Rehosting or refactoring applications to EC2, containers or serverless services based on what makes sense."
-          },
-          {
-            "title": "Data platforms",
-            "text": "Storage, pipelines and analytics using services such as S3, Glue, Redshift and Athena."
-          },
-          {
-            "title": "Cost and operations",
-            "text": "Tagging, budgets, rightsizing and monitoring so the bill stays predictable."
-          }
-        ],
-        "services": [
-          "cloud-operations-and-migration",
-          "data-modernization",
-          "managed-services"
+          "web-development",
+          "seo",
+          "social-media-management"
         ]
       }
     }
   ],
   "services": [
     {
-      "slug": "digital-consulting-and-strategy",
-      "name": "Digital Consulting and Strategy",
-      "path": "/services/digital/digital-consulting-and-strategy/"
+      "slug": "web-development",
+      "name": "Web Development",
+      "path": "/services/web-and-software/web-development/"
     },
     {
-      "slug": "digital-commerce",
-      "name": "Digital Commerce",
-      "path": "/services/digital/digital-commerce/"
+      "slug": "custom-software",
+      "name": "Custom Software",
+      "path": "/services/web-and-software/custom-software/"
     },
     {
-      "slug": "business-applications",
-      "name": "Business Applications",
-      "path": "/services/digital/business-applications/"
+      "slug": "ai-automation",
+      "name": "AI & Automation",
+      "path": "/services/ai-and-automation/ai-automation/"
     },
     {
-      "slug": "data-modernization",
-      "name": "Data Modernization",
-      "path": "/services/data-and-analytics/data-modernization/"
+      "slug": "crm-and-lead-management",
+      "name": "CRM & Lead Management",
+      "path": "/services/ai-and-automation/crm-and-lead-management/"
     },
     {
-      "slug": "advanced-analytics",
-      "name": "Advanced Analytics",
-      "path": "/services/data-and-analytics/advanced-analytics/"
+      "slug": "seo",
+      "name": "SEO",
+      "path": "/services/growth-marketing/seo/"
     },
     {
-      "slug": "connected-intelligence",
-      "name": "Connected Intelligence",
-      "path": "/services/data-and-analytics/connected-intelligence/"
+      "slug": "aeo-and-geo",
+      "name": "AEO & GEO",
+      "path": "/services/growth-marketing/aeo-and-geo/"
     },
     {
-      "slug": "data-management",
-      "name": "Data Management",
-      "path": "/services/data-and-analytics/data-management/"
+      "slug": "social-media-management",
+      "name": "Social Media Management",
+      "path": "/services/growth-marketing/social-media-management/"
     },
     {
-      "slug": "generative-ai",
-      "name": "Generative AI",
-      "path": "/services/data-and-analytics/generative-ai/"
-    },
-    {
-      "slug": "cloud-operations-and-migration",
-      "name": "Cloud Operations and Migration",
-      "path": "/services/cloud/cloud-operations-and-migration/"
-    },
-    {
-      "slug": "cloud-application-development-and-integration",
-      "name": "Cloud Application Development and Integration",
-      "path": "/services/cloud/cloud-application-development-and-integration/"
-    },
-    {
-      "slug": "managed-services",
-      "name": "Managed Services",
-      "path": "/services/cloud/managed-services/"
-    },
-    {
-      "slug": "digital-infrastructure-services",
-      "name": "Digital Infrastructure Services",
-      "path": "/services/digital-infrastructure-services/"
-    },
-    {
-      "slug": "security",
-      "name": "Security",
-      "path": "/services/security/"
-    },
-    {
-      "slug": "emerging-technologies",
-      "name": "Emerging Technologies",
-      "path": "/services/emerging-technologies/"
-    },
-    {
-      "slug": "contact-center",
-      "name": "Contact Center",
-      "path": "/services/business-process-services/contact-center/"
-    },
-    {
-      "slug": "digital-marketing",
-      "name": "Digital Marketing",
-      "path": "/services/business-process-services/digital-marketing/"
-    },
-    {
-      "slug": "finance-and-accounting",
-      "name": "Finance and Accounting",
-      "path": "/services/business-process-services/finance-and-accounting/"
-    },
-    {
-      "slug": "staff-augmentation",
-      "name": "Staff Augmentation",
-      "path": "/services/business-process-services/staff-augmentation/"
-    },
-    {
-      "slug": "legal-process-outsourcing",
-      "name": "Legal Process Outsourcing",
-      "path": "/services/business-process-services/legal-process-outsourcing/"
-    },
-    {
-      "slug": "recruitment-process-outsourcing",
-      "name": "Recruitment Process Outsourcing",
-      "path": "/services/business-process-services/recruitment-process-outsourcing/"
+      "slug": "ads-management",
+      "name": "Ads Management",
+      "path": "/services/growth-marketing/ads-management/"
     }
   ],
   "industries": [
