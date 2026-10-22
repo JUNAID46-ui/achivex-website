@@ -1,3 +1,4 @@
+import HeroShowcase from '../components/sections/HeroShowcase'
 import { Link } from 'react-router-dom'
 import { ArrowRight, ArrowRightCircle, ArrowUpRight, Check, Phone, Mail, MapPin, ExternalLink } from 'lucide-react'
 import { motion } from 'framer-motion'
@@ -452,7 +453,7 @@ function ContactStrip() {
 
 // Maps a section key from the Page Builder to its layout.
 const layouts = {
-  hero: Hero,
+  hero: HeroShowcase,
   intro: Intro,
   explorer: ServiceExplorer,
   why: WhyAchivex,
