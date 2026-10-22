@@ -170,7 +170,7 @@ function Intro({ d }) {
     { value: String(industries.length), label: 'Industries served' },
   ]
   return (
-    <section className="bg-canvas py-24 md:py-32">
+    <section className="bg-ink py-24 md:py-32">
       <div className="container-site grid gap-16 lg:grid-cols-[1.5fr_1fr]">
         <FadeUp>
           <h2 className="sr-only">About AchiveX</h2>
