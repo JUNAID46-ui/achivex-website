@@ -1,7 +1,6 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight, ArrowRightCircle, ArrowUpRight, Check, Phone, Mail, MapPin, ExternalLink } from 'lucide-react'
+import { motion } from 'framer-motion'
 import useSeo from '../hooks/useSeo'
 import Button from '../components/Button'
 import FadeUp from '../components/FadeUp'
@@ -198,13 +197,8 @@ function Intro({ d }) {
   )
 }
 
-/* 4. Interactive service explorer covering every category */
+/* 4. What we do: every service area side by side, with its services listed under it */
 function ServiceExplorer({ d }) {
-  const [active, setActive] = useState(categories[0].slug)
-  const cat = categories.find((c) => c.slug === active)
-  const list = cat.single ? [getService(cat.slug)] : cat.services.map(getService)
-  const intro = cat.single ? getService(cat.slug).overview[0] : cat.description
-
   return (
     <section className="bg-canvas py-24 md:py-32">
       <div className="container-site">
@@ -213,57 +207,38 @@ function ServiceExplorer({ d }) {
           text={d.text}
           link={<ArrowLink to="/services/" className="text-[15px] font-medium text-white">View all services</ArrowLink>}
         />
-        <div className="grid gap-12 pt-12 lg:grid-cols-[320px_1fr]">
-          <ul role="tablist" aria-label="Service areas" className="flex gap-2 overflow-x-auto pb-2 lg:flex-col lg:gap-0 lg:overflow-visible lg:pb-0">
-            {categories.map((c) => {
-              const on = c.slug === active
-              return (
-                <li key={c.slug} className="shrink-0 lg:border-b lg:border-body/10">
-                  <button
-                    role="tab"
-                    aria-selected={on}
-                    onClick={() => setActive(c.slug)}
-                    className={`flex w-full items-center justify-between gap-4 whitespace-nowrap border-b-2 px-1 py-3 text-left text-[15px] font-medium transition-colors lg:whitespace-normal lg:border-b-0 lg:border-l-2 lg:px-5 lg:py-5 lg:text-lg ${
-                      on ? 'border-accent text-white' : 'border-transparent text-body/50 hover:text-white'
-                    }`}
-                  >
-                    {c.name}
-                    <ArrowRight className={`hidden h-4 w-4 transition-opacity lg:block ${on ? 'text-accent opacity-100' : 'opacity-0'}`} aria-hidden="true" />
-                  </button>
-                </li>
-              )
-            })}
-          </ul>
-
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={active}
-              role="tabpanel"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.3 }}
-              className="grid gap-10 md:grid-cols-[1.1fr_1fr]"
-            >
-              <div className="min-w-0">
-                <h3 className="h-display text-3xl md:text-4xl">{cat.name}</h3>
-                <p className="mt-5 text-[17px] leading-relaxed text-body/65">{intro}</p>
-                <ul className="mt-8 border-t border-body/10">
-                  {list.map((s) => (
+        <div className="grid gap-x-10 gap-y-16 pt-12 md:grid-cols-2 lg:grid-cols-3">
+          {categories.map((cat, i) => {
+            const list = cat.single ? [getService(cat.slug)] : cat.services.map(getService)
+            return (
+              <FadeUp key={cat.slug} delay={i * 0.08} className="flex flex-col">
+                <Link to={pathFor(cat.slug)} className="group block overflow-hidden">
+                  <Img src={cat.image.replace('w=1600', 'w=900')} alt={`${cat.name} services`} className="aspect-[16/10] w-full bg-mist object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
+                </Link>
+                <p className="mt-6 font-mono text-sm text-body/50">{String(i + 1).padStart(2, '0')}</p>
+                <h3 className="h-display mt-2 text-2xl md:text-3xl">
+                  <Link to={pathFor(cat.slug)} className="hover:text-accent">{cat.name}</Link>
+                </h3>
+                <p className="mt-3 text-[16px] leading-relaxed text-body/65">{cat.short}</p>
+                <ul className="mt-6 flex-1 border-t border-body/10">
+                  {list.filter(Boolean).map((s) => (
                     <li key={s.slug} className="border-b border-body/10">
-                      <ArrowLink to={servicePath(s)} className="w-full justify-between py-4 text-[16px] text-white">{s.name}</ArrowLink>
+                      <Link to={servicePath(s)} className="group flex items-start justify-between gap-4 py-4">
+                        <span>
+                          <span className="block text-[16px] font-medium text-white group-hover:text-accent">{s.name}</span>
+                          <span className="mt-1 block text-sm leading-relaxed text-body/55">{s.short}</span>
+                        </span>
+                        <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-body/40 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-accent" aria-hidden="true" />
+                      </Link>
                     </li>
                   ))}
                 </ul>
-                <div className="mt-8">
-                  <Button to={pathFor(cat.slug)} variant="outline">{cat.single ? `About ${cat.name}` : `Explore ${cat.name}`}</Button>
+                <div className="mt-6">
+                  <ArrowLink to={pathFor(cat.slug)} className="text-[15px] font-medium text-white">Explore {cat.name}</ArrowLink>
                 </div>
-              </div>
-              <div className="overflow-hidden">
-                <Img src={cat.image.replace('w=1600', 'w=1000')} alt={`${cat.name} services`} className="aspect-[4/5] h-full w-full bg-mist object-cover" />
-              </div>
-            </motion.div>
-          </AnimatePresence>
+              </FadeUp>
+            )
+          })}
         </div>
       </div>
     </section>
