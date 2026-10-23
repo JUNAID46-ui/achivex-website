@@ -38,7 +38,7 @@ function Section({ title, id, openId, setOpenId, children }) {
 
 export default function MobileMenu({ open, onClose, onSearch }) {
   const [openId, setOpenId] = useState(null)
-  const link = 'text-[15px] text-body/75'
+  const link = 'text-[15px] text-body/80'
 
   return (
     <AnimatePresence>
@@ -79,7 +79,7 @@ export default function MobileMenu({ open, onClose, onSearch }) {
               <Link to="/about-us/" onClick={onClose} className="block border-b border-mist py-4 text-lg font-bold text-body hover:text-navy">About</Link>
               <Link to="/careers/" onClick={onClose} className="block border-b border-mist py-4 text-lg font-bold text-body hover:text-accent">Careers</Link>
               <Link to="/contact-us/" onClick={onClose} className="block border-b border-mist py-4 text-lg font-bold text-body hover:text-accent">Contact us</Link>
-              <button onClick={onSearch} className="mt-6 flex w-full items-center gap-3 bg-mist px-4 py-3 text-left text-body/60">
+              <button onClick={onSearch} className="mt-6 flex w-full items-center gap-3 bg-mist px-4 py-3 text-left text-body/80">
                 <Search className="h-4 w-4" aria-hidden="true" /> Search the site
               </button>
               <div className="mt-8 space-y-3 text-[15px] text-body">

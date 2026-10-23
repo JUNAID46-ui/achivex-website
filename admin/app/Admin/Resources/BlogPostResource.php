@@ -29,13 +29,19 @@ class BlogPostResource extends Resource
             ['name' => 'excerpt', 'label' => 'Excerpt', 'type' => 'textarea', 'rows' => 2, 'rules' => 'required|max:400', 'help' => 'Shown on blog cards and in search results.'],
             ['name' => 'intro_keyword', 'label' => 'Opening keyword (shown in bold)', 'type' => 'text', 'rules' => 'required|max:120'],
             ['name' => 'intro_text', 'label' => 'Rest of the first paragraph', 'type' => 'textarea', 'rows' => 3, 'rules' => 'required', 'help' => 'Starts right after the bold keyword. Begin with a space, for example " is the process of..."'],
-            ['name' => 'sections', 'label' => 'Article sections', 'type' => 'sections', 'help' => 'Each section becomes a heading in the article and an entry in its table of contents.'],
+            ['name' => 'sections', 'label' => 'Article sections', 'type' => 'sections', 'help' => 'Each section heading is an H2 and an entry in the table of contents. Inside the paragraphs, start a line with ### to make it a smaller H3 heading.'],
+            ['name' => 'faqs', 'label' => 'FAQs (shown as an accordion at the end of the article)', 'type' => 'repeater', 'itemLabel' => 'Question', 'fields' => [
+                ['name' => 'q', 'label' => 'Question', 'type' => 'text'],
+                ['name' => 'a', 'label' => 'Answer', 'type' => 'textarea'],
+            ], 'help' => 'Optional. Questions also go into the page schema so Google can show them.'],
             ['name' => 'published', 'label' => 'Published', 'type' => 'toggle', 'side' => true],
             ['name' => 'featured', 'label' => 'Featured on the Blogs page', 'type' => 'toggle', 'side' => true],
             ['name' => 'published_on', 'label' => 'Publish date', 'type' => 'date', 'rules' => 'required|date', 'side' => true],
             ['name' => 'category', 'label' => 'Category', 'type' => 'select', 'options' => SiteRoutes::blogCategories(), 'rules' => 'required', 'side' => true],
             ['name' => 'author', 'label' => 'Author', 'type' => 'text', 'rules' => 'required|max:120', 'side' => true],
             ['name' => 'image', 'label' => 'Featured image', 'type' => 'image', 'side' => true],
+            ['name' => 'hero_color', 'label' => 'Header background colour', 'type' => 'color', 'default' => '#000000', 'side' => true, 'help' => 'The band behind the title. Leave empty for black.'],
+            ['name' => 'hero_image', 'label' => 'Header background image', 'type' => 'image', 'side' => true, 'help' => 'Optional. Shown behind the title with a dark overlay so the text stays readable.'],
         ];
     }
 
@@ -54,7 +60,7 @@ class BlogPostResource extends Resource
 
     public function defaults(): array
     {
-        return ['published' => true, 'published_on' => now()->toDateString(), 'author' => 'AchiveX Editorial Team', 'category' => 'Data', 'sections' => []];
+        return ['published' => true, 'published_on' => now()->toDateString(), 'author' => 'AchiveX Editorial Team', 'category' => 'Data', 'sections' => [], 'faqs' => []];
     }
 
     public function sitePath(Model $record): ?string
@@ -69,6 +75,9 @@ class BlogPostResource extends Resource
         foreach ((array) $record->sections as $s) {
             $headings[] = $s['heading'] ?? '';
             $text .= ' '.implode(' ', $s['paragraphs'] ?? []).' '.implode(' ', $s['list'] ?? []);
+        }
+        foreach ((array) $record->faqs as $f) {
+            $text .= ' '.($f['q'] ?? '').' '.($f['a'] ?? '');
         }
 
         return ['text' => $text, 'headings' => $headings, 'first' => $record->intro_keyword.$record->intro_text];

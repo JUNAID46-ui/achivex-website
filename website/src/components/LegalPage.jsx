@@ -27,7 +27,7 @@ export default function LegalPage({ title, updated, intro, sections: raw }) {
         <div className="container-site">
           <Breadcrumb items={[{ label: title }]} />
           <h1 className="h-display mt-10 text-5xl md:text-7xl">{title}</h1>
-          <p className="mt-4 text-sm text-body/60">Last updated: {updated}</p>
+          <p className="mt-4 text-sm text-body/80">Last updated: {updated}</p>
         </div>
       </section>
       <section className="bg-canvas py-16 md:py-20">
@@ -40,7 +40,7 @@ export default function LegalPage({ title, updated, intro, sections: raw }) {
                   <li key={s.id}>
                     <a
                       href={`#${s.id}`} onClick={(e) => jumpTo(e, s.id)}
-                      className={`flex gap-3 px-3 py-2 transition-colors hover:text-accent ${active === s.id ? 'bg-mist font-semibold text-white' : 'text-body/60'}`}
+                      className={`flex gap-3 px-3 py-2 transition-colors hover:text-accent ${active === s.id ? 'bg-mist font-semibold text-white' : 'text-body/80'}`}
                     >
                       <span className={active === s.id ? 'text-accent' : ''}>{i + 1}.</span>{s.title}
                     </a>

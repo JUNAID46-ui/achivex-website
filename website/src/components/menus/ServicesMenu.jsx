@@ -9,7 +9,7 @@ export default function ServicesMenu({ onNavigate }) {
         <li key={s.slug}>
           <Link to={servicePath(s)} onClick={onNavigate} className="group block">
             <span className="block text-[15px] font-semibold text-white transition-colors group-hover:text-navy">{s.name}</span>
-            <span className="mt-1.5 block text-[13.5px] leading-relaxed text-body/70">{s.short}</span>
+            <span className="mt-1.5 block text-[13.5px] leading-relaxed text-body/80">{s.short}</span>
           </Link>
         </li>
       ))}

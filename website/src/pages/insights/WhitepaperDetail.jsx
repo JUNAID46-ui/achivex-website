@@ -57,7 +57,7 @@ export default function WhitepaperDetail() {
                 <BookCover paper={paper} className="aspect-[3/4] w-56 shrink-0" />
                 <div>
                   <h1 className="h-display text-4xl md:text-5xl">{paper.title}</h1>
-                  <p className="mt-5 text-lg leading-relaxed text-body/70">{paper.description}</p>
+                  <p className="mt-5 text-lg leading-relaxed text-body/80">{paper.description}</p>
                 </div>
               </div>
               <div className="mt-12 bg-mist p-8">

@@ -36,3 +36,10 @@
     <template x-for="(optLabel, optVal) in {{ $f }}.options" :key="optVal"><option :value="optVal" x-text="optLabel" :selected="{{ $v }} === optVal"></option></template>
   </select>
 </template>
+<template x-if="{{ $f }}.type === 'color'">
+  <div class="flex items-center gap-2">
+    <input type="color" class="h-9 w-12 shrink-0 cursor-pointer border border-neutral-300 bg-white p-0.5" :value="{{ $v }} || '#000000'" @input="{{ $v }} = $event.target.value; dirty = true">
+    <input class="input font-mono text-[13px]" x-model="{{ $v }}" @input="dirty = true" placeholder="Default">
+    <button type="button" x-show="{{ $v }}" class="btn-ghost btn-sm" @click="{{ $v }} = ''; dirty = true">Reset</button>
+  </div>
+</template>

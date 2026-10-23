@@ -33,6 +33,9 @@
       @include('admin.partials.field', ['field' => ['name' => 'og_image', 'label' => 'Social share image', 'type' => 'image'], 'value' => $meta?->og_image, 'record' => new \App\Models\Content\SeoMeta])
       <div><label for="canonical" class="label">Canonical URL (advanced)</label><input id="canonical" name="canonical" value="{{ old('canonical', $meta?->canonical) }}" class="input" placeholder="Leave empty to use this page's own URL"></div>
       @include('admin.partials.field', ['field' => ['name' => 'noindex', 'label' => 'Hide this page from search engines (noindex)', 'type' => 'toggle'], 'value' => $meta?->noindex, 'record' => new \App\Models\Content\SeoMeta])
+      <div class="border-t border-neutral-100 pt-4">
+        @include('admin.seo.partials.schema-field', ['name' => 'schema', 'value' => $meta?->schema, 'pageUrl' => rtrim(config('admin.site_public_url'), '/').$row['path'], 'pageTitle' => $row['title']])
+      </div>
       <button class="btn-primary">Save SEO settings</button>
     </div>
   </div>

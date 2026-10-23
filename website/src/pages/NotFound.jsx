@@ -52,7 +52,7 @@ function Missing({ pathname }) {
           404
         </motion.p>
         <h1 className="mt-4 text-3xl font-bold md:text-4xl">This page does not exist</h1>
-        <p className="mx-auto mt-4 max-w-md text-lg text-body/70">
+        <p className="mx-auto mt-4 max-w-md text-lg text-body/80">
           The link may be old or mistyped. Try one of the pages below, or head back to the homepage.
         </p>
         <div className="mt-10"><Button to="/">Back to Home</Button></div>

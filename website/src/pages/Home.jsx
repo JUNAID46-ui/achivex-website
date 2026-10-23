@@ -38,7 +38,7 @@ function SectionHead({ title, text, link, light = false }) {
     <FadeUp className={`grid gap-6 border-b pb-10 md:grid-cols-2 md:items-end ${light ? 'border-white/15' : 'border-body/10'}`}>
       <h2 className={`h-display text-4xl md:text-5xl ${light ? 'text-white' : ''}`}>{title}</h2>
       <div className="flex flex-col gap-4 md:items-end md:text-right">
-        {text && <p className={`max-w-md text-[17px] leading-relaxed ${light ? 'text-white/65' : 'text-body/60'}`}>{text}</p>}
+        {text && <p className={`max-w-md text-[17px] leading-relaxed ${light ? 'text-white/65' : 'text-body/80'}`}>{text}</p>}
         {link}
       </div>
     </FadeUp>
@@ -80,7 +80,7 @@ function Hero({ d }) {
           <h1 className="mt-6 font-display text-[40px] font-semibold leading-[1.05] tracking-[-0.035em] text-white sm:text-6xl lg:text-[64px]">
             {d.heading}
           </h1>
-          <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-body/70 md:text-base">
+          <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-body/80 md:text-base">
             {d.text}
           </p>
         </motion.div>
@@ -188,7 +188,7 @@ function Intro({ d }) {
           <dl className="grid grid-cols-2 border-l border-t border-body/10">
             {facts.map((f) => (
               <div key={f.label} className="border-b border-r border-body/10 p-6">
-                <dt className="text-sm text-body/55">{f.label}</dt>
+                <dt className="text-sm text-body/80">{f.label}</dt>
                 <dd className="mt-3 text-2xl font-medium tracking-tight text-white md:text-3xl">{f.value}</dd>
               </div>
             ))}
@@ -219,13 +219,13 @@ function ServiceExplorer({ d }) {
             {categories.map((c) => {
               const on = c.slug === active
               return (
-                <li key={c.slug} className="shrink-0 lg:border-b lg:border-body/10">
+                <li key={c.slug} role="presentation" className="shrink-0 lg:border-b lg:border-body/10">
                   <button
                     role="tab"
                     aria-selected={on}
                     onClick={() => setActive(c.slug)}
                     className={`flex w-full items-center justify-between gap-4 whitespace-nowrap border-b-2 px-1 py-3 text-left text-[15px] font-medium transition-colors lg:whitespace-normal lg:border-b-0 lg:border-l-2 lg:px-5 lg:py-5 lg:text-lg ${
-                      on ? 'border-accent text-white' : 'border-transparent text-body/50 hover:text-white'
+                      on ? 'border-accent text-white' : 'border-transparent text-body/80 hover:text-white'
                     }`}
                   >
                     {c.name}
@@ -248,7 +248,7 @@ function ServiceExplorer({ d }) {
             >
               <div className="min-w-0">
                 <h3 className="h-display text-3xl md:text-4xl">{cat.name}</h3>
-                <p className="mt-5 text-[17px] leading-relaxed text-body/65">{intro}</p>
+                <p className="mt-5 text-[17px] leading-relaxed text-body/80">{intro}</p>
                 <ul className="mt-8 border-t border-body/10">
                   {list.map((s) => (
                     <li key={s.slug} className="border-b border-body/10">
@@ -303,7 +303,7 @@ function Spotlights({ d }) {
             </FadeUp>
             <FadeUp delay={0.1}>
               <h2 className="h-display text-4xl md:text-5xl">{s.title}</h2>
-              <p className="mt-6 max-w-lg text-[17px] leading-relaxed text-body/65">{s.text}</p>
+              <p className="mt-6 max-w-lg text-[17px] leading-relaxed text-body/80">{s.text}</p>
               <ul className="mt-8 space-y-4">
                 {(s.points || []).map((p) => (
                   <li key={p} className="flex gap-3 text-white">
@@ -331,7 +331,7 @@ function Process({ d }) {
             <FadeUp as="li" key={s.title} delay={i * 0.06} className="bg-mist py-10 pr-8 lg:px-8 lg:first:pl-0">
               <span className="text-sm font-semibold text-slate">Step {i + 1}</span>
               <h3 className="mt-3 text-2xl font-medium tracking-tight">{s.title}</h3>
-              <p className="mt-3 leading-relaxed text-body/60">{s.text}</p>
+              <p className="mt-3 leading-relaxed text-body/80">{s.text}</p>
             </FadeUp>
           ))}
         </ol>
@@ -351,7 +351,7 @@ function Industries({ d }) {
             <li key={ind.slug} className="border-b border-body/10">
               <Link to={`/industries/${ind.slug}/`} className="group grid items-center gap-2 py-7 md:grid-cols-[1fr_1.4fr_auto] md:gap-10">
                 <span className="text-2xl font-medium tracking-tight text-white transition-colors group-hover:text-slate">{ind.name}</span>
-                <span className="text-[15px] text-body/55">{ind.summary}</span>
+                <span className="text-[15px] text-body/80">{ind.summary}</span>
                 <span className="hidden h-10 w-10 items-center justify-center rounded-full border border-body/15 text-white transition-colors group-hover:border-accent group-hover:bg-accent md:flex">
                   <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                 </span>
@@ -419,7 +419,7 @@ function LatestInsights({ d }) {
         {paper && <FadeUp className="mt-16 flex flex-col justify-between gap-6 border-t border-body/10 pt-10 md:flex-row md:items-center">
           <div>
             <p className="text-xl font-semibold text-white">Free guide: {paper.title}</p>
-            <p className="mt-2 max-w-xl text-body/60">{paper.description}</p>
+            <p className="mt-2 max-w-xl text-body/80">{paper.description}</p>
           </div>
           <Button to={permalink(`/insights/whitepapers/${paper.slug}/`)} variant="outline">Download the guide</Button>
         </FadeUp>}
@@ -435,7 +435,7 @@ function HomeFaq({ d }) {
       <div className="container-site grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
         <FadeUp>
           <h2 className="h-display text-4xl md:text-5xl">{d.title}</h2>
-          {d.text && <p className="mt-6 max-w-sm text-[17px] leading-relaxed text-body/60">{d.text}</p>}
+          {d.text && <p className="mt-6 max-w-sm text-[17px] leading-relaxed text-body/80">{d.text}</p>}
           <div className="mt-8"><ArrowLink to="/contact-us/" className="font-medium text-white">Ask us a question</ArrowLink></div>
         </FadeUp>
         <FadeUp delay={0.1}><FAQ items={d.items || []} /></FadeUp>

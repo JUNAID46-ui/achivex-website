@@ -15,5 +15,5 @@ class BlogPost extends Model
 
     public $timestamps = false;
     protected $guarded = [];
-    protected $casts = ['sections' => 'array', 'featured' => 'boolean', 'published' => 'boolean', 'published_on' => 'date', 'publish_at' => 'datetime'];
+    protected $casts = ['sections' => 'array', 'faqs' => 'array', 'featured' => 'boolean', 'published' => 'boolean', 'published_on' => 'date', 'publish_at' => 'datetime'];
 }

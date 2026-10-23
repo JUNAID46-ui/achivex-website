@@ -78,7 +78,7 @@ class FieldValues
     {
         return [
             ['name' => 'heading', 'label' => 'Heading', 'type' => 'text'],
-            ['name' => 'paragraphs', 'label' => 'Paragraphs (leave a blank line between paragraphs)', 'type' => 'paragraphs'],
+            ['name' => 'paragraphs', 'label' => 'Paragraphs (blank line between paragraphs; start a line with ### for an H3 heading)', 'type' => 'paragraphs'],
             ['name' => 'list', 'label' => 'Bullet list (one item per line, optional)', 'type' => 'lines'],
         ];
     }

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-22T18:06:55.319Z",
+  "generated": "2026-10-23T00:38:55.498Z",
   "pages": [
     {
       "path": "/",
@@ -13,22 +13,54 @@
       "description": "Learn about AchiveX LLC, a Wyoming based technology services company, its story, mission, vision and the values that guide its work.",
       "type": "Page",
       "editable": {
-        "heroTitle": "Who we are",
-        "heroText": "AchiveX LLC is a technology and business services company based in Wyoming, USA. We help organisations plan, build and run the systems and processes that keep them moving.",
-        "heroImage": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=80",
-        "heroImageAlt": "AchiveX team members collaborating on laptops",
-        "storyTitle": "Our story",
-        "storyParagraphs": [
-          "AchiveX was set up to give growing businesses access to the kind of technology and operations support that larger companies take for granted. Many firms know they need better data, safer systems or more help with daily processes, but they do not have the time or in house skills to sort it out alone.",
-          "We bring those capabilities together in one place: strategy, data and analytics, cloud, infrastructure, security and business process services. That means clients can start with one need and add others as they grow, without having to manage a long list of separate vendors.",
-          "AchiveX LLC is headquartered in Wyoming, USA."
+        "heroEyebrow": "About AchiveX",
+        "heroTitle": "A technology partner that explains every step",
+        "heroText": "AchiveX LLC is a Wyoming based company that builds websites, custom software, AI automation and growth marketing for small and mid sized businesses.",
+        "heroImage": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=2000&q=80",
+        "heroImageAlt": "AchiveX team members working together on laptops",
+        "introEyebrow": "Who we are",
+        "introTitle": "One team for the work that grows a business",
+        "introKeyword": "AchiveX LLC",
+        "introParagraphs": [
+          " is a technology and marketing company based in Wyoming, USA. We plan, build and run the digital side of a business: the website customers see first, the software your team uses every day, the automations that remove repetitive work, and the marketing that brings in new enquiries.",
+          "Most growing companies end up working with several suppliers for these jobs. One builds the website, another runs the ads, a third looks after the CRM, and nobody owns the full picture. We bring that work under one roof, so decisions are made with the whole business in mind and you have one team to call when something needs to change."
         ],
+        "areasEyebrow": "What we do",
+        "areasTitle": "Three areas, eight services",
+        "areasText": "Start with the service you need today and add more as the business grows. The same team delivers every area, so the work fits together.",
+        "areas": [
+          {
+            "title": "Web and Software",
+            "text": "Websites, online stores, web applications, dashboards and APIs. We build on WordPress, WooCommerce, Laravel and React, and keep every site fast, secure and easy to update.",
+            "to": "/services/web-and-software/"
+          },
+          {
+            "title": "AI and Automation",
+            "text": "Chatbots, workflow automation and CRM systems that answer questions, move data between your tools and follow up on leads, so your team spends less time on routine tasks.",
+            "to": "/services/ai-and-automation/"
+          },
+          {
+            "title": "Growth Marketing",
+            "text": "SEO, visibility in AI answers, social media management and paid ads, with monthly reporting that ties effort and spend to enquiries and sales.",
+            "to": "/services/growth-marketing/"
+          }
+        ],
+        "storyEyebrow": "Our story",
+        "storyTitle": "Why AchiveX exists",
+        "storyParagraphs": [
+          "AchiveX was started to give growing businesses the kind of digital support that larger companies take for granted. Many owners know their website could do more, that their team spends too long on manual work, or that their marketing is hard to measure. What they often lack is a partner who will look at all of it together and explain the options in plain terms.",
+          "That is the gap we set out to fill. We listen first, learn how the business actually runs, and then recommend the smallest set of changes that will make a real difference. When we build something, we document it and show your team how to use it, so you are never dependent on us for simple updates."
+        ],
+        "storyList": [],
+        "storyImage": "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1400&q=80",
+        "storyImageAlt": "A planning session around a table with laptops and notes",
         "missionTitle": "Mission",
-        "missionText": "To give businesses dependable technology and operations support, explained in plain language and delivered with care.",
+        "missionText": "To give businesses dependable websites, software and marketing, explained in plain language and delivered with care.",
         "visionTitle": "Vision",
-        "visionText": "A business world where companies of every size can use good technology with confidence, and spend their energy on serving their own customers.",
-        "valuesTitle": "What we value",
-        "valuesButton": "Meet our leadership",
+        "visionText": "A business world where companies of every size can use good technology with confidence and spend their energy on their own customers.",
+        "valuesEyebrow": "What we value",
+        "valuesTitle": "The principles behind every project",
+        "valuesText": "These are the habits we hold ourselves to on every project, whatever its size.",
         "values": [
           {
             "title": "Say what we mean",
@@ -55,117 +87,57 @@
             "text": "Client data, systems and reputations are handled with care."
           }
         ],
+        "processEyebrow": "How we work",
+        "processTitle": "A clear process from the first call to launch and beyond",
+        "processText": "Every engagement follows the same four steps, whatever its size.",
+        "process": [
+          {
+            "title": "Listen",
+            "text": "A free consultation to understand your goals, your customers and how your team works today."
+          },
+          {
+            "title": "Plan",
+            "text": "A written proposal with scope, timeline and a fixed price, so you know exactly what you are agreeing to."
+          },
+          {
+            "title": "Build",
+            "text": "Design, development and setup in short stages, with regular check ins and a review before anything goes live."
+          },
+          {
+            "title": "Support",
+            "text": "Launch, training and ongoing care. We monitor, update and improve the work after it is delivered."
+          }
+        ],
+        "whyEyebrow": "Why clients choose us",
+        "whyTitle": "What working with AchiveX is like",
+        "whyParagraphs": [
+          "The difference clients notice first is clarity. You always know what is being done, why it matters and what it will cost, because we put it in writing before we start."
+        ],
+        "whyList": [
+          "Plain language, with no jargon in proposals or reports",
+          "One point of contact for every service",
+          "Honest advice, even when the answer is to do less",
+          "Work your own team can run and update"
+        ],
+        "whyImage": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1400&q=80",
+        "whyImageAlt": "Two colleagues reviewing work together at a desk",
+        "faqTitle": "Questions about AchiveX",
+        "faqText": "If your question is not here, call or email us and we will answer it directly.",
+        "faqs": [
+          {
+            "q": "Where is AchiveX based?",
+            "a": "AchiveX LLC is registered and based in Wyoming, USA. We work with clients remotely, so your location is not a barrier."
+          },
+          {
+            "q": "What size of business do you work with?",
+            "a": "Mostly small and mid sized companies, as well as larger teams that need extra capacity for a specific project. The scope of each engagement is set to fit your size and budget."
+          },
+          {
+            "q": "How do you price your work?",
+            "a": "Projects are quoted at a fixed price after a free consultation. Ongoing services such as marketing or maintenance are billed monthly, and the scope is written down before we start."
+          }
+        ],
         "ctaTitle": "Work with a team that explains itself."
-      }
-    },
-    {
-      "path": "/about-us/accomplishments/",
-      "title": "Our Accomplishments",
-      "description": "Milestones and what AchiveX LLC has built so far: service areas, services, guides and articles.",
-      "type": "Page",
-      "editable": {
-        "heroTitle": "Our accomplishments",
-        "heroText": "The steps that have shaped AchiveX so far, and what we have built for clients and readers.",
-        "builtTitle": "What we have built",
-        "builtLabels": [
-          "Service areas",
-          "Individual services",
-          "Industries served",
-          "Free guides published",
-          "Articles published"
-        ],
-        "milestonesTitle": "Milestones",
-        "milestonesImage": "https://images.unsplash.com/photo-1568992687947-868a62a9f521?auto=format&fit=crop&w=1200&q=80",
-        "milestonesImageAlt": "Office workspace",
-        "nextTitle": "What comes next",
-        "nextText": "We add new milestones here as they happen. To follow our news, visit the newsroom.",
-        "nextLinkText": "Visit the newsroom"
-      }
-    },
-    {
-      "path": "/about-us/esg/",
-      "title": "Our Commitment to ESG",
-      "description": "How AchiveX LLC approaches environmental, social and governance responsibilities.",
-      "type": "Page",
-      "editable": {
-        "heroTitle": "Responsible by design",
-        "heroText": "Environmental, social and governance commitments that match the size and nature of our business. We list what we do today and leave space for goals we will publish as we set them.",
-        "sections": [
-          {
-            "key": "environment",
-            "title": "Environment",
-            "image": "https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=1600&q=80",
-            "text": "We are a services business, so most of our footprint comes from offices, travel and the computing we use. We favour remote collaboration where it works, recommend right sized cloud resources to clients, and plan hardware refreshes so devices are used for their full life.",
-            "commitments": [
-              "Prefer video meetings over travel where practical",
-              "Recommend efficient, right sized cloud setups",
-              "Extend device life and recycle responsibly"
-            ]
-          },
-          {
-            "key": "social",
-            "title": "Social",
-            "image": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1600&q=80",
-            "text": "Our people do the work, so we look after them. That means fair pay, clear expectations, time for learning and a workplace where people from different backgrounds can do their best work.",
-            "commitments": [
-              "Structured training time for every team member",
-              "Fair and consistent hiring practices",
-              "Flexible working where roles allow"
-            ]
-          },
-          {
-            "key": "governance",
-            "title": "Governance",
-            "image": "https://images.unsplash.com/photo-1556484687-30636164638b?auto=format&fit=crop&w=1600&q=80",
-            "text": "Clients trust us with data and access to their systems. We follow documented policies for information security, confidentiality and conflicts of interest, and we review them regularly.",
-            "commitments": [
-              "Written information security and privacy policies",
-              "Confidentiality agreements for all staff and contractors",
-              "Least privilege access to client systems"
-            ]
-          }
-        ],
-        "ctaTitle": "Questions about our policies?",
-        "ctaText": "Contact us for copies of our policies or to discuss how we handle data and access for your project.",
-        "ctaButton": "Contact Us"
-      }
-    },
-    {
-      "path": "/about-us/leadership/",
-      "title": "Our Leadership",
-      "description": "The leadership team at AchiveX LLC and how they work with clients.",
-      "type": "Page",
-      "editable": {
-        "heroTitle": "Leadership",
-        "heroText": "The people responsible for how AchiveX works and the standards we hold ourselves to.",
-        "principlesTitle": "How our leadership works with you",
-        "principles": [
-          {
-            "title": "Leaders who stay involved",
-            "text": "Senior people take part in scoping and review, not only in the first sales meeting."
-          },
-          {
-            "title": "Specialists for each service area",
-            "text": "Work is led by people who know the subject, from data and cloud to finance and recruitment."
-          },
-          {
-            "title": "One point of contact",
-            "text": "You always know who to call about your project and who is accountable for it."
-          }
-        ],
-        "ctaTitle": "Speak with our leadership",
-        "ctaText": "Book a free consultation to talk through your goals with our team."
-      }
-    },
-    {
-      "path": "/about-us/global-presence/",
-      "title": "Our Global Presence",
-      "description": "AchiveX LLC is headquartered in Wyoming, USA.",
-      "type": "Page",
-      "editable": {
-        "heroTitle": "Where we work",
-        "heroText": "Our headquarters is in Wyoming, USA. Contact us to discuss where and how we can support your team.",
-        "locationsTitle": "Locations"
       }
     },
     {
@@ -174,22 +146,274 @@
       "description": "Explore AchiveX services: web development, custom software, AI and intelligent systems, automation, CRM, SEO, AEO and GEO, social media and ads management.",
       "type": "Page",
       "editable": {
+        "heroEyebrow": "Services",
         "heroTitle": "What we do",
         "heroText": "Eight services in three areas, one team. Pick a single service or combine several. Either way you get the same people, the same standards and one point of contact.",
-        "specialistTitle": "Focused specialist services"
+        "heroImage": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=2000&q=80",
+        "heroImageAlt": "A laptop showing website code on a desk",
+        "introEyebrow": "Our services",
+        "introTitle": "Everything the digital side of a business needs",
+        "introKeyword": "AchiveX services",
+        "introParagraphs": [
+          " cover the three things most growing businesses need online: a website and software that work properly, automation that saves time, and marketing that brings in customers.",
+          "Each service stands on its own, so you can start with the one that matters most today. When you are ready to add another, the same team picks it up with full knowledge of what is already in place."
+        ],
+        "specialistTitle": "Focused specialist services",
+        "whyEyebrow": "Why AchiveX",
+        "whyTitle": "Why businesses choose one team for all of it",
+        "whyText": "The same four promises apply to every service we offer.",
+        "whyItems": [
+          {
+            "title": "One point of contact",
+            "text": "One team knows your website, systems and marketing, so nothing gets lost between suppliers."
+          },
+          {
+            "title": "Fixed, written quotes",
+            "text": "Scope, timeline and price are agreed in writing before any work begins."
+          },
+          {
+            "title": "Plain language",
+            "text": "Proposals and reports explain what we did, why it matters and what comes next."
+          },
+          {
+            "title": "Care after launch",
+            "text": "Updates, monitoring and monthly reporting keep the work performing long after delivery."
+          }
+        ],
+        "processEyebrow": "How we work",
+        "processTitle": "From the first call to results",
+        "processText": "Whichever service you choose, the steps are the same.",
+        "process": [
+          {
+            "title": "Consult",
+            "text": "A free call to understand your goals, customers and current setup."
+          },
+          {
+            "title": "Propose",
+            "text": "A written plan with scope, timeline and a fixed price."
+          },
+          {
+            "title": "Deliver",
+            "text": "Work in short stages with a review at each step."
+          },
+          {
+            "title": "Improve",
+            "text": "Measure results and keep making the work better."
+          }
+        ],
+        "faqTitle": "Questions about our services",
+        "faqText": "Not sure which service you need? Tell us what you want to achieve and we will recommend a starting point.",
+        "faqs": [
+          {
+            "q": "Which service should we start with?",
+            "a": "Usually the one closest to revenue. If customers cannot find you, start with SEO or ads. If they find you but do not get in touch, start with the website. If your team is overloaded, start with automation."
+          },
+          {
+            "q": "Can we combine services?",
+            "a": "Yes. Many clients pair a new website with SEO, or a CRM with automation. Combined projects are planned together so the pieces fit."
+          },
+          {
+            "q": "Do you offer ongoing support?",
+            "a": "Yes. Websites, automations and marketing can all be covered by a monthly plan that includes updates, monitoring and reporting."
+          },
+          {
+            "q": "Do you work with clients outside the USA?",
+            "a": "Yes. We are based in Wyoming and work remotely with clients in other countries."
+          }
+        ]
       }
     },
     {
       "path": "/industries/",
       "title": "Industries",
       "description": "The industries AchiveX works with, from financial services and healthcare to retail, manufacturing, logistics and education.",
-      "type": "Page"
+      "type": "Page",
+      "editable": {
+        "heroEyebrow": "Industries",
+        "heroTitle": "Industries we work with",
+        "heroText": "Each sector has its own rules, customers and pressures. Choose yours to see the problems we solve most often and the services that fit.",
+        "heroImage": "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=2000&q=80",
+        "heroImageAlt": "Office buildings in a business district",
+        "introEyebrow": "Our approach",
+        "introTitle": "Industry knowledge, applied to your business",
+        "introKeyword": "AchiveX",
+        "introParagraphs": [
+          " works with businesses in financial services, healthcare, retail and ecommerce, manufacturing, logistics and education. The technology is often similar across these sectors, but the rules, the customers and the daily pressures are not.",
+          "A clinic needs to protect patient information and keep phone lines clear. A manufacturer needs quotes out quickly and stock figures it can trust. A retailer needs pages that load in a moment and ads that pay for themselves. We bring what we have learned from each sector to the start of every project, so less time is spent explaining the basics.",
+          "If your industry is not listed here, we still want to hear from you. The way we work, starting with how your business runs today, applies to almost any organisation."
+        ],
+        "listEyebrow": "Sectors",
+        "listTitle": "Choose your industry",
+        "needsEyebrow": "Common needs",
+        "needsTitle": "What clients in every sector ask us for",
+        "needsText": "Whatever the industry, most projects start with one of these four needs.",
+        "needs": [
+          {
+            "title": "Be found and trusted online",
+            "text": "A clear, fast website and strong search presence so the right customers find you and understand what you offer."
+          },
+          {
+            "title": "Spend less time on routine work",
+            "text": "Automations and AI assistants that handle repeat questions, data entry and follow ups."
+          },
+          {
+            "title": "Keep track of every lead",
+            "text": "A CRM that records every enquiry, quote and conversation, with reminders so nothing slips."
+          },
+          {
+            "title": "Know what is working",
+            "text": "Reporting that ties marketing and operations to enquiries, sales and time saved."
+          }
+        ],
+        "processEyebrow": "How we work",
+        "processTitle": "The same clear process in every industry",
+        "processText": "We adapt the details to your sector, but the steps stay the same.",
+        "process": [
+          {
+            "title": "Understand",
+            "text": "We learn how your business runs, the rules you follow and what your customers expect."
+          },
+          {
+            "title": "Prioritise",
+            "text": "We agree on the few changes that will make the biggest difference first."
+          },
+          {
+            "title": "Build",
+            "text": "We design and build in short stages and review each one with you."
+          },
+          {
+            "title": "Improve",
+            "text": "After launch we measure results and keep improving the work."
+          }
+        ],
+        "whyEyebrow": "Why AchiveX",
+        "whyTitle": "Specialist enough to understand you, broad enough to do it all",
+        "whyParagraphs": [
+          "Most businesses do not need every service at once. They need a partner who can see which change will matter most, do that well, and then help with the next step when the time is right.",
+          "Many agencies focus on one channel, such as websites or ads. Many software firms focus on one platform. We cover websites, software, automation and marketing together, which matters because problems in one area usually affect the others.",
+          "You get one team that understands your sector and can fix the whole chain, from the first search a customer makes to the system your staff use to serve them."
+        ],
+        "whyList": [
+          "Experience across six industries",
+          "Data handling agreed before work starts",
+          "One team for web, software, automation and marketing",
+          "Fixed quotes and monthly reporting"
+        ],
+        "whyImage": "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1400&q=80",
+        "whyImageAlt": "A team planning a project around a table",
+        "expectEyebrow": "Getting started",
+        "expectTitle": "What you can expect in the first month",
+        "expectText": "Every new client goes through the same short start up period, so you see progress quickly.",
+        "expect": [
+          {
+            "title": "A free consultation",
+            "text": "A call to understand your goals, your customers and the systems you use today. There is no charge and no obligation."
+          },
+          {
+            "title": "A written proposal",
+            "text": "Scope, timeline and a fixed price for the first piece of work, with the reasons behind each recommendation."
+          },
+          {
+            "title": "A kick off session",
+            "text": "We agree on access, data handling, contacts and the way we will report progress to you."
+          },
+          {
+            "title": "Early, visible progress",
+            "text": "The first designs, automations or campaign plans arrive in the opening weeks for you to review."
+          }
+        ],
+        "sharedFaqs": [
+          {
+            "q": "How do we get started?",
+            "a": "Book a free consultation through the contact page or call us. We will talk through your goals and send a written proposal with a fixed price."
+          },
+          {
+            "q": "What does a project cost?",
+            "a": "It depends on the scope. Small projects such as one automation cost far less than a full website or custom platform. Every quote is fixed and agreed before work starts."
+          }
+        ],
+        "faqTitle": "Questions about working in your industry",
+        "faqText": "Ask us anything about your sector. We will tell you honestly whether we are a good fit.",
+        "faqs": [
+          {
+            "q": "Do you only work with these six industries?",
+            "a": "No. These are the sectors we work with most often, but our services apply to most businesses. Get in touch and we will tell you whether we are a good fit."
+          },
+          {
+            "q": "Can you follow the regulations in our sector?",
+            "a": "Yes. We work within the rules your business follows, agree on data handling and access before we start, and document our setup so it can be reviewed."
+          },
+          {
+            "q": "Do you have experience with businesses like ours?",
+            "a": "Ask us about your sector during the free consultation. We will explain the kind of work we have done and how it relates to your situation."
+          },
+          {
+            "q": "How long does a typical project take?",
+            "a": "Small projects such as a single automation can take a few weeks. Larger websites and software projects usually take two to four months. You get a timeline with every quote."
+          }
+        ],
+        "ctaTitle": "Let's build what your business needs next."
+      }
     },
     {
       "path": "/insights/",
       "title": "Insights",
       "description": "Case studies, company news, free guides and practical articles from AchiveX LLC.",
-      "type": "Page"
+      "type": "Page",
+      "editable": {
+        "heroEyebrow": "Insights",
+        "heroTitle": "Insights",
+        "heroText": "How we approach client problems, what is new at AchiveX, and practical guides and articles you can use in your own business.",
+        "heroImage": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=2000&q=80",
+        "heroImageAlt": "An analytics dashboard on a laptop screen",
+        "introEyebrow": "Learn with us",
+        "introTitle": "Practical knowledge, written in plain language",
+        "introKeyword": "AchiveX Insights",
+        "introParagraphs": [
+          " brings together everything we publish: client stories, company news, downloadable guides and articles from our team. Each piece is written to be useful on its own, without needing a technical background.",
+          "We write about the questions clients ask us most: how to choose a website platform, when automation is worth it, how SEO and AI search work, and how to measure marketing properly."
+        ],
+        "typesEyebrow": "Browse",
+        "typesTitle": "Four ways to explore",
+        "topicsEyebrow": "Topics",
+        "topicsTitle": "What we write about",
+        "topicsText": "Most of our articles and guides fall into one of these areas.",
+        "topics": [
+          {
+            "title": "Websites and software",
+            "text": "Choosing platforms, planning a redesign, speed, security and building tools that fit your team."
+          },
+          {
+            "title": "AI and automation",
+            "text": "Where AI assistants help, which tasks to automate first and how to keep data safe."
+          },
+          {
+            "title": "Search and AI visibility",
+            "text": "SEO basics, local search, and how to appear in answers from ChatGPT, Gemini and Perplexity."
+          },
+          {
+            "title": "Marketing that pays back",
+            "text": "Social media, paid ads and the reporting that shows what each channel returns."
+          }
+        ],
+        "faqTitle": "Questions about our insights",
+        "faqText": "Want us to write about a topic? Send us a message and tell us what you would like to read.",
+        "faqs": [
+          {
+            "q": "How often do you publish?",
+            "a": "We add new articles, guides and news regularly. The newest pieces always appear first on each page."
+          },
+          {
+            "q": "Are the guides free?",
+            "a": "Yes. Whitepapers and eBooks are free to download. Some ask for an email address so we can send you the file."
+          },
+          {
+            "q": "Can we share your articles?",
+            "a": "Yes. Every article has share buttons, and you are welcome to link to any page on this site."
+          }
+        ],
+        "ctaTitle": "Let's build what your business needs next."
+      }
     },
     {
       "path": "/insights/case-studies/",
@@ -251,13 +475,55 @@
       "description": "Contact AchiveX LLC by phone at +1 307 622 1140, by email at info@achivex.com, or send a message using our contact form.",
       "type": "Page",
       "editable": {
+        "heroEyebrow": "Contact us",
         "heroTitle": "Let us talk",
         "heroText": "Tell us a little about what you need and a member of our team will get back to you.",
         "formTitle": "Send us a message",
         "formButton": "Send Message",
         "thanksText": "Your message has been received. A member of our team will reply to",
         "detailsTitle": "Contact details",
-        "googleButton": "View Google Business Profile"
+        "googleButton": "View Google Business Profile",
+        "nextEyebrow": "What happens next",
+        "nextTitle": "What to expect after you get in touch",
+        "nextText": "We keep the first steps short and simple, and there is no cost until you approve a proposal.",
+        "next": [
+          {
+            "title": "We reply",
+            "text": "A member of our team reads your message and replies, usually within one business day."
+          },
+          {
+            "title": "Free consultation",
+            "text": "A short call to understand your goals, your customers and what you have in place today."
+          },
+          {
+            "title": "Written proposal",
+            "text": "A clear plan with scope, timeline and a fixed price for you to review."
+          },
+          {
+            "title": "We get started",
+            "text": "Once you approve, we agree on a start date and the first piece of work begins."
+          }
+        ],
+        "faqTitle": "Before you get in touch",
+        "faqText": "A few answers to the questions people ask most when they first contact us.",
+        "faqs": [
+          {
+            "q": "Is the first consultation really free?",
+            "a": "Yes. The first call is free and there is no obligation to go ahead with any work."
+          },
+          {
+            "q": "What should I include in my message?",
+            "a": "A short description of your business, what you want to achieve and any deadline. Links to your website or current tools are helpful too."
+          },
+          {
+            "q": "Do you work with clients outside the USA?",
+            "a": "Yes. We are based in Wyoming and work remotely with clients in other countries."
+          },
+          {
+            "q": "Can I call instead of filling in the form?",
+            "a": "Of course. Call us on +1 307 622 1140 or email info@achivex.com, whichever you prefer."
+          }
+        ]
       }
     },
     {
@@ -266,15 +532,16 @@
       "description": "Careers at AchiveX LLC. Learn about our culture and see current open positions.",
       "type": "Page",
       "editable": {
-        "heroTitle": "Careers",
+        "heroEyebrow": "Careers",
+        "heroTitle": "Do your best work with a small, focused team",
         "heroText": "We look for people who are curious, careful and good at explaining things. If that sounds like you, we would like to hear from you.",
-        "heroImage": "https://images.unsplash.com/photo-1529400971008-f566de0e6dfc?auto=format&fit=crop&w=1400&q=80",
+        "heroImage": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=2000&q=80",
         "heroImageAlt": "Colleagues talking during a team session",
         "cultureTitle": "How we work together",
         "culture": [
           {
             "title": "Learning is part of the job",
-            "text": "Time for training and certification is planned into the year, not squeezed in at weekends."
+            "text": "We share what we learn on every project and make time to keep our skills current."
           },
           {
             "title": "Clear expectations",
@@ -283,6 +550,69 @@
           {
             "title": "Real client work",
             "text": "You will work directly with clients and see the effect of what you build."
+          }
+        ],
+        "introEyebrow": "Working at AchiveX",
+        "introTitle": "Websites, software, automation and marketing under one roof",
+        "introKeyword": "Working at AchiveX",
+        "introParagraphs": [
+          " means seeing a project from the first client call to launch and beyond. Developers, designers and marketers work side by side, so you learn how each part of a digital business fits together.",
+          "We are a remote friendly company based in Wyoming, USA. We value clear writing, careful work and honest conversations with clients and with each other."
+        ],
+        "rolesEyebrow": "Who we hire",
+        "rolesTitle": "The kind of roles we bring on",
+        "rolesText": "Openings depend on client work, but most of our roles fall into these areas.",
+        "roles": [
+          {
+            "title": "Web and software developers",
+            "text": "WordPress, WooCommerce, Laravel and React developers who care about clean, maintainable code."
+          },
+          {
+            "title": "Designers",
+            "text": "People who design clear, accessible pages and interfaces that are easy to use on any device."
+          },
+          {
+            "title": "Automation and CRM specialists",
+            "text": "Problem solvers who connect tools, build workflows and set up AI assistants."
+          },
+          {
+            "title": "Marketers",
+            "text": "SEO, content, social media and paid ads specialists who measure their work against real results."
+          }
+        ],
+        "applyEyebrow": "How to apply",
+        "applyTitle": "A simple, respectful hiring process",
+        "applySteps": [
+          {
+            "title": "Send your CV",
+            "text": "Email your CV and a short note about the work you enjoy and the role you are interested in."
+          },
+          {
+            "title": "Intro call",
+            "text": "A relaxed conversation about your experience, what you are looking for and how we work."
+          },
+          {
+            "title": "Practical task",
+            "text": "A short, paid task or a review of past work that reflects the real job."
+          },
+          {
+            "title": "Decision",
+            "text": "We reply to every applicant and explain our decision clearly."
+          }
+        ],
+        "faqTitle": "Questions about careers",
+        "faqs": [
+          {
+            "q": "Can I work remotely?",
+            "a": "Many of our roles are remote friendly. Each opening explains where the work is based and which hours overlap with clients."
+          },
+          {
+            "q": "Do you accept applications when no roles are open?",
+            "a": "Yes. Send your CV and a short note and we will keep it on file and contact you when a suitable role opens."
+          },
+          {
+            "q": "Do you offer internships?",
+            "a": "From time to time. Internship openings are listed on this page when they are available."
           }
         ],
         "positionsTitle": "Open positions",
@@ -496,6 +826,46 @@
           "web-development",
           "custom-software"
         ],
+        "overview": [
+          "Some clients come to us for a new marketing website. Others need a portal for their customers, a dashboard for their managers or an API that connects two systems. Many need a mix of these over time, and it helps when the same team builds all of them.",
+          "Every project starts with how your business works today. We then pick the simplest technology that will do the job well, build it in short stages that you review, and hand it over with training and documentation."
+        ],
+        "outcomes": [
+          {
+            "title": "More enquiries and sales",
+            "text": "Clear pages and simple forms turn more visitors into customers."
+          },
+          {
+            "title": "Faster pages",
+            "text": "Sites that load quickly on phones and rank better in search."
+          },
+          {
+            "title": "Less manual work",
+            "text": "Internal tools that replace spreadsheets and repeated data entry."
+          },
+          {
+            "title": "Systems that connect",
+            "text": "Websites and apps that share data with the tools you already use."
+          }
+        ],
+        "faqs": [
+          {
+            "q": "Do we need a website or custom software?",
+            "a": "If you need to attract and inform customers, start with a website. If you need to run a process, such as quotes, bookings or reporting, custom software is usually the better fit."
+          },
+          {
+            "q": "Which technologies do you use?",
+            "a": "Mostly WordPress and WooCommerce for websites, and Laravel and React for custom software, chosen to suit the project and your team."
+          },
+          {
+            "q": "Can you improve a site someone else built?",
+            "a": "Yes. We review what is there, fix the problems that matter most and only rebuild when it is the better option."
+          },
+          {
+            "q": "How long does a typical project take?",
+            "a": "Most business websites take four to ten weeks. Custom software usually takes two to four months, delivered in stages you can use along the way."
+          }
+        ],
         "caseStudy": "retail-storefront-rebuild"
       }
     },
@@ -514,6 +884,46 @@
         "services": [
           "ai-automation",
           "crm-and-lead-management"
+        ],
+        "overview": [
+          "AI and automation are most useful when they take over the dull, repeated parts of a job. Answering the same questions, copying data between tools, chasing leads and sending reminders are all tasks software can handle reliably.",
+          "We start by listing the tasks that take the most time each week, then automate the ones with the clearest return. Every assistant and workflow is tested with real examples and monitored after launch, so you can trust it."
+        ],
+        "outcomes": [
+          {
+            "title": "Hours saved each week",
+            "text": "Routine tasks run automatically instead of waiting for someone to do them."
+          },
+          {
+            "title": "Faster replies",
+            "text": "Customers get answers to common questions at any hour."
+          },
+          {
+            "title": "No lost leads",
+            "text": "Every enquiry is captured, assigned and followed up on time."
+          },
+          {
+            "title": "Cleaner data",
+            "text": "Information moves between tools without typing errors."
+          }
+        ],
+        "faqs": [
+          {
+            "q": "Will AI replace our staff?",
+            "a": "That is not the goal. Automation removes repetitive work so your team can spend more time with customers and on work that needs judgement."
+          },
+          {
+            "q": "Which tasks are best to automate first?",
+            "a": "Tasks that happen often, follow the same steps and take real time, such as lead follow up, data entry, booking confirmations and routine questions."
+          },
+          {
+            "q": "Do we need a CRM for this?",
+            "a": "Not always, but most automations work better with one. We can set up a CRM as part of the project if you do not have one."
+          },
+          {
+            "q": "How quickly can we see results?",
+            "a": "Simple automations often go live within two to three weeks, and the time savings show up from the first week they run."
+          }
         ],
         "caseStudy": "healthcare-patient-support"
       }
@@ -536,6 +946,46 @@
           "social-media-management",
           "ads-management"
         ],
+        "overview": [
+          "Good marketing brings in people who are ready to buy, not just visitors. We focus on the channels where your customers already look for businesses like yours: Google search, Google Maps, AI assistants, social media and paid ads.",
+          "Every channel is measured against enquiries and sales. You receive a plain monthly report that shows what was done, what it cost and what it returned, so decisions about budget are easy to make."
+        ],
+        "outcomes": [
+          {
+            "title": "Be found in search",
+            "text": "Higher rankings in Google and Google Maps for the searches that matter."
+          },
+          {
+            "title": "Appear in AI answers",
+            "text": "Content that AI assistants can understand, quote and recommend."
+          },
+          {
+            "title": "A steady social presence",
+            "text": "Regular, on brand posts that build trust and bring enquiries."
+          },
+          {
+            "title": "Ads that pay back",
+            "text": "Campaigns managed against cost per lead and return on spend."
+          }
+        ],
+        "faqs": [
+          {
+            "q": "Which marketing channel should we start with?",
+            "a": "Usually search, because people looking for your service are already close to buying. We look at your market and budget before recommending a mix."
+          },
+          {
+            "q": "How do you report on results?",
+            "a": "A monthly report covering traffic, rankings, enquiries, sales and spend for each channel, with notes on what we will do next."
+          },
+          {
+            "q": "Is there a minimum contract?",
+            "a": "Most marketing work runs month to month after an initial setup period. We explain the terms clearly in every proposal."
+          },
+          {
+            "q": "Can you work with our existing marketing team?",
+            "a": "Yes. We can take on one channel, support your team with strategy and reporting, or run the full programme, whichever suits you."
+          }
+        ],
         "caseStudy": "retail-storefront-rebuild"
       }
     },
@@ -545,7 +995,7 @@
       "description": "Fast, mobile friendly websites built to turn visitors into customers. WordPress, WooCommerce, Laravel and React websites that load quickly and make it easy to get in touch or buy.",
       "type": "Service",
       "focus": "web development",
-      "content": "A website has one main job: help the right visitors take the next step, whether that is calling you, booking a meeting or placing an order. We plan each site around that step, then build it to load quickly and work properly on every phone. We build on WordPress and WooCommerce when you want to edit content yourself, and on custom PHP, Laravel or React when the site needs features an off the shelf setup cannot handle. Redesigns of existing sites, speed work and ongoing maintenance are part of the service. Page structure and content plan based on your goals Design for desktop, tablet and phone WordPress and WooCommerce builds you can edit yourself Custom PHP, Laravel and React development Speed optimization and basic technical SEO setup Hosting setup, backups and ongoing maintenance Built to convert. Clear pages, simple forms and visible calls to action make it easy for visitors to contact you or buy. Fast on every device. Images, code and hosting are tuned so pages load quickly on phones as well as desktops. Easy to update. You can change text, images and products yourself without calling a developer for every edit. Looked after. Updates, backups and fixes continue after launch, so the site keeps working. How long does a new website take? Most business websites take four to ten weeks. Online stores and custom builds can take longer. We give you a timeline after the first consultation. Can you redesign our existing site? Yes. We can keep what works, improve what does not and move your content across without losing pages that already rank. WordPress or custom code? WordPress suits most marketing sites and stores. Custom Laravel or React suits sites with complex features. We recommend one based on what you need, not on habit. How much does a website cost? It depends on the number of pages, features and content. We quote a fixed price after a free consultation.",
+      "content": "A website has one main job: help the right visitors take the next step, whether that is calling you, booking a meeting or placing an order. We plan each site around that step, then build it to load quickly and work properly on every phone. We build on WordPress and WooCommerce when you want to edit content yourself, and on custom PHP, Laravel or React when the site needs features an off the shelf setup cannot handle. Redesigns of existing sites, speed work and ongoing maintenance are part of the service. Page structure and content plan based on your goals Design for desktop, tablet and phone WordPress and WooCommerce builds you can edit yourself Custom PHP, Laravel and React development Speed optimization and basic technical SEO setup Hosting setup, backups and ongoing maintenance Built to convert. Clear pages, simple forms and visible calls to action make it easy for visitors to contact you or buy. Fast on every device. Images, code and hosting are tuned so pages load quickly on phones as well as desktops. Easy to update. You can change text, images and products yourself without calling a developer for every edit. Looked after. Updates, backups and fixes continue after launch, so the site keeps working. How long does a new website take? Most business websites take four to ten weeks. Online stores and custom builds can take longer. We give you a timeline after the first consultation. Can you redesign our existing site? Yes. We can keep what works, improve what does not and move your content across without losing pages that already rank. WordPress or custom code? WordPress suits most marketing sites and stores. Custom Laravel or React suits sites with complex features. We recommend one based on what you need, not on habit. How much does a website cost? It depends on the number of pages, features and content. We quote a fixed price after a free consultation. Will we be able to update the website ourselves? Yes. We set up an editor that suits your team, show you how to change text, images and products, and leave written notes for later.",
       "headings": [
         "Overview",
         "What is included",
@@ -628,7 +1078,27 @@
           {
             "q": "How much does a website cost?",
             "a": "It depends on the number of pages, features and content. We quote a fixed price after a free consultation."
+          },
+          {
+            "q": "Will we be able to update the website ourselves?",
+            "a": "Yes. We set up an editor that suits your team, show you how to change text, images and products, and leave written notes for later."
           }
+        ],
+        "whoFor": [
+          "Businesses whose current website is slow, dated or hard to update",
+          "Companies launching a new brand, product or location that needs its own site",
+          "Store owners who want to start selling online or move to WooCommerce",
+          "Teams that need a site connected to their CRM, booking system or payment provider"
+        ],
+        "tools": [
+          "WordPress",
+          "WooCommerce",
+          "Laravel",
+          "React",
+          "Tailwind CSS",
+          "Google Analytics 4",
+          "Google Search Console",
+          "Cloudflare"
         ],
         "caseStudy": "retail-storefront-rebuild"
       }
@@ -639,7 +1109,7 @@
       "description": "Web apps, SaaS platforms, dashboards, admin panels and APIs built around your business. Software shaped around how your team works, built on Laravel and React.",
       "type": "Service",
       "focus": "custom software",
-      "content": "Off the shelf tools cover common needs, but many businesses end up stitching together spreadsheets and apps that do not talk to each other. Custom software replaces that with one system built for your process. We build web apps, SaaS platforms, internal systems, dashboards, admin panels and APIs on Laravel and React. Each project starts with how your team works today and grows in small, usable releases. Discovery workshops and written requirements Web applications and SaaS platforms Internal systems and admin panels Dashboards and reporting screens APIs and integrations with your existing tools Testing, deployment and ongoing support Fits your process. Screens and steps follow how your team works instead of forcing a new routine. One source of truth. Data lives in one system rather than scattered spreadsheets and apps. You own it. The code and data belong to you, with no per seat licence for the core system. Grows with you. New features are added in small releases as the business changes. How long does a custom system take? A first usable version usually takes eight to sixteen weeks. Larger platforms are built in stages after that. Which technologies do you use? Mainly Laravel for the back end and React for the front end, with standard hosting and databases. Can it connect to the tools we already use? Usually yes, through APIs. We check each tool during discovery. Who owns the code? You do. The code and data are handed over and documented.",
+      "content": "Off the shelf tools cover common needs, but many businesses end up stitching together spreadsheets and apps that do not talk to each other. Custom software replaces that with one system built for your process. We build web apps, SaaS platforms, internal systems, dashboards, admin panels and APIs on Laravel and React. Each project starts with how your team works today and grows in small, usable releases. Discovery workshops and written requirements Web applications and SaaS platforms Internal systems and admin panels Dashboards and reporting screens APIs and integrations with your existing tools Testing, deployment and ongoing support Fits your process. Screens and steps follow how your team works instead of forcing a new routine. One source of truth. Data lives in one system rather than scattered spreadsheets and apps. You own it. The code and data belong to you, with no per seat licence for the core system. Grows with you. New features are added in small releases as the business changes. How long does a custom system take? A first usable version usually takes eight to sixteen weeks. Larger platforms are built in stages after that. Which technologies do you use? Mainly Laravel for the back end and React for the front end, with standard hosting and databases. Can it connect to the tools we already use? Usually yes, through APIs. We check each tool during discovery. Who owns the code? You do. The code and data are handed over and documented. Who owns the code you write for us? You do. The code, the data and the hosting accounts belong to your business, and we hand over full access and documentation.",
       "headings": [
         "Overview",
         "What is included",
@@ -722,7 +1192,27 @@
           {
             "q": "Who owns the code?",
             "a": "You do. The code and data are handed over and documented."
+          },
+          {
+            "q": "Who owns the code you write for us?",
+            "a": "You do. The code, the data and the hosting accounts belong to your business, and we hand over full access and documentation."
           }
+        ],
+        "whoFor": [
+          "Teams that run important processes on spreadsheets and email",
+          "Founders building a SaaS product or customer portal",
+          "Businesses whose off the shelf tools no longer fit how they work",
+          "Companies that need their systems connected through an API"
+        ],
+        "tools": [
+          "Laravel",
+          "React",
+          "PHP",
+          "MySQL",
+          "PostgreSQL",
+          "REST APIs",
+          "Supabase",
+          "AWS and Vercel hosting"
         ],
         "caseStudy": "finance-reporting-consolidation"
       }
@@ -733,7 +1223,7 @@
       "description": "Chatbots, document parsing, lead scoring, AI agents and a 24/7 AI receptionist, connected to the tools you already use. Practical AI and automation built on your own data, aimed at the work that takes your team the most time.",
       "type": "Service",
       "focus": "ai & automation",
-      "content": "Much of the work in a growing business is repetitive: reading documents, sorting enquiries, answering the same questions and copying information from one system to another. We find those tasks and build AI tools and automations that handle them the same way every time. Our work covers document parsing, prediction and lead scoring, retrieval based AI and custom chatbots that answer from your own documents, integration between your tools, AI agents for routine tasks, and a 24/7 AI receptionist that answers calls, books appointments and qualifies leads. Review of tasks where AI and automation can save time Document parsing, prediction and lead scoring Custom chatbots and retrieval based AI on your own data Integration between your apps, forms, email and CRM AI agents and workflow automation for routine tasks 24/7 AI receptionist for calls, appointments and lead qualification Hours back each week. Repetitive reading, sorting and copying is handled by the system. Answers from your data. Chatbots and assistants respond using your own documents and records. No missed calls. The AI receptionist answers out of hours and books appointments. Connected systems. Your tools share information instead of working in isolation. Will our data be used to train public AI models? No. We set up systems so your data stays within the services and accounts you control. Which tools can you connect? Most modern tools with an API, such as CRMs, booking systems, email, forms and spreadsheets. We confirm each one at the start. How does the AI receptionist work? It answers calls with a script you approve, answers common questions, books appointments in your calendar and passes qualified leads to your team. What does it cost? It depends on scope. We usually start with one focused tool or automation, quoted after a free consultation.",
+      "content": "Much of the work in a growing business is repetitive: reading documents, sorting enquiries, answering the same questions and copying information from one system to another. We find those tasks and build AI tools and automations that handle them the same way every time. Our work covers document parsing, prediction and lead scoring, retrieval based AI and custom chatbots that answer from your own documents, integration between your tools, AI agents for routine tasks, and a 24/7 AI receptionist that answers calls, books appointments and qualifies leads. Review of tasks where AI and automation can save time Document parsing, prediction and lead scoring Custom chatbots and retrieval based AI on your own data Integration between your apps, forms, email and CRM AI agents and workflow automation for routine tasks 24/7 AI receptionist for calls, appointments and lead qualification Hours back each week. Repetitive reading, sorting and copying is handled by the system. Answers from your data. Chatbots and assistants respond using your own documents and records. No missed calls. The AI receptionist answers out of hours and books appointments. Connected systems. Your tools share information instead of working in isolation. Will our data be used to train public AI models? No. We set up systems so your data stays within the services and accounts you control. Which tools can you connect? Most modern tools with an API, such as CRMs, booking systems, email, forms and spreadsheets. We confirm each one at the start. How does the AI receptionist work? It answers calls with a script you approve, answers common questions, books appointments in your calendar and passes qualified leads to your team. What does it cost? It depends on scope. We usually start with one focused tool or automation, quoted after a free consultation. Is our data safe with AI tools? We only connect tools you approve, limit what each one can see, and avoid sending sensitive information to services that are not set up for it.",
       "headings": [
         "Overview",
         "What is included",
@@ -816,7 +1306,27 @@
           {
             "q": "What does it cost?",
             "a": "It depends on scope. We usually start with one focused tool or automation, quoted after a free consultation."
+          },
+          {
+            "q": "Is our data safe with AI tools?",
+            "a": "We only connect tools you approve, limit what each one can see, and avoid sending sensitive information to services that are not set up for it."
           }
+        ],
+        "whoFor": [
+          "Teams that answer the same customer questions every day",
+          "Businesses copying data between forms, spreadsheets and other tools by hand",
+          "Companies that want a chatbot or assistant trained on their own information",
+          "Owners who want reports and follow ups to happen without someone remembering them"
+        ],
+        "tools": [
+          "OpenAI and Claude models",
+          "Zapier",
+          "Make",
+          "n8n",
+          "WhatsApp Business",
+          "Google Workspace",
+          "Microsoft 365",
+          "Custom APIs"
         ],
         "caseStudy": "healthcare-patient-support"
       }
@@ -827,7 +1337,7 @@
       "description": "Custom CRM systems, lead capture and automated follow ups so no lead is lost. Capture every enquiry, follow up on time and see where each lead stands.",
       "type": "Service",
       "focus": "crm & lead management",
-      "content": "Leads often arrive through many channels: website forms, calls, emails, ads and social media. Without one place to track them, follow ups are missed and good enquiries go cold. We set up or build CRM systems that capture leads from every channel, nurture them with timely messages and automate follow ups, so your team always knows who to contact next. Custom CRM systems or setup of an existing CRM Lead capture from forms, calls, ads and email Pipelines and stages that match your sales process Automated follow up emails and reminders Lead nurturing sequences Reports on lead sources and conversion No lost leads. Every enquiry is captured and assigned automatically. Timely follow ups. Reminders and automated messages keep leads warm. Clear pipeline. See every lead, its stage and the next action at a glance. Know what works. Reports show which channels bring leads that turn into customers. Do we need a custom CRM or an existing one? Many businesses do well with an established CRM. We recommend a custom system only when your process needs it. Can you move our existing contacts? Yes. We import contacts and history from spreadsheets or your current system. Will our team find it easy to use? We keep screens simple and train your team before launch. How long does it take? A CRM setup usually takes two to six weeks depending on channels and automations.",
+      "content": "Leads often arrive through many channels: website forms, calls, emails, ads and social media. Without one place to track them, follow ups are missed and good enquiries go cold. We set up or build CRM systems that capture leads from every channel, nurture them with timely messages and automate follow ups, so your team always knows who to contact next. Custom CRM systems or setup of an existing CRM Lead capture from forms, calls, ads and email Pipelines and stages that match your sales process Automated follow up emails and reminders Lead nurturing sequences Reports on lead sources and conversion No lost leads. Every enquiry is captured and assigned automatically. Timely follow ups. Reminders and automated messages keep leads warm. Clear pipeline. See every lead, its stage and the next action at a glance. Know what works. Reports show which channels bring leads that turn into customers. Do we need a custom CRM or an existing one? Many businesses do well with an established CRM. We recommend a custom system only when your process needs it. Can you move our existing contacts? Yes. We import contacts and history from spreadsheets or your current system. Will our team find it easy to use? We keep screens simple and train your team before launch. How long does it take? A CRM setup usually takes two to six weeks depending on channels and automations. Can you move our data from our current CRM? Yes. We map your contacts, deals and history into the new system, test the import and keep the old data available until you are happy.",
       "headings": [
         "Overview",
         "What is included",
@@ -910,7 +1420,27 @@
           {
             "q": "How long does it take?",
             "a": "A CRM setup usually takes two to six weeks depending on channels and automations."
+          },
+          {
+            "q": "Can you move our data from our current CRM?",
+            "a": "Yes. We map your contacts, deals and history into the new system, test the import and keep the old data available until you are happy."
           }
+        ],
+        "whoFor": [
+          "Sales teams that track leads in spreadsheets or inboxes",
+          "Businesses losing enquiries because follow ups depend on memory",
+          "Companies that want to see where leads come from and which ones close",
+          "Teams moving from one CRM to another without losing data"
+        ],
+        "tools": [
+          "HubSpot",
+          "Zoho CRM",
+          "GoHighLevel",
+          "Pipedrive",
+          "Salesforce",
+          "Zapier",
+          "Calendly",
+          "Email and SMS tools"
         ],
         "caseStudy": "retail-storefront-rebuild"
       }
@@ -921,7 +1451,7 @@
       "description": "Technical, on-page, local and off-page SEO with monthly reporting. Help the right customers find you on Google, then turn that traffic into enquiries.",
       "type": "Service",
       "focus": "seo",
-      "content": "Search engine optimization is steady work across the whole site: making it easy for Google to read, making each page useful for the people searching, and building trust through mentions and links from other sites. We cover technical, on-page, local and off-page SEO, optimize your Google Business Profile and send a monthly report, so you can see how rankings, organic traffic and qualified leads are changing. Technical SEO audit and fixes Keyword research and on-page optimization Local SEO and Google Business Profile optimization Content planning for pages and articles Off-page SEO and quality link building Monthly ranking, traffic and lead reports More qualified traffic. Pages target the searches your customers actually make. Local visibility. An optimized Google Business Profile helps you show up in local results and maps. A healthy site. Technical fixes make the site faster and easier for search engines to read. Clear reporting. Monthly reports show what changed and what we are doing next. How long until we see results? Technical fixes can help within weeks. Ranking for competitive searches usually takes several months of steady work. Can you guarantee first place on Google? No one can honestly guarantee a ranking. We focus on the work that improves visibility and report on progress every month. Do you write content? Yes. We plan and write pages and articles, or work with content your team provides. How is SEO priced? Usually as a monthly retainer based on the size of the site and the competition. We quote after a free consultation.",
+      "content": "Search engine optimization is steady work across the whole site: making it easy for Google to read, making each page useful for the people searching, and building trust through mentions and links from other sites. We cover technical, on-page, local and off-page SEO, optimize your Google Business Profile and send a monthly report, so you can see how rankings, organic traffic and qualified leads are changing. Technical SEO audit and fixes Keyword research and on-page optimization Local SEO and Google Business Profile optimization Content planning for pages and articles Off-page SEO and quality link building Monthly ranking, traffic and lead reports More qualified traffic. Pages target the searches your customers actually make. Local visibility. An optimized Google Business Profile helps you show up in local results and maps. A healthy site. Technical fixes make the site faster and easier for search engines to read. Clear reporting. Monthly reports show what changed and what we are doing next. How long until we see results? Technical fixes can help within weeks. Ranking for competitive searches usually takes several months of steady work. Can you guarantee first place on Google? No one can honestly guarantee a ranking. We focus on the work that improves visibility and report on progress every month. Do you write content? Yes. We plan and write pages and articles, or work with content your team provides. How is SEO priced? Usually as a monthly retainer based on the size of the site and the competition. We quote after a free consultation. How long does SEO take to show results? Technical fixes can help within weeks, but steady growth in rankings and traffic usually takes three to six months of consistent work.",
       "headings": [
         "Overview",
         "What is included",
@@ -1004,7 +1534,27 @@
           {
             "q": "How is SEO priced?",
             "a": "Usually as a monthly retainer based on the size of the site and the competition. We quote after a free consultation."
+          },
+          {
+            "q": "How long does SEO take to show results?",
+            "a": "Technical fixes can help within weeks, but steady growth in rankings and traffic usually takes three to six months of consistent work."
           }
+        ],
+        "whoFor": [
+          "Businesses that rely on Google to bring in new customers",
+          "Local companies that want to appear in Google Maps results",
+          "Websites that have lost traffic after a redesign or update",
+          "Stores that want product and category pages to rank"
+        ],
+        "tools": [
+          "Google Search Console",
+          "Google Analytics 4",
+          "Google Business Profile",
+          "Ahrefs",
+          "Semrush",
+          "Screaming Frog",
+          "PageSpeed Insights",
+          "Schema markup"
         ],
         "caseStudy": "retail-storefront-rebuild"
       }
@@ -1015,7 +1565,7 @@
       "description": "Visibility in featured snippets, voice search and AI answers from ChatGPT, Gemini and Perplexity. Make your business easy for search engines and AI assistants to understand, quote and recommend.",
       "type": "Service",
       "focus": "aeo & geo",
-      "content": "More people now get answers straight from Google AI Overviews, voice assistants and tools like ChatGPT, Gemini and Perplexity. Answer engine optimization (AEO) and generative engine optimization (GEO) help your business appear in those answers. We structure your content to answer real questions clearly, add schema markup so machines understand your pages, work towards featured snippets and voice search results, and track how your brand appears in AI answers over time. Audit of how AI tools currently describe your brand Question based content that answers searches directly Schema markup for your business, services and FAQs Optimization for featured snippets and voice search Brand mentions and consistent business information across the web Regular checks of visibility in AI answers Seen in AI answers. Your business is more likely to be named when people ask AI tools for recommendations. Featured snippets. Clear answers can earn the highlighted box at the top of Google. Voice search ready. Content is written to answer spoken questions directly. Builds on SEO. The same work strengthens your regular search rankings too. What is the difference between AEO and GEO? AEO focuses on direct answers such as featured snippets and voice search. GEO focuses on being cited in AI generated answers from tools like ChatGPT and Gemini. Can you guarantee ChatGPT will mention us? No. AI tools decide their own answers. We improve the signals they rely on and track changes over time. Do we still need SEO? Yes. AEO and GEO build on a site that is already well optimized for search. How long does it take? Schema and content changes can be done in weeks. Visibility in AI answers builds gradually over months.",
+      "content": "More people now get answers straight from Google AI Overviews, voice assistants and tools like ChatGPT, Gemini and Perplexity. Answer engine optimization (AEO) and generative engine optimization (GEO) help your business appear in those answers. We structure your content to answer real questions clearly, add schema markup so machines understand your pages, work towards featured snippets and voice search results, and track how your brand appears in AI answers over time. Audit of how AI tools currently describe your brand Question based content that answers searches directly Schema markup for your business, services and FAQs Optimization for featured snippets and voice search Brand mentions and consistent business information across the web Regular checks of visibility in AI answers Seen in AI answers. Your business is more likely to be named when people ask AI tools for recommendations. Featured snippets. Clear answers can earn the highlighted box at the top of Google. Voice search ready. Content is written to answer spoken questions directly. Builds on SEO. The same work strengthens your regular search rankings too. What is the difference between AEO and GEO? AEO focuses on direct answers such as featured snippets and voice search. GEO focuses on being cited in AI generated answers from tools like ChatGPT and Gemini. Can you guarantee ChatGPT will mention us? No. AI tools decide their own answers. We improve the signals they rely on and track changes over time. Do we still need SEO? Yes. AEO and GEO build on a site that is already well optimized for search. How long does it take? Schema and content changes can be done in weeks. Visibility in AI answers builds gradually over months. How is this different from normal SEO? SEO focuses on ranking in search results. AEO and GEO focus on being quoted and recommended inside AI answers, which needs clear, structured and well sourced content.",
       "headings": [
         "Overview",
         "What is included",
@@ -1098,7 +1648,27 @@
           {
             "q": "How long does it take?",
             "a": "Schema and content changes can be done in weeks. Visibility in AI answers builds gradually over months."
+          },
+          {
+            "q": "How is this different from normal SEO?",
+            "a": "SEO focuses on ranking in search results. AEO and GEO focus on being quoted and recommended inside AI answers, which needs clear, structured and well sourced content."
           }
+        ],
+        "whoFor": [
+          "Businesses that want to be mentioned when people ask ChatGPT, Gemini or Perplexity for a recommendation",
+          "Companies whose content is strong but rarely appears in featured snippets or AI answers",
+          "Brands that want to know how AI tools describe them today",
+          "Teams already investing in SEO who want to cover the next way people search"
+        ],
+        "tools": [
+          "ChatGPT",
+          "Google Gemini",
+          "Perplexity",
+          "Microsoft Copilot",
+          "Google Search Console",
+          "Schema markup",
+          "llms.txt",
+          "Brand mention tracking"
         ],
         "caseStudy": "retail-storefront-rebuild"
       }
@@ -1109,7 +1679,7 @@
       "description": "Content planning, reels, graphics, scheduling, engagement and reporting. Regular, on brand posts and a responsive presence, without your team having to manage it daily.",
       "type": "Service",
       "focus": "social media management",
-      "content": "Social media works best when it is consistent: a clear plan, posts that look and sound like your brand, and quick replies to comments and messages. That takes time most small teams do not have. We plan your content, create reels and graphics, schedule posts, engage with your community and send a performance report, so your accounts stay active and you can see what is working. Monthly content plan and calendar Reels, short videos and graphics Captions and hashtags written for each platform Post scheduling and publishing Community engagement and replies Monthly performance reports Consistent presence. Posts go out on schedule every week. On brand content. Graphics and captions follow your style and tone. Engaged followers. Comments and messages get timely replies. Measured results. Reports show reach, engagement and the posts that performed best. Which platforms do you manage? Usually Facebook, Instagram, LinkedIn and TikTok. We recommend the ones your customers actually use. Do we approve posts before they go live? Yes. You review the content calendar and posts before publishing. Do you film videos? We create reels from your photos, clips and our graphics. On site filming can be arranged separately. How is it priced? As a monthly package based on platforms and the number of posts. We quote after a free consultation.",
+      "content": "Social media works best when it is consistent: a clear plan, posts that look and sound like your brand, and quick replies to comments and messages. That takes time most small teams do not have. We plan your content, create reels and graphics, schedule posts, engage with your community and send a performance report, so your accounts stay active and you can see what is working. Monthly content plan and calendar Reels, short videos and graphics Captions and hashtags written for each platform Post scheduling and publishing Community engagement and replies Monthly performance reports Consistent presence. Posts go out on schedule every week. On brand content. Graphics and captions follow your style and tone. Engaged followers. Comments and messages get timely replies. Measured results. Reports show reach, engagement and the posts that performed best. Which platforms do you manage? Usually Facebook, Instagram, LinkedIn and TikTok. We recommend the ones your customers actually use. Do we approve posts before they go live? Yes. You review the content calendar and posts before publishing. Do you film videos? We create reels from your photos, clips and our graphics. On site filming can be arranged separately. How is it priced? As a monthly package based on platforms and the number of posts. We quote after a free consultation. Do we need to be on every platform? No. We recommend the two or three platforms where your customers actually spend time and do those well, instead of spreading effort thin.",
       "headings": [
         "Overview",
         "What is included",
@@ -1192,7 +1762,27 @@
           {
             "q": "How is it priced?",
             "a": "As a monthly package based on platforms and the number of posts. We quote after a free consultation."
+          },
+          {
+            "q": "Do we need to be on every platform?",
+            "a": "No. We recommend the two or three platforms where your customers actually spend time and do those well, instead of spreading effort thin."
           }
+        ],
+        "whoFor": [
+          "Businesses that know they should post regularly but never find the time",
+          "Brands with accounts that look inconsistent or out of date",
+          "Companies that want social media to bring enquiries, not just likes",
+          "Teams launching a product, event or campaign that needs steady content"
+        ],
+        "tools": [
+          "Meta Business Suite",
+          "Instagram",
+          "Facebook",
+          "LinkedIn",
+          "TikTok",
+          "Canva",
+          "Buffer",
+          "Native analytics"
         ],
         "caseStudy": "retail-storefront-rebuild"
       }
@@ -1203,7 +1793,7 @@
       "description": "Google Ads and Meta Ads with retargeting, conversion tracking and ROI reporting. Paid campaigns set up to bring in leads and sales, with tracking that shows what each one returns.",
       "type": "Service",
       "focus": "ads management",
-      "content": "Paid ads can bring in customers quickly, but only when the targeting, budget and tracking are set up properly. Without conversion tracking it is hard to know which ads pay for themselves. We run Google Ads and Meta Ads campaigns, set up retargeting for people who already visited your site, install conversion tracking and report on return on ad spend, so budget moves to what works. Account setup or audit of existing campaigns Google Search, Display and Performance Max campaigns Facebook and Instagram ads through Meta Retargeting campaigns Conversion tracking for calls, forms and sales Monthly ROI reporting and optimization Spend where it works. Budget shifts towards campaigns that bring leads and sales. Second chances. Retargeting reminds past visitors to come back. Accurate tracking. Conversions are measured, so results are based on real numbers. Clear reports. See cost per lead and return on ad spend each month. How much should we spend on ads? It depends on your market and goals. We suggest a starting budget after reviewing your situation and adjust it based on results. Is the ad budget included in your fee? No. Ad spend is paid directly to Google or Meta. Our management fee is separate. How soon will we see results? Ads can bring traffic within days. Campaigns usually need a few weeks of data to settle and improve. Can you take over our existing campaigns? Yes. We start with an audit and keep what is working.",
+      "content": "Paid ads can bring in customers quickly, but only when the targeting, budget and tracking are set up properly. Without conversion tracking it is hard to know which ads pay for themselves. We run Google Ads and Meta Ads campaigns, set up retargeting for people who already visited your site, install conversion tracking and report on return on ad spend, so budget moves to what works. Account setup or audit of existing campaigns Google Search, Display and Performance Max campaigns Facebook and Instagram ads through Meta Retargeting campaigns Conversion tracking for calls, forms and sales Monthly ROI reporting and optimization Spend where it works. Budget shifts towards campaigns that bring leads and sales. Second chances. Retargeting reminds past visitors to come back. Accurate tracking. Conversions are measured, so results are based on real numbers. Clear reports. See cost per lead and return on ad spend each month. How much should we spend on ads? It depends on your market and goals. We suggest a starting budget after reviewing your situation and adjust it based on results. Is the ad budget included in your fee? No. Ad spend is paid directly to Google or Meta. Our management fee is separate. How soon will we see results? Ads can bring traffic within days. Campaigns usually need a few weeks of data to settle and improve. Can you take over our existing campaigns? Yes. We start with an audit and keep what is working. What budget do we need for ads? It depends on your market and goals. We recommend a starting budget during the consultation and only scale it once campaigns show a return.",
       "headings": [
         "Overview",
         "What is included",
@@ -1286,7 +1876,27 @@
           {
             "q": "Can you take over our existing campaigns?",
             "a": "Yes. We start with an audit and keep what is working."
+          },
+          {
+            "q": "What budget do we need for ads?",
+            "a": "It depends on your market and goals. We recommend a starting budget during the consultation and only scale it once campaigns show a return."
           }
+        ],
+        "whoFor": [
+          "Businesses spending on ads without a clear view of what it returns",
+          "Companies starting paid advertising for the first time",
+          "Stores that want shopping and retargeting campaigns",
+          "Teams whose ad accounts need a full audit and rebuild"
+        ],
+        "tools": [
+          "Google Ads",
+          "Meta Ads",
+          "LinkedIn Ads",
+          "Microsoft Ads",
+          "Google Merchant Center",
+          "Google Tag Manager",
+          "Google Analytics 4",
+          "Looker Studio"
         ],
         "caseStudy": "retail-storefront-rebuild"
       }
@@ -1294,46 +1904,140 @@
     {
       "path": "/industries/financial-services/",
       "title": "Financial Services",
-      "description": "Banks, credit unions, lenders and fintech teams that need reliable systems, clean data and strong controls. See how AchiveX supports financial services organisations.",
+      "description": "Banks, credit unions, lenders, accountants and fintech teams that need reliable systems, clean data and strong controls. See how AchiveX supports financial services organisations.",
       "type": "Industry",
       "editable": {
         "slug": "financial-services",
         "name": "Financial Services",
         "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1600&q=80",
-        "summary": "Banks, credit unions, lenders and fintech teams that need reliable systems, clean data and strong controls.",
+        "summary": "Banks, credit unions, lenders, accountants and fintech teams that need reliable systems, clean data and strong controls.",
+        "intro": [
+          "Financial services firms run on trust. Clients expect accurate statements, quick answers and a website that feels as secure as the business behind it. At the same time, teams are often stuck re keying data between systems that were never designed to work together.",
+          "We help lenders, credit unions, advisory firms, accountants and fintech startups modernise the digital side of their business without putting compliance or client data at risk. That might mean a faster, clearer website, a client portal, an automation that moves application data into the CRM, or a search and ads programme that brings in qualified enquiries."
+        ],
+        "challenges": [
+          {
+            "title": "Manual data entry",
+            "text": "Applications, onboarding forms and documents are often copied by hand between systems, which slows service and creates errors."
+          },
+          {
+            "title": "Slow client response",
+            "text": "Simple questions about rates, documents or status tie up staff who should be working on higher value tasks."
+          },
+          {
+            "title": "Security expectations",
+            "text": "Clients and regulators expect careful handling of personal and financial data at every step."
+          },
+          {
+            "title": "Lead quality",
+            "text": "Marketing spend can attract plenty of visitors but too few people who are ready to apply or book a meeting."
+          }
+        ],
+        "helpTitle": "How we help financial services teams",
+        "helpParagraphs": [
+          "We start by mapping how a client moves from first enquiry to an active account. That shows where time is lost and where an automation, a better form or a clearer page would make the biggest difference.",
+          "Everything we build follows the security practices your firm already uses. We agree on how data is stored, who can access it and how it is backed up before any work begins, and we document the setup so your compliance team can review it."
+        ],
+        "helpList": [
+          "Secure websites and client portals",
+          "Automated onboarding and document collection",
+          "CRM setup that tracks every application and follow up",
+          "SEO and paid search focused on qualified enquiries"
+        ],
         "focus": [
-          "Core system integration",
-          "Reporting and analytics",
-          "Security reviews",
-          "Back office support"
+          "Client portals",
+          "Onboarding automation",
+          "CRM and pipeline",
+          "Search and ads"
         ],
         "services": [
           "custom-software",
           "crm-and-lead-management",
           "ai-automation"
+        ],
+        "faqs": [
+          {
+            "q": "Can you work within our compliance requirements?",
+            "a": "Yes. We follow the data handling, access and retention rules your firm sets, and we document how each system is configured so your compliance team can review it."
+          },
+          {
+            "q": "Do you build client portals?",
+            "a": "We build secure portals where clients can upload documents, check the status of an application and message your team, connected to the systems you already use."
+          },
+          {
+            "q": "Can automation reduce our onboarding time?",
+            "a": "In most firms, yes. Forms, document requests and reminders can run automatically, and data can flow into your CRM without being typed in again."
+          }
         ]
       }
     },
     {
       "path": "/industries/healthcare/",
       "title": "Healthcare",
-      "description": "Clinics, practices and health service providers that handle sensitive records and busy patient operations. See how AchiveX supports healthcare organisations.",
+      "description": "Clinics, practices, therapists and health service providers that handle sensitive records and busy patient operations. See how AchiveX supports healthcare organisations.",
       "type": "Industry",
       "editable": {
         "slug": "healthcare",
         "name": "Healthcare",
         "image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1600&q=80",
-        "summary": "Clinics, practices and health service providers that handle sensitive records and busy patient operations.",
+        "summary": "Clinics, practices, therapists and health service providers that handle sensitive records and busy patient operations.",
+        "intro": [
+          "Healthcare teams spend a large part of every day on calls, bookings, reminders and paperwork. Patients want to find information quickly, book online and get answers outside office hours, while staff need systems that are simple and reliable.",
+          "We help clinics, dental and medical practices, therapists and health service providers improve the patient journey online. That includes websites that make booking easy, automations that send reminders and collect forms before a visit, AI assistants that answer common questions, and local SEO that helps new patients find you."
+        ],
+        "challenges": [
+          {
+            "title": "Busy phone lines",
+            "text": "Front desk teams answer the same questions about hours, insurance and directions many times a day."
+          },
+          {
+            "title": "Missed appointments",
+            "text": "No shows cost time and revenue when reminders and confirmations are handled manually."
+          },
+          {
+            "title": "Paperwork before visits",
+            "text": "Intake forms completed on paper or at the desk slow down every appointment."
+          },
+          {
+            "title": "Being found locally",
+            "text": "Patients search on Google Maps and AI assistants, and practices with weak listings lose them to nearby competitors."
+          }
+        ],
+        "helpTitle": "How we help healthcare providers",
+        "helpParagraphs": [
+          "We look at the patient journey from the first search to the follow up after a visit, then improve the steps that cause the most friction for patients and staff.",
+          "Privacy comes first. We work within the rules your organisation follows, such as HIPAA for providers in the United States, keep patient information out of tools that are not approved for it, and agree on data handling before a project starts."
+        ],
+        "helpList": [
+          "Websites with clear service pages and online booking",
+          "Automated reminders, confirmations and intake forms",
+          "AI assistants for common, non clinical questions",
+          "Local SEO and Google Business Profile management"
+        ],
         "focus": [
-          "Patient communication",
-          "Data handling practices",
-          "Cloud hosting",
-          "Staff support"
+          "Online booking",
+          "Patient reminders",
+          "Intake automation",
+          "Local SEO"
         ],
         "services": [
           "ai-automation",
           "web-development",
           "seo"
+        ],
+        "faqs": [
+          {
+            "q": "Can an AI assistant answer patient questions?",
+            "a": "It can answer common, non clinical questions such as opening hours, location, accepted insurance and how to book. Clinical questions are always passed to your staff."
+          },
+          {
+            "q": "How do you handle patient data?",
+            "a": "We agree on data handling before we start and keep patient information inside systems approved for it. We do not use patient data to train AI tools."
+          },
+          {
+            "q": "Will local SEO help us get more patients?",
+            "a": "For most practices it is one of the most effective channels. A complete Google Business Profile, accurate listings and clear service pages help nearby patients choose you."
+          }
         ]
       }
     },
@@ -1347,39 +2051,133 @@
         "name": "Retail and Ecommerce",
         "image": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=80",
         "summary": "Store owners and online sellers who want better storefronts, smarter marketing and fewer manual tasks.",
+        "intro": [
+          "Online shoppers compare quickly and leave just as quickly. A slow product page, a confusing checkout or an unanswered question can send them to a competitor in seconds. Behind the scenes, store owners juggle orders, stock, returns and marketing across several tools.",
+          "We help retailers and ecommerce brands build faster storefronts, connect their systems and grow sales through search, social media and paid ads. Most of our retail work is on WooCommerce and custom builds, with automations that keep orders, inventory and customer messages in step."
+        ],
+        "challenges": [
+          {
+            "title": "Abandoned carts",
+            "text": "Shoppers leave at checkout when pages load slowly, costs appear late or payment options are limited."
+          },
+          {
+            "title": "Disconnected tools",
+            "text": "Orders, stock and customer records live in separate systems that do not update each other."
+          },
+          {
+            "title": "Rising ad costs",
+            "text": "Paid campaigns get more expensive each year, so wasted spend hurts margins quickly."
+          },
+          {
+            "title": "Repeat questions",
+            "text": "Customers ask about delivery times, returns and order status, often outside working hours."
+          }
+        ],
+        "helpTitle": "How we help retail and ecommerce brands",
+        "helpParagraphs": [
+          "We start with the numbers that matter most for a store: conversion rate, average order value and cost per sale. Then we fix the pages and steps that hold them back.",
+          "Once the storefront is in good shape, we connect it to the rest of the business, so orders, stock and customer messages update automatically, and we run marketing that is measured against real sales rather than clicks."
+        ],
+        "helpList": [
+          "Fast WooCommerce and custom storefronts",
+          "Inventory, order and email automations",
+          "Product SEO and shopping campaigns",
+          "Social media content and paid social ads"
+        ],
         "focus": [
           "Online storefronts",
-          "Customer analytics",
-          "Digital marketing",
-          "Order support"
+          "Order automation",
+          "Shopping ads",
+          "Social media"
         ],
         "services": [
           "web-development",
           "ads-management",
           "social-media-management"
+        ],
+        "faqs": [
+          {
+            "q": "Do you work with WooCommerce?",
+            "a": "Yes. We build and improve WooCommerce stores, and we also build custom stores when a business needs features that off the shelf platforms cannot provide."
+          },
+          {
+            "q": "Can you move our store from another platform?",
+            "a": "Yes. We plan the move so products, customers, orders and search rankings carry across, and we set up redirects so old links keep working."
+          },
+          {
+            "q": "How do you measure marketing results for a store?",
+            "a": "We track sales, revenue and cost per sale from each channel, not just traffic or clicks, and report on them every month."
+          }
         ]
       }
     },
     {
       "path": "/industries/manufacturing/",
       "title": "Manufacturing",
-      "description": "Producers that want connected equipment data, planning tools and steady infrastructure on the shop floor. See how AchiveX supports manufacturing organisations.",
+      "description": "Producers and suppliers that want connected data, planning tools and a stronger pipeline of trade enquiries. See how AchiveX supports manufacturing organisations.",
       "type": "Industry",
       "editable": {
         "slug": "manufacturing",
         "name": "Manufacturing",
         "image": "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1600&q=80",
-        "summary": "Producers that want connected equipment data, planning tools and steady infrastructure on the shop floor.",
+        "summary": "Producers and suppliers that want connected data, planning tools and a stronger pipeline of trade enquiries.",
+        "intro": [
+          "Manufacturers often run on a mix of ERP software, spreadsheets and email. Quotes, orders and production updates pass through many hands, and sales teams can find it hard to keep track of every trade enquiry.",
+          "We help manufacturers and industrial suppliers connect their systems, build internal tools that fit how the shop floor works, and generate more qualified leads from distributors and buyers. The aim is less time spent chasing information and more time making and selling products."
+        ],
+        "challenges": [
+          {
+            "title": "Data in spreadsheets",
+            "text": "Production, stock and order figures are kept in separate files that are hard to keep current."
+          },
+          {
+            "title": "Slow quoting",
+            "text": "Preparing a quote can mean gathering prices and lead times from several people and systems."
+          },
+          {
+            "title": "Untracked enquiries",
+            "text": "Trade enquiries arrive by email, phone and web forms with no single place to follow them up."
+          },
+          {
+            "title": "Low online visibility",
+            "text": "Buyers research suppliers online, but many manufacturing websites say little about capabilities."
+          }
+        ],
+        "helpTitle": "How we help manufacturers",
+        "helpParagraphs": [
+          "We work alongside your operations and sales teams to understand how information flows today. Then we build the tools and connections that remove the slowest manual steps.",
+          "On the sales side, we set up a CRM that captures every enquiry and quote, and we improve your website and search presence so buyers can see what you make, the standards you work to and how to request a quote."
+        ],
+        "helpList": [
+          "Dashboards and internal tools connected to your ERP",
+          "Quote and order workflows with automatic updates",
+          "CRM pipelines for distributors and trade buyers",
+          "Capability focused websites and industrial SEO"
+        ],
         "focus": [
-          "Equipment data",
-          "ERP applications",
-          "Network infrastructure",
-          "Forecasting"
+          "ERP connections",
+          "Quoting tools",
+          "CRM pipeline",
+          "Industrial SEO"
         ],
         "services": [
           "custom-software",
           "ai-automation",
           "crm-and-lead-management"
+        ],
+        "faqs": [
+          {
+            "q": "Can you connect to our existing ERP?",
+            "a": "In most cases, yes. Many ERP systems offer an API or export options that we can use to share data with dashboards, CRMs and other tools."
+          },
+          {
+            "q": "Do you build custom internal tools?",
+            "a": "Yes. We build web applications for quoting, scheduling, stock checks and reporting, designed around how your team works."
+          },
+          {
+            "q": "How can our website bring in trade enquiries?",
+            "a": "By clearly describing capabilities, materials, certifications and lead times, and making it easy to request a quote. We then support it with search and targeted ads."
+          }
         ]
       }
     },
@@ -1393,16 +2191,63 @@
         "name": "Logistics and Transportation",
         "image": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1600&q=80",
         "summary": "Carriers, warehouses and distributors that depend on accurate tracking and quick responses.",
+        "intro": [
+          "In logistics, every delay creates a phone call. Customers want to know where their shipment is, drivers need clear instructions and dispatch teams switch between several systems to keep everything moving.",
+          "We help carriers, freight brokers, warehouses and distributors connect their systems, give customers self service tracking and reduce the manual updates that fill the working day. We also help logistics firms win more business through search and a stronger online presence."
+        ],
+        "challenges": [
+          {
+            "title": "Status calls and emails",
+            "text": "Customers contact the office for updates that could be shown to them automatically."
+          },
+          {
+            "title": "Systems that do not talk",
+            "text": "Transport, warehouse and accounting tools hold separate copies of the same information."
+          },
+          {
+            "title": "Manual paperwork",
+            "text": "Proof of delivery, invoices and rate confirmations are often handled by hand."
+          },
+          {
+            "title": "Winning new accounts",
+            "text": "Shippers compare providers online, and firms with thin websites are easy to overlook."
+          }
+        ],
+        "helpTitle": "How we help logistics teams",
+        "helpParagraphs": [
+          "We look at the questions your team answers most often and the data your systems already hold. Many of those questions can be answered by a tracking page, an automated message or an AI assistant.",
+          "We then connect the systems involved, so a status change in one place updates the others, and build reports that show performance across routes, customers and teams."
+        ],
+        "helpList": [
+          "Customer tracking pages and automated status updates",
+          "Integrations between transport, warehouse and accounting tools",
+          "Document automation for invoices and proof of delivery",
+          "Websites and SEO that help shippers find you"
+        ],
         "focus": [
-          "Shipment visibility",
-          "Integration between systems",
-          "Customer support",
-          "Reporting"
+          "Shipment tracking",
+          "System integration",
+          "Document automation",
+          "Lead generation"
         ],
         "services": [
           "custom-software",
           "ai-automation",
           "crm-and-lead-management"
+        ],
+        "faqs": [
+          {
+            "q": "Can customers track shipments on our website?",
+            "a": "Yes. We can build a tracking page or portal that reads status data from your systems and shows it to customers securely."
+          },
+          {
+            "q": "Do you integrate with transport management systems?",
+            "a": "Where the system offers an API or data export, we can connect it to your website, CRM, accounting software or reporting tools."
+          },
+          {
+            "q": "Can AI help our dispatch team?",
+            "a": "AI assistants can answer routine customer questions and draft updates, which frees dispatchers to focus on planning and exceptions."
+          }
         ]
       }
     },
@@ -1416,16 +2261,63 @@
         "name": "Education",
         "image": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1600&q=80",
         "summary": "Schools, training providers and edtech teams that serve students and staff across many channels.",
+        "intro": [
+          "Education providers serve several audiences at once: prospective students, current learners, parents, staff and partners. Each group needs different information, and enquiries arrive through the website, email, phone and social media.",
+          "We help schools, colleges, training providers and edtech companies build clear websites, automate admissions and enquiry handling, and reach new students through search and social media. We keep accessibility and data protection in mind on every project."
+        ],
+        "challenges": [
+          {
+            "title": "Hard to find information",
+            "text": "Course details, fees and deadlines are spread across pages that are difficult to navigate."
+          },
+          {
+            "title": "Busy admissions teams",
+            "text": "Enquiries and applications pile up during peak periods and follow ups get missed."
+          },
+          {
+            "title": "Many channels to manage",
+            "text": "Social media, email and the website all need regular, consistent updates."
+          },
+          {
+            "title": "Accessibility",
+            "text": "Learners and parents use many devices and assistive tools, so content needs to work for everyone."
+          }
+        ],
+        "helpTitle": "How we help education providers",
+        "helpParagraphs": [
+          "We organise content around what each audience needs to do, whether that is comparing courses, applying, paying fees or contacting a tutor, and we build pages that work well on phones and with assistive technology.",
+          "Behind the website, we connect enquiry forms to a CRM, automate reminders and follow ups, and run search and social campaigns timed around your intake dates."
+        ],
+        "helpList": [
+          "Accessible websites with clear course and admissions pages",
+          "Enquiry and application tracking in a CRM",
+          "Automated follow ups and reminders for applicants",
+          "SEO and social media campaigns around intake dates"
+        ],
         "focus": [
-          "Learning platforms",
-          "Student support",
-          "Data protection",
-          "Recruitment"
+          "Course websites",
+          "Admissions automation",
+          "Student enquiries",
+          "Social media"
         ],
         "services": [
           "web-development",
           "seo",
           "social-media-management"
+        ],
+        "faqs": [
+          {
+            "q": "Can you make our website more accessible?",
+            "a": "Yes. We follow accessibility guidelines for structure, contrast, keyboard use and alternative text, and check pages with assistive tools."
+          },
+          {
+            "q": "Can admissions enquiries be tracked automatically?",
+            "a": "Enquiry and application forms can feed straight into a CRM, with automatic replies and reminders so no applicant is missed."
+          },
+          {
+            "q": "Do you manage social media for schools and training providers?",
+            "a": "Yes. We plan, create and schedule content, and run paid campaigns around open days and intake dates."
+          }
         ]
       }
     }

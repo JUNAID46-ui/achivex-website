@@ -2,7 +2,7 @@
 // (the admin maps addresses to the saved permalinks).
 // The admin panel reads this file for the SEO page list and the sitemap.
 // Run with: npm run export-routes
-import { writeFileSync } from 'node:fs'
+import { rmSync, writeFileSync } from 'node:fs'
 import { categories } from '../src/data/categories.js'
 import { services, defaultServicePath as servicePath, categoryPath } from '../src/data/services.js'
 import { industries } from '../src/data/industries.js'
@@ -15,10 +15,6 @@ import { whitepapers } from '../src/data/whitepapers.js'
 const pages = [
   { path: '/', title: 'Home', description: 'AchiveX LLC is a Wyoming based marketing and software solutions company offering web development, custom software, AI and automation, CRM, SEO, social media and ads management.', type: 'Page' },
   { path: '/about-us/', title: 'Who We Are', description: 'Learn about AchiveX LLC, a Wyoming based technology services company, its story, mission, vision and the values that guide its work.', type: 'Page' },
-  { path: '/about-us/accomplishments/', title: 'Our Accomplishments', description: 'Milestones and what AchiveX LLC has built so far: service areas, services, guides and articles.', type: 'Page' },
-  { path: '/about-us/esg/', title: 'Our Commitment to ESG', description: 'How AchiveX LLC approaches environmental, social and governance responsibilities.', type: 'Page' },
-  { path: '/about-us/leadership/', title: 'Our Leadership', description: 'The leadership team at AchiveX LLC and how they work with clients.', type: 'Page' },
-  { path: '/about-us/global-presence/', title: 'Our Global Presence', description: 'AchiveX LLC is headquartered in Wyoming, USA.', type: 'Page' },
   { path: '/services/', title: 'Services', description: 'Explore AchiveX services: web development, custom software, AI and intelligent systems, automation, CRM, SEO, AEO and GEO, social media and ads management.', type: 'Page' },
   { path: '/industries/', title: 'Industries', description: 'The industries AchiveX works with, from financial services and healthcare to retail, manufacturing, logistics and education.', type: 'Page' },
   { path: '/insights/', title: 'Insights', description: 'Case studies, company news, free guides and practical articles from AchiveX LLC.', type: 'Page' },
@@ -80,6 +76,14 @@ async function fromAdmin(file, looksRight) {
     if (res.ok && !/^\s*<!doctype html/i.test(text) && looksRight(text)) return text
   } catch {}
   return null
+}
+// On Vercel, vercel.json rewrites these three files to the admin, so they are always current and
+// a new blog post shows up in the sitemap without a redeploy. No static copy is written there,
+// because a file in the build would take priority over the rewrite.
+if (process.env.VERCEL) {
+  for (const f of ['sitemap.xml', 'robots.txt', 'llms.txt']) rmSync(`public/${f}`, { force: true })
+  console.log('sitemap.xml, robots.txt, llms.txt: served live from the admin (vercel.json rewrites)')
+  process.exit(0)
 }
 const adminSitemap = await fromAdmin('sitemap.xml', (t) => t.includes('<urlset'))
 const adminRobots = await fromAdmin('robots.txt', (t) => /user-agent\s*:/i.test(t))

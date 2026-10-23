@@ -7,7 +7,7 @@ import { milestones, leaders, locations, careers, heroStats } from '../data/abou
 import { homeSections } from '../data/homeSections'
 import { site } from '../data/site'
 import { settings, seoMeta, redirects } from '../data/settings'
-import { customPages, pageSections } from '../data/customPages'
+import { customPages, pageSections, pageDesigns } from '../data/customPages'
 import { contentTargets } from '../data/contentTargets'
 
 const normalizePath = (p) => (p.endsWith('/') ? p : `${p}/`)
@@ -47,7 +47,8 @@ const tables = [
   ['blog_posts', 'published_on', (r) => replace(blogs, r.map((x) => ({
     slug: x.slug, title: x.title, category: x.category, date: x.published_on, author: x.author,
     featured: x.featured, image: x.image, excerpt: x.excerpt,
-    intro: { keyword: x.intro_keyword, text: x.intro_text }, sections: x.sections || [],
+    intro: { keyword: x.intro_keyword, text: x.intro_text }, sections: x.sections || [], faqs: x.faqs || [],
+    heroColor: x.hero_color, heroImage: x.hero_image,
   }))), false],
   ['case_studies', 'sort', (r) => replace(caseStudies, r.map((x) => ({
     slug: x.slug, title: x.title, clientType: x.client_type, industry: x.industry, services: x.services || [],
@@ -80,8 +81,10 @@ const tables = [
   ['pages', 'path', (r) => {
     const targets = contentTargets()
     Object.keys(customPages).forEach((k) => delete customPages[k])
+    Object.keys(pageDesigns).forEach((k) => delete pageDesigns[k])
     r.forEach((x) => {
       const path = normalizePath(x.path)
+      if (x.kind !== 'custom' && x.content?.design) pageDesigns[path] = x.content.design
       if (x.kind === 'custom') customPages[path] = { path, title: x.title, ...(x.content || {}) }
       else if (targets[path] && x.content) Object.assign(targets[path], x.content)
     })

@@ -7,6 +7,25 @@
   <a href="{{ route('admin.resources.create', 'blog-posts') }}" class="btn-primary">@include('admin.partials.icon', ['name' => 'plus']) New post</a>
 @endsection
 
+@push('scripts')
+<script>
+  function liveStats(initial, url) {
+    return {
+      d: initial, error: false,
+      start() { setInterval(() => this.load(), 15000) },
+      async load() {
+        if (document.hidden) return
+        try {
+          const r = await fetch(url, { headers: { Accept: 'application/json' }, cache: 'no-store' })
+          if (!r.ok) throw new Error(r.status)
+          this.d = await r.json(); this.error = false
+        } catch (e) { this.error = true }
+      },
+    }
+  }
+</script>
+@endpush
+
 @section('content')
 @php
   $change = function ($v) {
@@ -15,6 +34,36 @@
       return '<span class="'.$cls.' font-semibold">'.($v >= 0 ? '+' : '').$v.'%</span> <span class="text-neutral-400">vs previous 30 days</span>';
   };
 @endphp
+
+{{-- Live now: refreshed every 15 seconds from the page_views table --}}
+<div x-data="liveStats(@js($live), @js(route('admin.dashboard.live')))" x-init="start()" class="mb-8 border border-neutral-200 bg-white">
+  <div class="flex flex-wrap items-center justify-between gap-3 border-b border-neutral-100 px-5 py-3">
+    <h2 class="flex items-center gap-2 text-[13px] font-semibold uppercase tracking-wider text-ink">
+      <span class="relative flex h-2.5 w-2.5"><span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span><span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500"></span></span>
+      Live now
+    </h2>
+    <p class="text-xs text-neutral-500">Updates every 15 seconds · last update <span x-text="d.at"></span> <span x-show="error" class="text-red-600">· could not refresh</span></p>
+  </div>
+  <div class="grid gap-6 p-5 lg:grid-cols-[repeat(4,minmax(0,1fr))_1.6fr]">
+    <div><p class="stat-label">On the site now</p><p class="stat-value text-ink" x-text="d.online"></p><p class="mt-1 text-xs text-neutral-500">visitors in the last 5 minutes</p></div>
+    <div><p class="stat-label">Views, last 5 min</p><p class="stat-value text-ink" x-text="d.viewsNow"></p></div>
+    <div><p class="stat-label">Today</p><p class="stat-value text-ink" x-text="d.todayViews"></p><p class="mt-1 text-xs text-neutral-500"><span x-text="d.todayVisitors"></span> visitors</p></div>
+    <div><p class="stat-label">Last 30 days</p><p class="stat-value text-ink" x-text="d.monthViews"></p><p class="mt-1 text-xs text-neutral-500"><span x-text="d.monthVisitors"></span> visitors</p></div>
+    <div>
+      <p class="stat-label">Latest visits</p>
+      <ul class="mt-2 space-y-1.5 text-[13px]">
+        <template x-for="(v, i) in d.latest" :key="i">
+          <li class="flex items-center justify-between gap-3"><span class="truncate text-ink" x-text="v.path"></span><span class="shrink-0 text-xs text-neutral-500" x-text="v.device + ' · ' + v.ago"></span></li>
+        </template>
+        <li x-show="!d.latest.length" class="text-neutral-500">No visits recorded yet.</li>
+      </ul>
+    </div>
+  </div>
+  <div x-show="d.pages.length" class="flex flex-wrap gap-2 border-t border-neutral-100 px-5 py-3 text-xs">
+    <span class="font-semibold text-neutral-600">Being viewed now:</span>
+    <template x-for="p in d.pages" :key="p.path"><span class="bg-neutral-100 px-2 py-0.5 text-neutral-700" x-text="p.path + ' (' + p.views + ')'"></span></template>
+  </div>
+</div>
 
 {{-- Key figures --}}
 <div class="grid gap-x-10 gap-y-6 border-b border-neutral-100 pb-8 sm:grid-cols-2 xl:grid-cols-4">

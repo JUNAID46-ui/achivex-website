@@ -40,15 +40,15 @@ export default function CaseStudyDetail() {
           <aside className="lg:sticky lg:top-28 lg:self-start">
             <dl className="divide-y divide-mist bg-mist p-7">
               <div className="pb-5">
-                <dt className="text-sm font-semibold text-body/60">Client</dt>
+                <dt className="text-sm font-semibold text-body/80">Client</dt>
                 <dd className="mt-1 font-bold text-white">{cs.clientType}</dd>
               </div>
               <div className="py-5">
-                <dt className="text-sm font-semibold text-body/60">Industry</dt>
+                <dt className="text-sm font-semibold text-body/80">Industry</dt>
                 <dd className="mt-1 font-bold text-white">{industry?.name}</dd>
               </div>
               <div className="pt-5">
-                <dt className="text-sm font-semibold text-body/60">Services used</dt>
+                <dt className="text-sm font-semibold text-body/80">Services used</dt>
                 <dd className="mt-3 space-y-2">
                   {cs.services.map(getService).filter(Boolean).map((s) => (
                     <ArrowLink key={s.slug} to={servicePath(s)} className="text-[15px] font-semibold text-white">{s.name}</ArrowLink>
@@ -56,23 +56,23 @@ export default function CaseStudyDetail() {
                 </dd>
               </div>
             </dl>
-            <p className="mt-4 text-xs leading-relaxed text-body/50">This case study describes our approach for this type of client. Client names and figures are shared only with permission.</p>
+            <p className="mt-4 text-xs leading-relaxed text-body/80">This case study describes our approach for this type of client. Client names and figures are shared only with permission.</p>
           </aside>
 
           <div className="max-w-read">
             <FadeUp>
               <h2 className="h-display text-4xl">The situation</h2>
-              <p className="mt-5 text-xl leading-relaxed text-body/75">{cs.overview}</p>
+              <p className="mt-5 text-xl leading-relaxed text-body/80">{cs.overview}</p>
             </FadeUp>
             <FadeUp className="mt-14">
               <h2 className="h-display text-4xl">The challenge</h2>
-              {cs.challenge.map((p, i) => <p key={i} className="mt-5 text-[17px] leading-relaxed text-body/75">{p}</p>)}
+              {cs.challenge.map((p, i) => <p key={i} className="mt-5 text-[17px] leading-relaxed text-body/80">{p}</p>)}
             </FadeUp>
             <FadeUp className="mt-14">
               <h2 className="h-display text-4xl">Our approach</h2>
               <ul className="mt-6 space-y-4">
                 {cs.solution.map((p, i) => (
-                  <li key={i} className="flex gap-4 text-[17px] leading-relaxed text-body/75">
+                  <li key={i} className="flex gap-4 text-[17px] leading-relaxed text-body/80">
                     <Check className="mt-1 h-5 w-5 shrink-0 text-accent" aria-hidden="true" />{p}
                   </li>
                 ))}

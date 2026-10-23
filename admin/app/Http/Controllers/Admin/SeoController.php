@@ -103,12 +103,14 @@ class SeoController extends Controller
             'focus_keyword' => 'nullable|max:120',
             'og_image' => 'nullable|max:500',
             'canonical' => 'nullable|url|max:500',
+            'schema' => 'nullable|string|max:20000',
         ]);
-        $data += ['title' => null, 'description' => null, 'focus_keyword' => null, 'og_image' => null, 'canonical' => null];
+        $data += ['title' => null, 'description' => null, 'focus_keyword' => null, 'og_image' => null, 'canonical' => null, 'schema' => null];
+        $schema = \App\Support\SchemaJson::parse($data['schema']);
         SeoMeta::updateOrCreate(['path' => $data['path']], [
             'title' => $data['title'] ?: null, 'description' => $data['description'] ?: null,
             'focus_keyword' => $data['focus_keyword'] ?: null, 'og_image' => $data['og_image'] ?: null,
-            'canonical' => $data['canonical'] ?: null, 'noindex' => $request->boolean('noindex'), 'updated_at' => now(),
+            'canonical' => $data['canonical'] ?: null, 'noindex' => $request->boolean('noindex'), 'schema' => $schema, 'updated_at' => now(),
         ]);
         $this->forget();
         ActivityLog::record('updated', 'SEO', $data['path']);

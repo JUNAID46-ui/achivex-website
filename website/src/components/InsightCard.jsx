@@ -14,7 +14,7 @@ export default function InsightCard({ to, image, kicker, title, text, cta = 'Rea
           <Link to={to} className="transition-colors hover:text-accent">{title}</Link>
         </h3>
         <p className="mt-2 text-sm font-semibold text-accent">{kicker}</p>
-        {text && <p className="mt-3 flex-1 text-[15px] leading-relaxed text-body/70">{text}</p>}
+        {text && <p className="mt-3 flex-1 text-[15px] leading-relaxed text-body/80">{text}</p>}
         <Link to={to} className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-white transition-colors hover:text-accent">
           {cta}
           <ArrowRight className="h-4 w-4 text-accent transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />

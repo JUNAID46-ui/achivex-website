@@ -13,7 +13,7 @@ export default function ServiceCard({ service }) {
         <h3 className="text-lg font-semibold leading-snug text-white transition-colors group-hover:text-accent">{service.name}</h3>
         <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 text-accent transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
       </div>
-      <p className="mt-2 text-[15px] leading-relaxed text-body/60">{service.short}</p>
+      <p className="mt-2 text-[15px] leading-relaxed text-body/80">{service.short}</p>
     </Link>
   )
 }

@@ -384,6 +384,7 @@ class ResourceController extends Controller
             'focus_keyword' => $request->input('seo_keyword') ?: null,
             'og_image' => $request->input('seo_og_image') ?: null,
             'noindex' => $request->boolean('seo_noindex'),
+            'schema' => \App\Support\SchemaJson::parse($request->input('seo_schema'), 'seo_schema'),
         ];
         if (array_filter($values) || SeoMeta::find($path)) {
             SeoMeta::updateOrCreate(['path' => $path], $values + ['updated_at' => now()]);

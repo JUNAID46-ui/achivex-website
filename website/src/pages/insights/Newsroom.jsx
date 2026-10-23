@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react'
 import useSeo from '../../hooks/useSeo'
 import FadeUp from '../../components/FadeUp'
 import Img from '../../components/Img'
-import Breadcrumb from '../../components/Breadcrumb'
+import { InnerHero } from '../../components/inner/InnerSections'
 import CTA from '../../components/CTA'
 import { news } from '../../data/news'
 import { shortDate } from '../../utils/format'
@@ -20,11 +20,11 @@ export default function Newsroom() {
 
   return (
     <>
-      <section className="bg-canvas pb-10 pt-12">
+      <InnerHero crumbs={[{ label: 'Insights', to: '/insights/' }, { label: 'Newsroom' }]} eyebrow="Newsroom" title={pc.heroTitle} text={pc.heroText || 'Announcements, new services and company updates from AchiveX LLC.'} />
+      <section className="bg-canvas pb-10 pt-14">
         <div className="container-site">
-          <Breadcrumb items={[{ label: 'Insights' }, { label: 'Newsroom' }]} />
-          <FadeUp className="mt-12 flex flex-col justify-between gap-8 border-b-2 border-white pb-10 md:flex-row md:items-end">
-            <h1 className="h-display text-5xl md:text-7xl">{pc.heroTitle}</h1>
+          <FadeUp className="flex flex-col justify-between gap-8 border-b border-[#E6E9EE] pb-8 md:flex-row md:items-end">
+            <h2 className="text-[28px] font-medium tracking-[-0.02em] text-[#111111]">Latest news</h2>
             <div role="tablist" aria-label="Filter by year" className="flex flex-wrap gap-6">
               {['all', ...years].map((y) => (
                 <button
@@ -32,7 +32,7 @@ export default function Newsroom() {
                   role="tab"
                   aria-selected={year === y}
                   onClick={() => setYear(y)}
-                  className={`border-b-2 pb-1 text-sm font-semibold transition-colors ${year === y ? 'border-accent text-white' : 'border-transparent text-body/50 hover:text-accent'}`}
+                  className={`border-b-2 pb-1 text-sm font-semibold transition-colors ${year === y ? 'border-accent text-white' : 'border-transparent text-body/80 hover:text-accent'}`}
                 >
                   {y === 'all' ? pc.allYearsLabel : y}
                 </button>
@@ -52,11 +52,11 @@ export default function Newsroom() {
                   <Link to={permalink(`/insights/newsroom/${n.slug}/`)} className="group grid items-center gap-6 py-10 md:grid-cols-[140px_1fr_260px] md:gap-10">
                     <time dateTime={n.date} className="flex items-baseline gap-3 md:block">
                       <span className="font-display text-5xl text-white">{d.day}</span>
-                      <span className="block text-sm font-semibold uppercase tracking-wide text-body/60">{d.month} {d.year}</span>
+                      <span className="block text-sm font-semibold uppercase tracking-wide text-body/80">{d.month} {d.year}</span>
                     </time>
                     <div>
                       <h2 className="text-2xl font-bold leading-snug transition-colors group-hover:text-accent md:text-3xl">{n.title}</h2>
-                      <p className="mt-3 max-w-2xl leading-relaxed text-body/70">{n.summary}</p>
+                      <p className="mt-3 max-w-2xl leading-relaxed text-body/80">{n.summary}</p>
                       <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-white">
                         {pc.readMoreText} <ArrowRight className="h-4 w-4 text-accent transition-transform group-hover:translate-x-1" aria-hidden="true" />
                       </span>

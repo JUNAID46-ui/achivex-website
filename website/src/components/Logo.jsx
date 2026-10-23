@@ -8,11 +8,11 @@ export default function Logo({ light = !isLight, variant = 'compact', onClick })
   return (
     <Link to="/" onClick={onClick} className="flex shrink-0 items-center gap-3" aria-label="AchiveX LLC home">
       {variant === 'full' ? (
-        <img src={`${import.meta.env.BASE_URL}brand/logo-${tone}.png`} alt="AchiveX LLC, Marketing and Software Solutions" className="h-28 w-auto" />
+        <img src={`${import.meta.env.BASE_URL}brand/logo-${tone}.png`} alt="AchiveX LLC, Marketing and Software Solutions" width="175" height="112" className="h-28 w-auto" />
       ) : (
         <>
-          <img src={`${import.meta.env.BASE_URL}brand/mark-${tone}.png`} alt="" className="h-8 w-auto" />
-          <img src={`${import.meta.env.BASE_URL}brand/wordmark-${tone}.png`} alt="AchiveX LLC" className="hidden h-[18px] w-auto sm:block" />
+          <img src={`${import.meta.env.BASE_URL}brand/mark-${tone}.png`} alt="" width="66" height="32" className="h-8 w-auto" />
+          <img src={`${import.meta.env.BASE_URL}brand/wordmark-${tone}.png`} alt="AchiveX LLC" width="119" height="18" className="hidden h-[18px] w-auto sm:block" />
         </>
       )}
     </Link>

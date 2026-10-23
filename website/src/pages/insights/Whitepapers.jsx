@@ -3,7 +3,7 @@ import { Download } from 'lucide-react'
 import useSeo from '../../hooks/useSeo'
 import FadeUp from '../../components/FadeUp'
 import Img from '../../components/Img'
-import Breadcrumb from '../../components/Breadcrumb'
+import { InnerHero } from '../../components/inner/InnerSections'
 import CTA from '../../components/CTA'
 import { whitepapers } from '../../data/whitepapers'
 import { pageContent } from '../../data/pageContent'
@@ -30,15 +30,7 @@ export default function Whitepapers() {
   const pc = pageContent['/insights/whitepapers/']
   return (
     <>
-      <section className="bg-mist pb-16 pt-12 md:pb-20">
-        <div className="container-site">
-          <Breadcrumb items={[{ label: 'Insights' }, { label: 'Whitepapers and eBooks' }]} />
-          <FadeUp className="mt-12 max-w-3xl">
-            <h1 className="h-display text-5xl md:text-7xl">{pc.heroTitle}</h1>
-            <p className="mt-6 text-lg leading-relaxed text-body/70">{pc.heroText}</p>
-          </FadeUp>
-        </div>
-      </section>
+      <InnerHero crumbs={[{ label: 'Insights', to: '/insights/' }, { label: 'Whitepapers and eBooks' }]} eyebrow="Guides" title={pc.heroTitle} text={pc.heroText} />
 
       <section className="bg-canvas py-20 md:py-24">
         <div className="container-site grid gap-x-10 gap-y-16 sm:grid-cols-2 lg:grid-cols-4">
@@ -50,7 +42,7 @@ export default function Whitepapers() {
               <h2 className="mt-7 text-xl font-bold leading-snug">
                 <Link to={permalink(`/insights/whitepapers/${w.slug}/`)} className="hover:text-accent">{w.title}</Link>
               </h2>
-              <p className="mt-2 flex-1 text-[15px] leading-relaxed text-body/70">{w.description}</p>
+              <p className="mt-2 flex-1 text-[15px] leading-relaxed text-body/80">{w.description}</p>
               <Link
                 to={permalink(`/insights/whitepapers/${w.slug}/`)}
                 className="mt-6 inline-flex w-fit items-center gap-2 bg-accent px-5 py-2.5 text-sm font-semibold text-onaccent transition-colors hover:bg-white hover:text-onaccent"

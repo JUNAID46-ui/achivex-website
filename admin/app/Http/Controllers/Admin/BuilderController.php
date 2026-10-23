@@ -141,6 +141,10 @@ class BuilderController extends Controller
             'lines' => is_array($value) ? array_values(array_filter(array_map('trim', $value), 'strlen'))
                 : array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', (string) $value)), 'strlen')),
             'images' => array_values(array_filter(array_map(fn ($v) => trim((string) $v), (array) $value), 'strlen')),
+            'group' => collect($field['fields'])->mapWithKeys(fn ($sub) => [$sub['name'] => $this->clean($sub, ((array) $value)[$sub['name']] ?? null)])
+                ->filter(fn ($v) => $v !== '' && $v !== [])->all(),
+            'select' => array_key_exists((string) $value, $field['options'] ?? []) ? (string) $value : '',
+            'color' => preg_match('/^#[0-9a-fA-F]{3,8}$/', trim((string) $value)) ? trim((string) $value) : '',
             'repeater' => collect((array) $value)->map(function ($item) use ($field) {
                 $row = [];
                 foreach ($field['fields'] as $sub) {

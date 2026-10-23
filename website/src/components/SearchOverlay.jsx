@@ -82,13 +82,13 @@ export default function SearchOverlay({ open, onClose }) {
               </div>
               {q.trim().length >= 2 && (
                 <ul className="mt-4 max-h-[60vh] divide-y divide-mist overflow-y-auto">
-                  {results.length === 0 && <li className="py-6 text-body/60">No results for "{q}". Try a service name such as cloud or security.</li>}
+                  {results.length === 0 && <li className="py-6 text-body/80">No results for "{q}". Try a service name such as cloud or security.</li>}
                   {results.map((r) => (
                     <li key={r.to + r.title}>
                       <Link to={r.to} onClick={onClose} className="group flex items-center justify-between gap-6 py-4">
                         <span>
                           <span className="block text-lg font-bold text-white group-hover:text-accent">{r.title}</span>
-                          <span className="block text-sm text-body/60"><span className="font-semibold text-accent">{r.type}</span> / {r.text}</span>
+                          <span className="block text-sm text-body/80"><span className="font-semibold text-accent">{r.type}</span> / {r.text}</span>
                         </span>
                         <ArrowRight className="h-5 w-5 shrink-0 text-accent transition-transform group-hover:translate-x-1" aria-hidden="true" />
                       </Link>

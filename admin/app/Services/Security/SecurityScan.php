@@ -15,7 +15,7 @@ class SecurityScan
         'hooks.inbox', 'hooks.daily', 'sitemap', 'robots', 'llms', 'storage.local', 'up'];
 
     // Signed in routes that every role may open.
-    public const ANY_ROLE = ['admin.dashboard', 'admin.logout', 'admin.profile', 'admin.profile.two-factor', 'admin.profile.two-factor.confirm', 'admin.profile.two-factor.disable',
+    public const ANY_ROLE = ['admin.dashboard', 'admin.dashboard.live', 'admin.logout', 'admin.profile', 'admin.profile.two-factor', 'admin.profile.two-factor.confirm', 'admin.profile.two-factor.disable',
         'admin.profile.sessions', 'admin.notifications', 'admin.notifications.read-all', 'admin.notifications.open', 'admin.notifications.update',
         'admin.media.list', 'admin.media.store', 'admin.media.sign', 'admin.media.complete'];
 

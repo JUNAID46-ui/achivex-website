@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { ChevronDown } from 'lucide-react'
 import useSeo from '../../hooks/useSeo'
 import FadeUp from '../../components/FadeUp'
-import Breadcrumb from '../../components/Breadcrumb'
+import { InnerHero } from '../../components/inner/InnerSections'
 import InsightCard from '../../components/InsightCard'
 import CTA from '../../components/CTA'
 import { caseStudies } from '../../data/caseStudies'
@@ -47,18 +47,10 @@ export default function CaseStudies() {
 
   return (
     <>
-      <section className="bg-navy pb-14 pt-12 text-white">
+      <InnerHero crumbs={[{ label: 'Insights', to: '/insights/' }, { label: 'Case Studies' }]} eyebrow="Case studies" title={pc.heroTitle} text={pc.heroText} />
+      <section className="bg-ink py-8 text-white">
         <div className="container-site">
-          <Breadcrumb light items={[{ label: 'Insights' }, { label: 'Case Studies' }]} />
-          <div className="mt-14 grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-end">
-            <FadeUp><h1 className="h-display text-5xl text-white md:text-7xl">{pc.heroTitle}</h1></FadeUp>
-            <FadeUp delay={0.1}>
-              <p className="text-lg leading-relaxed text-white/80">
-                {pc.heroText}
-              </p>
-            </FadeUp>
-          </div>
-          <div className="mt-12 flex flex-col gap-3 border-t border-white/15 pt-8 sm:flex-row">
+          <div className="flex flex-col gap-3 sm:flex-row">
             <Select id="f-service" label={pc.allServicesLabel} value={service} onChange={setService} options={serviceOptions} />
             <Select id="f-industry" label={pc.allIndustriesLabel} value={industry} onChange={setIndustry} options={industryOptions} />
             {(service || industry) && (
@@ -72,11 +64,11 @@ export default function CaseStudies() {
 
       <section className="bg-canvas py-16 md:py-24">
         <div className="container-site">
-          <p className="mb-12 max-w-3xl border-l-2 border-accent pl-4 text-[15px] text-body/65">
+          <p className="mb-12 max-w-3xl border-l-2 border-accent pl-4 text-[15px] text-body/80">
             {pc.note}
           </p>
           {list.length === 0 ? (
-            <p className="py-16 text-center text-lg text-body/60">{pc.emptyText}</p>
+            <p className="py-16 text-center text-lg text-body/80">{pc.emptyText}</p>
           ) : (
             <div className="grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
               {list.map((c, i) => (

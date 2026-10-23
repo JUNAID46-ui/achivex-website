@@ -47,8 +47,8 @@ class DashboardController extends Controller
             ['label' => 'Media files', 'count' => $c['media'], 'route' => route('admin.media.index')],
         ];
 
-        // Traffic figures change slowly; keep them for five minutes so the dashboard opens quickly.
-        $traffic = Cache::remember('dashboard-traffic', 300, fn () => [
+        // Kept for 30 seconds only; the Live card below refreshes itself every 15 seconds.
+        $traffic = Cache::remember('dashboard-traffic', 30, fn () => [
             'summary' => $analytics->summary(),
             'daily' => $analytics->daily(),
             'topPages' => $analytics->topPages(6),
@@ -56,6 +56,7 @@ class DashboardController extends Controller
         ]);
 
         return view('admin.dashboard', $traffic + [
+            'live' => $this->liveStats(),
             'glance' => $glance,
             'unread' => ContactSubmission::whereNull('read_at')->count(),
             'requests30' => WhitepaperRequest::where('created_at', '>=', now()->subDays(30))->count(),
@@ -65,6 +66,35 @@ class DashboardController extends Controller
             'seoCounts' => collect($seoRows)->groupBy(fn ($r) => \App\Services\SeoAnalyzer::grade($r['score']))->map->count(),
             'health' => $this->health($seoRows),
         ]);
+    }
+
+    // Real time figures for the dashboard, read straight from the page_views table (no cache).
+    public function live()
+    {
+        return response()->json($this->liveStats())->header('Cache-Control', 'no-store');
+    }
+
+    private function liveStats(): array
+    {
+        $since = now()->subMinutes(5);
+        $views = \App\Models\Content\PageView::query();
+        $recent = (clone $views)->where('created_at', '>=', $since);
+        $today = (clone $views)->where('created_at', '>=', now()->startOfDay());
+        $month = (clone $views)->where('created_at', '>=', now()->subDays(30));
+
+        return [
+            'online' => (int) (clone $recent)->distinct('visitor')->count('visitor'),
+            'viewsNow' => (int) (clone $recent)->count(),
+            'pages' => (clone $recent)->selectRaw('path, count(*) as views')->groupBy('path')->orderByDesc('views')->limit(5)->get()
+                ->map(fn ($r) => ['path' => $r->path, 'views' => (int) $r->views])->all(),
+            'todayViews' => (int) (clone $today)->count(),
+            'todayVisitors' => (int) (clone $today)->distinct('visitor')->count('visitor'),
+            'monthViews' => (int) (clone $month)->count(),
+            'monthVisitors' => (int) (clone $month)->distinct('visitor')->count('visitor'),
+            'latest' => (clone $views)->latest('created_at')->limit(6)->get(['path', 'device', 'created_at'])
+                ->map(fn ($r) => ['path' => $r->path, 'device' => $r->device ?: 'unknown', 'ago' => $r->created_at->diffForHumans(null, true).' ago'])->all(),
+            'at' => now()->format('H:i:s'),
+        ];
     }
 
     // WordPress style "Site Health" checks with links to fix each item.

@@ -38,9 +38,25 @@ class PageController extends Controller
         ]);
     }
 
-    public function create()
+    // Page templates for new builder pages: the sections each one starts with.
+    public const TEMPLATES = [
+        'service' => ['Service page', 'Heading, overview with image, what is included, how it works, call to action and FAQs.', ['page_hero', 'image_text', 'cards', 'rich_text', 'cta', 'faq']],
+        'landing' => ['Landing page', 'Heading, benefits, image with text, gallery, call to action and FAQs. Good for campaigns.', ['page_hero', 'cards', 'image_text', 'gallery', 'cta', 'faq']],
+        'about' => ['About style page', 'Heading, story with image, text, values cards and a call to action.', ['page_hero', 'image_text', 'rich_text', 'cards', 'cta']],
+        'basic' => ['Text page', 'Heading, a text block and a call to action. For simple information pages.', ['page_hero', 'rich_text', 'cta']],
+        'image' => ['Heading, image and cards', 'Heading, image with text, a cards grid and a call to action.', ['page_hero', 'image_text', 'cards', 'cta']],
+        'blank' => ['Blank page', 'Only the page heading. Add every section yourself.', ['page_hero']],
+    ];
+
+    public function create(Request $request)
     {
-        return view('admin.pages.create', ['parents' => collect(PageCatalog::all())->where('kind', '!=', 'home')->pluck('title', 'path')]);
+        $layout = (string) $request->query('template');
+        if (! isset(self::TEMPLATES[$layout])) {
+            return view('admin.pages.choose', ['templates' => self::TEMPLATES]);
+        }
+
+        return view('admin.pages.create', ['layout' => $layout, 'template' => self::TEMPLATES[$layout],
+            'parents' => collect(PageCatalog::all())->where('kind', '!=', 'home')->pluck('title', 'path')]);
     }
 
     public function store(Request $request)
@@ -49,7 +65,7 @@ class PageController extends Controller
             'title' => 'required|max:120',
             'slug' => ['required', 'max:120', 'regex:/^[a-z0-9-]+(\/[a-z0-9-]+)*$/'],
             'description' => 'nullable|max:300',
-            'layout' => 'required|in:blank,basic,image',
+            'layout' => 'required|in:'.implode(',', array_keys(self::TEMPLATES)),
             'published' => 'nullable|boolean',
         ], ['slug.regex' => 'Use lowercase letters, numbers and dashes only, for example "our-pricing".'], ['slug' => 'page address']);
         $path = '/'.trim($data['slug'], '/').'/';
@@ -65,15 +81,11 @@ class PageController extends Controller
                 'path' => $path, 'kind' => 'custom', 'title' => $data['title'], 'published' => $request->boolean('published'),
                 'content' => ['description' => $data['description'] ?? ''],
             ]);
-            $starter = match ($data['layout']) {
-                'basic' => ['page_hero', 'rich_text', 'cta'],
-                'image' => ['page_hero', 'image_text', 'cards', 'cta'],
-                default => ['page_hero'],
-            };
+            $starter = self::TEMPLATES[$data['layout']][2];
             foreach ($starter as $i => $type) {
                 $schema = config("builder.{$type}");
-                $sectionData = $type === 'cta'
-                    ? (PageSection::where('page', 'home')->where('key', 'cta')->value('data') ?? [])
+                $sectionData = in_array($type, ['cta', 'faq'])
+                    ? (PageSection::where('page', 'home')->where('key', $type)->value('data') ?? [])
                     : ($schema['defaults'] ?? []);
                 if ($type === 'page_hero') {
                     $sectionData['heading'] = $data['title'];
@@ -110,8 +122,8 @@ class PageController extends Controller
         abort_unless($defaults, 404, 'This page has no editable content.');
 
         return view('admin.pages.edit', $viewData + [
-            'fields' => ContentSchema::fields($defaults),
-            'values' => array_replace($defaults, $saved?->content ?? []),
+            'fields' => [...ContentSchema::fields($defaults), \App\Support\DesignOptions::field()],
+            'values' => array_replace($defaults, $saved?->content ?? []) + ['design' => []],
         ]);
     }
 
@@ -127,6 +139,9 @@ class PageController extends Controller
         $input = json_decode((string) $request->input('content_json'), true);
         abort_unless(is_array($input), 422, 'The form could not be read. Reload the page and try again.');
         $content = ContentSchema::clean(ContentSchema::fields($defaults), $input, $defaults);
+        if ($design = \App\Support\DesignOptions::clean($input['design'] ?? [])) {
+            $content['design'] = $design;
+        }
 
         if ($old = Page::find($page['path'])) {
             Revisions::snapshot('pages', $old, 'update');

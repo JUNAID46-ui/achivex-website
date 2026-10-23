@@ -76,6 +76,9 @@
             </div>
             @include('admin.partials.field', ['field' => ['name' => 'seo_og_image', 'label' => 'Social share image (optional)', 'type' => 'image'], 'value' => $seoMeta?->og_image])
             @include('admin.partials.field', ['field' => ['name' => 'seo_noindex', 'label' => 'Hide from search engines (noindex)', 'type' => 'toggle'], 'value' => $seoMeta?->noindex])
+            <div class="border-t border-neutral-100 pt-4">
+              @include('admin.seo.partials.schema-field', ['name' => 'seo_schema', 'value' => $seoMeta?->schema, 'pageUrl' => rtrim(config('admin.site_public_url'), '/').($record->exists ? $resource->sitePath($record) : '/'), 'pageTitle' => $record->title ?? $record->name ?? ''])
+            </div>
           </div>
           <div>
             <p class="label">Analysis</p>

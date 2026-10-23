@@ -3,7 +3,7 @@
 @section('heading', 'Add New Page')
 @section('subheading', 'Create a new page on the website. After saving you can add and edit its sections in the Page Builder.')
 @section('actions')
-  <a href="{{ route('admin.pages.index') }}" class="btn-secondary">&larr; All pages</a>
+  <a href="{{ route('admin.pages.create') }}" class="btn-secondary">&larr; Choose another type</a>
 @endsection
 
 @section('content')
@@ -29,18 +29,14 @@
       <label for="description" class="label">Short description (used by Google)</label>
       <textarea id="description" name="description" rows="3" class="input" placeholder="One or two sentences about this page.">{{ old('description') }}</textarea>
     </div>
-    <fieldset>
-      <legend class="label">Starting layout</legend>
-      <div class="grid gap-3 sm:grid-cols-3">
-        @foreach(['basic' => ['Heading and text', 'Page heading, a text block and a call to action.'], 'image' => ['Heading, image and cards', 'Page heading, image with text, a cards grid and a call to action.'], 'blank' => ['Blank', 'Only the page heading. Add everything else yourself.']] as $val => [$name, $desc])
-          <label class="cursor-pointer  border border-neutral-200 p-4 has-[:checked]:border-ink has-[:checked]:bg-neutral-100">
-            <input type="radio" name="layout" value="{{ $val }}" class="text-ink" @checked(old('layout', 'basic') === $val)>
-            <span class="mt-2 block font-semibold text-ink">{{ $name }}</span>
-            <span class="mt-1 block text-xs text-neutral-500">{{ $desc }}</span>
-          </label>
-        @endforeach
+    <div class="flex items-center justify-between gap-4 border border-neutral-200 bg-neutral-50 p-4">
+      <div>
+        <p class="label mb-0">Template: {{ $template[0] }}</p>
+        <p class="help mt-1">{{ $template[1] }} You can add, remove and restyle every section afterwards.</p>
       </div>
-    </fieldset>
+      <a href="{{ route('admin.pages.create') }}" class="btn-secondary btn-sm shrink-0">Change</a>
+      <input type="hidden" name="layout" value="{{ $layout }}">
+    </div>
   </div>
   <aside>
     <div class="card">

@@ -34,6 +34,10 @@ export const blogs = [
           'Cloud data warehouses and lakehouse platforms from the major providers all handle typical business volumes well. The right choice usually depends on the cloud you already use, the skills on your team and how you prefer to pay.',
         ],
         list: ['Which cloud provider do you already use?', 'Who will maintain pipelines after launch?', 'Do you need to store raw files as well as tables?'],
+        subsections: [
+          { heading: 'Warehouse or lakehouse', paragraphs: ['A warehouse suits teams whose data is mostly tables from business systems. A lakehouse also stores raw files, which helps when you plan to keep logs, documents or exports alongside your reports.'] },
+          { heading: 'Who runs it day to day', paragraphs: ['Pick a platform your team or your partner already knows. A familiar tool that someone can maintain is worth more than a newer one nobody owns.'] },
+        ],
       },
       {
         id: 'migrate-in-waves',
@@ -50,6 +54,10 @@ export const blogs = [
           'A platform is only useful if someone can run it. Document pipelines, set up alerts for failures and train the people who will look after it. Then switch off the old pieces so there is only one place to look.',
         ],
       },
+    ],
+    faqs: [
+      { q: 'How long does a data modernization project take?', a: 'It depends on how many sources feed your reports. A small business with a handful of sources can often finish in a few months, while larger estates are usually moved in stages.' },
+      { q: 'Do we need to replace every system at once?', a: 'No. Most teams move one group of reports at a time, starting with the ones people rely on most, and keep the old setup running until each part is checked.' },
     ],
   },
   {

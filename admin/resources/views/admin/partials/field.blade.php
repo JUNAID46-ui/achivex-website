@@ -81,6 +81,14 @@
       @include('admin.partials.repeater', ['name' => $name, 'items' => $items, 'sub' => $sub, 'itemLabel' => $type === 'sections' ? 'Section' : ($field['itemLabel'] ?? 'Item')])
       @break
 
+    @case('color')
+      <div x-data="{ c: @js($val ?: '') }" class="flex items-center gap-2">
+        <input type="color" :value="c || @js($field['default'] ?? '#000000')" @input="c = $event.target.value" class="h-9 w-12 shrink-0 cursor-pointer border border-neutral-300 bg-white p-0.5" aria-label="{{ $field['label'] }}">
+        <input id="{{ $id }}" name="{{ $name }}" x-model="c" class="input font-mono text-[13px]" placeholder="{{ $field['default'] ?? '#000000' }}">
+        <button type="button" class="btn-ghost btn-sm" @click="c = ''" title="Use the default">Reset</button>
+      </div>
+      @break
+
     @case('password')
       <input id="{{ $id }}" type="password" name="{{ $name }}" class="input" autocomplete="new-password">
       @break

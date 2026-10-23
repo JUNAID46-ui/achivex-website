@@ -1,31 +1,28 @@
+import { lazy } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Layout from './components/Layout'
 import Home from './pages/Home'
-import WhoWeAre from './pages/about/WhoWeAre'
-import Accomplishments from './pages/about/Accomplishments'
-import Esg from './pages/about/Esg'
-import Leadership from './pages/about/Leadership'
-import GlobalPresence from './pages/about/GlobalPresence'
-import ServicesOverview from './pages/services/ServicesOverview'
-import ServiceResolver from './pages/services/ServiceResolver'
-import ServiceDetail from './pages/services/ServiceDetail'
-import Industry from './pages/Industry'
-import Industries from './pages/Industries'
-import Insights from './pages/insights/Insights'
-import CaseStudies from './pages/insights/CaseStudies'
-import CaseStudyDetail from './pages/insights/CaseStudyDetail'
-import Newsroom from './pages/insights/Newsroom'
-import NewsDetail from './pages/insights/NewsDetail'
-import Whitepapers from './pages/insights/Whitepapers'
-import WhitepaperDetail from './pages/insights/WhitepaperDetail'
-import Blogs from './pages/insights/Blogs'
-import BlogPost from './pages/insights/BlogPost'
-import Contact from './pages/Contact'
-import Careers from './pages/Careers'
-import PrivacyPolicy from './pages/legal/PrivacyPolicy'
-import Terms from './pages/legal/Terms'
+const WhoWeAre = lazy(() => import('./pages/about/WhoWeAre'))
+const ServicesOverview = lazy(() => import('./pages/services/ServicesOverview'))
+const ServiceResolver = lazy(() => import('./pages/services/ServiceResolver'))
+const ServiceDetail = lazy(() => import('./pages/services/ServiceDetail'))
+const Industry = lazy(() => import('./pages/Industry'))
+const Industries = lazy(() => import('./pages/Industries'))
+const Insights = lazy(() => import('./pages/insights/Insights'))
+const CaseStudies = lazy(() => import('./pages/insights/CaseStudies'))
+const CaseStudyDetail = lazy(() => import('./pages/insights/CaseStudyDetail'))
+const Newsroom = lazy(() => import('./pages/insights/Newsroom'))
+const NewsDetail = lazy(() => import('./pages/insights/NewsDetail'))
+const Whitepapers = lazy(() => import('./pages/insights/Whitepapers'))
+const WhitepaperDetail = lazy(() => import('./pages/insights/WhitepaperDetail'))
+const Blogs = lazy(() => import('./pages/insights/Blogs'))
+const BlogPost = lazy(() => import('./pages/insights/BlogPost'))
+const Contact = lazy(() => import('./pages/Contact'))
+const Careers = lazy(() => import('./pages/Careers'))
+const PrivacyPolicy = lazy(() => import('./pages/legal/PrivacyPolicy'))
+const Terms = lazy(() => import('./pages/legal/Terms'))
 import NotFound from './pages/NotFound'
-import RootResolver from './pages/RootResolver'
+const RootResolver = lazy(() => import('./pages/RootResolver'))
 import { routePath, listRoutePath, isRoot } from './lib/permalinks'
 
 export default function App() {
@@ -36,12 +33,10 @@ export default function App() {
 
         <Route path="about-us">
           <Route index element={<WhoWeAre />} />
-          <Route path="accomplishments" element={<Accomplishments />} />
-          <Route path="esg" element={<Esg />} />
-          <Route path="leadership" element={<Leadership />} />
-          <Route path="global-presence" element={<GlobalPresence />} />
           {/* The Alliance pages were removed; old links go to the services page. */}
           <Route path="alliances/*" element={<Navigate to="/services/" replace />} />
+          {/* About Us is a single page; older sub pages send visitors back to it. */}
+          <Route path="*" element={<Navigate to="/about-us/" replace />} />
         </Route>
 
         <Route path="services">

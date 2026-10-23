@@ -33,6 +33,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::post('logout', [Admin\AuthController::class, 'logout'])->name('logout');
         Route::get('/', [Admin\DashboardController::class, 'index'])->name('dashboard');
+        Route::get('dashboard/live', [Admin\DashboardController::class, 'live'])->name('dashboard.live');
         Route::post('quick-draft', [Admin\DashboardController::class, 'quickDraft'])->name('quick-draft')->middleware('area:posts');
 
         // Page builder

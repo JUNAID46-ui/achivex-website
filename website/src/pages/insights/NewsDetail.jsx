@@ -25,7 +25,7 @@ export default function NewsDetail() {
       <header className="mx-auto mt-14 max-w-read px-5">
         <h1 className="text-4xl font-extrabold leading-tight tracking-tight md:text-5xl">{n.title}</h1>
         <time dateTime={n.date} className="mt-4 block text-sm font-semibold text-accent">{formatDate(n.date)}</time>
-        <p className="mt-6 text-xl leading-relaxed text-body/70">{n.summary}</p>
+        <p className="mt-6 text-xl leading-relaxed text-body/80">{n.summary}</p>
       </header>
       <FadeUp className="mx-auto mt-12 max-w-4xl px-5">
         <Img src={n.image} alt={n.title} className="aspect-[16/9] w-full object-cover" />
