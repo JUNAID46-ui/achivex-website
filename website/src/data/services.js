@@ -154,7 +154,9 @@ export const services = [
   {
     slug: 'crm-and-lead-management',
     name: 'CRM & Lead Management',
-    category: 'ai-and-automation',
+    category: 'crm-and-lead-generation',
+    // Area before October 2026; old addresses that include it still lead here.
+    formerCategory: 'ai-and-automation',
     short: 'Custom CRM systems, lead capture and automated follow ups so no lead is lost.',
     heroImage: img('1553877522-43269d4ea984', 2000),
     images: [img('1556745753-b2904692b3cd'), img('1522071820081-009f0129c71c')],
@@ -203,7 +205,9 @@ export const services = [
   {
     slug: 'seo',
     name: 'SEO',
-    category: 'growth-marketing',
+    category: 'seo-and-ai-search',
+    // Area before October 2026; old addresses that include it still lead here.
+    formerCategory: 'growth-marketing',
     short: 'Technical, on-page, local and off-page SEO with monthly reporting.',
     heroImage: img('1432888498266-38ffec3eaf0a', 2000),
     images: [img('1551288049-bebda4e38f71'), img('1504868584819-f8e8b4b6d7e3')],
@@ -251,7 +255,9 @@ export const services = [
   {
     slug: 'aeo-and-geo',
     name: 'AEO & GEO',
-    category: 'growth-marketing',
+    category: 'seo-and-ai-search',
+    // Area before October 2026; old addresses that include it still lead here.
+    formerCategory: 'growth-marketing',
     short: 'Visibility in featured snippets, voice search and AI answers from ChatGPT, Gemini and Perplexity.',
     heroImage: img('1639322537228-f710d846310a', 2000),
     images: [img('1677442136019-21780ecad995'), img('1531545514256-b1400bc00f31')],
@@ -299,7 +305,9 @@ export const services = [
   {
     slug: 'social-media-management',
     name: 'Social Media Management',
-    category: 'growth-marketing',
+    category: 'digital-marketing-and-ads',
+    // Area before October 2026; old addresses that include it still lead here.
+    formerCategory: 'growth-marketing',
     short: 'Content planning, reels, graphics, scheduling, engagement and reporting.',
     heroImage: img('1611162617213-7d7a39e9b1d7', 2000),
     images: [img('1557838923-2985c318be48'), img('1522071820081-009f0129c71c')],
@@ -347,7 +355,9 @@ export const services = [
   {
     slug: 'ads-management',
     name: 'Ads Management',
-    category: 'growth-marketing',
+    category: 'digital-marketing-and-ads',
+    // Area before October 2026; old addresses that include it still lead here.
+    formerCategory: 'growth-marketing',
     short: 'Google Ads and Meta Ads with retargeting, conversion tracking and ROI reporting.',
     heroImage: img('1504868584819-f8e8b4b6d7e3', 2000),
     images: [img('1551288049-bebda4e38f71'), img('1556742049-0cfed4f6a45d')],
@@ -422,6 +432,8 @@ export const legacyServices = {
   'recruitment-process-outsourcing': 'crm-and-lead-management',
 }
 export const legacyAreas = {
+  // Split into SEO & AI Search Optimization and Digital Marketing & Paid Ads; old links go to the services page.
+  'growth-marketing': '',
   digital: 'web-and-software',
   'data-and-analytics': 'ai-and-automation',
   cloud: 'web-and-software',

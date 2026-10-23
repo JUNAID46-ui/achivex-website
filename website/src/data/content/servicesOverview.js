@@ -5,7 +5,7 @@ import { img } from '../images.js'
 export default {
   heroEyebrow: 'Services',
   heroTitle: 'What we do',
-  heroText: 'Eight services in three areas, one team. Pick a single service or combine several. Either way you get the same people, the same standards and one point of contact.',
+  heroText: 'Eight services in five areas, one team. Pick a single service or combine several. Either way you get the same people, the same standards and one point of contact.',
   heroImage: img('1498050108023-c5249f4df085', 2000),
   heroImageAlt: 'A laptop showing website code on a desk',
 

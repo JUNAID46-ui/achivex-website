@@ -61,13 +61,13 @@ export default function ProcessTimeline({ items = [] }) {
               >
                 <span
                   className={`absolute left-0 top-0 grid h-[31px] w-[31px] place-items-center rounded-full border text-[12px] font-semibold tabular-nums transition-all duration-500 lg:static ${
-                    on ? 'scale-110 border-[#FFFFFF] bg-[#FFFFFF] text-[#1C1C1C] shadow-[0_0_0_6px_rgba(255,255,255,0.08)]' : done ? 'border-[#FFFFFF] bg-[#1C1C1C] text-[#FFFFFF]' : 'border-white/25 bg-[#1C1C1C] text-[#A3A3A3]'
+                    on ? 'scale-110 border-[#FFFFFF] bg-[#FFFFFF] text-site-heading shadow-[0_0_0_6px_rgba(255,255,255,0.08)]' : done ? 'border-[#FFFFFF] bg-site-dark text-[#FFFFFF]' : 'border-white/25 bg-site-dark text-site-muted'
                   }`}
                 >
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <h3 className={`mt-0 text-[22px] font-medium tracking-tight transition-colors duration-500 lg:mt-8 ${on ? 'text-[#FFFFFF]' : 'text-[#999999] group-hover:text-[#FFFFFF]'}`}>{s.title}</h3>
-                {s.text && <p className={`mt-3 text-[15px] leading-[1.7] transition-colors duration-500 ${on ? 'text-[#D4D4D4]' : 'text-[#999999]/80'}`}>{s.text}</p>}
+                <h3 className={`mt-0 text-[22px] font-medium tracking-tight transition-colors duration-500 lg:mt-8 ${on ? 'text-[#FFFFFF]' : 'text-site-muted group-hover:text-[#FFFFFF]'}`}>{s.title}</h3>
+                {s.text && <p className={`mt-3 text-[15px] leading-[1.7] transition-colors duration-500 ${on ? 'text-[#D4D4D4]' : 'text-site-muted/80'}`}>{s.text}</p>}
                 <span className="mt-6 block h-[2px] w-full overflow-hidden rounded-full bg-white/10" aria-hidden="true">
                   {on && (
                     <motion.span

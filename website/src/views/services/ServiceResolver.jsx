@@ -10,7 +10,7 @@ import NotFound from '../NotFound'
 export default function ServiceResolver() {
   const { slug } = useParams()
   const category = getCategory(slug)
-  if (legacyAreas[slug]) return <Navigate to={`/services/${legacyAreas[slug]}/`} replace />
+  if (slug in legacyAreas) return <Navigate to={legacyAreas[slug] ? `/services/${legacyAreas[slug]}/` : '/services/'} replace />
   if (category && !category.single) return <ServiceCategory category={category} />
   return getService(slug) ? <ServiceDetail singleSlug={slug} /> : <NotFound />
 }

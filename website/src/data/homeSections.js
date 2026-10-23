@@ -27,7 +27,7 @@ export const homeSections = [
   },
   {
     key: 'explorer', label: 'What we do (service explorer)', sort: 2, visible: true,
-    data: { title: 'What we do', text: 'Eight services in three areas, one team. Pick one or combine several.' },
+    data: { title: 'What we do', text: 'Eight services in five areas, one team. Pick one or combine several.' },
   },
   {
     key: 'why', label: 'Why AchiveX', sort: 3, visible: true,
@@ -61,7 +61,7 @@ export const homeSections = [
           points: ['Technical, local and on-page SEO', 'Visibility in ChatGPT, Gemini and AI Overviews', 'Google and Meta Ads with conversion tracking'],
           image: img('1558494949-ef010cbdcc31', 1400),
           alt: 'Marketing results on a laptop screen',
-          to: '/services/growth-marketing/',
+          to: '/services/digital-marketing-and-ads/',
           link: 'Explore Growth Marketing',
         },
       ],

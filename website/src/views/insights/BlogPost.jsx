@@ -36,7 +36,7 @@ function Bullets({ items }) {
   return (
     <ul className="mb-7 mt-2 space-y-3">
       {items.map((li) => (
-        <li key={li} className="flex gap-3 text-[17px] leading-[1.7] text-[#3F4550]">
+        <li key={li} className="flex gap-3 text-[17px] leading-[1.7] text-site-text">
           <span className="mt-[5px] grid h-5 w-5 shrink-0 place-items-center rounded-full bg-navy/10 text-navy">
             <Check className="h-3 w-3" strokeWidth={3} aria-hidden="true" />
           </span>
@@ -120,7 +120,7 @@ export default function BlogPost() {
           {post.heroImage && (
             <>
               <Img src={post.heroImage} alt="" className="absolute inset-0 h-full w-full object-cover" />
-              <div className="absolute inset-0 bg-[#000000]/65" aria-hidden="true" />
+              <div className="absolute inset-0 bg-site-black/65" aria-hidden="true" />
             </>
           )}
           <div className={`container-site relative pt-8 md:pt-10 ${post.image ? 'pb-[150px] md:pb-[230px]' : 'pb-20'}`}>
@@ -151,7 +151,7 @@ export default function BlogPost() {
         </header>
         {post.image && (
           <div className="container-site relative -mt-[110px] md:-mt-[190px]">
-            <div className="mx-auto max-w-[1120px] overflow-hidden rounded-[28px] bg-[#E9ECF0] shadow-[0_30px_80px_-40px_rgba(0,0,0,0.45)]">
+            <div className="mx-auto max-w-[1120px] overflow-hidden rounded-[28px] bg-site-grey shadow-[0_30px_80px_-40px_rgba(0,0,0,0.45)]">
               <Img priority sizes="(min-width: 1280px) 1200px, 100vw" src={post.image} alt={post.title} className="motion-settle aspect-[16/9] w-full object-cover md:aspect-[21/9]" />
             </div>
           </div>
@@ -161,8 +161,8 @@ export default function BlogPost() {
         <div className="pb-24 pt-14 md:pt-20">
           <div className="container-site grid gap-12 lg:grid-cols-[250px_minmax(0,1fr)] xl:grid-cols-[270px_minmax(0,720px)_1fr]">
             <aside className="lg:sticky lg:top-28 lg:self-start">
-              <nav aria-label="Table of contents" className="rounded-[22px] border border-[#E6E9EE] bg-[#F7F8FA] p-6">
-                <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-[#6E747E]">In this article</p>
+              <nav aria-label="Table of contents" className="rounded-[22px] border border-site-line bg-site-card p-6">
+                <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-site-text">In this article</p>
                 <ol className="mt-5 space-y-1">
                   {toc.map((s, i) => {
                     const on = activeId === s.id
@@ -170,16 +170,16 @@ export default function BlogPost() {
                       <li key={s.id}>
                         <a
                           href={`#${s.id}`} onClick={(e) => jumpTo(e, s.id)}
-                          className={`flex gap-3 rounded-xl px-3 py-2.5 text-[14px] leading-snug transition-colors ${on ? 'bg-[#FFFFFF] font-semibold text-[#111111] shadow-[0_4px_14px_-8px_rgba(0,0,0,0.2)]' : 'text-[#5B616B] hover:text-[#111111]'}`}
+                          className={`flex gap-3 rounded-xl px-3 py-2.5 text-[14px] leading-snug transition-colors ${on ? 'bg-[#FFFFFF] font-semibold text-site-heading shadow-[0_4px_14px_-8px_rgba(0,0,0,0.2)]' : 'text-site-text hover:text-site-heading'}`}
                         >
-                          <span className={`tabular-nums ${on ? 'text-navy' : 'text-[#6E747E]'}`}>{pad(i + 1)}</span>
+                          <span className={`tabular-nums ${on ? 'text-navy' : 'text-site-text'}`}>{pad(i + 1)}</span>
                           {s.heading}
                         </a>
                       </li>
                     )
                   })}
                 </ol>
-                <div className="mt-5 h-1 overflow-hidden rounded-full bg-[#E6E9EE]" aria-hidden="true">
+                <div className="mt-5 h-1 overflow-hidden rounded-full bg-site-line" aria-hidden="true">
                   <div className="h-full rounded-full bg-navy transition-[width] duration-150" style={{ width: `${Math.round(progress * 100)}%` }} />
                 </div>
               </nav>
@@ -187,21 +187,21 @@ export default function BlogPost() {
             </aside>
 
             <div ref={bodyRef} className="min-w-0">
-              <p className="text-[21px] leading-[1.7] text-[#2A2F37]">
-                <strong className="font-semibold text-[#111111]">{post.intro.keyword}</strong>{post.intro.text}
+              <p className="text-[21px] leading-[1.7] text-site-heading">
+                <strong className="font-semibold text-site-heading">{post.intro.keyword}</strong>{post.intro.text}
               </p>
 
               {post.sections.map((s, i) => (
                 <section key={s.id} className="mt-14">
                   <p className="text-[13px] font-semibold tracking-[0.12em] text-navy">{pad(i + 1)}</p>
-                  <h2 id={s.id} className="mt-2 scroll-mt-28 font-display text-[28px] font-medium leading-tight tracking-tight text-[#111111] md:text-[34px]">{s.heading}</h2>
+                  <h2 id={s.id} className="mt-2 scroll-mt-28 font-display text-[28px] font-medium leading-tight tracking-tight text-site-heading md:text-[34px]">{s.heading}</h2>
                   <div className="prose-body mt-5">
                     <Paragraphs items={s.paragraphs} />
                   </div>
                   {s.list?.length > 0 && <Bullets items={s.list} />}
                   {(s.subsections || []).map((sub, j) => (
                     <div key={j} className="mt-8 border-l-2 border-navy/15 pl-6">
-                      <h3 className="font-display text-[21px] font-semibold leading-snug tracking-tight text-[#111111] md:text-[23px]">{sub.heading}</h3>
+                      <h3 className="font-display text-[21px] font-semibold leading-snug tracking-tight text-site-heading md:text-[23px]">{sub.heading}</h3>
                       <div className="prose-body mt-3">
                         {(sub.paragraphs || []).map((p, k) => <p key={k}>{p}</p>)}
                       </div>
@@ -212,26 +212,26 @@ export default function BlogPost() {
               ))}
 
               {faqs.length > 0 && (
-                <section className="mt-16 rounded-[26px] bg-[#EEF0F3] p-7 md:p-10">
+                <section className="mt-16 rounded-[26px] bg-site-grey p-7 md:p-10">
                   <p className="text-[13px] font-semibold tracking-[0.12em] text-navy">{pad(post.sections.length + 1)}</p>
-                  <h2 id="faqs" className="mt-2 scroll-mt-28 font-display text-[28px] font-medium leading-tight tracking-tight text-[#111111] md:text-[34px]">Frequently asked questions</h2>
+                  <h2 id="faqs" className="mt-2 scroll-mt-28 font-display text-[28px] font-medium leading-tight tracking-tight text-site-heading md:text-[34px]">Frequently asked questions</h2>
                   <div className="mt-6"><FAQ items={faqs} /></div>
                 </section>
               )}
 
-              <div className="mt-14 flex flex-col gap-6 rounded-[26px] border border-[#E6E9EE] p-7 sm:flex-row sm:items-center md:p-8">
+              <div className="mt-14 flex flex-col gap-6 rounded-[26px] border border-site-line p-7 sm:flex-row sm:items-center md:p-8">
                 <span className="grid h-16 w-16 shrink-0 place-items-center rounded-full bg-ink">
                   <img src={`/brand/mark-light.png`} alt="" width="58" height="28" className="h-7 w-auto" />
                 </span>
                 <div className="flex-1">
-                  <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-[#6E747E]">Written by</p>
-                  <p className="mt-1 text-[18px] font-semibold text-[#111111]">{post.author}</p>
-                  <p className="mt-1 text-[15px] leading-relaxed text-[#5B616B]">Practical notes on websites, software, AI automation and growth marketing from the AchiveX team.</p>
+                  <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-site-text">Written by</p>
+                  <p className="mt-1 text-[18px] font-semibold text-site-heading">{post.author}</p>
+                  <p className="mt-1 text-[15px] leading-relaxed text-site-text">Practical notes on websites, software, AI automation and growth marketing from the AchiveX team.</p>
                 </div>
               </div>
 
               <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
-                <Link to={permalink('/insights/blogs/')} className="inline-flex items-center gap-2 text-[15px] font-semibold text-[#111111] hover:text-navy">
+                <Link to={permalink('/insights/blogs/')} className="inline-flex items-center gap-2 text-[15px] font-semibold text-site-heading hover:text-navy">
                   <ArrowLeft className="h-4 w-4" aria-hidden="true" /> All articles
                 </Link>
                 <div className="lg:hidden"><ShareButtons title={post.title} /></div>
@@ -242,11 +242,11 @@ export default function BlogPost() {
       </article>
 
       {related.length > 0 && (
-        <section className="bg-[#EEF0F3] py-20 md:py-24">
+        <section className="bg-site-grey py-20 md:py-24">
           <div className="container-site">
             <div className="flex flex-wrap items-end justify-between gap-4">
-              <h2 className="text-[34px] font-medium tracking-[-0.02em] text-[#111111] md:text-[44px]">Keep reading</h2>
-              <Link to={permalink('/insights/blogs/')} className="inline-flex items-center gap-2 text-[15px] font-semibold text-[#111111] hover:text-navy">
+              <h2 className="text-[34px] font-medium tracking-[-0.02em] text-site-heading md:text-[44px]">Keep reading</h2>
+              <Link to={permalink('/insights/blogs/')} className="inline-flex items-center gap-2 text-[15px] font-semibold text-site-heading hover:text-navy">
                 View all articles <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>

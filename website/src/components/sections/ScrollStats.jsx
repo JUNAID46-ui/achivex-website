@@ -8,11 +8,11 @@ import CountUp from '../motion/CountUp'
 function Stat({ s, dark }) {
   return (
     <div className="w-[260px] shrink-0 md:w-[320px]">
-      <span className="block h-[3px] w-28 rounded-full bg-gradient-to-r from-[#0F2C9C] to-[#5B7CFF]" aria-hidden="true" />
-      <p className={`mt-7 text-[64px] font-light leading-none tracking-[-0.04em] md:text-[84px] ${dark ? 'text-[#FFFFFF]' : 'text-[#0F2C9C]'}`}>
+      <span className="block h-[3px] w-28 rounded-full bg-gradient-to-r from-site-brand to-[#5B7CFF]" aria-hidden="true" />
+      <p className={`mt-7 text-[64px] font-light leading-none tracking-[-0.04em] md:text-[84px] ${dark ? 'text-[#FFFFFF]' : 'text-site-brand'}`}>
         <CountUp value={s.value} suffix={s.suffix} />
       </p>
-      <p className={`mt-4 max-w-[240px] text-[18px] leading-snug tracking-[-0.01em] md:text-[20px] ${dark ? 'text-[#D4D4D4]' : 'text-[#1C1C1C]'}`}>{s.label}</p>
+      <p className={`mt-4 max-w-[240px] text-[18px] leading-snug tracking-[-0.01em] md:text-[20px] ${dark ? 'text-[#D4D4D4]' : 'text-site-heading'}`}>{s.label}</p>
     </div>
   )
 }
@@ -41,8 +41,8 @@ export default function ScrollStats({ stats = [], tone = 'light', eyebrow, title
 
   const head = (eyebrow || title) && (
     <div className="mb-14 max-w-3xl md:mb-16">
-      {eyebrow && <p className={`text-[13px] font-semibold uppercase tracking-[0.18em] ${dark ? 'text-[#A3A3A3]' : 'text-[#0F2C9C]'}`}>{eyebrow}</p>}
-      {title && <h2 className={`mt-4 text-[32px] font-medium leading-[1.12] tracking-[-0.025em] md:text-[44px] ${dark ? 'text-[#FFFFFF]' : 'text-[#1C1C1C]'}`}>{title}</h2>}
+      {eyebrow && <p className={`text-[13px] font-semibold uppercase tracking-[0.18em] ${dark ? 'text-site-muted' : 'text-site-brand'}`}>{eyebrow}</p>}
+      {title && <h2 className={`mt-4 text-[32px] font-medium leading-[1.12] tracking-[-0.025em] md:text-[44px] ${dark ? 'text-[#FFFFFF]' : 'text-site-heading'}`}>{title}</h2>}
     </div>
   )
 
@@ -66,8 +66,8 @@ export default function ScrollStats({ stats = [], tone = 'light', eyebrow, title
               {stats.map((s) => <Stat key={s.label} s={s} dark={dark} />)}
             </motion.div>
           </div>
-          <div className={`mt-16 h-px w-full ${dark ? 'bg-white/10' : 'bg-[#D5D9E0]'}`} aria-hidden="true">
-            <motion.div className={`h-full ${dark ? 'bg-[#FFFFFF]' : 'bg-[#0F2C9C]'}`} style={{ width: bar }} />
+          <div className={`mt-16 h-px w-full ${dark ? 'bg-white/10' : 'bg-site-line'}`} aria-hidden="true">
+            <motion.div className={`h-full ${dark ? 'bg-[#FFFFFF]' : 'bg-site-brand'}`} style={{ width: bar }} />
           </div>
         </div>
       </div>

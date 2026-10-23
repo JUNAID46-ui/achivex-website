@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-23T11:06:04.176Z",
+  "generated": "2026-10-23T13:41:01.001Z",
   "pages": [
     {
       "path": "/",
@@ -26,23 +26,33 @@
           "Most growing companies end up working with several suppliers for these jobs. One builds the website, another runs the ads, a third looks after the CRM, and nobody owns the full picture. We bring that work under one roof, with one team to call."
         ],
         "areasEyebrow": "What we do",
-        "areasTitle": "Three areas, eight services",
+        "areasTitle": "Five areas, eight services",
         "areasText": "",
         "areas": [
           {
-            "title": "Web and Software",
-            "text": "Websites, online stores, web applications, dashboards and APIs. We build on WordPress, WooCommerce, Laravel and React, and keep every site fast, secure and easy to update.",
+            "title": "Web & Software Development",
+            "text": "Websites, online stores, web apps, dashboards and APIs on WordPress, WooCommerce, Laravel and React.",
             "to": "/services/web-and-software/"
           },
           {
-            "title": "AI and Automation",
-            "text": "Chatbots, workflow automation and CRM systems that answer questions, move data between your tools and follow up on leads, so your team spends less time on routine tasks.",
+            "title": "AI & Business Automation",
+            "text": "Chatbots, AI agents, workflow automation and a 24/7 AI receptionist connected to your tools.",
             "to": "/services/ai-and-automation/"
           },
           {
-            "title": "Growth Marketing",
-            "text": "SEO, visibility in AI answers, social media management and paid ads, with monthly reporting that ties effort and spend to enquiries and sales.",
-            "to": "/services/growth-marketing/"
+            "title": "CRM & Lead Generation",
+            "text": "One place to capture every lead, with automated follow ups and clear reporting.",
+            "to": "/services/crm-and-lead-generation/"
+          },
+          {
+            "title": "SEO & AI Search Optimization",
+            "text": "Rankings on Google and Google Maps, and visibility in AI answers from ChatGPT and Gemini.",
+            "to": "/services/seo-and-ai-search/"
+          },
+          {
+            "title": "Digital Marketing & Paid Ads",
+            "text": "Social media management and Google and Meta ads, tracked against leads and sales.",
+            "to": "/services/digital-marketing-and-ads/"
           }
         ],
         "storyEyebrow": "Our story",
@@ -132,7 +142,7 @@
       "editable": {
         "heroEyebrow": "Services",
         "heroTitle": "What we do",
-        "heroText": "Eight services in three areas, one team. Pick a single service or combine several. Either way you get the same people, the same standards and one point of contact.",
+        "heroText": "Eight services in five areas, one team. Pick a single service or combine several. Either way you get the same people, the same standards and one point of contact.",
         "heroImage": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=2000&q=80",
         "heroImageAlt": "A laptop showing website code on a desk",
         "introEyebrow": "Our services",
@@ -488,6 +498,12 @@
       }
     },
     {
+      "path": "/free-consultation/",
+      "title": "Book a Free Consultation",
+      "description": "Book a free consultation with AchiveX LLC for web development, custom software, AI automation, CRM, SEO and digital marketing. Fixed price quotes in writing.",
+      "type": "Landing page"
+    },
+    {
       "path": "/careers/",
       "title": "Careers",
       "description": "Careers at AchiveX LLC. Learn about our culture and see current open positions.",
@@ -773,12 +789,12 @@
     },
     {
       "path": "/services/web-and-software/",
-      "title": "Web and Software Services",
-      "description": "Websites, web apps and internal systems built around how your business works. AchiveX web and software services for businesses in the USA and beyond.",
+      "title": "Web & Software Development Services",
+      "description": "Websites, web apps and internal systems built around how your business works. AchiveX web & software development services for businesses in the USA and beyond.",
       "type": "Service area",
       "editable": {
         "slug": "web-and-software",
-        "name": "Web and Software",
+        "name": "Web & Software Development",
         "short": "Websites, web apps and internal systems built around how your business works.",
         "description": "Your website is often the first thing a customer sees, and your internal tools shape how your team spends its day. We design, build and maintain both, using WordPress, WooCommerce, Laravel and React.",
         "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&q=80",
@@ -832,19 +848,18 @@
     },
     {
       "path": "/services/ai-and-automation/",
-      "title": "AI and Automation Services",
-      "description": "AI, automation and CRM systems that take repetitive work off your team. AchiveX ai and automation services for businesses in the USA and beyond.",
+      "title": "AI & Business Automation Services",
+      "description": "Chatbots, AI agents, workflow automation and a 24/7 AI receptionist that take repetitive work off your team. AchiveX ai & business automation services for businesses in the USA and beyond.",
       "type": "Service area",
       "editable": {
         "slug": "ai-and-automation",
-        "name": "AI and Automation",
-        "short": "AI, automation and CRM systems that take repetitive work off your team.",
-        "description": "Many hours in a week go into copying data, chasing leads and answering the same questions. We build AI systems, automations and CRM setups that handle that work and keep every lead moving.",
+        "name": "AI & Business Automation",
+        "short": "Chatbots, AI agents, workflow automation and a 24/7 AI receptionist that take repetitive work off your team.",
+        "description": "Many hours in a week go into copying data, chasing leads and answering the same questions. We build AI assistants and automations that handle that work, connected to the tools you already use.",
         "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1600&q=80",
         "heroImage": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=2000&q=80",
         "services": [
-          "ai-automation",
-          "crm-and-lead-management"
+          "ai-automation"
         ],
         "overview": [
           "AI and automation are most useful when they take over the dull, repeated parts of a job. Answering the same questions, copying data between tools, chasing leads and sending reminders are all tasks software can handle reliably.",
@@ -860,8 +875,8 @@
             "text": "Customers get answers to common questions at any hour."
           },
           {
-            "title": "No lost leads",
-            "text": "Every enquiry is captured, assigned and followed up on time."
+            "title": "Answers at any hour",
+            "text": "A 24/7 AI receptionist answers calls, books appointments and qualifies leads."
           },
           {
             "title": "Cleaner data",
@@ -890,26 +905,78 @@
       }
     },
     {
-      "path": "/services/growth-marketing/",
-      "title": "Growth Marketing Services",
-      "description": "SEO, AI search visibility, social media and ads that bring in qualified leads. AchiveX growth marketing services for businesses in the USA and beyond.",
+      "path": "/services/crm-and-lead-generation/",
+      "title": "CRM & Lead Generation Services",
+      "description": "CRM systems, lead capture and automated follow ups so no enquiry goes cold. AchiveX crm & lead generation services for businesses in the USA and beyond.",
       "type": "Service area",
       "editable": {
-        "slug": "growth-marketing",
-        "name": "Growth Marketing",
-        "short": "SEO, AI search visibility, social media and ads that bring in qualified leads.",
-        "description": "Customers find businesses through Google, AI assistants, social media and ads. We work across all of them, with reporting that shows what is bringing in leads and what is not.",
-        "image": "https://images.unsplash.com/photo-1557838923-2985c318be48?auto=format&fit=crop&w=1600&q=80",
-        "heroImage": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=2000&q=80",
+        "slug": "crm-and-lead-generation",
+        "name": "CRM & Lead Generation",
+        "short": "CRM systems, lead capture and automated follow ups so no enquiry goes cold.",
+        "description": "Leads arrive through forms, calls, emails, ads and social media. We set up one place to capture them all, follow up on time and see which sources bring in real customers.",
+        "image": "https://images.unsplash.com/photo-1556745753-b2904692b3cd?auto=format&fit=crop&w=1600&q=80",
+        "heroImage": "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=2000&q=80",
         "services": [
-          "seo",
-          "aeo-and-geo",
-          "social-media-management",
-          "ads-management"
+          "crm-and-lead-management"
         ],
         "overview": [
-          "Good marketing brings in people who are ready to buy, not just visitors. We focus on the channels where your customers already look for businesses like yours: Google search, Google Maps, AI assistants, social media and paid ads.",
-          "Every channel is measured against enquiries and sales. You receive a plain monthly report that shows what was done, what it cost and what it returned, so decisions about budget are easy to make."
+          "Without a single place to track enquiries, follow ups are missed and good leads go cold. Sales teams spend their time searching inboxes instead of talking to customers.",
+          "We set up an existing CRM or build a custom one, connect every lead source to it, and automate reminders and follow up messages. Reports show where leads come from and how many turn into sales."
+        ],
+        "outcomes": [
+          {
+            "title": "No lost leads",
+            "text": "Every enquiry is captured and assigned automatically."
+          },
+          {
+            "title": "Faster follow up",
+            "text": "Reminders and messages go out on time without manual work."
+          },
+          {
+            "title": "A clear pipeline",
+            "text": "Stages that match your sales process show where each deal stands."
+          },
+          {
+            "title": "Known lead sources",
+            "text": "Reports show which channels bring in customers."
+          }
+        ],
+        "faqs": [
+          {
+            "q": "Do you build a custom CRM or use an existing one?",
+            "a": "Either. We set up a ready made CRM when it fits your process, and build a custom one when you need features an off the shelf tool cannot handle."
+          },
+          {
+            "q": "Can you connect our website forms and ads?",
+            "a": "Yes. Leads from forms, calls, email, ads and social media can flow into the CRM automatically."
+          },
+          {
+            "q": "Will our team need training?",
+            "a": "We show your team how to use the CRM and leave written notes, so it becomes part of daily work."
+          }
+        ],
+        "caseStudy": "healthcare-patient-support"
+      }
+    },
+    {
+      "path": "/services/seo-and-ai-search/",
+      "title": "SEO & AI Search Optimization Services",
+      "description": "SEO, AEO and GEO so customers find you on Google and in AI answers. AchiveX seo & ai search optimization services for businesses in the USA and beyond.",
+      "type": "Service area",
+      "editable": {
+        "slug": "seo-and-ai-search",
+        "name": "SEO & AI Search Optimization",
+        "short": "SEO, AEO and GEO so customers find you on Google and in AI answers.",
+        "description": "Customers look for businesses on Google, Google Maps and in AI assistants such as ChatGPT, Gemini and Perplexity. We help your business show up in all of them, with monthly reporting.",
+        "image": "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&w=1600&q=80",
+        "heroImage": "https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&w=2000&q=80",
+        "services": [
+          "seo",
+          "aeo-and-geo"
+        ],
+        "overview": [
+          "Search is changing. People still use Google, but more of them now get answers straight from AI Overviews, voice assistants and chat tools. A business needs to be easy to find and easy to quote in both.",
+          "We cover technical, on-page, local and off-page SEO, and add answer focused content and schema markup so AI tools understand your pages. A monthly report shows rankings, traffic and leads."
         ],
         "outcomes": [
           {
@@ -921,30 +988,81 @@
             "text": "Content that AI assistants can understand, quote and recommend."
           },
           {
+            "title": "More qualified traffic",
+            "text": "Visitors who are looking for exactly what you offer."
+          },
+          {
+            "title": "Clear monthly reports",
+            "text": "Rankings, traffic and leads in plain language."
+          }
+        ],
+        "faqs": [
+          {
+            "q": "What is the difference between SEO, AEO and GEO?",
+            "a": "SEO helps you rank in search results. AEO and GEO help your business appear in direct answers from Google, voice assistants and AI tools such as ChatGPT and Gemini."
+          },
+          {
+            "q": "How long does SEO take to show results?",
+            "a": "Technical fixes can help within weeks. Rankings for competitive searches usually build over several months of steady work."
+          },
+          {
+            "q": "Do you work on Google Business Profile?",
+            "a": "Yes. Local SEO and Google Business Profile optimization are part of the service."
+          }
+        ],
+        "caseStudy": "retail-storefront-rebuild"
+      }
+    },
+    {
+      "path": "/services/digital-marketing-and-ads/",
+      "title": "Digital Marketing & Paid Ads Services",
+      "description": "Social media management and Google and Meta ads that bring in leads and sales. AchiveX digital marketing & paid ads services for businesses in the USA and beyond.",
+      "type": "Service area",
+      "editable": {
+        "slug": "digital-marketing-and-ads",
+        "name": "Digital Marketing & Paid Ads",
+        "short": "Social media management and Google and Meta ads that bring in leads and sales.",
+        "description": "A steady social presence builds trust, and paid ads bring in customers quickly when they are set up and tracked properly. We run both and report on what each one returns.",
+        "image": "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=1600&q=80",
+        "heroImage": "https://images.unsplash.com/photo-1557838923-2985c318be48?auto=format&fit=crop&w=2000&q=80",
+        "services": [
+          "social-media-management",
+          "ads-management"
+        ],
+        "overview": [
+          "Social media works best when it is consistent, and ads work best when every click and sale is tracked. Both take time that most small teams do not have.",
+          "We plan and create your social content, schedule posts and reply to your community. We also run Google Ads and Meta Ads with retargeting and conversion tracking, so budget moves to what works."
+        ],
+        "outcomes": [
+          {
             "title": "A steady social presence",
             "text": "Regular, on brand posts that build trust and bring enquiries."
           },
           {
             "title": "Ads that pay back",
             "text": "Campaigns managed against cost per lead and return on spend."
+          },
+          {
+            "title": "Every sale tracked",
+            "text": "Conversion tracking for calls, forms and purchases."
+          },
+          {
+            "title": "Monthly reporting",
+            "text": "What was spent, what it returned and what we will do next."
           }
         ],
         "faqs": [
           {
-            "q": "Which marketing channel should we start with?",
-            "a": "Usually search, because people looking for your service are already close to buying. We look at your market and budget before recommending a mix."
+            "q": "Which platforms do you manage?",
+            "a": "Mainly Facebook, Instagram, LinkedIn and TikTok for social media, and Google Ads and Meta Ads for paid campaigns, chosen to suit your customers."
           },
           {
-            "q": "How do you report on results?",
-            "a": "A monthly report covering traffic, rankings, enquiries, sales and spend for each channel, with notes on what we will do next."
+            "q": "Is there a minimum ad budget?",
+            "a": "No fixed minimum. We recommend a budget based on your market and goals, and explain it before anything is spent."
           },
           {
             "q": "Is there a minimum contract?",
-            "a": "Most marketing work runs month to month after an initial setup period. We explain the terms clearly in every proposal."
-          },
-          {
-            "q": "Can you work with our existing marketing team?",
-            "a": "Yes. We can take on one channel, support your team with strategy and reporting, or run the full programme, whichever suits you."
+            "a": "Most marketing work runs month to month after an initial setup period. The terms are written in every proposal."
           }
         ],
         "caseStudy": "retail-storefront-rebuild"
@@ -1293,7 +1411,7 @@
       }
     },
     {
-      "path": "/services/ai-and-automation/crm-and-lead-management/",
+      "path": "/services/crm-and-lead-generation/crm-and-lead-management/",
       "title": "CRM & Lead Management",
       "description": "Custom CRM systems, lead capture and automated follow ups so no lead is lost. Capture every enquiry, follow up on time and see where each lead stands.",
       "type": "Service",
@@ -1309,7 +1427,8 @@
       "editable": {
         "slug": "crm-and-lead-management",
         "name": "CRM & Lead Management",
-        "category": "ai-and-automation",
+        "category": "crm-and-lead-generation",
+        "formerCategory": "ai-and-automation",
         "short": "Custom CRM systems, lead capture and automated follow ups so no lead is lost.",
         "heroImage": "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=2000&q=80",
         "images": [
@@ -1407,7 +1526,7 @@
       }
     },
     {
-      "path": "/services/growth-marketing/seo/",
+      "path": "/services/seo-and-ai-search/seo/",
       "title": "SEO",
       "description": "Technical, on-page, local and off-page SEO with monthly reporting. Help the right customers find you on Google, then turn that traffic into enquiries.",
       "type": "Service",
@@ -1423,7 +1542,8 @@
       "editable": {
         "slug": "seo",
         "name": "SEO",
-        "category": "growth-marketing",
+        "category": "seo-and-ai-search",
+        "formerCategory": "growth-marketing",
         "short": "Technical, on-page, local and off-page SEO with monthly reporting.",
         "heroImage": "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&w=2000&q=80",
         "images": [
@@ -1521,7 +1641,7 @@
       }
     },
     {
-      "path": "/services/growth-marketing/aeo-and-geo/",
+      "path": "/services/seo-and-ai-search/aeo-and-geo/",
       "title": "AEO & GEO",
       "description": "Visibility in featured snippets, voice search and AI answers from ChatGPT, Gemini and Perplexity. Make your business easy for search engines and AI assistants to understand, quote and recommend.",
       "type": "Service",
@@ -1537,7 +1657,8 @@
       "editable": {
         "slug": "aeo-and-geo",
         "name": "AEO & GEO",
-        "category": "growth-marketing",
+        "category": "seo-and-ai-search",
+        "formerCategory": "growth-marketing",
         "short": "Visibility in featured snippets, voice search and AI answers from ChatGPT, Gemini and Perplexity.",
         "heroImage": "https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&w=2000&q=80",
         "images": [
@@ -1635,7 +1756,7 @@
       }
     },
     {
-      "path": "/services/growth-marketing/social-media-management/",
+      "path": "/services/digital-marketing-and-ads/social-media-management/",
       "title": "Social Media Management",
       "description": "Content planning, reels, graphics, scheduling, engagement and reporting. Regular, on brand posts and a responsive presence, without your team having to manage it daily.",
       "type": "Service",
@@ -1651,7 +1772,8 @@
       "editable": {
         "slug": "social-media-management",
         "name": "Social Media Management",
-        "category": "growth-marketing",
+        "category": "digital-marketing-and-ads",
+        "formerCategory": "growth-marketing",
         "short": "Content planning, reels, graphics, scheduling, engagement and reporting.",
         "heroImage": "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=2000&q=80",
         "images": [
@@ -1749,7 +1871,7 @@
       }
     },
     {
-      "path": "/services/growth-marketing/ads-management/",
+      "path": "/services/digital-marketing-and-ads/ads-management/",
       "title": "Ads Management",
       "description": "Google Ads and Meta Ads with retargeting, conversion tracking and ROI reporting. Paid campaigns set up to bring in leads and sales, with tracking that shows what each one returns.",
       "type": "Service",
@@ -1765,7 +1887,8 @@
       "editable": {
         "slug": "ads-management",
         "name": "Ads Management",
-        "category": "growth-marketing",
+        "category": "digital-marketing-and-ads",
+        "formerCategory": "growth-marketing",
         "short": "Google Ads and Meta Ads with retargeting, conversion tracking and ROI reporting.",
         "heroImage": "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=2000&q=80",
         "images": [
@@ -2302,27 +2425,27 @@
     {
       "slug": "crm-and-lead-management",
       "name": "CRM & Lead Management",
-      "path": "/services/ai-and-automation/crm-and-lead-management/"
+      "path": "/services/crm-and-lead-generation/crm-and-lead-management/"
     },
     {
       "slug": "seo",
       "name": "SEO",
-      "path": "/services/growth-marketing/seo/"
+      "path": "/services/seo-and-ai-search/seo/"
     },
     {
       "slug": "aeo-and-geo",
       "name": "AEO & GEO",
-      "path": "/services/growth-marketing/aeo-and-geo/"
+      "path": "/services/seo-and-ai-search/aeo-and-geo/"
     },
     {
       "slug": "social-media-management",
       "name": "Social Media Management",
-      "path": "/services/growth-marketing/social-media-management/"
+      "path": "/services/digital-marketing-and-ads/social-media-management/"
     },
     {
       "slug": "ads-management",
       "name": "Ads Management",
-      "path": "/services/growth-marketing/ads-management/"
+      "path": "/services/digital-marketing-and-ads/ads-management/"
     }
   ],
   "industries": [

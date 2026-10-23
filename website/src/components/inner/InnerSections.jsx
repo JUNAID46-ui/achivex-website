@@ -13,14 +13,14 @@ import CountUp from '../motion/CountUp'
 const paras = (v) => (Array.isArray(v) ? v : v ? [v] : []).filter(Boolean)
 
 const Eyebrow = ({ children, light = false }) =>
-  children ? <p className={`text-[13px] font-semibold uppercase tracking-[0.18em] ${light ? 'text-[#A3A3A3]' : 'text-navy'}`}>{children}</p> : null
+  children ? <p className={`text-[13px] font-semibold uppercase tracking-[0.18em] ${light ? 'text-site-muted' : 'text-navy'}`}>{children}</p> : null
 
 // Deep navy hero with the title on the left and the lead on the right, then a wide image that
 // overlaps into the section below. A dot grid and soft light follow the pointer.
 export function InnerHero({ crumbs, eyebrow, title, text, image, alt, action, stats }) {
   return (
     <>
-      <header className="overflow-hidden bg-ink !bg-[#07152D] text-white">
+      <header className="overflow-hidden bg-ink !bg-site-hero text-white">
         <div className={`container-site relative pt-8 md:pt-10 ${image ? 'pb-[120px] md:pb-[200px]' : 'pb-16 md:pb-20'}`}>
           {crumbs && <Breadcrumb light items={crumbs} />}
           <div className="mt-12 grid gap-8 md:mt-16 lg:grid-cols-[1.25fr_1fr] lg:items-end lg:gap-16">
@@ -29,9 +29,9 @@ export function InnerHero({ crumbs, eyebrow, title, text, image, alt, action, st
               <h1 className="mt-5 text-[40px] font-medium leading-[1.05] tracking-[-0.035em] text-[#FFFFFF] sm:text-[54px] xl:text-[68px]">{title}</h1>
             </div>
             <div className="motion-rise-late lg:pb-2">
-              {text && <p className="text-[18px] leading-[1.65] text-[#A3A3A3]">{text}</p>}
+              {text && <p className="text-[18px] leading-[1.65] text-site-muted">{text}</p>}
               {action && (
-                <Link to={action.to} className="mt-7 inline-flex items-center gap-2 border-b-2 border-[#FFFFFF] pb-1 text-[15px] font-semibold text-[#FFFFFF] transition-colors hover:border-[#999999] hover:text-[#A3A3A3]">
+                <Link to={action.to} className="mt-7 inline-flex items-center gap-2 border-b-2 border-[#FFFFFF] pb-1 text-[15px] font-semibold text-[#FFFFFF] transition-colors hover:border-site-muted hover:text-site-muted">
                   {action.label} <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               )}
@@ -44,7 +44,7 @@ export function InnerHero({ crumbs, eyebrow, title, text, image, alt, action, st
                   <dd className="text-[40px] font-light leading-none tracking-[-0.03em] text-[#FFFFFF] md:text-[48px]">
                     {typeof st.value === 'number' ? <CountUp value={st.value} suffix={st.suffix} /> : st.value}
                   </dd>
-                  <dt className="mt-3 text-[14px] leading-snug text-[#A3A3A3]">{st.label}</dt>
+                  <dt className="mt-3 text-[14px] leading-snug text-site-muted">{st.label}</dt>
                 </div>
               ))}
             </dl>
@@ -53,7 +53,7 @@ export function InnerHero({ crumbs, eyebrow, title, text, image, alt, action, st
       </header>
       {image && (
         <div className="container-site relative -mt-[90px] md:-mt-[160px]">
-          <div className="overflow-hidden rounded-[28px] bg-[#E9ECF0] shadow-[0_30px_80px_-45px_rgba(0,0,0,0.45)]">
+          <div className="overflow-hidden rounded-[28px] bg-site-grey shadow-[0_30px_80px_-45px_rgba(0,0,0,0.45)]">
             <Img priority sizes="(min-width: 1280px) 1200px, 100vw" src={image} alt={alt || title} className="motion-settle aspect-[16/9] w-full object-cover md:aspect-[21/8]" />
           </div>
         </div>
@@ -66,16 +66,16 @@ export function InnerHero({ crumbs, eyebrow, title, text, image, alt, action, st
 export function IntroSplit({ eyebrow, title, keyword, paragraphs, tone = 'white' }) {
   if (!title && !paras(paragraphs).length) return null
   return (
-    <section className={`${tone === 'grey' ? 'bg-[#EEF0F3]' : 'bg-canvas'} py-20 md:py-28`}>
+    <section className={`${tone === 'grey' ? 'bg-site-grey' : 'bg-canvas'} py-20 md:py-28`}>
       <div className="container-site grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
         <FadeUp>
           <Eyebrow>{eyebrow}</Eyebrow>
-          <h2 className="mt-4 text-[32px] font-medium leading-[1.12] tracking-[-0.025em] text-[#1C1C1C] md:text-[44px]">{title}</h2>
+          <h2 className="mt-4 text-[32px] font-medium leading-[1.12] tracking-[-0.025em] text-site-heading md:text-[44px]">{title}</h2>
         </FadeUp>
         <FadeUp delay={0.08} className="space-y-5">
           {paras(paragraphs).map((p, i) => (
-            <p key={i} className={i === 0 ? 'text-[20px] leading-[1.65] text-[#2A2F37]' : 'text-[17px] leading-[1.75] text-[#4B515B]'}>
-              {i === 0 && keyword && <strong className="font-semibold text-[#1C1C1C]">{keyword}</strong>}{p}
+            <p key={i} className={i === 0 ? 'text-[20px] leading-[1.65] text-site-heading' : 'text-[17px] leading-[1.75] text-site-text'}>
+              {i === 0 && keyword && <strong className="font-semibold text-site-heading">{keyword}</strong>}{p}
             </p>
           ))}
         </FadeUp>
@@ -89,34 +89,34 @@ export function CardGrid({ eyebrow, title, text, items = [], columns = 3, tone =
   const list = items.filter((i) => i && (i.title || i.text))
   if (!list.length) return null
   const cols = columns === 2 ? 'md:grid-cols-2' : columns === 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : 'sm:grid-cols-2 lg:grid-cols-3'
-  const card = tone === 'grey' ? 'bg-[#FFFFFF] border-[#E3E6EB]' : 'bg-[#F6F7F9] border-[#E6E9EE]'
+  const card = tone === 'grey' ? 'bg-[#FFFFFF] border-site-line' : 'bg-site-card border-site-line'
   return (
-    <section className={`${tone === 'grey' ? 'bg-[#EEF0F3]' : 'bg-canvas'} py-20 md:py-28`}>
+    <section className={`${tone === 'grey' ? 'bg-site-grey' : 'bg-canvas'} py-20 md:py-28`}>
       <div className="container-site">
         <FadeUp className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end">
           <div>
             <Eyebrow>{eyebrow}</Eyebrow>
-            {title && <h2 className="mt-4 text-[32px] font-medium leading-[1.12] tracking-[-0.025em] text-[#1C1C1C] md:text-[44px]">{title}</h2>}
+            {title && <h2 className="mt-4 text-[32px] font-medium leading-[1.12] tracking-[-0.025em] text-site-heading md:text-[44px]">{title}</h2>}
           </div>
-          {text && <p className="text-[17px] leading-[1.7] text-[#4B515B] lg:justify-self-end lg:max-w-[520px]">{text}</p>}
+          {text && <p className="text-[17px] leading-[1.7] text-site-text lg:justify-self-end lg:max-w-[520px]">{text}</p>}
         </FadeUp>
         <ul className={`mt-14 grid gap-5 ${cols}`}>
           {list.map((item, i) => {
             const Icon = item.icon || icons[i % (icons.length || 1)]
             const body = (
               <>
-                <span className="absolute inset-x-0 top-0 h-[3px] bg-[#D5D9E0]" aria-hidden="true" />
-                <span className="absolute left-0 top-0 h-[3px] w-16 bg-gradient-to-r from-[#07152D] to-[#3B5BFF] transition-all duration-700 ease-out group-hover:w-full" aria-hidden="true" />
+                <span className="absolute inset-x-0 top-0 h-[3px] bg-site-line" aria-hidden="true" />
+                <span className="absolute left-0 top-0 h-[3px] w-16 bg-gradient-to-r from-site-hero to-[#3B5BFF] transition-all duration-700 ease-out group-hover:w-full" aria-hidden="true" />
                 {Icon && (
-                  <span className="mb-6 grid h-11 w-11 place-items-center rounded-xl bg-[#07152D]/[0.06] text-[#0F2C9C] transition-colors duration-500 group-hover:bg-[#07152D] group-hover:text-[#FFFFFF]">
+                  <span className="mb-6 grid h-11 w-11 place-items-center rounded-xl bg-site-hero/[0.06] text-site-brand transition-colors duration-500 group-hover:bg-site-hero group-hover:text-[#FFFFFF]">
                     <Icon className="h-5 w-5" aria-hidden="true" />
                   </span>
                 )}
-                <h3 className="flex items-start justify-between gap-4 text-[20px] font-semibold leading-snug tracking-[-0.01em] text-[#1C1C1C]">
+                <h3 className="flex items-start justify-between gap-4 text-[20px] font-semibold leading-snug tracking-[-0.01em] text-site-heading">
                   {item.title}
-                  {item.to && <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 text-[#999999] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-navy" aria-hidden="true" />}
+                  {item.to && <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 text-site-muted transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-navy" aria-hidden="true" />}
                 </h3>
-                {item.text && <p className="mt-3 text-[15.5px] leading-[1.7] text-[#5B616B]">{item.text}</p>}
+                {item.text && <p className="mt-3 text-[15.5px] leading-[1.7] text-site-text">{item.text}</p>}
               </>
             )
             const cls = `group relative block h-full overflow-hidden rounded-[18px] border p-7 pt-9 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_24px_50px_-30px_rgba(7,21,45,0.35)] md:p-8 md:pt-10 ${card}`
@@ -136,25 +136,25 @@ export function CardGrid({ eyebrow, title, text, items = [], columns = 3, tone =
 export function ImageSplit({ eyebrow, title, paragraphs, list, image, alt, reverse = false, tone = 'white' }) {
   if (!title && !paras(paragraphs).length) return null
   return (
-    <section className={`${tone === 'grey' ? 'bg-[#EEF0F3]' : 'bg-canvas'} py-20 md:py-28`}>
+    <section className={`${tone === 'grey' ? 'bg-site-grey' : 'bg-canvas'} py-20 md:py-28`}>
       <div className="container-site grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
         {image && (
           <FadeUp className={reverse ? 'lg:order-2' : ''}>
-            <div className="overflow-hidden rounded-[28px] bg-[#E9ECF0]">
+            <div className="overflow-hidden rounded-[28px] bg-site-grey">
               <Img sizes="(min-width: 1024px) 600px, 100vw" src={image} alt={alt || title} className="aspect-[5/4] w-full object-cover transition-transform duration-[1.2s] ease-out hover:scale-[1.04]" />
             </div>
           </FadeUp>
         )}
         <FadeUp delay={0.08}>
           <Eyebrow>{eyebrow}</Eyebrow>
-          <h2 className="mt-4 text-[32px] font-medium leading-[1.12] tracking-[-0.025em] text-[#1C1C1C] md:text-[42px]">{title}</h2>
+          <h2 className="mt-4 text-[32px] font-medium leading-[1.12] tracking-[-0.025em] text-site-heading md:text-[42px]">{title}</h2>
           <div className="mt-6 space-y-5">
-            {paras(paragraphs).map((p, i) => <p key={i} className="text-[17px] leading-[1.75] text-[#4B515B]">{p}</p>)}
+            {paras(paragraphs).map((p, i) => <p key={i} className="text-[17px] leading-[1.75] text-site-text">{p}</p>)}
           </div>
           {paras(list).length > 0 && (
             <ul className="mt-7 space-y-3">
               {paras(list).map((li) => (
-                <li key={li} className="flex gap-3 text-[16px] leading-[1.6] text-[#2A2F37]">
+                <li key={li} className="flex gap-3 text-[16px] leading-[1.6] text-site-heading">
                   <span className="mt-[3px] grid h-5 w-5 shrink-0 place-items-center rounded-full bg-navy/10 text-navy"><Check className="h-3 w-3" strokeWidth={3} aria-hidden="true" /></span>
                   {li}
                 </li>
@@ -177,7 +177,7 @@ export function Steps({ eyebrow, title, text, items = [] }) {
         <FadeUp className="max-w-3xl">
           <Eyebrow light>{eyebrow}</Eyebrow>
           <h2 className="mt-4 text-[32px] font-medium leading-[1.12] tracking-[-0.025em] text-white md:text-[44px]">{title}</h2>
-          {text && <p className="mt-5 text-[17px] leading-[1.7] text-[#A3A3A3]">{text}</p>}
+          {text && <p className="mt-5 text-[17px] leading-[1.7] text-site-muted">{text}</p>}
         </FadeUp>
         <div className="mt-16">
           <ProcessTimeline items={list} />
@@ -197,15 +197,15 @@ export function Pair({ eyebrow, title, items = [] }) {
         {title && (
           <FadeUp>
             <Eyebrow>{eyebrow}</Eyebrow>
-            <h2 className="mt-4 text-[32px] font-medium leading-[1.12] tracking-[-0.025em] text-[#1C1C1C] md:text-[44px]">{title}</h2>
+            <h2 className="mt-4 text-[32px] font-medium leading-[1.12] tracking-[-0.025em] text-site-heading md:text-[44px]">{title}</h2>
           </FadeUp>
         )}
         <div className={`grid gap-5 ${title ? 'mt-12' : ''} ${list.length >= 3 ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
           {list.map((m, i) => (
-            <FadeUp key={m.title} delay={i * 0.08} className="group relative overflow-hidden rounded-[20px] border border-[#E3E6EB] bg-[#FFFFFF] p-8 shadow-[0_20px_50px_-40px_rgba(7,21,45,0.4)] md:p-10">
-              <span className="absolute inset-x-0 top-0 h-[3px] origin-left bg-gradient-to-r from-[#07152D] via-[#0F2C9C] to-[#5B7CFF] transition-transform duration-700 group-hover:scale-x-100 md:scale-x-[0.35]" aria-hidden="true" />
+            <FadeUp key={m.title} delay={i * 0.08} className="group relative overflow-hidden rounded-[20px] border border-site-line bg-[#FFFFFF] p-8 shadow-[0_20px_50px_-40px_rgba(7,21,45,0.4)] md:p-10">
+              <span className="absolute inset-x-0 top-0 h-[3px] origin-left bg-gradient-to-r from-site-hero via-site-brand to-[#5B7CFF] transition-transform duration-700 group-hover:scale-x-100 md:scale-x-[0.35]" aria-hidden="true" />
               <p className="text-[12px] font-semibold uppercase tracking-[0.2em] text-navy">{m.title}</p>
-              <p className="mt-6 text-[19px] leading-[1.6] text-[#2A2F37]">{m.text}</p>
+              <p className="mt-6 text-[19px] leading-[1.6] text-site-heading">{m.text}</p>
             </FadeUp>
           ))}
         </div>
@@ -218,17 +218,17 @@ export function Pair({ eyebrow, title, items = [] }) {
 export function DarkBanner({ eyebrow, title, text, action, tone = 'grey' }) {
   if (!title) return null
   return (
-    <section className={`${tone === 'grey' ? 'bg-[#EEF0F3]' : 'bg-canvas'} pb-20 md:pb-28`}>
+    <section className={`${tone === 'grey' ? 'bg-site-grey' : 'bg-canvas'} pb-20 md:pb-28`}>
       <div className="container-site">
-        <FadeUp className="relative overflow-hidden rounded-[24px] bg-ink !bg-[#07152D] px-8 py-10 md:flex md:items-center md:justify-between md:gap-10 md:px-12 md:py-12">
+        <FadeUp className="relative overflow-hidden rounded-[24px] bg-ink !bg-site-hero px-8 py-10 md:flex md:items-center md:justify-between md:gap-10 md:px-12 md:py-12">
           <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#3B5BFF]/25 blur-3xl" aria-hidden="true" />
           <div className="relative max-w-2xl">
             <Eyebrow light>{eyebrow}</Eyebrow>
             <h2 className="mt-3 text-[24px] font-medium leading-snug tracking-[-0.015em] text-[#FFFFFF] md:text-[28px]">{title}</h2>
-            {text && <p className="mt-3 text-[16px] leading-[1.7] text-[#A3A3A3]">{text}</p>}
+            {text && <p className="mt-3 text-[16px] leading-[1.7] text-site-muted">{text}</p>}
           </div>
           {action && (
-            <Link to={action.to} className="relative mt-7 inline-flex shrink-0 items-center gap-2 rounded-full bg-[#FFFFFF] px-6 py-3 text-[14px] font-semibold text-[#07152D] transition-transform duration-300 hover:-translate-y-0.5 md:mt-0">
+            <Link to={action.to} className="relative mt-7 inline-flex shrink-0 items-center gap-2 rounded-full bg-[#FFFFFF] px-6 py-3 text-[14px] font-semibold text-site-hero transition-transform duration-300 hover:-translate-y-0.5 md:mt-0">
               {action.label} <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           )}
@@ -247,8 +247,8 @@ export function FaqBlock({ eyebrow = 'FAQs', title, text, items = [] }) {
       <div className="container-site grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
         <FadeUp>
           <Eyebrow>{eyebrow}</Eyebrow>
-          <h2 className="mt-4 text-[32px] font-medium leading-[1.12] tracking-[-0.025em] text-[#1C1C1C] md:text-[44px]">{title}</h2>
-          {text && <p className="mt-5 max-w-sm text-[17px] leading-[1.7] text-[#5B616B]">{text}</p>}
+          <h2 className="mt-4 text-[32px] font-medium leading-[1.12] tracking-[-0.025em] text-site-heading md:text-[44px]">{title}</h2>
+          {text && <p className="mt-5 max-w-sm text-[17px] leading-[1.7] text-site-text">{text}</p>}
         </FadeUp>
         <FadeUp delay={0.08}><FAQ items={list} /></FadeUp>
       </div>

@@ -15,7 +15,7 @@ export default function CurvedFrame({ className = '', children }) {
           <path d={FRAME_PATH} />
         </clipPath>
       </svg>
-      <div className={`relative aspect-[550/515] w-full bg-[#E9ECF0] ${className}`} style={{ clipPath: `url(#${id})` }}>
+      <div className={`relative aspect-[550/515] w-full bg-site-grey ${className}`} style={{ clipPath: `url(#${id})` }}>
         {children}
       </div>
     </>

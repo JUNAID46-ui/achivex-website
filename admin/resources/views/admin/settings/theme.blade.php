@@ -58,20 +58,29 @@
   <aside class="xl:sticky xl:top-16 xl:self-start">
     <div class="card-header"><h2 class="card-title">Preview</h2></div>
     <div class="mt-4 border border-ink">
+      <div class="p-6" :style="`background:${c.heroBg}`">
+        <p class="text-xs uppercase tracking-widest" :style="`color:${c.mutedText}; font-family:'${f.body}'`">About AchiveX</p>
+        <p class="mt-2 text-[28px] leading-tight" :style="`color:#FFFFFF; font-family:'${f.heading}'`">A technology partner that explains every step</p>
+        <p class="mt-3 text-[14px] leading-relaxed" :style="`color:${c.mutedText}; font-family:'${f.body}'`">Page hero, Why AchiveX and dark cards.</p>
+      </div>
+      <div class="p-6" :style="`background:#FFFFFF`">
+        <p class="text-xs font-semibold uppercase tracking-widest" :style="`color:${c.brand}; font-family:'${f.body}'`">What we do</p>
+        <p class="mt-2 text-[22px] leading-tight" :style="`color:${c.heading}; font-family:'${f.heading}'`">Five areas, eight services</p>
+        <p class="mt-2 text-[14px]" :style="`color:${c.text}; font-family:'${f.body}'`">Body text on a white section.</p>
+        <div class="mt-4 p-4 text-[13px]" :style="`background:${c.cards}; border:1px solid ${c.lines}; color:${c.text}; font-family:'${f.body}'`">A card with its border</div>
+        <span class="mt-4 inline-block rounded-full px-4 py-2 text-[13px] font-semibold" :style="`background:${c.brand}; color:#FFFFFF; font-family:'${f.body}'`">Contact us</span>
+      </div>
+      <div class="p-6" :style="`background:${c.greyBg}`">
+        <p class="text-[20px]" :style="`color:${c.heading}; font-family:'${f.heading}'`">A grey section</p>
+        <p class="mt-1 text-[14px]" :style="`color:${c.text}; font-family:'${f.body}'`">Bands between white sections.</p>
+      </div>
       <div class="p-6" :style="`background:${c.darkBg}`">
-        <p class="text-xs uppercase tracking-widest" :style="`color:${c.accent}; font-family:'${f.body}'`">Our services</p>
-        <p class="mt-2 text-[28px] leading-tight" :style="`color:${c.darkHeading}; font-family:'${f.heading}'`">Digital work that moves the business</p>
-        <p class="mt-3 text-[14px] leading-relaxed" :style="`color:${c.darkText}; font-family:'${f.body}'`">Strategy, data, cloud and security services for growing companies.</p>
-        <span class="mt-5 inline-block px-4 py-2 text-[13px] font-semibold" :style="`background:${c.accent}; color:${c.onAccent}; font-family:'${f.body}'`">Talk to us</span>
+        <p class="text-[34px] font-light" :style="`color:#FFFFFF; font-family:'${f.heading}'`">8</p>
+        <p class="text-[14px]" :style="`color:${c.mutedText}; font-family:'${f.body}'`">Dark section: numbers and timeline</p>
       </div>
-      <div class="p-6" :style="`background:${c.lightBg}`">
-        <p class="text-[22px] leading-tight" :style="`color:${c.lightHeading}; font-family:'${f.heading}'`">Case studies</p>
-        <p class="mt-2 text-[14px]" :style="`color:${c.lightText}; font-family:'${f.body}'`">How we approached real client problems.</p>
-        <div class="mt-4 p-4 text-[13px]" :style="`background:${c.lightCards}; color:${c.lightText}; font-family:'${f.body}'`">A card inside a light section</div>
-        <span class="mt-4 inline-block px-4 py-2 text-[13px] font-semibold" :style="`background:${c.lightAccent}; color:${c.lightOnAccent}; font-family:'${f.body}'`">Read more</span>
-      </div>
-      <div class="p-6" :style="`background:${c.brandBlue}`">
-        <p class="text-[20px]" :style="`color:${c.darkHeading}; font-family:'${f.heading}'`">Ready to start?</p>
+      <div class="p-6" :style="`background:${c.footerBg}`">
+        <p class="text-[20px]" :style="`color:#FFFFFF; font-family:'${f.heading}'`">Ready to start?</p>
+        <p class="mt-1 text-[13px]" :style="`color:${c.mutedText}; font-family:'${f.body}'`">Call to action and footer</p>
       </div>
     </div>
     <div class="mt-4 text-[13px]">

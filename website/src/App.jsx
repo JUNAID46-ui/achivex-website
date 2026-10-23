@@ -23,6 +23,7 @@ const PrivacyPolicy = lazy(() => import('./views/legal/PrivacyPolicy'))
 const Terms = lazy(() => import('./views/legal/Terms'))
 import NotFound from './views/NotFound'
 const RootResolver = lazy(() => import('./views/RootResolver'))
+const Landing = lazy(() => import('./views/Landing'))
 import { routePath, listRoutePath, isRoot } from './lib/permalinks'
 
 export default function App() {
@@ -58,6 +59,7 @@ export default function App() {
           ])}
 
         <Route path="contact-us" element={<Contact />} />
+        <Route path="free-consultation" element={<Landing />} />
         <Route path="careers" element={<Careers />} />
         <Route path="privacy-policy" element={<PrivacyPolicy />} />
         <Route path="terms-of-service" element={<Terms />} />

@@ -25,7 +25,7 @@ export default function WhoWeAre() {
     <>
       <InnerHero crumbs={[{ label: 'About Us' }]} eyebrow={c.heroEyebrow} title={c.heroTitle} text={c.heroText} image={c.heroImage} alt={c.heroImageAlt} action={{ label: 'Talk to our team', to: '/contact-us/' }} />
       <IntroSplit eyebrow={c.introEyebrow} title={c.introTitle} keyword={c.introKeyword} paragraphs={c.introParagraphs} />
-      <section className="bg-[#EEF0F3]">
+      <section className="bg-site-grey">
         <ScrollStats stats={siteFacts()} eyebrow="AchiveX in numbers" title="What one team covers" />
       </section>
       <Pair

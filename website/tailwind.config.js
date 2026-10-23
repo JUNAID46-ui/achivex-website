@@ -21,6 +21,19 @@ export default {
       // Home hero keeps its original white and black cards on the dark background.
       ink: 'rgb(var(--c-ink) / <alpha-value>)',
       cloud: 'rgb(var(--c-cloud) / <alpha-value>)',
+      // Site palette (see :root in index.css), editable in the admin.
+      site: {
+        hero: 'rgb(var(--s-hero) / <alpha-value>)',
+        dark: 'rgb(var(--s-dark) / <alpha-value>)',
+        black: 'rgb(var(--s-black) / <alpha-value>)',
+        grey: 'rgb(var(--s-grey) / <alpha-value>)',
+        heading: 'rgb(var(--s-heading) / <alpha-value>)',
+        text: 'rgb(var(--s-text) / <alpha-value>)',
+        muted: 'rgb(var(--s-muted) / <alpha-value>)',
+        brand: 'rgb(var(--s-brand) / <alpha-value>)',
+        card: 'rgb(var(--s-card) / <alpha-value>)',
+        line: 'rgb(var(--s-line) / <alpha-value>)',
+      },
     },
     extend: {
       fontFamily: {

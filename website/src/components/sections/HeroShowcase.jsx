@@ -35,7 +35,7 @@ function RotatingBadge({ label, words, to }) {
       </svg>
       <Link
         to={to}
-        className="absolute flex h-[112px] w-[112px] flex-col items-center justify-center gap-1 rounded-full bg-[#080808] text-[14px] text-[#FFFFFF] shadow-[0_10px_26px_rgba(0,0,0,0.16)] transition-transform duration-200 hover:scale-105 xl:h-[122px] xl:w-[122px]"
+        className="absolute flex h-[112px] w-[112px] flex-col items-center justify-center gap-1 rounded-full bg-site-black text-[14px] text-[#FFFFFF] shadow-[0_10px_26px_rgba(0,0,0,0.16)] transition-transform duration-200 hover:scale-105 xl:h-[122px] xl:w-[122px]"
       >
         <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
         {label}
@@ -61,18 +61,18 @@ export default function HeroShowcase({ d = {} }) {
       <div className="container-site grid gap-12 lg:grid-cols-[1fr_1.08fr] lg:gap-8">
         <div className="relative z-10 flex flex-col pt-2 lg:justify-between">
           <div>
-            <h1 className="motion-rise text-[40px] font-medium leading-[1.1] tracking-[-0.03em] text-[#111111] sm:text-[54px] lg:whitespace-nowrap lg:text-[52px] xl:text-[64px]">
+            <h1 className="motion-rise text-[40px] font-medium leading-[1.1] tracking-[-0.03em] text-site-heading sm:text-[54px] lg:whitespace-nowrap lg:text-[52px] xl:text-[64px]">
               {v('line1')}
               <br />
               {v('line2')}
             </h1>
-            <p className="motion-rise-late mt-5 max-w-[480px] text-[15px] leading-[1.65] text-[#666666]">{v('lead')}</p>
+            <p className="motion-rise-late mt-5 max-w-[480px] text-[15px] leading-[1.65] text-site-text">{v('lead')}</p>
             <Link
               to={v('ctaLink')}
-              className="mt-7 inline-flex w-fit items-center gap-4 rounded-full bg-[#2B2927] py-1.5 pl-6 pr-1.5 text-[15px] text-[#FFFFFF] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#141414]"
+              className="mt-7 inline-flex w-fit items-center gap-4 rounded-full bg-[#2B2927] py-1.5 pl-6 pr-1.5 text-[15px] text-[#FFFFFF] transition-all duration-200 hover:-translate-y-0.5 hover:bg-site-dark"
             >
               {v('ctaText')}
-              <span className="grid h-10 w-10 place-items-center rounded-full bg-[#FFFFFF] text-[#141414]">
+              <span className="grid h-10 w-10 place-items-center rounded-full bg-[#FFFFFF] text-site-heading">
                 <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
               </span>
             </Link>
@@ -90,8 +90,8 @@ export default function HeroShowcase({ d = {} }) {
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
-              <p className="mb-1 text-[18px] font-semibold tracking-[-0.2px] text-[#161616]">{v('cardTitle')}</p>
-              <p className="text-[13.5px] text-[#6E6E6E]">{v('cardText')}</p>
+              <p className="mb-1 text-[18px] font-semibold tracking-[-0.2px] text-site-heading">{v('cardTitle')}</p>
+              <p className="text-[13.5px] text-site-text">{v('cardText')}</p>
             </Link>
             <div className="lg:-mt-9">
               <RotatingBadge label={v('badgeLabel')} words={v('badgeText').toUpperCase()} to={v('badgeLink')} />

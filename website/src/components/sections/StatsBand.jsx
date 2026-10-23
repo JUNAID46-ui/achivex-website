@@ -8,7 +8,7 @@ export default function StatsBand({ title, image, alt = '', stats = [] }) {
   return (
     <section className="relative isolate overflow-hidden bg-ink text-white">
       <Img src={image} alt={alt} sizes="100vw" className="absolute inset-0 -z-20 h-full w-full object-cover" />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#07152D]/80 via-[#07152D]/55 to-[#07152D]/85" aria-hidden="true" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-site-hero/80 via-site-hero/55 to-site-hero/85" aria-hidden="true" />
       <div className="container-site flex min-h-[620px] flex-col justify-between py-20 md:min-h-[700px] md:py-24">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
@@ -31,7 +31,7 @@ export default function StatsBand({ title, image, alt = '', stats = [] }) {
               <dd className="text-[64px] font-extralight leading-none tracking-[-0.04em] text-[#FFFFFF] md:text-[88px]">
                 <CountUp value={s.value} suffix={s.suffix} />
               </dd>
-              <dt className="mx-auto mt-4 max-w-[240px] text-[16px] leading-snug text-[#E5E7EB]">{s.label}</dt>
+              <dt className="mx-auto mt-4 max-w-[240px] text-[16px] leading-snug text-site-line">{s.label}</dt>
             </motion.div>
           ))}
         </dl>

@@ -41,10 +41,10 @@ export default function CTA({
         </div>
         <Link
           to={to}
-          className="group inline-flex w-fit items-center gap-4 rounded-full bg-[#FFFFFF] py-2 pl-7 pr-2 text-[15px] font-semibold text-[#000000] shadow-[0_20px_50px_-20px_rgba(91,124,255,0.6)] transition-transform duration-300 hover:-translate-y-0.5"
+          className="group inline-flex w-fit items-center gap-4 rounded-full bg-[#FFFFFF] py-2 pl-7 pr-2 text-[15px] font-semibold text-site-black shadow-[0_20px_50px_-20px_rgba(91,124,255,0.6)] transition-transform duration-300 hover:-translate-y-0.5"
         >
           {button}
-          <span className="grid h-11 w-11 place-items-center rounded-full bg-[#000000] text-[#FFFFFF] transition-transform duration-300 group-hover:-rotate-45">
+          <span className="grid h-11 w-11 place-items-center rounded-full bg-site-black text-[#FFFFFF] transition-transform duration-300 group-hover:-rotate-45">
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </span>
         </Link>

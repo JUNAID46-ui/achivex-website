@@ -115,7 +115,7 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.2 }}
-              className="absolute inset-x-0 top-full hidden border-y border-[#E6E9EE] bg-canvas shadow-[0_18px_30px_-24px_rgba(11,13,18,0.25)] lg:block"
+              className="absolute inset-x-0 top-full hidden border-y border-site-line bg-canvas shadow-[0_18px_30px_-24px_rgba(11,13,18,0.25)] lg:block"
               onMouseEnter={() => enter(open)}
             >
               {(() => { const Panel = items.find((i) => i.key === open).panel; return <Panel onNavigate={close} /> })()}

@@ -23,6 +23,7 @@ const pages = [
   { path: '/insights/whitepapers/', title: 'Whitepapers and eBooks', description: 'Free practical guides from AchiveX on cloud migration, data quality, generative AI and security.', type: 'Page' },
   { path: '/insights/blogs/', title: 'Blogs', description: 'Practical articles from AchiveX on data, cloud, security, strategy and business operations.', type: 'Page' },
   { path: '/contact-us/', title: 'Contact Us', description: 'Contact AchiveX LLC by phone at +1 307 622 1140, by email at info@achivex.com, or send a message using our contact form.', type: 'Page' },
+  { path: '/free-consultation/', title: 'Book a Free Consultation', description: 'Book a free consultation with AchiveX LLC for web development, custom software, AI automation, CRM, SEO and digital marketing. Fixed price quotes in writing.', type: 'Landing page' },
   { path: '/careers/', title: 'Careers', description: 'Careers at AchiveX LLC. Learn about our culture and see current open positions.', type: 'Page' },
   { path: '/privacy-policy/', title: 'Privacy Policy', description: 'How AchiveX LLC collects, uses and protects personal information.', type: 'Page' },
   { path: '/terms-of-service/', title: 'Terms of Service', description: 'The terms that govern use of the AchiveX LLC website and services.', type: 'Page' },

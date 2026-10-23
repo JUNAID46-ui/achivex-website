@@ -11,8 +11,12 @@ import { pageDesignCss } from '../lib/sectionDesign'
 import PageSections from './PageSections'
 import ClosingStrip from './ClosingStrip'
 
+// Landing pages end with their own copyright bar instead of the footer.
+const LANDING_PAGES = ['/free-consultation/']
+
 export default function Layout() {
   const { pathname } = useLocation()
+  const bare = LANDING_PAGES.includes(normalizePath(pathname))
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' })
     logPageView(pathname)
@@ -50,10 +54,10 @@ export default function Layout() {
           <Outlet />
         </Suspense>
         {/* Extra sections added to a fixed page in the Page Builder appear above the footer. */}
-        {pathname !== '/' && !customPages[normalizePath(pathname)] && <PageSections sections={pageSections[normalizePath(pathname)]} />}
-        {endsWithCta && <div data-closing><ClosingStrip /></div>}
+        {!bare && pathname !== '/' && !customPages[normalizePath(pathname)] && <PageSections sections={pageSections[normalizePath(pathname)]} />}
+        {!bare && endsWithCta && <div data-closing><ClosingStrip /></div>}
       </main>
-      <Footer />
+      {!bare && <Footer />}
     </>
   )
 }

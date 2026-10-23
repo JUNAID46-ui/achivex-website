@@ -17,12 +17,14 @@ export default {
   ],
 
   areasEyebrow: 'What we do',
-  areasTitle: 'Three areas, eight services',
+  areasTitle: 'Five areas, eight services',
   areasText: '',
   areas: [
-    { title: 'Web and Software', text: 'Websites, online stores, web applications, dashboards and APIs. We build on WordPress, WooCommerce, Laravel and React, and keep every site fast, secure and easy to update.', to: '/services/web-and-software/' },
-    { title: 'AI and Automation', text: 'Chatbots, workflow automation and CRM systems that answer questions, move data between your tools and follow up on leads, so your team spends less time on routine tasks.', to: '/services/ai-and-automation/' },
-    { title: 'Growth Marketing', text: 'SEO, visibility in AI answers, social media management and paid ads, with monthly reporting that ties effort and spend to enquiries and sales.', to: '/services/growth-marketing/' },
+    { title: 'Web & Software Development', text: 'Websites, online stores, web apps, dashboards and APIs on WordPress, WooCommerce, Laravel and React.', to: '/services/web-and-software/' },
+    { title: 'AI & Business Automation', text: 'Chatbots, AI agents, workflow automation and a 24/7 AI receptionist connected to your tools.', to: '/services/ai-and-automation/' },
+    { title: 'CRM & Lead Generation', text: 'One place to capture every lead, with automated follow ups and clear reporting.', to: '/services/crm-and-lead-generation/' },
+    { title: 'SEO & AI Search Optimization', text: 'Rankings on Google and Google Maps, and visibility in AI answers from ChatGPT and Gemini.', to: '/services/seo-and-ai-search/' },
+    { title: 'Digital Marketing & Paid Ads', text: 'Social media management and Google and Meta ads, tracked against leads and sales.', to: '/services/digital-marketing-and-ads/' },
   ],
 
   storyEyebrow: 'Our story',

@@ -7,27 +7,23 @@ use App\Models\Content\SiteSetting;
 // Website colours and fonts (Settings, Colors and Fonts). Mirrors website/src/lib/theme.js.
 class Theme
 {
-    // key => [label, help, default]
+    // key => [label, help, default]. Must match PALETTE in website/src/lib/theme.js.
     public const COLORS = [
         'Dark sections' => [
-            'darkBg' => ['Background', 'Most of the site, the header and the footer.', '#0B0D12'],
-            'darkHeading' => ['Headings', 'Headings and strong text on dark backgrounds.', '#FFFFFF'],
-            'darkText' => ['Body text', 'Paragraphs on dark backgrounds.', '#C9CED6'],
-            'accent' => ['Accent', 'Buttons, numbers and icons on dark backgrounds.', '#B6F500'],
-            'onAccent' => ['Text on accent', 'Button text on the accent colour.', '#0B0D12'],
+            'heroBg' => ['Page heroes and navy bands', 'The top of every inner page, Why AchiveX, the dark cards and banners.', '#07152D'],
+            'darkBg' => ['Dark sections', 'The home intro and numbers, and every "How we work" timeline.', '#1C1C1C'],
+            'footerBg' => ['Call to action and footer', 'The closing call to action band and the footer.', '#000000'],
+            'mutedText' => ['Text on dark backgrounds', 'Paragraphs and labels on navy, dark and black sections. Headings there stay white.', '#A3A3A3'],
         ],
         'Light sections' => [
-            'lightBg' => ['Background', 'White sections.', '#FFFFFF'],
-            'lightHeading' => ['Headings', 'Headings on light backgrounds.', '#0B0D12'],
-            'lightText' => ['Body text', 'Paragraphs on light backgrounds.', '#0B0D12'],
-            'lightAccent' => ['Accent', 'Buttons and links on light backgrounds.', '#0F2C9C'],
-            'lightOnAccent' => ['Text on accent', 'Button text on the light accent.', '#FFFFFF'],
-            'lightCards' => ['Cards', 'Cards and form fields inside light sections.', '#C9CED6'],
+            'greyBg' => ['Grey sections', 'The light grey bands between white sections.', '#EEF0F3'],
+            'heading' => ['Headings', 'Headings and strong text on white and grey sections.', '#1C1C1C'],
+            'text' => ['Body text', 'Paragraphs on white and grey sections.', '#4B515B'],
+            'cards' => ['Cards', 'Card and summary box backgrounds on white sections.', '#F6F7F9'],
+            'lines' => ['Lines and borders', 'Card borders, dividers and the grey part of progress lines.', '#E3E6EB'],
         ],
-        'Other' => [
-            'brandBlue' => ['Brand blue sections', 'Blue bands such as call to action blocks.', '#0F2C9C'],
-            'panel' => ['Light panels', 'Side panels in menus.', '#EEF1F3'],
-            'heroCard' => ['Hero dark card', 'The black card in the home page hero.', '#000000'],
+        'Brand' => [
+            'brand' => ['Brand blue', 'Links, small labels above headings, buttons, numbers and the active menu item.', '#0F2C9C'],
         ],
     ];
 
@@ -39,12 +35,13 @@ class Theme
 
     // Pairs whose contrast is checked: [text, background, label].
     public const PAIRS = [
-        ['darkText', 'darkBg', 'Body text on dark background'],
-        ['darkHeading', 'darkBg', 'Headings on dark background'],
-        ['onAccent', 'accent', 'Button text on accent'],
-        ['lightText', 'lightBg', 'Body text on light background'],
-        ['lightOnAccent', 'lightAccent', 'Button text on light accent'],
-        ['darkHeading', 'brandBlue', 'Headings on brand blue'],
+        ['mutedText', 'heroBg', 'Text on page heroes'],
+        ['mutedText', 'darkBg', 'Text on dark sections'],
+        ['mutedText', 'footerBg', 'Text on the footer'],
+        ['heading', 'greyBg', 'Headings on grey sections'],
+        ['text', 'greyBg', 'Body text on grey sections'],
+        ['text', 'cards', 'Body text on cards'],
+        ['brand', 'greyBg', 'Brand blue on grey sections'],
     ];
 
     public static function defaults(): array

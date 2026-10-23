@@ -39,24 +39,24 @@ class AppearanceTest extends PostgresTestCase
     public function test_colours_are_saved_and_unsafe_values_are_refused(): void
     {
         $admin = $this->makeUser();
-        $this->actingAs($admin)->post('/admin/settings/appearance', $this->theme(['accent' => 'red; } body { display:none']))->assertSessionHasErrors('colors.accent');
+        $this->actingAs($admin)->post('/admin/settings/appearance', $this->theme(['brand' => 'red; } body { display:none']))->assertSessionHasErrors('colors.brand');
         $this->actingAs($admin)->post('/admin/settings/appearance', $this->theme([], ['body' => 'Comic Sans</style>']))->assertSessionHasErrors('fonts.body');
-        $this->actingAs($admin)->post('/admin/settings/appearance', $this->theme(['accent' => '#ff6b6b'], ['heading' => 'Playfair Display']))->assertSessionHasNoErrors();
+        $this->actingAs($admin)->post('/admin/settings/appearance', $this->theme(['brand' => '#ff6b6b'], ['heading' => 'Playfair Display']))->assertSessionHasNoErrors();
 
         $saved = SiteSetting::group('theme');
-        $this->assertSame(['accent' => '#FF6B6B'], $saved['colors'], 'Only changes from the defaults are stored');
+        $this->assertSame(['brand' => '#FF6B6B'], $saved['colors'], 'Only changes from the defaults are stored');
         $this->assertSame(['heading' => 'Playfair Display'], $saved['fonts']);
-        $this->assertSame('#FF6B6B', Theme::current()['colors']['accent']);
+        $this->assertSame('#FF6B6B', Theme::current()['colors']['brand']);
 
         $this->actingAs($admin)->post('/admin/settings/appearance/reset')->assertRedirect();
-        $this->assertSame(Theme::defaults()['accent'], Theme::current()['colors']['accent']);
+        $this->assertSame(Theme::defaults()['brand'], Theme::current()['colors']['brand']);
     }
 
     public function test_contrast_warnings(): void
     {
         $this->assertSame(21.0, Theme::contrast('#000000', '#FFFFFF'));
-        $warn = Theme::warnings(array_merge(Theme::defaults(), ['darkText' => '#111111']));
-        $this->assertStringContainsString('Body text on dark background', $warn[0]);
+        $warn = Theme::warnings(array_merge(Theme::defaults(), ['mutedText' => '#222222']));
+        $this->assertStringContainsString('Text on page heroes', $warn[0]);
         $this->assertSame([], Theme::warnings(Theme::defaults()));
     }
 

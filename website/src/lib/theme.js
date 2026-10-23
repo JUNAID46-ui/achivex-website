@@ -31,13 +31,30 @@ const rgb = (v) => [1, 3, 5].map((i) => parseInt(v.slice(i, i + 2), 16)).join(' 
 
 // The CSS for the saved colours and fonts, and any extra Google fonts to load. Used on the server
 // (rendered into the page head) and in the browser (applyTheme), so both agree.
+// Admin colour key => CSS variable(s) it sets. Must match COLORS in admin/app/Support/Theme.php.
+const PALETTE = {
+  heroBg: ['--s-hero'],
+  darkBg: ['--s-dark', '--c-ink'],
+  footerBg: ['--s-black'],
+  greyBg: ['--s-grey'],
+  heading: ['--s-heading'],
+  text: ['--s-text'],
+  mutedText: ['--s-muted'],
+  brand: ['--s-brand', '--c-navy'],
+  cards: ['--s-card'],
+  lines: ['--s-line'],
+}
+
+// The CSS for the saved colours and fonts, and any extra Google fonts to load. Used on the server
+// (rendered into the page head) and in the browser (applyTheme), so both agree.
 export function themeCss(theme) {
   const c = theme?.colors || {}
   const f = theme?.fonts || {}
   const vars = (pairs) => pairs.filter(([, v]) => hex(v)).map(([k, v]) => `${k}: ${rgb(v)};`).join(' ')
-  const root = vars([['--c-navy', c.brandBlue], ['--c-mist', c.lightBg], ['--c-ink', c.heroCard], ['--c-cloud', c.panel]])
-  const dark = vars([['--c-fg', c.darkHeading], ['--c-body', c.darkText], ['--c-canvas', c.darkBg], ['--c-accent', c.accent], ['--c-on-accent', c.onAccent]])
-  const light = vars([['--c-fg', c.lightHeading], ['--c-body', c.lightText], ['--c-canvas', c.lightCards], ['--c-accent', c.lightAccent], ['--c-on-accent', c.lightOnAccent]])
+  const root = vars(Object.entries(PALETTE).flatMap(([key, names]) => names.map((n) => [n, c[key]])))
+  // Text roles the older components read: headings and body text on light sections, and on dark ones.
+  const light = vars([['--c-fg', c.heading], ['--c-body', c.text], ['--c-accent', c.brand]])
+  const dark = vars([['--c-body', c.mutedText]])
   const body = FONTS[f.body] ? f.body : null
   const heading = FONTS[f.heading] ? f.heading : null
   const fonts = [
@@ -47,8 +64,8 @@ export function themeCss(theme) {
 
   const css = [
     (root || fonts) && `:root { ${root} ${fonts} }`,
-    dark && `:root, [class~='bg-navy'], [class~='bg-ink'] { ${dark} }`,
-    light && `[class~='bg-mist'] { ${light} }`,
+    light && `html[data-theme='light'], html[data-theme='light'] [class~='bg-mist'] { ${light} }`,
+    dark && `html[data-theme='light'] [class~='bg-navy'], html[data-theme='light'] [class~='bg-ink'] { ${dark} }`,
   ].filter(Boolean).join('\n')
   return { css, load: [...new Set([body, heading])].filter((name) => name && !PRELOADED.includes(name)) }
 }

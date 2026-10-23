@@ -190,29 +190,35 @@ function Intro({ d }) {
 
 /* 4. Service areas as panels. On large screens the panel under the pointer opens wide and shows its
    services; every panel keeps its title on the same baseline so the row stays even. */
-function AreaPanelBody({ cat, list, open }) {
+function AreaPanelBody({ cat, list, open, compact = false }) {
+  // Closed panels on large screens are narrow, so their title runs upwards along the left edge.
+  if (compact && !open) {
+    return (
+      <div className="relative flex h-full items-end p-6">
+        <h3 className="whitespace-nowrap text-[21px] font-medium tracking-[-0.01em] text-[#FFFFFF] [transform:rotate(180deg)] [writing-mode:vertical-rl]">{cat.name}</h3>
+      </div>
+    )
+  }
   return (
     <div className="relative flex h-full flex-col justify-end p-7 lg:p-9">
-      <p className="text-[12px] font-semibold uppercase tracking-[0.18em] text-[#A3A3A3]">{list.length} {list.length === 1 ? 'service' : 'services'}</p>
+      <p className="text-[12px] font-semibold uppercase tracking-[0.18em] text-site-muted">{list.length} {list.length === 1 ? 'service' : 'services'}</p>
       <h3 className="mt-3 text-[26px] font-medium leading-tight tracking-[-0.02em] text-[#FFFFFF] lg:text-[30px]">{cat.name}</h3>
-      <div className={`grid transition-all duration-500 ease-out ${open ? 'mt-5 grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
-        <div className="min-w-0 overflow-hidden lg:w-[440px]">
-          <p className="text-[15px] leading-[1.7] text-[#D4D4D4]">{cat.short || cat.description}</p>
-          <ul className="mt-5 flex flex-wrap gap-2">
-            {list.map((s) => (
-              <li key={s.slug}>
-                <Link to={servicePath(s)} tabIndex={open ? 0 : -1} className="inline-flex items-center gap-1.5 rounded-full border border-white/25 px-4 py-2 text-[13px] text-[#FFFFFF] transition-colors hover:border-[#FFFFFF] hover:bg-[#FFFFFF] hover:text-[#1C1C1C]">
-                  {s.name}
-                  <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <Link to={pathFor(cat.slug)} tabIndex={open ? 0 : -1} className="mt-6 inline-flex items-center gap-2 text-[15px] font-medium text-[#FFFFFF] underline-offset-4 hover:underline">
-            Explore {cat.name}
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </Link>
-        </div>
+      <div className="mt-5 min-w-0 lg:w-[380px]">
+        <p className="text-[15px] leading-[1.7] text-[#D4D4D4]">{cat.short || cat.description}</p>
+        <ul className="mt-5 flex flex-wrap gap-2">
+          {list.map((s) => (
+            <li key={s.slug}>
+              <Link to={servicePath(s)} className="inline-flex items-center gap-1.5 rounded-full border border-white/25 px-4 py-2 text-[13px] text-[#FFFFFF] transition-colors hover:border-[#FFFFFF] hover:bg-[#FFFFFF] hover:text-site-heading">
+                {s.name}
+                <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <Link to={pathFor(cat.slug)} className="mt-6 inline-flex items-center gap-2 text-[15px] font-medium text-[#FFFFFF] underline-offset-4 hover:underline">
+          Explore {cat.name}
+          <ArrowRight className="h-4 w-4" aria-hidden="true" />
+        </Link>
       </div>
     </div>
   )
@@ -223,7 +229,7 @@ function ServiceExplorer({ d }) {
   const areas = categories.map((c) => ({ cat: c, list: c.single ? [getService(c.slug)] : c.services.map(getService) }))
 
   return (
-    <section className="bg-[#EEF0F3] py-24 md:py-32">
+    <section className="bg-site-grey py-24 md:py-32">
       <div className="container-site">
         <SectionHead
           title={d.title}
@@ -232,7 +238,7 @@ function ServiceExplorer({ d }) {
         />
 
         {/* Large screens: panels that open on hover or focus. */}
-        <div className="mt-12 hidden h-[560px] gap-4 lg:flex">
+        <div className="mt-12 hidden h-[560px] gap-3 lg:flex">
           {areas.map(({ cat, list }, i) => {
             const open = cat.slug === active
             return (
@@ -241,15 +247,15 @@ function ServiceExplorer({ d }) {
                 delay={i * 0.08}
                 onMouseEnter={() => setActive(cat.slug)}
                 onFocusCapture={() => setActive(cat.slug)}
-                className="group relative min-w-0 overflow-hidden rounded-[24px] bg-[#1C1C1C] transition-[flex-grow] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
-                style={{ flexGrow: open ? 2.6 : 1, flexBasis: 0 }}
+                className="group relative min-w-0 overflow-hidden rounded-[24px] bg-site-dark transition-[flex-grow] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                style={{ flexGrow: open ? 4 : 1, flexBasis: 0 }}
               >
                 <Img src={cat.image.replace('w=1600', 'w=1200')} alt="" className={`absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-out ${open ? 'scale-105' : 'scale-100 grayscale-[40%]'}`} />
-                <div className={`absolute inset-0 bg-gradient-to-t transition-opacity duration-700 ${open ? 'from-[#07152D] via-[#07152D]/70 to-[#07152D]/10' : 'from-[#1C1C1C] via-[#1C1C1C]/75 to-[#1C1C1C]/40'}`} aria-hidden="true" />
-                <span className={`absolute right-7 top-7 grid h-11 w-11 place-items-center rounded-full border transition-all duration-500 ${open ? 'rotate-45 border-[#FFFFFF] bg-[#FFFFFF] text-[#1C1C1C]' : 'border-white/40 text-[#FFFFFF]'}`} aria-hidden="true">
+                <div className={`absolute inset-0 bg-gradient-to-t transition-opacity duration-700 ${open ? 'from-site-hero via-site-hero/70 to-site-hero/10' : 'from-site-dark via-site-dark/75 to-site-dark/40'}`} aria-hidden="true" />
+                <span className={`absolute right-5 top-5 grid h-10 w-10 place-items-center rounded-full border transition-all duration-500 ${open ? 'rotate-45 border-[#FFFFFF] bg-[#FFFFFF] text-site-heading' : 'border-white/40 text-[#FFFFFF]'}`} aria-hidden="true">
                   {open ? <ArrowUpRight className="h-4 w-4 -rotate-45" /> : <Plus className="h-4 w-4" />}
                 </span>
-                <AreaPanelBody cat={cat} list={list} open={open} />
+                <AreaPanelBody cat={cat} list={list} open={open} compact />
               </FadeUp>
             )
           })}
@@ -258,9 +264,9 @@ function ServiceExplorer({ d }) {
         {/* Small screens: the same panels stacked, all open. */}
         <div className="mt-10 grid gap-4 lg:hidden">
           {areas.map(({ cat, list }) => (
-            <div key={cat.slug} className="relative min-h-[440px] overflow-hidden rounded-[22px] bg-[#1C1C1C]">
+            <div key={cat.slug} className="relative min-h-[440px] overflow-hidden rounded-[22px] bg-site-dark">
               <Img src={cat.image.replace('w=1600', 'w=900')} alt="" className="absolute inset-0 h-full w-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#07152D] via-[#07152D]/80 to-[#07152D]/20" aria-hidden="true" />
+              <div className="absolute inset-0 bg-gradient-to-t from-site-hero via-site-hero/80 to-site-hero/20" aria-hidden="true" />
               <AreaPanelBody cat={cat} list={list} open />
             </div>
           ))}
@@ -275,15 +281,15 @@ function ServiceExplorer({ d }) {
 function WhyAchivex({ d }) {
   const items = d.items || []
   return (
-    <section className="bg-ink !bg-[#07152D] py-24 text-white md:py-32">
+    <section className="bg-ink !bg-site-hero py-24 text-white md:py-32">
       <div className="container-site">
         <FadeUp className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
           <div>
-            <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-[#A3A3A3]">Why choose us</p>
+            <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-site-muted">Why choose us</p>
             <h2 className="h-display mt-4 text-[40px] leading-[1.05] text-white md:text-[64px]">{d.title}</h2>
           </div>
           <div className="lg:pb-2">
-            {d.text && <p className="max-w-md text-[18px] leading-relaxed text-[#A3A3A3]">{d.text}</p>}
+            {d.text && <p className="max-w-md text-[18px] leading-relaxed text-site-muted">{d.text}</p>}
             <Link to="/contact-us/" className="group mt-6 inline-flex items-center gap-2 border-b border-[#FFFFFF] pb-1 text-[15px] font-semibold text-[#FFFFFF]">
               Talk to our team
               <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
@@ -297,7 +303,7 @@ function WhyAchivex({ d }) {
               <span className="absolute inset-0 origin-left scale-x-0 bg-white/[0.04] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100" aria-hidden="true" />
               <div className="relative grid gap-3 py-9 md:grid-cols-[1fr_1.2fr] md:gap-16 md:py-11">
                 <h3 className="text-[24px] font-medium leading-snug tracking-[-0.02em] text-[#FFFFFF] transition-transform duration-500 group-hover:translate-x-3 md:text-[30px]">{r.title}</h3>
-                <p className="max-w-xl text-[16.5px] leading-[1.7] text-[#A3A3A3] transition-colors duration-500 group-hover:text-[#D4D4D4] md:pt-1.5">{r.text}</p>
+                <p className="max-w-xl text-[16.5px] leading-[1.7] text-site-muted transition-colors duration-500 group-hover:text-[#D4D4D4] md:pt-1.5">{r.text}</p>
               </div>
             </FadeUp>
           ))}
@@ -340,7 +346,7 @@ function Process({ d }) {
 /* 8. Industries */
 function Industries({ d }) {
   return (
-    <section className="bg-[#EEF0F3] py-24 md:py-32">
+    <section className="bg-site-grey py-24 md:py-32">
       <div className="container-site">
         <SectionHead title={d.title} text={d.text} />
         <ul>
@@ -368,7 +374,7 @@ function FeaturedCase({ d }) {
   return (
     <section className="bg-canvas py-24 md:py-32">
       <div className="container-site">
-        <FadeUp className="group grid overflow-hidden bg-navy text-white transition-colors duration-500 hover:bg-[#1C1C1C] lg:grid-cols-2">
+        <FadeUp className="group grid overflow-hidden bg-navy text-white transition-colors duration-500 hover:bg-site-dark lg:grid-cols-2">
           <Img src={cs.image} alt={cs.title} className="h-full min-h-[320px] w-full bg-mist object-cover" />
           <div className="flex flex-col justify-center p-8 md:p-14">
             <h2 className="h-display text-3xl text-white md:text-4xl">{cs.title}</h2>

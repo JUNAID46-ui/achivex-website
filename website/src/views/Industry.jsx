@@ -35,19 +35,19 @@ export default function Industry() {
       <ImageSplit eyebrow="How we help" title={ind.helpTitle} paragraphs={ind.helpParagraphs} list={ind.helpList} image={ind.image} alt={`${ind.name} work`} reverse />
 
       {services.length > 0 && (
-        <section className="bg-[#EEF0F3] py-20 md:py-28">
+        <section className="bg-site-grey py-20 md:py-28">
           <div className="container-site">
             <FadeUp>
               <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-navy">Services</p>
-              <h2 className="mt-4 text-[32px] font-medium leading-[1.12] tracking-[-0.025em] text-[#111111] md:text-[44px]">Services that fit {ind.name.toLowerCase()}</h2>
+              <h2 className="mt-4 text-[32px] font-medium leading-[1.12] tracking-[-0.025em] text-site-heading md:text-[44px]">Services that fit {ind.name.toLowerCase()}</h2>
             </FadeUp>
             <div className="mt-12 grid gap-6 md:grid-cols-3">
               {services.map((s) => <FadeUp key={s.slug}><ServiceCard service={s} /></FadeUp>)}
             </div>
-            <div className="mt-14 flex flex-wrap gap-x-8 gap-y-3 border-t border-[#E3E6EA] pt-8">
-              <span className="font-semibold text-[#111111]">Other industries:</span>
+            <div className="mt-14 flex flex-wrap gap-x-8 gap-y-3 border-t border-site-line pt-8">
+              <span className="font-semibold text-site-heading">Other industries:</span>
               {industries.filter((i) => i.slug !== slug).map((i) => (
-                <ArrowLink key={i.slug} to={`/industries/${i.slug}/`} className="text-[#111111]">{i.name}</ArrowLink>
+                <ArrowLink key={i.slug} to={`/industries/${i.slug}/`} className="text-site-heading">{i.name}</ArrowLink>
               ))}
             </div>
           </div>

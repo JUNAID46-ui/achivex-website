@@ -17,15 +17,15 @@ function Col({ title, children }) {
   )
 }
 
-const linkCls = 'text-[15px] text-[#A3A3A3] transition-colors hover:text-white'
+const linkCls = 'text-[15px] text-site-muted transition-colors hover:text-white'
 
 export default function Footer() {
   return (
-    <footer className="bg-ink !bg-black text-white">
+    <footer className="bg-ink !bg-site-black text-white">
       <div className="container-site grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1.1fr_1.1fr_1.3fr] lg:gap-10 lg:py-20">
         <div>
           <Logo variant="full" light />
-          <p className="mt-6 max-w-xs text-[15px] leading-relaxed text-[#A3A3A3]">{site.tagline}</p>
+          <p className="mt-6 max-w-xs text-[15px] leading-relaxed text-site-muted">{site.tagline}</p>
           <SocialIcons className="mt-7" />
         </div>
 
@@ -56,12 +56,12 @@ export default function Footer() {
 
         <Col title="Contact">
           <ul className="space-y-4">
-            <li><a href={site.phoneHref} className={`flex items-center gap-3 ${linkCls}`}><Phone className="h-4 w-4 text-[#A3A3A3]" aria-hidden="true" />{site.phone}</a></li>
-            <li><a href={`mailto:${site.email}`} className={`flex items-center gap-3 ${linkCls}`}><Mail className="h-4 w-4 text-[#A3A3A3]" aria-hidden="true" />{site.email}</a></li>
-            <li className="flex items-center gap-3 text-[15px] text-[#A3A3A3]"><MapPin className="h-4 w-4 text-[#A3A3A3]" aria-hidden="true" />{site.location}</li>
+            <li><a href={site.phoneHref} className={`flex items-center gap-3 ${linkCls}`}><Phone className="h-4 w-4 text-site-muted" aria-hidden="true" />{site.phone}</a></li>
+            <li><a href={`mailto:${site.email}`} className={`flex items-center gap-3 ${linkCls}`}><Mail className="h-4 w-4 text-site-muted" aria-hidden="true" />{site.email}</a></li>
+            <li className="flex items-center gap-3 text-[15px] text-site-muted"><MapPin className="h-4 w-4 text-site-muted" aria-hidden="true" />{site.location}</li>
             <li>
               <a href={safeHref(site.googleProfile)} target="_blank" rel="noopener noreferrer" className={`flex items-center gap-3 ${linkCls}`}>
-                <ExternalLink className="h-4 w-4 text-[#A3A3A3]" aria-hidden="true" />Google Business Profile
+                <ExternalLink className="h-4 w-4 text-site-muted" aria-hidden="true" />Google Business Profile
               </a>
             </li>
           </ul>

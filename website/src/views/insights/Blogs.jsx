@@ -42,7 +42,7 @@ export default function Blogs() {
         <div className="container-site">
 
           <FadeUp delay={0.1} className="mt-8">
-            <Link to={permalink(`/insights/blogs/${featured.slug}/`)} className="group grid overflow-hidden rounded-[28px] bg-[#F3F5F7] lg:grid-cols-[1.3fr_1fr]">
+            <Link to={permalink(`/insights/blogs/${featured.slug}/`)} className="group grid overflow-hidden rounded-[28px] bg-site-grey lg:grid-cols-[1.3fr_1fr]">
               <div className="overflow-hidden">
                 <Img src={featured.image} alt={featured.title} className="aspect-[16/10] h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
               </div>
@@ -86,7 +86,7 @@ export default function Blogs() {
                 value={q}
                 onChange={(e) => change(setQ)(e.target.value)}
                 placeholder={pc.searchPlaceholder}
-                className="w-full rounded-full border border-[#D5D9E0] bg-[#FFFFFF] py-3 pl-11 pr-5 text-[15px] outline-none focus:border-accent"
+                className="w-full rounded-full border border-site-line bg-[#FFFFFF] py-3 pl-11 pr-5 text-[15px] outline-none focus:border-accent"
               />
             </div>
           </div>

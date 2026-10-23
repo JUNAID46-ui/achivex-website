@@ -8,6 +8,17 @@
   --c-mist: 255 255 255;
   --c-ink: 28 28 28;
   --c-cloud: 238 241 243;
+  /* Site palette. Every value can be changed in the admin under Settings, Colors and Fonts. */
+  --s-hero: 7 21 45;
+  --s-dark: 28 28 28;
+  --s-black: 0 0 0;
+  --s-grey: 238 240 243;
+  --s-heading: 28 28 28;
+  --s-text: 75 81 91;
+  --s-muted: 163 163 163;
+  --s-brand: 15 44 156;
+  --s-card: 246 247 249;
+  --s-line: 227 230 235;
   --font-sans: 'Manrope', system-ui, sans-serif;
   --font-display: 'Geist', 'Manrope', system-ui, sans-serif;
 }
@@ -58,7 +69,7 @@ html[data-theme='light'] [class~='bg-mist'] {
   --c-canvas: 255 255 255;
   --c-accent: 15 44 156;
   --c-on-accent: 255 255 255;
-  background-color: #EEF0F3;
+  background-color: rgb(var(--s-grey));
 }
 /* Form fields: visible borders on white cards. */
 html[data-theme='light'] .field {
@@ -82,7 +93,7 @@ html[data-theme='light'] .field::placeholder { color: #9AA0A9; }
     @apply bg-canvas font-sans text-body;
   }
   h1, h2, h3, h4 {
-    @apply text-white;
+    @apply font-display text-white;
   }
   ::selection {
     @apply bg-navy text-white;
@@ -129,7 +140,7 @@ html[data-theme='light'] .field::placeholder { color: #9AA0A9; }
 @property --mx { syntax: '<length-percentage>'; inherits: true; initial-value: 66%; }
 @property --my { syntax: '<length-percentage>'; inherits: true; initial-value: 58%; }
 .cta-shine {
-  background-color: #000000;
+  background-color: rgb(var(--s-black));
   /* Light position: a resting spot right of the text, then the pointer while hovering. */
   --mx: 66%;
   --my: 58%;

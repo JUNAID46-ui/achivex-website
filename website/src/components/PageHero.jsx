@@ -13,15 +13,15 @@ export default function PageHero({ crumbs, eyebrow, title, text, image, alt, act
         <div className={`mt-10 grid items-center gap-12 ${image ? 'lg:grid-cols-[1fr_1.05fr] lg:gap-14' : ''}`}>
           <div>
             {eyebrow && <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-navy">{eyebrow}</p>}
-            <h1 className="mt-4 text-[40px] font-medium leading-[1.08] tracking-[-0.03em] text-[#111111] sm:text-[52px] lg:text-[60px]">{title}</h1>
-            {text && <p className="mt-6 max-w-[520px] text-[17px] leading-[1.65] text-[#5B616B]">{text}</p>}
+            <h1 className="mt-4 text-[40px] font-medium leading-[1.08] tracking-[-0.03em] text-site-heading sm:text-[52px] lg:text-[60px]">{title}</h1>
+            {text && <p className="mt-6 max-w-[520px] text-[17px] leading-[1.65] text-site-text">{text}</p>}
             {action && (
               <Link
                 to={action.to}
-                className="mt-8 inline-flex w-fit items-center gap-4 rounded-full bg-[#2B2927] py-1.5 pl-6 pr-1.5 text-[15px] text-[#FFFFFF] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#141414]"
+                className="mt-8 inline-flex w-fit items-center gap-4 rounded-full bg-[#2B2927] py-1.5 pl-6 pr-1.5 text-[15px] text-[#FFFFFF] transition-all duration-200 hover:-translate-y-0.5 hover:bg-site-dark"
               >
                 {action.label}
-                <span className="grid h-10 w-10 place-items-center rounded-full bg-[#FFFFFF] text-[#141414]">
+                <span className="grid h-10 w-10 place-items-center rounded-full bg-[#FFFFFF] text-site-heading">
                   <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                 </span>
               </Link>
@@ -29,7 +29,7 @@ export default function PageHero({ crumbs, eyebrow, title, text, image, alt, act
           </div>
           {image && (
             <div>
-              <div className="overflow-hidden rounded-[28px] bg-[#E9ECF0]">
+              <div className="overflow-hidden rounded-[28px] bg-site-grey">
                 <Img priority sizes="(min-width: 1024px) 640px, 100vw" src={image} alt={alt || title} className="aspect-[5/4] w-full object-cover" />
               </div>
             </div>

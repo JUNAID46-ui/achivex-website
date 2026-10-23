@@ -22,10 +22,10 @@ export default function ServicesOverview() {
       <InnerHero crumbs={[{ label: 'Services' }]} eyebrow={pc.heroEyebrow} title={pc.heroTitle} text={pc.heroText} image={pc.heroImage} alt={pc.heroImageAlt} />
       <IntroSplit eyebrow={pc.introEyebrow} title={pc.introTitle} keyword={pc.introKeyword} paragraphs={pc.introParagraphs} />
       <nav aria-label="Service areas" className="bg-canvas">
-        <ul className="container-site flex flex-wrap gap-x-8 gap-y-3 border-t border-[#E6E9EE] py-6 text-[15px] font-semibold">
+        <ul className="container-site flex flex-wrap gap-x-8 gap-y-3 border-t border-site-line py-6 text-[15px] font-semibold">
           {categories.map((c, i) => (
             <li key={c.slug}>
-              <a href={`#${c.slug}`} onClick={(e) => jumpTo(e, c.slug)} className="text-[#111111] transition-colors hover:text-navy">
+              <a href={`#${c.slug}`} onClick={(e) => jumpTo(e, c.slug)} className="text-site-heading transition-colors hover:text-navy">
                 <span className="mr-2 text-navy">{String(i + 1).padStart(2, '0')}</span>{c.name}
               </a>
             </li>

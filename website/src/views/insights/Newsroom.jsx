@@ -23,8 +23,8 @@ export default function Newsroom() {
       <InnerHero crumbs={[{ label: 'Insights', to: '/insights/' }, { label: 'Newsroom' }]} eyebrow="Newsroom" title={pc.heroTitle} text={pc.heroText || 'Announcements, new services and company updates from AchiveX LLC.'} />
       <section className="bg-canvas pb-10 pt-14">
         <div className="container-site">
-          <FadeUp className="flex flex-col justify-between gap-8 border-b border-[#E6E9EE] pb-8 md:flex-row md:items-end">
-            <h2 className="text-[28px] font-medium tracking-[-0.02em] text-[#111111]">Latest news</h2>
+          <FadeUp className="flex flex-col justify-between gap-8 border-b border-site-line pb-8 md:flex-row md:items-end">
+            <h2 className="text-[28px] font-medium tracking-[-0.02em] text-site-heading">Latest news</h2>
             <div role="tablist" aria-label="Filter by year" className="flex flex-wrap gap-6">
               {['all', ...years].map((y) => (
                 <button
