@@ -7,6 +7,18 @@
   "trailingSlash": true,
   "rewrites": [
     {
+      "source": "/sitemap.xml",
+      "destination": "https://achivex-admin.vercel.app/sitemap.xml"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "https://achivex-admin.vercel.app/robots.txt"
+    },
+    {
+      "source": "/llms.txt",
+      "destination": "https://achivex-admin.vercel.app/llms.txt"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
