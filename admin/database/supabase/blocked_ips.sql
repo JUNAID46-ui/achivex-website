@@ -18,6 +18,8 @@ create table if not exists admin.blocked_ips (
 );
 create index if not exists blocked_ips_ip_index on admin.blocked_ips (ip);
 alter table admin.blocked_ips enable row level security;
+grant select, insert, update, delete on admin.blocked_ips to achivex_admin;
+grant usage, select on sequence admin.blocked_ips_id_seq to achivex_admin;
 
 insert into admin.migrations (migration, batch)
 select '2026_10_26_000001_create_blocked_ips_table', coalesce(max(batch), 0) + 1 from admin.migrations
