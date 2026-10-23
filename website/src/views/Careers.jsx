@@ -18,7 +18,7 @@ export default function Careers() {
       <CardGrid eyebrow={c.rolesEyebrow} title={c.rolesTitle} text={c.rolesText} items={c.roles} columns={4} />
       <Steps eyebrow={c.applyEyebrow} title={c.applyTitle} items={c.applySteps} />
 
-      <section id="positions" className="scroll-mt-24 bg-[#F5F6F8] py-20 md:py-24">
+      <section id="positions" className="scroll-mt-24 bg-[#EEF0F3] py-20 md:py-24">
         <div className="container-site">
           <FadeUp className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <h2 className="h-display text-4xl md:text-5xl">{c.positionsTitle}</h2>

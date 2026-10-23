@@ -17,7 +17,7 @@ export default function Industries() {
     <>
       <InnerHero crumbs={[{ label: 'Industries' }]} eyebrow={c.heroEyebrow} title={c.heroTitle} text={c.heroText} image={c.heroImage} alt={c.heroImageAlt} />
       <IntroSplit eyebrow={c.introEyebrow} title={c.introTitle} keyword={c.introKeyword} paragraphs={c.introParagraphs} />
-      <section className="bg-[#F5F6F8] py-20 md:py-28">
+      <section className="bg-[#EEF0F3] py-20 md:py-28">
         <div className="container-site">
           <FadeUp>
             <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-navy">{c.listEyebrow}</p>
@@ -43,7 +43,6 @@ export default function Industries() {
           </ul>
         </div>
       </section>
-      <CardGrid eyebrow={c.needsEyebrow} title={c.needsTitle} text={c.needsText} items={c.needs} columns={4} />
       <Steps eyebrow={c.processEyebrow} title={c.processTitle} text={c.processText} items={c.process} />
       <ImageSplit eyebrow={c.whyEyebrow} title={c.whyTitle} paragraphs={c.whyParagraphs} list={c.whyList} image={c.whyImage} alt={c.whyImageAlt} />
       <CardGrid eyebrow={c.expectEyebrow} title={c.expectTitle} text={c.expectText} items={c.expect} columns={4} tone="grey" />

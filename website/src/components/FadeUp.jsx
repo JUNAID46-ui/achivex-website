@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 
-export default function FadeUp({ children, delay = 0, className = '', as = 'div' }) {
+export default function FadeUp({ children, delay = 0, className = '', as = 'div', ...rest }) {
   const Tag = motion[as]
   return (
     <Tag
@@ -9,6 +9,7 @@ export default function FadeUp({ children, delay = 0, className = '', as = 'div'
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay }}
+      {...rest}
     >
       {children}
     </Tag>

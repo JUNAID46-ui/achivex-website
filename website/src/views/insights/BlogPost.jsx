@@ -136,7 +136,7 @@ export default function BlogPost() {
               {post.excerpt && <p className="mx-auto mt-6 max-w-[640px] text-[18px] leading-[1.65] text-white/65">{post.excerpt}</p>}
               <div className="mt-9 inline-flex items-center gap-3 text-left">
                 <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[#FFFFFF]">
-                  <img src={`${import.meta.env.BASE_URL}brand/mark-dark.png`} alt="" width="37" height="18" className="h-[18px] w-auto" />
+                  <img src={`/brand/mark-dark.png`} alt="" width="37" height="18" className="h-[18px] w-auto" />
                 </span>
                 <span>
                   <span className="block text-[15px] font-semibold text-white">{post.author}</span>
@@ -212,7 +212,7 @@ export default function BlogPost() {
               ))}
 
               {faqs.length > 0 && (
-                <section className="mt-16 rounded-[26px] bg-[#F5F6F8] p-7 md:p-10">
+                <section className="mt-16 rounded-[26px] bg-[#EEF0F3] p-7 md:p-10">
                   <p className="text-[13px] font-semibold tracking-[0.12em] text-navy">{pad(post.sections.length + 1)}</p>
                   <h2 id="faqs" className="mt-2 scroll-mt-28 font-display text-[28px] font-medium leading-tight tracking-tight text-[#111111] md:text-[34px]">Frequently asked questions</h2>
                   <div className="mt-6"><FAQ items={faqs} /></div>
@@ -221,7 +221,7 @@ export default function BlogPost() {
 
               <div className="mt-14 flex flex-col gap-6 rounded-[26px] border border-[#E6E9EE] p-7 sm:flex-row sm:items-center md:p-8">
                 <span className="grid h-16 w-16 shrink-0 place-items-center rounded-full bg-ink">
-                  <img src={`${import.meta.env.BASE_URL}brand/mark-light.png`} alt="" width="58" height="28" className="h-7 w-auto" />
+                  <img src={`/brand/mark-light.png`} alt="" width="58" height="28" className="h-7 w-auto" />
                 </span>
                 <div className="flex-1">
                   <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-[#6E747E]">Written by</p>
@@ -242,7 +242,7 @@ export default function BlogPost() {
       </article>
 
       {related.length > 0 && (
-        <section className="bg-[#F5F6F8] py-20 md:py-24">
+        <section className="bg-[#EEF0F3] py-20 md:py-24">
           <div className="container-site">
             <div className="flex flex-wrap items-end justify-between gap-4">
               <h2 className="text-[34px] font-medium tracking-[-0.02em] text-[#111111] md:text-[44px]">Keep reading</h2>

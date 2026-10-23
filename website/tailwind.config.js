@@ -3,7 +3,7 @@
 // #0F2C9C blue sections (20%), #C9CED6 silver text and cards. The light theme in index.css uses blue as the only accent.
 // Tailwind's default colors are intentionally replaced, not extended.
 export default {
-  content: ['./index.html', './src/**/*.{js,jsx}'],
+  content: ['./app/**/*.{js,jsx}', './src/**/*.{js,jsx}'],
   theme: {
     colors: {
       transparent: 'transparent',

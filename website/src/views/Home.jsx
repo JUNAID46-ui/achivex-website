@@ -1,11 +1,14 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import HeroShowcase from '../components/sections/HeroShowcase'
 import { Link } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowRight, ArrowRightCircle, ArrowUpRight, Check, Phone, Mail, MapPin, ExternalLink } from 'lucide-react'
+import { motion, useScroll, useSpring } from 'framer-motion'
+import { ArrowRight, ArrowRightCircle, ArrowUpRight, Check, Phone, Mail, MapPin, ExternalLink, Target, Handshake, MessageSquareText, KeyRound, Plus } from 'lucide-react'
 import useSeo from '../hooks/useSeo'
 import Button from '../components/Button'
 import FadeUp from '../components/FadeUp'
+import ProcessTimeline from '../components/sections/ProcessTimeline'
+import ScrollStats from '../components/sections/ScrollStats'
+import StickyShowcase from '../components/sections/StickyShowcase'
 import Img from '../components/Img'
 import InsightCard from '../components/InsightCard'
 import ArrowLink from '../components/ArrowLink'
@@ -162,20 +165,20 @@ function Hero({ d }) {
   )
 }
 
-/* 2. Intro statement with facts taken from the site data */
+/* 2. Intro statement, then figures from the site data that count up and drift with the scroll. */
 function Intro({ d }) {
   const facts = [
-    { value: 'Wyoming, USA', label: 'Headquarters' },
-    { value: String(categories.length), label: 'Service areas' },
-    { value: String(services.length), label: 'Individual services' },
-    { value: String(industries.length), label: 'Industries served' },
+    { value: categories.length, label: 'Service areas' },
+    { value: services.length, label: 'Individual services' },
+    { value: industries.length, label: 'Industries served' },
+    { value: (homeSections.find((x) => x.key === 'process')?.data?.steps || []).length || 4, label: 'Steps to launch' },
   ]
   return (
-    <section className="bg-ink py-24 md:py-32">
-      <div className="container-site grid gap-16 lg:grid-cols-[1.5fr_1fr]">
-        <FadeUp>
+    <section className="overflow-hidden bg-ink py-24 md:py-32">
+      <div className="container-site">
+        <FadeUp className="max-w-4xl">
           <h2 className="sr-only">About AchiveX</h2>
-          <p className="text-3xl font-light leading-snug tracking-tight text-white md:text-[40px] md:leading-[1.25]">
+          <p className="text-3xl font-light leading-snug tracking-tight text-white md:text-[44px] md:leading-[1.22]">
             {d.before}{' '}
             {d.highlight && <span className="font-medium text-slate underline decoration-accent decoration-2 underline-offset-[10px]">{d.highlight}</span>}{' '}
             {d.after}
@@ -184,157 +187,171 @@ function Intro({ d }) {
             <ArrowLink to={d.linkTo || '/about-us/'} className="font-medium text-white">{d.linkText}</ArrowLink>
           </div>
         </FadeUp>
-        <FadeUp delay={0.1}>
-          <dl className="grid grid-cols-2 border-l border-t border-body/10">
-            {facts.map((f) => (
-              <div key={f.label} className="border-b border-r border-body/10 p-6">
-                <dt className="text-sm text-body/80">{f.label}</dt>
-                <dd className="mt-3 text-2xl font-medium tracking-tight text-white md:text-3xl">{f.value}</dd>
-              </div>
-            ))}
-          </dl>
-        </FadeUp>
+        <div className="mt-20 border-t border-white/10 pt-16 md:mt-24">
+          <ScrollStats stats={facts} tone="dark" />
+        </div>
       </div>
     </section>
   )
 }
 
-/* 4. Interactive service explorer covering every category */
+/* 4. Service areas as panels. On large screens the panel under the pointer opens wide and shows its
+   services; every panel keeps its title on the same baseline so the row stays even. */
+function AreaPanelBody({ cat, list, open }) {
+  return (
+    <div className="relative flex h-full flex-col justify-end p-7 lg:p-9">
+      <p className="text-[12px] font-semibold uppercase tracking-[0.18em] text-[#A3A3A3]">{list.length} {list.length === 1 ? 'service' : 'services'}</p>
+      <h3 className="mt-3 text-[26px] font-medium leading-tight tracking-[-0.02em] text-[#FFFFFF] lg:text-[30px]">{cat.name}</h3>
+      <div className={`grid transition-all duration-500 ease-out ${open ? 'mt-5 grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
+        <div className="min-w-0 overflow-hidden lg:w-[440px]">
+          <p className="text-[15px] leading-[1.7] text-[#D4D4D4]">{cat.short || cat.description}</p>
+          <ul className="mt-5 flex flex-wrap gap-2">
+            {list.map((s) => (
+              <li key={s.slug}>
+                <Link to={servicePath(s)} tabIndex={open ? 0 : -1} className="inline-flex items-center gap-1.5 rounded-full border border-white/25 px-4 py-2 text-[13px] text-[#FFFFFF] transition-colors hover:border-[#FFFFFF] hover:bg-[#FFFFFF] hover:text-[#1C1C1C]">
+                  {s.name}
+                  <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <Link to={pathFor(cat.slug)} tabIndex={open ? 0 : -1} className="mt-6 inline-flex items-center gap-2 text-[15px] font-medium text-[#FFFFFF] underline-offset-4 hover:underline">
+            Explore {cat.name}
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function ServiceExplorer({ d }) {
   const [active, setActive] = useState(categories[0].slug)
-  const cat = categories.find((c) => c.slug === active)
-  const list = cat.single ? [getService(cat.slug)] : cat.services.map(getService)
-  const intro = cat.single ? getService(cat.slug).overview[0] : cat.description
+  const areas = categories.map((c) => ({ cat: c, list: c.single ? [getService(c.slug)] : c.services.map(getService) }))
 
   return (
-    <section className="bg-canvas py-24 md:py-32">
+    <section className="bg-[#EEF0F3] py-24 md:py-32">
       <div className="container-site">
         <SectionHead
           title={d.title}
           text={d.text}
           link={<ArrowLink to="/services/" className="text-[15px] font-medium text-white">View all services</ArrowLink>}
         />
-        <div className="grid gap-12 pt-12 lg:grid-cols-[320px_1fr]">
-          <ul role="tablist" aria-label="Service areas" className="flex gap-2 overflow-x-auto pb-2 lg:flex-col lg:gap-0 lg:overflow-visible lg:pb-0">
-            {categories.map((c) => {
-              const on = c.slug === active
+
+        {/* Large screens: panels that open on hover or focus. */}
+        <div className="mt-12 hidden h-[560px] gap-4 lg:flex">
+          {areas.map(({ cat, list }, i) => {
+            const open = cat.slug === active
+            return (
+              <FadeUp
+                key={cat.slug}
+                delay={i * 0.08}
+                onMouseEnter={() => setActive(cat.slug)}
+                onFocusCapture={() => setActive(cat.slug)}
+                className="group relative min-w-0 overflow-hidden rounded-[24px] bg-[#1C1C1C] transition-[flex-grow] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                style={{ flexGrow: open ? 2.6 : 1, flexBasis: 0 }}
+              >
+                <Img src={cat.image.replace('w=1600', 'w=1200')} alt="" className={`absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-out ${open ? 'scale-105' : 'scale-100 grayscale-[40%]'}`} />
+                <div className={`absolute inset-0 bg-gradient-to-t transition-opacity duration-700 ${open ? 'from-[#07152D] via-[#07152D]/70 to-[#07152D]/10' : 'from-[#1C1C1C] via-[#1C1C1C]/75 to-[#1C1C1C]/40'}`} aria-hidden="true" />
+                <span className={`absolute right-7 top-7 grid h-11 w-11 place-items-center rounded-full border transition-all duration-500 ${open ? 'rotate-45 border-[#FFFFFF] bg-[#FFFFFF] text-[#1C1C1C]' : 'border-white/40 text-[#FFFFFF]'}`} aria-hidden="true">
+                  {open ? <ArrowUpRight className="h-4 w-4 -rotate-45" /> : <Plus className="h-4 w-4" />}
+                </span>
+                <AreaPanelBody cat={cat} list={list} open={open} />
+              </FadeUp>
+            )
+          })}
+        </div>
+
+        {/* Small screens: the same panels stacked, all open. */}
+        <div className="mt-10 grid gap-4 lg:hidden">
+          {areas.map(({ cat, list }) => (
+            <div key={cat.slug} className="relative min-h-[440px] overflow-hidden rounded-[22px] bg-[#1C1C1C]">
+              <Img src={cat.image.replace('w=1600', 'w=900')} alt="" className="absolute inset-0 h-full w-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#07152D] via-[#07152D]/80 to-[#07152D]/20" aria-hidden="true" />
+              <AreaPanelBody cat={cat} list={list} open />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* 5. Why AchiveX: the heading stays in place while the reasons scroll past, with a line that fills as you read. */
+const whyIcons = [Target, Handshake, MessageSquareText, KeyRound]
+
+function WhyAchivex({ d }) {
+  const listRef = useRef(null)
+  const { scrollYProgress } = useScroll({ target: listRef, offset: ['start 75%', 'end 55%'] })
+  const fill = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.3 })
+  const items = d.items || []
+  return (
+    <section className="bg-ink !bg-[#07152D] py-24 text-white md:py-32">
+      <div className="container-site grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
+        <div>
+          <FadeUp className="lg:sticky lg:top-32">
+            <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-[#A3A3A3]">Why choose us</p>
+            <h2 className="h-display mt-4 text-4xl text-white md:text-[56px] md:leading-[1.05]">{d.title}</h2>
+            {d.text && <p className="mt-6 max-w-md text-[17px] leading-relaxed text-[#A3A3A3]">{d.text}</p>}
+            <Link to="/contact-us/" className="group mt-10 inline-flex items-center gap-4 rounded-full bg-[#FFFFFF] py-1.5 pl-6 pr-1.5 text-[15px] font-medium text-[#1C1C1C] transition-transform duration-300 hover:-translate-y-0.5">
+              Talk to our team
+              <span className="grid h-10 w-10 place-items-center rounded-full bg-[#07152D] text-[#FFFFFF] transition-transform duration-300 group-hover:rotate-45">
+                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              </span>
+            </Link>
+          </FadeUp>
+        </div>
+
+        <div ref={listRef} className="relative pl-8 md:pl-12">
+          <div className="absolute bottom-0 left-0 top-0 w-px bg-white/15" aria-hidden="true">
+            <motion.div className="h-full w-full origin-top bg-[#FFFFFF]" style={{ scaleY: fill }} />
+          </div>
+          <ul className="space-y-5">
+            {items.map((r, i) => {
+              const Icon = whyIcons[i % whyIcons.length]
               return (
-                <li key={c.slug} role="presentation" className="shrink-0 lg:border-b lg:border-body/10">
-                  <button
-                    role="tab"
-                    aria-selected={on}
-                    onClick={() => setActive(c.slug)}
-                    className={`flex w-full items-center justify-between gap-4 whitespace-nowrap border-b-2 px-1 py-3 text-left text-[15px] font-medium transition-colors lg:whitespace-normal lg:border-b-0 lg:border-l-2 lg:px-5 lg:py-5 lg:text-lg ${
-                      on ? 'border-accent text-white' : 'border-transparent text-body/80 hover:text-white'
-                    }`}
-                  >
-                    {c.name}
-                    <ArrowRight className={`hidden h-4 w-4 transition-opacity lg:block ${on ? 'text-accent opacity-100' : 'opacity-0'}`} aria-hidden="true" />
-                  </button>
-                </li>
+                <motion.li
+                  key={r.title}
+                  initial={{ opacity: 0, x: 40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: '-80px' }}
+                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                  className="group relative rounded-[22px] border border-white/10 bg-white/[0.03] p-6 transition-colors duration-500 hover:border-white/30 hover:bg-white/[0.06] md:p-10"
+                >
+                  <span className="absolute -left-[38px] top-12 h-3 w-3 rounded-full border-2 border-[#07152D] bg-[#FFFFFF] md:-left-[54px]" aria-hidden="true" />
+                  <div className="flex flex-col items-start gap-5 md:flex-row md:gap-6">
+                    <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white/10 text-[#FFFFFF] transition-colors duration-500 group-hover:bg-[#FFFFFF] group-hover:text-[#07152D]">
+                      <Icon className="h-5 w-5" aria-hidden="true" />
+                    </span>
+                    <div>
+                      <h3 className="text-[21px] font-medium tracking-tight text-white">{r.title}</h3>
+                      <p className="mt-3 max-w-lg leading-relaxed text-[#A3A3A3]">{r.text}</p>
+                    </div>
+                  </div>
+                </motion.li>
               )
             })}
           </ul>
-
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={active}
-              role="tabpanel"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.3 }}
-              className="grid gap-10 md:grid-cols-[1.1fr_1fr]"
-            >
-              <div className="min-w-0">
-                <h3 className="h-display text-3xl md:text-4xl">{cat.name}</h3>
-                <p className="mt-5 text-[17px] leading-relaxed text-body/80">{intro}</p>
-                <ul className="mt-8 border-t border-body/10">
-                  {list.map((s) => (
-                    <li key={s.slug} className="border-b border-body/10">
-                      <ArrowLink to={servicePath(s)} className="w-full justify-between py-4 text-[16px] text-white">{s.name}</ArrowLink>
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-8">
-                  <Button to={pathFor(cat.slug)} variant="outline">{cat.single ? `About ${cat.name}` : `Explore ${cat.name}`}</Button>
-                </div>
-              </div>
-              <div className="overflow-hidden">
-                <Img src={cat.image.replace('w=1600', 'w=1000')} alt={`${cat.name} services`} className="aspect-[4/5] h-full w-full bg-mist object-cover" />
-              </div>
-            </motion.div>
-          </AnimatePresence>
         </div>
       </div>
     </section>
   )
 }
 
-/* 5. Why AchiveX */
-function WhyAchivex({ d }) {
-  return (
-    <section className="bg-ink py-24 text-white md:py-32">
-      <div className="container-site">
-        <SectionHead light title={d.title} text={d.text} />
-        <div className="grid gap-x-16 sm:grid-cols-2">
-          {(d.items || []).map((r, i) => (
-            <FadeUp key={r.title} delay={(i % 2) * 0.06} className="border-b border-white/15 py-10">
-              <Check className="h-5 w-5 text-accent" aria-hidden="true" />
-              <h3 className="mt-5 text-xl font-semibold text-white">{r.title}</h3>
-              <p className="mt-3 max-w-md leading-relaxed text-white/65">{r.text}</p>
-            </FadeUp>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/* 6. Two service spotlights */
+/* 6. Service spotlights: the text scrolls while the picture stays and changes with it. */
 function Spotlights({ d }) {
-  return (
-    <section className="bg-canvas py-24 md:py-32">
-      <div className="container-site space-y-24 md:space-y-32">
-        {(d.items || []).map((s, i) => (
-          <div key={s.title} className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
-            <FadeUp className={`overflow-hidden ${i % 2 ? 'lg:order-2' : ''}`}>
-              <Img src={s.image} alt={s.alt} className="aspect-[5/4] w-full bg-mist object-cover transition-transform duration-700 hover:scale-[1.03]" />
-            </FadeUp>
-            <FadeUp delay={0.1}>
-              <h2 className="h-display text-4xl md:text-5xl">{s.title}</h2>
-              <p className="mt-6 max-w-lg text-[17px] leading-relaxed text-body/80">{s.text}</p>
-              <ul className="mt-8 space-y-4">
-                {(s.points || []).map((p) => (
-                  <li key={p} className="flex gap-3 text-white">
-                    <Check className="mt-0.5 h-5 w-5 shrink-0 text-accent" aria-hidden="true" />{p}
-                  </li>
-                ))}
-              </ul>
-              {s.link && <div className="mt-10"><Button to={s.to}>{s.link}</Button></div>}
-            </FadeUp>
-          </div>
-        ))}
-      </div>
-    </section>
-  )
+  return <StickyShowcase eyebrow={d.eyebrow || 'Focus areas'} title={d.title || 'A closer look at what we do'} items={d.items || []} />
 }
 
-/* 7. Process */
+/* 7. Process: steps on a line that move on by themselves (see ProcessTimeline). */
 function Process({ d }) {
   return (
-    <section className="bg-mist py-24 md:py-32">
+    <section className="overflow-hidden bg-ink py-24 text-white md:py-32">
       <div className="container-site">
-        <SectionHead title={d.title} text={d.text} />
-        <ol className="grid gap-px bg-body/10 pt-px sm:grid-cols-2 lg:grid-cols-4">
-          {(d.steps || []).map((s, i) => (
-            <FadeUp as="li" key={s.title} delay={i * 0.06} className="bg-mist py-10 pr-8 lg:px-8 lg:first:pl-0">
-              <span className="text-sm font-semibold text-slate">Step {i + 1}</span>
-              <h3 className="mt-3 text-2xl font-medium tracking-tight">{s.title}</h3>
-              <p className="mt-3 leading-relaxed text-body/80">{s.text}</p>
-            </FadeUp>
-          ))}
-        </ol>
+        <SectionHead title={d.title} text={d.text} light />
+        <div className="mt-14">
+          <ProcessTimeline items={d.steps || []} />
+        </div>
       </div>
     </section>
   )
@@ -343,7 +360,7 @@ function Process({ d }) {
 /* 8. Industries */
 function Industries({ d }) {
   return (
-    <section className="bg-canvas py-24 md:py-32">
+    <section className="bg-[#EEF0F3] py-24 md:py-32">
       <div className="container-site">
         <SectionHead title={d.title} text={d.text} />
         <ul>
@@ -371,7 +388,7 @@ function FeaturedCase({ d }) {
   return (
     <section className="bg-canvas py-24 md:py-32">
       <div className="container-site">
-        <FadeUp className="grid overflow-hidden bg-navy text-white lg:grid-cols-2">
+        <FadeUp className="group grid overflow-hidden bg-navy text-white transition-colors duration-500 hover:bg-[#1C1C1C] lg:grid-cols-2">
           <Img src={cs.image} alt={cs.title} className="h-full min-h-[320px] w-full bg-mist object-cover" />
           <div className="flex flex-col justify-center p-8 md:p-14">
             <h2 className="h-display text-3xl text-white md:text-4xl">{cs.title}</h2>

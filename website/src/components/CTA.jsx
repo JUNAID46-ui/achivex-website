@@ -34,15 +34,19 @@ export default function CTA({
     <section ref={ref} onPointerMove={move} onPointerLeave={leave} className="cta-shine relative overflow-hidden bg-ink text-white">
       <div ref={glow} className="cta-shine-glow" aria-hidden="true" />
       <div className="cta-shine-grain" aria-hidden="true" />
-      <FadeUp className="container-site relative py-24 md:py-32">
-        <h2 className="h-display max-w-2xl text-4xl text-white md:text-6xl">{title}</h2>
-        {text && <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/75">{text}</p>}
+      <FadeUp className="container-site relative grid items-center gap-10 py-20 md:py-24 lg:grid-cols-[1fr_auto] lg:gap-16">
+        <div>
+          <h2 className="h-display max-w-3xl text-[34px] leading-[1.1] text-white md:text-[52px]">{title}</h2>
+          {text && <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-white/70">{text}</p>}
+        </div>
         <Link
           to={to}
-          className="group mt-10 inline-flex items-center gap-3 rounded-full border-[1.5px] border-white px-7 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-white hover:text-ink"
+          className="group inline-flex w-fit items-center gap-4 rounded-full bg-[#FFFFFF] py-2 pl-7 pr-2 text-[15px] font-semibold text-[#000000] shadow-[0_20px_50px_-20px_rgba(91,124,255,0.6)] transition-transform duration-300 hover:-translate-y-0.5"
         >
           {button}
-          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+          <span className="grid h-11 w-11 place-items-center rounded-full bg-[#000000] text-[#FFFFFF] transition-transform duration-300 group-hover:-rotate-45">
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </span>
         </Link>
       </FadeUp>
     </section>

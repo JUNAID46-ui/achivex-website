@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-23T00:38:55.498Z",
+  "generated": "2026-10-23T10:23:13.359Z",
   "pages": [
     {
       "path": "/",
@@ -9,25 +9,25 @@
     },
     {
       "path": "/about-us/",
-      "title": "Who We Are",
-      "description": "Learn about AchiveX LLC, a Wyoming based technology services company, its story, mission, vision and the values that guide its work.",
+      "title": "About Us",
+      "description": "AchiveX LLC is a Wyoming based company that builds websites, custom software, AI automation and growth marketing for small and mid sized businesses.",
       "type": "Page",
       "editable": {
         "heroEyebrow": "About AchiveX",
         "heroTitle": "A technology partner that explains every step",
         "heroText": "AchiveX LLC is a Wyoming based company that builds websites, custom software, AI automation and growth marketing for small and mid sized businesses.",
-        "heroImage": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=2000&q=80",
-        "heroImageAlt": "AchiveX team members working together on laptops",
+        "heroImage": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=2000&q=80",
+        "heroImageAlt": "A team reviewing a project together at a shared desk",
         "introEyebrow": "Who we are",
         "introTitle": "One team for the work that grows a business",
         "introKeyword": "AchiveX LLC",
         "introParagraphs": [
           " is a technology and marketing company based in Wyoming, USA. We plan, build and run the digital side of a business: the website customers see first, the software your team uses every day, the automations that remove repetitive work, and the marketing that brings in new enquiries.",
-          "Most growing companies end up working with several suppliers for these jobs. One builds the website, another runs the ads, a third looks after the CRM, and nobody owns the full picture. We bring that work under one roof, so decisions are made with the whole business in mind and you have one team to call when something needs to change."
+          "Most growing companies end up working with several suppliers for these jobs. One builds the website, another runs the ads, a third looks after the CRM, and nobody owns the full picture. We bring that work under one roof, with one team to call."
         ],
         "areasEyebrow": "What we do",
         "areasTitle": "Three areas, eight services",
-        "areasText": "Start with the service you need today and add more as the business grows. The same team delivers every area, so the work fits together.",
+        "areasText": "Start with the service you need today and add more as the business grows.",
         "areas": [
           {
             "title": "Web and Software",
@@ -48,19 +48,25 @@
         "storyEyebrow": "Our story",
         "storyTitle": "Why AchiveX exists",
         "storyParagraphs": [
-          "AchiveX was started to give growing businesses the kind of digital support that larger companies take for granted. Many owners know their website could do more, that their team spends too long on manual work, or that their marketing is hard to measure. What they often lack is a partner who will look at all of it together and explain the options in plain terms.",
-          "That is the gap we set out to fill. We listen first, learn how the business actually runs, and then recommend the smallest set of changes that will make a real difference. When we build something, we document it and show your team how to use it, so you are never dependent on us for simple updates."
+          "AchiveX was started to give growing businesses the kind of digital support that larger companies take for granted. Many owners know their website could do more or that their marketing is hard to measure. What they lack is a partner who looks at all of it together and explains the options plainly."
         ],
         "storyList": [],
         "storyImage": "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1400&q=80",
         "storyImageAlt": "A planning session around a table with laptops and notes",
+        "statementsEyebrow": "Who we are",
+        "statementsTitle": "Mission, vision and philosophy",
         "missionTitle": "Mission",
         "missionText": "To give businesses dependable websites, software and marketing, explained in plain language and delivered with care.",
         "visionTitle": "Vision",
         "visionText": "A business world where companies of every size can use good technology with confidence and spend their energy on their own customers.",
+        "philosophyTitle": "Philosophy",
+        "philosophyText": "Listen first, recommend the smallest change that makes a real difference, and leave every client able to run what we build.",
+        "statsTitle": "One team for the website, the software and the marketing behind your growth",
+        "statsImage": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=2000&q=80",
+        "statsImageAlt": "Network of lights across the earth at night",
         "valuesEyebrow": "What we value",
         "valuesTitle": "The principles behind every project",
-        "valuesText": "These are the habits we hold ourselves to on every project, whatever its size.",
+        "valuesText": "The habits we keep on every project.",
         "values": [
           {
             "title": "Say what we mean",
@@ -77,16 +83,11 @@
           {
             "title": "Respect the budget",
             "text": "Every recommendation comes with a realistic view of cost and effort."
-          },
-          {
-            "title": "Keep learning",
-            "text": "Technology moves quickly. We invest time in staying current so clients do not have to."
-          },
-          {
-            "title": "Protect what we are trusted with",
-            "text": "Client data, systems and reputations are handled with care."
           }
         ],
+        "bannerEyebrow": "How we start",
+        "bannerTitle": "Every project begins with a free consultation",
+        "bannerText": "",
         "processEyebrow": "How we work",
         "processTitle": "A clear process from the first call to launch and beyond",
         "processText": "Every engagement follows the same four steps, whatever its size.",
@@ -108,21 +109,8 @@
             "text": "Launch, training and ongoing care. We monitor, update and improve the work after it is delivered."
           }
         ],
-        "whyEyebrow": "Why clients choose us",
-        "whyTitle": "What working with AchiveX is like",
-        "whyParagraphs": [
-          "The difference clients notice first is clarity. You always know what is being done, why it matters and what it will cost, because we put it in writing before we start."
-        ],
-        "whyList": [
-          "Plain language, with no jargon in proposals or reports",
-          "One point of contact for every service",
-          "Honest advice, even when the answer is to do less",
-          "Work your own team can run and update"
-        ],
-        "whyImage": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1400&q=80",
-        "whyImageAlt": "Two colleagues reviewing work together at a desk",
         "faqTitle": "Questions about AchiveX",
-        "faqText": "If your question is not here, call or email us and we will answer it directly.",
+        "faqText": "Call or email us with anything else.",
         "faqs": [
           {
             "q": "Where is AchiveX based?",
@@ -131,10 +119,6 @@
           {
             "q": "What size of business do you work with?",
             "a": "Mostly small and mid sized companies, as well as larger teams that need extra capacity for a specific project. The scope of each engagement is set to fit your size and budget."
-          },
-          {
-            "q": "How do you price your work?",
-            "a": "Projects are quoted at a fixed price after a free consultation. Ongoing services such as marketing or maintenance are billed monthly, and the scope is written down before we start."
           }
         ],
         "ctaTitle": "Work with a team that explains itself."
@@ -239,32 +223,10 @@
         "introKeyword": "AchiveX",
         "introParagraphs": [
           " works with businesses in financial services, healthcare, retail and ecommerce, manufacturing, logistics and education. The technology is often similar across these sectors, but the rules, the customers and the daily pressures are not.",
-          "A clinic needs to protect patient information and keep phone lines clear. A manufacturer needs quotes out quickly and stock figures it can trust. A retailer needs pages that load in a moment and ads that pay for themselves. We bring what we have learned from each sector to the start of every project, so less time is spent explaining the basics.",
-          "If your industry is not listed here, we still want to hear from you. The way we work, starting with how your business runs today, applies to almost any organisation."
+          "A clinic needs to protect patient information and keep phone lines clear. A manufacturer needs quotes out quickly and stock figures it can trust. A retailer needs pages that load in a moment and ads that pay for themselves. We bring what we have learned from each sector to the start of every project, so less time is spent explaining the basics."
         ],
         "listEyebrow": "Sectors",
         "listTitle": "Choose your industry",
-        "needsEyebrow": "Common needs",
-        "needsTitle": "What clients in every sector ask us for",
-        "needsText": "Whatever the industry, most projects start with one of these four needs.",
-        "needs": [
-          {
-            "title": "Be found and trusted online",
-            "text": "A clear, fast website and strong search presence so the right customers find you and understand what you offer."
-          },
-          {
-            "title": "Spend less time on routine work",
-            "text": "Automations and AI assistants that handle repeat questions, data entry and follow ups."
-          },
-          {
-            "title": "Keep track of every lead",
-            "text": "A CRM that records every enquiry, quote and conversation, with reminders so nothing slips."
-          },
-          {
-            "title": "Know what is working",
-            "text": "Reporting that ties marketing and operations to enquiries, sales and time saved."
-          }
-        ],
         "processEyebrow": "How we work",
         "processTitle": "The same clear process in every industry",
         "processText": "We adapt the details to your sector, but the steps stay the same.",
@@ -290,8 +252,7 @@
         "whyTitle": "Specialist enough to understand you, broad enough to do it all",
         "whyParagraphs": [
           "Most businesses do not need every service at once. They need a partner who can see which change will matter most, do that well, and then help with the next step when the time is right.",
-          "Many agencies focus on one channel, such as websites or ads. Many software firms focus on one platform. We cover websites, software, automation and marketing together, which matters because problems in one area usually affect the others.",
-          "You get one team that understands your sector and can fix the whole chain, from the first search a customer makes to the system your staff use to serve them."
+          "Many agencies focus on one channel, such as websites or ads. Many software firms focus on one platform. We cover websites, software, automation and marketing together, which matters because problems in one area usually affect the others."
         ],
         "whyList": [
           "Experience across six industries",
@@ -1912,8 +1873,8 @@
         "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1600&q=80",
         "summary": "Banks, credit unions, lenders, accountants and fintech teams that need reliable systems, clean data and strong controls.",
         "intro": [
-          "Financial services firms run on trust. Clients expect accurate statements, quick answers and a website that feels as secure as the business behind it. At the same time, teams are often stuck re keying data between systems that were never designed to work together.",
-          "We help lenders, credit unions, advisory firms, accountants and fintech startups modernise the digital side of their business without putting compliance or client data at risk. That might mean a faster, clearer website, a client portal, an automation that moves application data into the CRM, or a search and ads programme that brings in qualified enquiries."
+          "Financial services firms run on trust. Clients expect accurate statements, quick answers and a website that feels as secure as the business behind it. Yet many teams still re key data between systems by hand.",
+          "We help lenders, credit unions, advisory firms, accountants and fintech startups modernise the digital side of their business without putting compliance or client data at risk."
         ],
         "challenges": [
           {

@@ -9,8 +9,8 @@ export const industries = [
     image: img('1611974789855-9c2a0a7236a3'),
     summary: 'Banks, credit unions, lenders, accountants and fintech teams that need reliable systems, clean data and strong controls.',
     intro: [
-      'Financial services firms run on trust. Clients expect accurate statements, quick answers and a website that feels as secure as the business behind it. At the same time, teams are often stuck re keying data between systems that were never designed to work together.',
-      'We help lenders, credit unions, advisory firms, accountants and fintech startups modernise the digital side of their business without putting compliance or client data at risk. That might mean a faster, clearer website, a client portal, an automation that moves application data into the CRM, or a search and ads programme that brings in qualified enquiries.',
+      'Financial services firms run on trust. Clients expect accurate statements, quick answers and a website that feels as secure as the business behind it. Yet many teams still re key data between systems by hand.',
+      'We help lenders, credit unions, advisory firms, accountants and fintech startups modernise the digital side of their business without putting compliance or client data at risk.',
     ],
     challenges: [
       { title: 'Manual data entry', text: 'Applications, onboarding forms and documents are often copied by hand between systems, which slows service and creates errors.' },

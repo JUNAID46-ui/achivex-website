@@ -1,4 +1,4 @@
-import { homeLayouts } from '../pages/Home'
+import { homeLayouts } from '../views/Home'
 import { genericLayouts } from './sections/GenericSections'
 import { designCss } from '../lib/sectionDesign'
 

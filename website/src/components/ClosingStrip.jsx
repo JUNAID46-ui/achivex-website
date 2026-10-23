@@ -10,7 +10,7 @@ export default function ClosingStrip() {
   const latest = [...blogs].sort((a, b) => String(b.date).localeCompare(String(a.date))).slice(0, 3)
   if (!latest.length) return null
   return (
-    <section className="bg-[#F5F6F8] py-20 md:py-24">
+    <section className="bg-[#EEF0F3] py-20 md:py-24">
       <div className="container-site">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>

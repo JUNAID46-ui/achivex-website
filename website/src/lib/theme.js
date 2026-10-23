@@ -29,7 +29,9 @@ const PRELOADED = ['Manrope', 'Geist'] // loaded by index.html
 const hex = (v) => (typeof v === 'string' && /^#[0-9a-fA-F]{6}$/.test(v) ? v : null)
 const rgb = (v) => [1, 3, 5].map((i) => parseInt(v.slice(i, i + 2), 16)).join(' ')
 
-export function applyTheme(theme) {
+// The CSS for the saved colours and fonts, and any extra Google fonts to load. Used on the server
+// (rendered into the page head) and in the browser (applyTheme), so both agree.
+export function themeCss(theme) {
   const c = theme?.colors || {}
   const f = theme?.fonts || {}
   const vars = (pairs) => pairs.filter(([, v]) => hex(v)).map(([k, v]) => `${k}: ${rgb(v)};`).join(' ')
@@ -48,6 +50,11 @@ export function applyTheme(theme) {
     dark && `:root, [class~='bg-navy'], [class~='bg-ink'] { ${dark} }`,
     light && `[class~='bg-mist'] { ${light} }`,
   ].filter(Boolean).join('\n')
+  return { css, load: [...new Set([body, heading])].filter((name) => name && !PRELOADED.includes(name)) }
+}
+
+export function applyTheme(theme) {
+  const { css, load } = themeCss(theme)
   if (css) {
     const style = document.createElement('style')
     style.id = 'site-theme'
@@ -55,7 +62,6 @@ export function applyTheme(theme) {
     document.head.appendChild(style)
   }
 
-  const load = [...new Set([body, heading])].filter((name) => name && !PRELOADED.includes(name))
   if (load.length) {
     const link = document.createElement('link')
     link.rel = 'stylesheet'

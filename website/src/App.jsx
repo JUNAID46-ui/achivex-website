@@ -1,28 +1,28 @@
 import { lazy } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Layout from './components/Layout'
-import Home from './pages/Home'
-const WhoWeAre = lazy(() => import('./pages/about/WhoWeAre'))
-const ServicesOverview = lazy(() => import('./pages/services/ServicesOverview'))
-const ServiceResolver = lazy(() => import('./pages/services/ServiceResolver'))
-const ServiceDetail = lazy(() => import('./pages/services/ServiceDetail'))
-const Industry = lazy(() => import('./pages/Industry'))
-const Industries = lazy(() => import('./pages/Industries'))
-const Insights = lazy(() => import('./pages/insights/Insights'))
-const CaseStudies = lazy(() => import('./pages/insights/CaseStudies'))
-const CaseStudyDetail = lazy(() => import('./pages/insights/CaseStudyDetail'))
-const Newsroom = lazy(() => import('./pages/insights/Newsroom'))
-const NewsDetail = lazy(() => import('./pages/insights/NewsDetail'))
-const Whitepapers = lazy(() => import('./pages/insights/Whitepapers'))
-const WhitepaperDetail = lazy(() => import('./pages/insights/WhitepaperDetail'))
-const Blogs = lazy(() => import('./pages/insights/Blogs'))
-const BlogPost = lazy(() => import('./pages/insights/BlogPost'))
-const Contact = lazy(() => import('./pages/Contact'))
-const Careers = lazy(() => import('./pages/Careers'))
-const PrivacyPolicy = lazy(() => import('./pages/legal/PrivacyPolicy'))
-const Terms = lazy(() => import('./pages/legal/Terms'))
-import NotFound from './pages/NotFound'
-const RootResolver = lazy(() => import('./pages/RootResolver'))
+import Home from './views/Home'
+const WhoWeAre = lazy(() => import('./views/about/WhoWeAre'))
+const ServicesOverview = lazy(() => import('./views/services/ServicesOverview'))
+const ServiceResolver = lazy(() => import('./views/services/ServiceResolver'))
+const ServiceDetail = lazy(() => import('./views/services/ServiceDetail'))
+const Industry = lazy(() => import('./views/Industry'))
+const Industries = lazy(() => import('./views/Industries'))
+const Insights = lazy(() => import('./views/insights/Insights'))
+const CaseStudies = lazy(() => import('./views/insights/CaseStudies'))
+const CaseStudyDetail = lazy(() => import('./views/insights/CaseStudyDetail'))
+const Newsroom = lazy(() => import('./views/insights/Newsroom'))
+const NewsDetail = lazy(() => import('./views/insights/NewsDetail'))
+const Whitepapers = lazy(() => import('./views/insights/Whitepapers'))
+const WhitepaperDetail = lazy(() => import('./views/insights/WhitepaperDetail'))
+const Blogs = lazy(() => import('./views/insights/Blogs'))
+const BlogPost = lazy(() => import('./views/insights/BlogPost'))
+const Contact = lazy(() => import('./views/Contact'))
+const Careers = lazy(() => import('./views/Careers'))
+const PrivacyPolicy = lazy(() => import('./views/legal/PrivacyPolicy'))
+const Terms = lazy(() => import('./views/legal/Terms'))
+import NotFound from './views/NotFound'
+const RootResolver = lazy(() => import('./views/RootResolver'))
 import { routePath, listRoutePath, isRoot } from './lib/permalinks'
 
 export default function App() {

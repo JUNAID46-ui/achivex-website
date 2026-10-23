@@ -8,7 +8,7 @@ export default function BlogCard({ post }) {
   const to = permalink(`/insights/blogs/${post.slug}/`)
   return (
     <article className="group flex h-full flex-col transition-transform duration-500 ease-out hover:-translate-y-1">
-      <Link to={to} className="block overflow-hidden rounded-[20px]">
+      <Link to={to} tabIndex={-1} aria-hidden="true" className="block overflow-hidden rounded-[20px]">
         <Img sizes="(min-width: 768px) 400px, 100vw" src={post.image} alt={post.title} className="aspect-[16/10] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
       </Link>
       <div className="flex flex-1 flex-col pt-5">

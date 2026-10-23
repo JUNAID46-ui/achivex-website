@@ -15,21 +15,11 @@ export default {
   introParagraphs: [
     ' works with businesses in financial services, healthcare, retail and ecommerce, manufacturing, logistics and education. The technology is often similar across these sectors, but the rules, the customers and the daily pressures are not.',
     'A clinic needs to protect patient information and keep phone lines clear. A manufacturer needs quotes out quickly and stock figures it can trust. A retailer needs pages that load in a moment and ads that pay for themselves. We bring what we have learned from each sector to the start of every project, so less time is spent explaining the basics.',
-    'If your industry is not listed here, we still want to hear from you. The way we work, starting with how your business runs today, applies to almost any organisation.',
   ],
 
   listEyebrow: 'Sectors',
   listTitle: 'Choose your industry',
 
-  needsEyebrow: 'Common needs',
-  needsTitle: 'What clients in every sector ask us for',
-  needsText: 'Whatever the industry, most projects start with one of these four needs.',
-  needs: [
-    { title: 'Be found and trusted online', text: 'A clear, fast website and strong search presence so the right customers find you and understand what you offer.' },
-    { title: 'Spend less time on routine work', text: 'Automations and AI assistants that handle repeat questions, data entry and follow ups.' },
-    { title: 'Keep track of every lead', text: 'A CRM that records every enquiry, quote and conversation, with reminders so nothing slips.' },
-    { title: 'Know what is working', text: 'Reporting that ties marketing and operations to enquiries, sales and time saved.' },
-  ],
 
   processEyebrow: 'How we work',
   processTitle: 'The same clear process in every industry',
@@ -46,7 +36,6 @@ export default {
   whyParagraphs: [
     'Most businesses do not need every service at once. They need a partner who can see which change will matter most, do that well, and then help with the next step when the time is right.',
     'Many agencies focus on one channel, such as websites or ads. Many software firms focus on one platform. We cover websites, software, automation and marketing together, which matters because problems in one area usually affect the others.',
-    'You get one team that understands your sector and can fix the whole chain, from the first search a customer makes to the system your staff use to serve them.',
   ],
   whyList: [
     'Experience across six industries',

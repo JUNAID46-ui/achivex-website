@@ -1,1 +1,3 @@
-/*    /index.html   200
+# Netlify: addresses without their own file show the website's 404 page, which also opens
+# posts published after the last build.
+/*    /404.html   404

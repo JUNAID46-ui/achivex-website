@@ -6,7 +6,7 @@
 :root {
   --c-navy: 15 44 156;
   --c-mist: 255 255 255;
-  --c-ink: 0 0 0;
+  --c-ink: 28 28 28;
   --c-cloud: 238 241 243;
   --font-sans: 'Manrope', system-ui, sans-serif;
   --font-display: 'Geist', 'Manrope', system-ui, sans-serif;
@@ -58,7 +58,7 @@ html[data-theme='light'] [class~='bg-mist'] {
   --c-canvas: 255 255 255;
   --c-accent: 15 44 156;
   --c-on-accent: 255 255 255;
-  background-color: #F3F5F7;
+  background-color: #EEF0F3;
 }
 /* Form fields: visible borders on white cards. */
 html[data-theme='light'] .field {
@@ -173,3 +173,4 @@ html[data-theme='light'] .field::placeholder { color: #9AA0A9; }
   .motion-rise, .motion-rise-late, .motion-settle, .motion-line { animation: none; }
   .motion-lift, .motion-lift:hover { transition: none; transform: none; }
 }
+

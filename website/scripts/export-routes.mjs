@@ -14,7 +14,7 @@ import { whitepapers } from '../src/data/whitepapers.js'
 
 const pages = [
   { path: '/', title: 'Home', description: 'AchiveX LLC is a Wyoming based marketing and software solutions company offering web development, custom software, AI and automation, CRM, SEO, social media and ads management.', type: 'Page' },
-  { path: '/about-us/', title: 'Who We Are', description: 'Learn about AchiveX LLC, a Wyoming based technology services company, its story, mission, vision and the values that guide its work.', type: 'Page' },
+  { path: '/about-us/', title: 'About Us', description: 'AchiveX LLC is a Wyoming based company that builds websites, custom software, AI automation and growth marketing for small and mid sized businesses.', type: 'Page' },
   { path: '/services/', title: 'Services', description: 'Explore AchiveX services: web development, custom software, AI and intelligent systems, automation, CRM, SEO, AEO and GEO, social media and ads management.', type: 'Page' },
   { path: '/industries/', title: 'Industries', description: 'The industries AchiveX works with, from financial services and healthcare to retail, manufacturing, logistics and education.', type: 'Page' },
   { path: '/insights/', title: 'Insights', description: 'Case studies, company news, free guides and practical articles from AchiveX LLC.', type: 'Page' },

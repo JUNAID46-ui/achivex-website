@@ -20,7 +20,7 @@ export default function Insights() {
     <>
       <InnerHero crumbs={[{ label: 'Insights' }]} eyebrow={c.heroEyebrow} title={c.heroTitle} text={c.heroText} image={c.heroImage} alt={c.heroImageAlt} />
       <IntroSplit eyebrow={c.introEyebrow} title={c.introTitle} keyword={c.introKeyword} paragraphs={c.introParagraphs} />
-      <section className="bg-[#F5F6F8] py-20 md:py-28">
+      <section className="bg-[#EEF0F3] py-20 md:py-28">
         <div className="container-site">
           <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-navy">{c.typesEyebrow}</p>
           <h2 className="mt-4 text-[32px] font-medium leading-[1.12] tracking-[-0.025em] text-[#111111] md:text-[44px]">{c.typesTitle}</h2>

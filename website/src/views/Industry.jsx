@@ -35,7 +35,7 @@ export default function Industry() {
       <ImageSplit eyebrow="How we help" title={ind.helpTitle} paragraphs={ind.helpParagraphs} list={ind.helpList} image={ind.image} alt={`${ind.name} work`} reverse />
 
       {services.length > 0 && (
-        <section className="bg-[#F5F6F8] py-20 md:py-28">
+        <section className="bg-[#EEF0F3] py-20 md:py-28">
           <div className="container-site">
             <FadeUp>
               <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-navy">Services</p>
