@@ -19,6 +19,8 @@ export default function Blogs() {
   const pc = pageContent['/insights/blogs/']
   const featured = blogs.find((b) => b.featured) || blogs[0]
   const [cat, setCat] = useState('All')
+  // Saved categories in their order, then any other name a post uses; empty ones are left out.
+  const tabs = [...new Set([...blogCategories, ...blogs.map((b) => b.category)])].filter((c) => c && blogs.some((b) => b.category === c))
   const [q, setQ] = useState('')
   const [page, setPage] = useState(1)
 
@@ -65,7 +67,7 @@ export default function Blogs() {
         <div className="container-site">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div role="tablist" aria-label="Filter by category" className="flex flex-wrap gap-6">
-              {['All', ...blogCategories].map((c) => (
+              {['All', ...tabs].map((c) => (
                 <button
                   key={c}
                   role="tab"

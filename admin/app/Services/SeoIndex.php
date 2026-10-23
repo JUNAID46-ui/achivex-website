@@ -67,6 +67,7 @@ class SeoIndex
         $analysis = SeoAnalyzer::analyze([
             'title' => $fullTitle, 'description' => $desc, 'keyword' => $keyword, 'path' => $path,
             'text' => $content['text'] ?? '', 'headings' => $content['headings'] ?? [], 'first' => $content['first'] ?? '', 'noindex' => $m?->noindex,
+            'raw' => $content['raw'] ?? null, 'paragraphs' => $content['paragraphs'] ?? null,
         ]);
 
         return [

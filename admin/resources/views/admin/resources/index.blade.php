@@ -3,6 +3,7 @@
 @section('heading', $resource->label)
 @section('subheading', $resource->description)
 @section('actions')
+  @if($resource->slug === 'blog-posts' && auth()->user()->canAccess('content'))<a href="{{ route('admin.blog.categories') }}" class="btn-secondary">Categories</a>@endif
   @if($resource->slug !== 'users' && $deleted)<a href="{{ route('admin.resources.deleted', $resource->slug) }}" class="btn-secondary">@include('admin.partials.icon', ['name' => 'history']) Recently deleted ({{ $deleted }})</a>@endif
   <a href="{{ route('admin.resources.create', $resource->slug) }}" class="btn-primary">@include('admin.partials.icon', ['name' => 'plus']) Add {{ $resource->singular }}</a>
 @endsection

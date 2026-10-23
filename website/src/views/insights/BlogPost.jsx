@@ -17,16 +17,33 @@ import { faqSchema } from '../../lib/schema'
 
 const pad = (n) => String(n).padStart(2, '0')
 
+// Inline formatting in article text: [label](url) becomes a link and **text** becomes bold.
+// Built as React elements, so nothing from the database is ever inserted as raw HTML.
+const INLINE = /\[([^\]]+)\]\(((?:https?:\/\/|\/|#|mailto:)[^)\s]*)\)|\*\*([^*]+)\*\*/g
+function Inline({ text }) {
+  const out = []
+  let last = 0
+  for (const m of String(text).matchAll(INLINE)) {
+    if (m.index > last) out.push(String(text).slice(last, m.index))
+    if (m[3]) out.push(<strong key={m.index} className="font-semibold text-site-heading">{m[3]}</strong>)
+    else if (m[2].startsWith('/')) out.push(<Link key={m.index} to={m[2]} className="text-site-brand underline underline-offset-4">{m[1]}</Link>)
+    else out.push(<a key={m.index} href={m[2]} target={m[2].startsWith('http') ? '_blank' : undefined} rel={m[2].startsWith('http') ? 'noopener noreferrer' : undefined} className="text-site-brand underline underline-offset-4">{m[1]}</a>)
+    last = m.index + m[0].length
+  }
+  if (last < String(text).length) out.push(String(text).slice(last))
+  return out
+}
+
 // Paragraph blocks from the admin. A block that starts with "### " is an H3 heading;
 // any lines after it in the same block are a normal paragraph.
 function Paragraphs({ items }) {
   return (items || []).map((p, i) => {
-    if (!p.startsWith('### ')) return <p key={i}>{p}</p>
+    if (!p.startsWith('### ')) return <p key={i}><Inline text={p} /></p>
     const [head, ...rest] = p.split('\n')
     return (
       <div key={i}>
         <h3>{head.slice(4).trim()}</h3>
-        {rest.join(' ').trim() && <p>{rest.join(' ').trim()}</p>}
+        {rest.join(' ').trim() && <p><Inline text={rest.join(' ').trim()} /></p>}
       </div>
     )
   })
@@ -40,7 +57,7 @@ function Bullets({ items }) {
           <span className="mt-[5px] grid h-5 w-5 shrink-0 place-items-center rounded-full bg-navy/10 text-navy">
             <Check className="h-3 w-3" strokeWidth={3} aria-hidden="true" />
           </span>
-          {li}
+          <span><Inline text={li} /></span>
         </li>
       ))}
     </ul>
@@ -188,7 +205,7 @@ export default function BlogPost() {
 
             <div ref={bodyRef} className="min-w-0">
               <p className="text-[21px] leading-[1.7] text-site-heading">
-                <strong className="font-semibold text-site-heading">{post.intro.keyword}</strong>{post.intro.text}
+                <strong className="font-semibold text-site-heading">{post.intro.keyword}</strong><Inline text={post.intro.text} />
               </p>
 
               {post.sections.map((s, i) => (
@@ -203,7 +220,7 @@ export default function BlogPost() {
                     <div key={j} className="mt-8 border-l-2 border-navy/15 pl-6">
                       <h3 className="font-display text-[21px] font-semibold leading-snug tracking-tight text-site-heading md:text-[23px]">{sub.heading}</h3>
                       <div className="prose-body mt-3">
-                        {(sub.paragraphs || []).map((p, k) => <p key={k}>{p}</p>)}
+                        {(sub.paragraphs || []).map((p, k) => <p key={k}><Inline text={p} /></p>)}
                       </div>
                       {sub.list?.length > 0 && <Bullets items={sub.list} />}
                     </div>

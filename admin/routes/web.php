@@ -50,6 +50,8 @@ Route::prefix('admin')->name('admin.')->middleware(\App\Http\Middleware\BlockBan
         Route::get('/', [Admin\DashboardController::class, 'index'])->name('dashboard');
         Route::get('dashboard/live', [Admin\DashboardController::class, 'live'])->name('dashboard.live');
         Route::post('quick-draft', [Admin\DashboardController::class, 'quickDraft'])->name('quick-draft')->middleware('area:posts');
+        Route::get('blog-categories', [Admin\BlogCategoriesController::class, 'edit'])->name('blog.categories')->middleware('area:content');
+        Route::post('blog-categories', [Admin\BlogCategoriesController::class, 'save'])->middleware('area:content');
 
         // Page builder
         Route::middleware('area:builder')->group(function () {

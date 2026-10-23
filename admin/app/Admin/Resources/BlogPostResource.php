@@ -80,6 +80,8 @@ class BlogPostResource extends Resource
             $text .= ' '.($f['q'] ?? '').' '.($f['a'] ?? '');
         }
 
-        return ['text' => $text, 'headings' => $headings, 'first' => $record->intro_keyword.$record->intro_text];
+        $paragraphs = collect((array) $record->sections)->flatMap(fn ($s) => $s['paragraphs'] ?? [])->reject(fn ($p) => str_starts_with((string) $p, '### '))->values()->all();
+
+        return ['text' => $text, 'headings' => $headings, 'first' => $record->intro_keyword.$record->intro_text, 'raw' => $text, 'paragraphs' => $paragraphs];
     }
 }

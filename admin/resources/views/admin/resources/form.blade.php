@@ -22,6 +22,9 @@
   @unless($isNew) @method('PUT') @endunless
 
   <div class="min-w-0 space-y-6">
+    @if($resource->slug === 'blog-posts')
+      @include('admin.resources.quickpaste')
+    @endif
     <div class="card card-body space-y-5">
       @foreach($main as $field)
         @include('admin.partials.field', ['field' => $field, 'value' => $value($field)])
@@ -32,7 +35,8 @@
       @php
         $template = \App\Models\Content\SiteSetting::group('seo')['titleTemplate'] ?? '%title% | AchiveX LLC';
         $defaultDesc = $record->excerpt ?? $record->summary ?? $record->description ?? '';
-        $content = $record->exists ? $resource->seoContent($record)['text'] : '';
+        $seoIn = $record->exists ? $resource->seoContent($record) : [];
+        $content = $seoIn['text'] ?? '';
       @endphp
       <div class="card" x-data="{
               title: @js(old('seo_title', $seoMeta?->title)),
@@ -43,10 +47,15 @@
               template: @js($template),
               slug: @js($record->slug ?? ''),
               content: @js($content),
+              first: @js($seoIn['first'] ?? ''),
+              headings: @js($seoIn['headings'] ?? []),
+              raw: @js($seoIn['raw'] ?? ''),
+              paragraphs: @js($seoIn['paragraphs'] ?? []),
+              fromPaste(p) { this.content = p.seo.text; this.first = p.seo.first; this.headings = p.seo.headings; this.raw = p.seo.raw; this.paragraphs = p.seo.paragraphs; if (!this.desc) this.desc = p.description; if (!this.keyword && p.intro_keyword) this.keyword = p.intro_keyword; if (p.title) this.fallbackTitle = p.title; this.$nextTick(() => { const sl = this.$root.closest('form')?.querySelector(`[name='slug']`); if (sl && sl.value) this.slug = sl.value }) },
               get fullTitle() { return this.template.replace('%title%', this.title || this.fallbackTitle) },
               get fullDesc() { return this.desc || this.fallbackDesc },
-              get result() { return seoChecks({ title: this.fullTitle, description: this.fullDesc, keyword: this.keyword, slug: this.slug, content: this.content }) },
-           }">
+              get result() { return seoChecks({ title: this.fullTitle, description: this.fullDesc, keyword: this.keyword, slug: this.slug, content: this.content, first: this.first, headings: this.headings, raw: this.raw, paragraphs: this.paragraphs }) },
+           }" @quickpaste.window="fromPaste($event.detail)">
         <div class="card-header">
           <h2 class="card-title">SEO</h2>
           <span class="score" :class="result.score >= 80 ? 'bg-green-500' : result.score >= 50 ? 'bg-ink' : 'bg-red-500'" x-text="result.score"></span>

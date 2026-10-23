@@ -1,5 +1,5 @@
 {{-- Repeatable group of fields. Submits one hidden JSON input named $name. --}}
-<div x-data="repeater(@js($items ?? []), @js($sub))" class="space-y-3">
+<div x-data="repeater(@js($items ?? []), @js($sub))" @quickpaste.window="$event.detail[@js($name)] && fill($event.detail[@js($name)])" class="space-y-3">
   <input type="hidden" name="{{ $name }}" :value="json">
   <template x-for="(item, i) in items" :key="item._k">
     <div class="border border-neutral-200 bg-neutral-50/60">

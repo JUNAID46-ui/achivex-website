@@ -26,7 +26,7 @@ window.slugify = (s) => String(s || '').toLowerCase().normalize('NFKD').replace(
 window.toast = (message, type = 'success') => window.dispatchEvent(new CustomEvent('toast', { detail: { message, type } }))
 
 // Live SEO checks used by the SEO box on edit screens.
-window.seoChecks = ({ title, description, keyword, slug, content }) => {
+window.seoChecks = ({ title, description, keyword, slug, content, first, headings, raw, paragraphs }) => {
   const k = (keyword || '').trim().toLowerCase()
   const t = (title || '').trim()
   const d = (description || '').trim()
@@ -50,22 +50,47 @@ window.seoChecks = ({ title, description, keyword, slug, content }) => {
     }
   }
   if (words.length) add(words.length >= 300, words.length >= 150, `Content length is ${words.length} words (300 or more is better).`)
+  if (k && first) {
+    const inFirst = first.toLowerCase().includes(k)
+    add(inFirst, true, inFirst ? 'Focus keyword appears in the first paragraph.' : 'Focus keyword is missing from the first paragraph.')
+  }
+  if (k && headings && headings.length) {
+    const inH = headings.some((h) => (h || '').toLowerCase().includes(k))
+    add(inH, true, inH ? 'Focus keyword appears in a subheading.' : 'Focus keyword is missing from the subheadings.')
+  }
+  if (raw) {
+    const internal = (raw.match(/\]\(\/[^)]*\)/g) || []).length
+    const external = (raw.match(/\]\(https?:\/\/[^)]*\)/g) || []).length
+    add(internal >= 2, internal >= 1, `${internal} internal link${internal === 1 ? '' : 's'} (2 or more is better).`)
+    add(external >= 1, true, `${external} external link${external === 1 ? '' : 's'} (1 or more to a trusted source is better).`)
+  }
+  if (paragraphs && paragraphs.length) {
+    const long = paragraphs.filter((p) => (p || '').split(/\s+/).filter(Boolean).length > 120).length
+    add(long === 0, long <= 1, long ? `${long} paragraph${long === 1 ? ' is' : 's are'} over 120 words. Split them up.` : 'No paragraph is over 120 words.')
+  }
   const score = Math.round((checks.reduce((s, c) => s + (c.status === 'good' ? 1 : c.status === 'ok' ? 0.5 : 0), 0) / checks.length) * 100)
   return { checks, score }
 }
 
 // Repeater fields: list values become multi-line text while editing and are split again on the server.
 let repeaterKey = 0
-window.repeater = (items, fields) => ({
-  fields,
-  items: (items || []).map((it) => {
+const repeaterRows = (items, fields) =>
+  (items || []).map((it) => {
     const row = { _k: ++repeaterKey, _open: false }
     fields.forEach((f) => {
       const v = it[f.name]
       row[f.name] = Array.isArray(v) ? v.join(f.type === 'paragraphs' ? '\n\n' : '\n') : v ?? ''
     })
     return row
-  }),
+  })
+
+window.repeater = (items, fields) => ({
+  fields,
+  items: repeaterRows(items, fields),
+  // Replaces every row, for example with the sections QuickPaste found.
+  fill(rows) {
+    this.items = repeaterRows(rows, this.fields)
+  },
   add() {
     const row = { _k: ++repeaterKey, _open: true }
     this.fields.forEach((f) => (row[f.name] = ''))

@@ -1,5 +1,5 @@
 import { supabase } from './supabase'
-import { blogs } from '../data/blogs'
+import { blogs, blogCategories } from '../data/blogs'
 import { caseStudies } from '../data/caseStudies'
 import { news } from '../data/news'
 import { whitepapers } from '../data/whitepapers'
@@ -35,6 +35,9 @@ function applySettings(rows) {
   Object.assign(settings.customCode, byKey.custom_code || {})
   Object.assign(settings.permalinks, byKey.permalinks || {})
   Object.assign(settings.theme, byKey.theme || {})
+  // Blog categories saved in the admin (Blog Posts, Categories) replace the default list.
+  const cats = (byKey.blog || {}).categories
+  if (Array.isArray(cats) && cats.length) blogCategories.splice(0, blogCategories.length, ...cats)
 }
 
 // Loads the editable content from the database and swaps it into the data arrays
