@@ -88,16 +88,16 @@
     return blocks
   }
 
-  function parse(input, isHtml) {
+  function parse(input, isHtml, opts = {}) {
     const blocks = (isHtml ? htmlBlocks(input) : textBlocks(input)).filter((b) => b.type === 'list' || b.text)
     const warnings = []
 
-    // Title: the first H1, otherwise the first short line.
+    // Title: the first H1, otherwise the first short line (not in the article editor, which has its own title).
     let title = ''
     let i = blocks.findIndex((b) => b.type === 'h1')
-    if (i === -1 && blocks[0] && blocks[0].type !== 'list' && words(blocks[0].text) <= 16) i = 0
+    if (i === -1 && !opts.noTitle && blocks[0] && blocks[0].type !== 'list' && words(blocks[0].text) <= 16) i = 0
     if (i !== -1) { title = plain(blocks[i].text); blocks.splice(i, 1) }
-    else warnings.push('No title found. Add an H1 at the top of the article.')
+    else if (!opts.noTitle) warnings.push('No title found. Add an H1 at the top of the article.')
 
     // Opening paragraph: the first paragraph before any H2. Its leading bold text is the keyword.
     let introKeyword = ''
@@ -174,5 +174,51 @@
     }
   }
 
+  // ---- Article editor helpers ----
+  const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+  // Inline Markdown (bold, links) to safe HTML: the text is escaped first, links keep only safe schemes.
+  const mdInline = (s) => esc(s)
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/\[([^\]]+)\]\(((?:https?:\/\/|\/|#|mailto:)[^)\s"]*)\)/g, '<a href="$2">$1</a>')
+  const blocksToHtml = (blocks) => blocks.map((b) => {
+    if (b.type === 'list') return '<ul>' + b.items.map((li) => `<li>${mdInline(li)}</li>`).join('') + '</ul>'
+    if (b.type === 'h1') return `<h1>${esc(b.text)}</h1>`
+    if (b.type === 'h2' || b.type === 'h3') return `<${b.type}>${esc(b.text)}</${b.type}>`
+    return `<p>${mdInline(b.text)}</p>`
+  }).join('')
+  // Pasted HTML or text, reduced to headings, paragraphs, lists, bold and links.
+  const cleanPaste = (input, isHtml) => blocksToHtml((isHtml ? htmlBlocks(input) : textBlocks(input)).filter((b) => b.type === 'list' || b.text))
+  // Saved post fields back to editor HTML.
+  const toEditorHtml = ({ intro_keyword, intro_text, sections }) => {
+    let html = ''
+    if (intro_keyword || intro_text) html += `<p>${intro_keyword ? `<strong>${esc(intro_keyword)}</strong>` : ''}${mdInline(intro_text || '')}</p>`
+    ;(sections || []).forEach((s) => {
+      html += `<h2>${esc(s.heading || '')}</h2>`
+      const paras = Array.isArray(s.paragraphs) ? s.paragraphs : String(s.paragraphs || '').split(/\n\s*\n/)
+      paras.filter((p) => p && p.trim()).forEach((p) => {
+        if (p.startsWith('### ')) {
+          const [head, ...rest] = p.split('\n')
+          html += `<h3>${esc(head.slice(4).trim())}</h3>`
+          if (rest.join(' ').trim()) html += `<p>${mdInline(rest.join(' ').trim())}</p>`
+        } else html += `<p>${mdInline(p.trim())}</p>`
+      })
+      const list = Array.isArray(s.list) ? s.list : String(s.list || '').split('\n')
+      if (list.filter((l) => l.trim()).length) html += '<ul>' + list.filter((l) => l.trim()).map((li) => `<li>${mdInline(li.trim())}</li>`).join('') + '</ul>'
+    })
+    return html || '<p><br></p>'
+  }
+
   window.parseQuickPaste = parse
+  // A paste into the article editor: the H1 becomes the post title and a trailing FAQs part becomes
+  // the FAQ list, so only the article itself goes into the editor.
+  const pasteForEditor = (input, isHtml) => {
+    const blocks = (isHtml ? htmlBlocks(input) : textBlocks(input)).filter((b) => b.type === 'list' || b.text)
+    const h1 = blocks.findIndex((b) => b.type === 'h1')
+    const title = h1 !== -1 ? blocks.splice(h1, 1)[0].text : ''
+    const faqAt = blocks.findIndex((b) => b.type === 'h2' && FAQ_HEADING.test(b.text))
+    const faqs = faqAt !== -1 ? parse(blocksToHtml(blocks.slice(faqAt)), true, { noTitle: true }).faqs : []
+    return { html: blocksToHtml(faqAt !== -1 ? blocks.slice(0, faqAt) : blocks), title, faqs }
+  }
+
+  window.articleEditor = { cleanPaste, toEditorHtml, pasteForEditor, words }
 })()
