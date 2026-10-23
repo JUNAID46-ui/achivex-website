@@ -14,6 +14,37 @@
   <div class="py-1"><p class="stat-label">Administrators</p><p class="stat-value text-ink">{{ $users->where('role', 'administrator')->count() }}</p></div>
 </div>
 
+<div id="blocked" class="card mb-10 overflow-x-auto">
+  <div class="card-header"><h2 class="card-title">Blocked IP addresses</h2></div>
+  <p class="px-5 pt-3 text-[13px] text-neutral-500">After {{ \App\Services\Security\LoginGuard::MAX_FAILURES }} wrong passwords or two-step codes from one IP address within {{ \App\Services\Security\LoginGuard::WINDOW_MINUTES }} minutes, that address cannot open any admin page for {{ \App\Services\Security\LoginGuard::BLOCK_HOURS }} hours. Administrators get a notification here and by email.</p>
+  <table class="table">
+    <thead><tr><th>IP address</th><th>Status</th><th>Attempts</th><th>Emails tried</th><th>Blocked</th><th></th></tr></thead>
+    <tbody>
+      @forelse($blocked as $b)
+        <tr>
+          <td><span class="font-mono font-semibold text-ink">{{ $b->ip }}</span><span class="block max-w-xs truncate text-xs text-neutral-500" title="{{ $b->user_agent }}">{{ $b->user_agent ?: 'Unknown browser' }}</span></td>
+          <td class="whitespace-nowrap">
+            @if($b->isActive())<span class="badge-red">Blocked</span><span class="block text-xs text-neutral-500">{{ $b->expires_at ? 'until '.$b->expires_at->format('M j, H:i') : 'until lifted' }}</span>
+            @elseif($b->unblocked_at)<span class="badge-gray">Lifted</span><span class="block text-xs text-neutral-500">by {{ $b->unblocked_by }}, {{ $b->unblocked_at->format('M j, H:i') }}</span>
+            @else<span class="badge-gray">Ended</span>@endif
+          </td>
+          <td class="font-mono">{{ $b->attempts }}</td>
+          <td class="max-w-xs break-words text-[12.5px] text-neutral-600">{{ implode(', ', $b->emails ?? []) ?: 'None' }}</td>
+          <td class="whitespace-nowrap text-neutral-500">{{ $b->blocked_at?->format('M j, H:i') }}<span class="block text-xs">{{ $b->notified_at ? 'Email sent' : 'No email sent' }}</span></td>
+          <td class="whitespace-nowrap text-right">
+            @if($b->isActive())
+              <form method="POST" action="{{ route('admin.security.unblock', $b->id) }}" class="inline" onsubmit="return confirm('Let {{ $b->ip }} open the admin again?')">@csrf<button class="btn-ghost btn-sm">Unblock</button></form>
+              @if($b->expires_at)<form method="POST" action="{{ route('admin.security.keep', $b->id) }}" class="inline" onsubmit="return confirm('Keep {{ $b->ip }} blocked until you lift it?')">@csrf<button class="btn-danger btn-sm">Block permanently</button></form>@endif
+            @endif
+          </td>
+        </tr>
+      @empty
+        <tr><td colspan="6" class="py-8 text-center text-neutral-500">No IP address has been blocked.</td></tr>
+      @endforelse
+    </tbody>
+  </table>
+</div>
+
 <div class="card mb-10">
   <div class="card-header"><h2 class="card-title">Security check findings</h2>
     @if($runs->count())

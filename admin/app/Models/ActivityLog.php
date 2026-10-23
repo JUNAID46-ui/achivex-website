@@ -14,7 +14,7 @@ class ActivityLog extends Model
     protected $casts = ['created_at' => 'datetime', 'context' => 'array'];
 
     // Actions shown in the Security Center as security sensitive.
-    public const SENSITIVE = ['login', 'login_failed', 'logout_all', 'role_changed', 'password_changed', 'two_factor', 'deleted', 'restored', 'published', 'settings', 'exported'];
+    public const SENSITIVE = ['login', 'login_failed', 'logout_all', 'role_changed', 'password_changed', 'two_factor', 'deleted', 'restored', 'published', 'settings', 'exported', 'ip_blocked', 'ip_unblocked'];
 
     // Keys that are never stored in the context column, whatever the caller passes.
     private const SECRET_KEYS = '/pass|token|secret|api_?key|private_?key|cookie|authorization|otp|recovery/i';

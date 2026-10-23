@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\ActivityLog;
 use App\Models\User;
+use App\Services\Security\LoginGuard;
 use App\Services\TwoFactor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,6 +40,9 @@ class AuthController extends Controller
             RateLimiter::hit($key, 60);
             // The email typed is kept so repeated guessing shows up in the Security Center; the password never is.
             ActivityLog::failure('login_failed', 'User', $email, 'Wrong email or password', ['module' => 'Security', 'user_name' => $email]);
+            if ($block = LoginGuard::failed($request)) {
+                return response()->view('admin.errors.blocked', ['block' => $block], 403);
+            }
             throw ValidationException::withMessages(['email' => 'These details do not match our records.']);
         }
 
@@ -84,6 +88,11 @@ class AuthController extends Controller
         if (! $ok) {
             RateLimiter::hit($key, 60);
             ActivityLog::failure('login_failed', 'User', $user->email, 'Wrong two-step code', ['module' => 'Security', 'user_name' => $user->name, 'id' => $user->id]);
+            if ($block = LoginGuard::failed($request)) {
+                $request->session()->forget('2fa');
+
+                return response()->view('admin.errors.blocked', ['block' => $block], 403);
+            }
             throw ValidationException::withMessages(['code' => 'This code is not correct.']);
         }
 

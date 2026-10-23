@@ -18,7 +18,8 @@ Route::post('/hooks/inbox', InboxHookController::class)->middleware('throttle:30
 // Daily maintenance, called by Vercel Cron (vercel.json)
 Route::match(['get', 'post'], '/hooks/daily', \App\Http\Controllers\DailyHookController::class)->middleware('throttle:5,1')->name('hooks.daily');
 
-Route::prefix('admin')->name('admin.')->group(function () {
+// IP addresses blocked after repeated failed sign ins cannot open any admin page (Security Center).
+Route::prefix('admin')->name('admin.')->middleware(\App\Http\Middleware\BlockBannedIps::class)->group(function () {
     Route::middleware('guest')->group(function () {
         Route::get('login', [Admin\AuthController::class, 'showLogin'])->name('login');
         Route::post('login', [Admin\AuthController::class, 'login'])->middleware('throttle:20,1');
@@ -167,6 +168,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('security', [Admin\SecurityController::class, 'index'])->name('security');
             Route::post('security/scan', [Admin\SecurityController::class, 'run'])->name('security.run')->middleware('throttle:6,1');
             Route::post('security/users/{user}/sessions', [Admin\SecurityController::class, 'endSessions'])->name('security.sessions')->middleware('throttle:10,1');
+            Route::post('security/blocked/{block}/unblock', [Admin\SecurityController::class, 'unblock'])->whereNumber('block')->name('security.unblock');
+            Route::post('security/blocked/{block}/keep', [Admin\SecurityController::class, 'keepBlocked'])->whereNumber('block')->name('security.keep');
         });
 
         // Backup and cache tools (administrators only)

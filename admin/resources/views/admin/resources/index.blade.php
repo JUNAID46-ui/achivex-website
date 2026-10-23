@@ -62,7 +62,7 @@
           @forelse($records as $record)
             @php $editUrl = route('admin.resources.edit', [$resource->slug, $record->getKey()]); $path = $resource->sitePath($record); @endphp
             <tr class="group">
-              <td><input type="checkbox" name="ids[]" value="{{ $record->getKey() }}" x-model="selected" class="border-neutral-300 text-ink" aria-label="Select"></td>
+              <td>@if($resource->slug !== 'users' || ! $resource->deleteBlocker($record))<input type="checkbox" name="ids[]" value="{{ $record->getKey() }}" x-model="selected" class="border-neutral-300 text-ink" aria-label="Select">@endif</td>
               @foreach($resource->columns() as $col)
                 @php $v = $record->{$col['name']} ?? null; @endphp
                 <td>
@@ -73,8 +73,10 @@
                         <a href="{{ $editUrl }}" class="hover:text-ink">Edit</a>
                         @if($resource->slug !== 'users')<span>|</span><a href="{{ route('admin.resources.preview', [$resource->slug, $record->getKey()]) }}" target="_blank" class="hover:text-ink">Preview</a>@endif
                         @if($path && in_array($states[$record->getKey()] ?? 'published', ['published'], true))<span>|</span><a href="{{ rtrim(config('admin.site_url'), '/').$path }}" target="_blank" class="hover:text-ink">View</a>@endif
-                        <span>|</span>
-                        <button type="submit" form="del-{{ md5($record->getKey()) }}" class="text-red-600 hover:underline">Delete</button>
+                        @unless($resource->deleteBlocker($record))
+                          <span>|</span>
+                          <button type="submit" form="del-{{ md5($record->getKey()) }}" class="text-red-600 hover:underline">Delete</button>
+                        @endunless
                       </div>
                       @break
                     @case('image')

@@ -43,8 +43,30 @@ class UserResource extends Resource
         return ['role' => 'editor'];
     }
 
+    // The signed in user and the last administrator cannot be deleted, so the panel always keeps an owner.
+    public function deleteBlocker(Model $record): ?string
+    {
+        if ($record->getKey() === auth()->id()) {
+            return 'You cannot delete your own account.';
+        }
+        if ($record->role === 'administrator' && User::where('role', 'administrator')->count() <= 1) {
+            return 'This is the only administrator. Make another user an administrator first.';
+        }
+
+        return null;
+    }
+
     public function beforeSave(array $data, ?Model $record): array
     {
+        // Same rule for roles: nobody can take away their own administrator role, and the last one stays.
+        if ($record?->exists && $record->role === 'administrator' && ($data['role'] ?? 'administrator') !== 'administrator') {
+            if ($record->getKey() === auth()->id()) {
+                throw \Illuminate\Validation\ValidationException::withMessages(['role' => 'You cannot remove your own administrator role. Ask another administrator.']);
+            }
+            if (User::where('role', 'administrator')->count() <= 1) {
+                throw \Illuminate\Validation\ValidationException::withMessages(['role' => 'This is the only administrator. Make another user an administrator first.']);
+            }
+        }
         $exists = User::where('email', $data['email'])->when($record?->exists, fn ($q) => $q->where('id', '!=', $record->id))->exists();
         if ($exists) {
             throw \Illuminate\Validation\ValidationException::withMessages(['email' => 'Another user already has this email.']);

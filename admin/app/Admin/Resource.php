@@ -47,6 +47,12 @@ abstract class Resource
         return $data;
     }
 
+    // Null when the record may be deleted, otherwise the reason it may not.
+    public function deleteBlocker(Model $record): ?string
+    {
+        return null;
+    }
+
     public function titleOf(Model $record): string
     {
         return (string) ($record->{$this->titleField} ?? '#'.$record->getKey());

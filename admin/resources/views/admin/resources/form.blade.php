@@ -159,11 +159,13 @@
         @endif
       </div>
       <div class="flex items-center justify-between gap-2 pt-2">
-        @unless($isNew)
+        @if(! $isNew && ! ($blocker = $resource->deleteBlocker($record)))
           <button type="submit" form="delete-form" class="text-[13px] font-semibold text-red-600 hover:underline">Delete</button>
+        @elseif(! $isNew)
+          <span class="text-xs text-neutral-500">{{ $blocker }}</span>
         @else
           <span></span>
-        @endunless
+        @endif
         <button class="btn-primary" data-loading>{{ $isNew ? 'Save' : 'Update' }}</button>
       </div>
     </div>

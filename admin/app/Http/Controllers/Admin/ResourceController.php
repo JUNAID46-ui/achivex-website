@@ -135,7 +135,9 @@ class ResourceController extends Controller
     {
         $resource = $this->resource($slug);
         $record = ($resource->model)::findOrFail($id);
-        abort_if($slug === 'users' && $record->getKey() === auth()->id(), 422, 'You cannot delete your own account.');
+        if ($reason = $resource->deleteBlocker($record)) {
+            return back()->withErrors(['delete' => $reason]);
+        }
         $title = $resource->titleOf($record);
         DB::transaction(function () use ($resource, $record, $slug) {
             if ($slug !== 'users') {
@@ -165,13 +167,16 @@ class ResourceController extends Controller
             return back()->withErrors(['action' => 'Only editors and administrators can publish.']);
         }
         $records = ($resource->model)::whereIn($resource->newRecord()->getKeyName(), $ids)->get();
-        if ($slug === 'users') {
-            $records = $records->reject(fn ($u) => $u->getKey() === auth()->id());
-        }
-        DB::transaction(function () use ($records, $resource, $slug, $action) {
-            foreach ($records as $record) {
+        DB::transaction(function () use (&$records, $resource, $slug, $action) {
+            foreach ($records as $i => $record) {
                 $title = $resource->titleOf($record);
                 if ($action === 'delete') {
+                    // Checked one by one, so a bulk delete can never remove the last administrator.
+                    if ($resource->deleteBlocker($record)) {
+                        $records->forget($i);
+
+                        continue;
+                    }
                     if ($slug !== 'users') {
                         Revisions::snapshot($slug, $record, 'delete');
                     }
