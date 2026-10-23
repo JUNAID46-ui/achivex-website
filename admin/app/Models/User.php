@@ -51,12 +51,19 @@ class User extends Authenticatable
                 ActivityLog::record('role_changed', 'User', $user->name, 'Role changed from '.($user->getOriginal('role') ?? '?').' to '.$user->role, ['module' => 'Users', 'id' => $user->id]);
             }
             if ($user->wasChanged(['password', 'role']) && config('session.driver') === 'database') {
-                DB::table(config('session.table', 'sessions'))
+                DB::connection(\App\Support\Sites::mainConnection() ?? config('session.connection'))->table(config('session.table', 'sessions'))
                     ->where('user_id', $user->getKey())
                     ->when(session()->isStarted(), fn ($q) => $q->where('id', '!=', session()->getId()))
                     ->delete();
             }
         });
+    }
+
+    // Users always live in the main database. When another website is selected in Sites, the
+    // default connection points at that website, so users stay on the main one explicitly.
+    public function getConnectionName()
+    {
+        return \App\Support\Sites::mainConnection() ?? parent::getConnectionName();
     }
 
     public function isAdmin(): bool

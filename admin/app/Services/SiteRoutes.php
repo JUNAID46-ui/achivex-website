@@ -21,7 +21,11 @@ class SiteRoutes
                 // Fall back to the bundled copy below.
             }
 
-            return json_decode(file_get_contents(resource_path('site-routes.json')), true);
+            // The bundled copy describes the main website only; another selected website gets an
+            // empty list until its own /site-routes.json can be read.
+            return \App\Support\Sites::active()
+                ? ['pages' => [], 'services' => [], 'industries' => [], 'blogCategories' => []]
+                : json_decode(file_get_contents(resource_path('site-routes.json')), true);
         });
     }
 

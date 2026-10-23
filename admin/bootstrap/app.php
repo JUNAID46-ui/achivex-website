@@ -11,7 +11,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->alias(['area' => \App\Http\Middleware\EnsureArea::class]);
+        $middleware->alias(['area' => \App\Http\Middleware\EnsureArea::class, 'site' => \App\Http\Middleware\UseSelectedSite::class]);
         $middleware->append(\App\Http\Middleware\SecurityHeaders::class);
         // The inbox hook is called by the database, not a browser form, and takes no input.
         $middleware->validateCsrfTokens(except: ['hooks/inbox', 'hooks/daily']);

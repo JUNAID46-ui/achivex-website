@@ -30,8 +30,22 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('reset-password', [Admin\PasswordResetController::class, 'update'])->name('password.update');
     });
 
-    Route::middleware('auth')->group(function () {
+    Route::middleware(['auth', 'site'])->group(function () {
         Route::post('logout', [Admin\AuthController::class, 'logout'])->name('logout');
+
+        // Sites: more websites managed from this admin (administrators only)
+        Route::middleware('area:sites')->group(function () {
+            Route::get('sites', [Admin\SitesController::class, 'index'])->name('sites.index');
+            Route::get('sites/create', [Admin\SitesController::class, 'create'])->name('sites.create');
+            Route::post('sites', [Admin\SitesController::class, 'store'])->name('sites.store');
+            Route::get('sites/{site}/edit', [Admin\SitesController::class, 'edit'])->whereNumber('site')->name('sites.edit');
+            Route::put('sites/{site}', [Admin\SitesController::class, 'update'])->whereNumber('site')->name('sites.update');
+            Route::delete('sites/{site}', [Admin\SitesController::class, 'destroy'])->whereNumber('site')->name('sites.destroy');
+            Route::post('sites/{site}/check', [Admin\SitesController::class, 'check'])->whereNumber('site')->name('sites.check');
+            Route::post('sites/{site}/prepare', [Admin\SitesController::class, 'prepare'])->whereNumber('site')->name('sites.prepare');
+            Route::post('sites/{site}/switch', [Admin\SitesController::class, 'switch'])->whereNumber('site')->name('sites.switch');
+            Route::post('sites/main', [Admin\SitesController::class, 'main'])->name('sites.main');
+        });
         Route::get('/', [Admin\DashboardController::class, 'index'])->name('dashboard');
         Route::get('dashboard/live', [Admin\DashboardController::class, 'live'])->name('dashboard.live');
         Route::post('quick-draft', [Admin\DashboardController::class, 'quickDraft'])->name('quick-draft')->middleware('area:posts');

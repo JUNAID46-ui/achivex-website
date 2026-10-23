@@ -40,6 +40,31 @@
       <img src="{{ asset('brand/mark-dark.png') }}" alt="" class="h-5">
       <span class="hidden font-extrabold uppercase tracking-[0.08em] text-ink sm:inline">AchiveX</span>
     </a>
+    @php $sitesList = $siteList ?? collect(); @endphp
+    @if($user->canAccess('sites') && ($sitesList->isNotEmpty() || ($currentSite ?? null)))
+    <div class="relative" x-data="{ open: false }" @click.outside="open = false">
+      <button @click="open = !open" class="flex items-center gap-1.5 border border-neutral-300 px-2 py-1 font-semibold text-ink hover:border-ink" title="Website you are managing">
+        <span class="h-2 w-2 rounded-full {{ ($currentSite ?? null) ? 'bg-blue-600' : 'bg-green-500' }}"></span>
+        <span class="max-w-[160px] truncate">{{ ($currentSite ?? null)?->name ?? 'Main website' }}</span>
+        @include('admin.partials.icon', ['name' => 'chevron', 'class' => 'h-3.5 w-3.5'])
+      </button>
+      <div x-show="open" x-cloak x-transition class="absolute left-0 top-full mt-1 w-64 border border-ink bg-white py-1">
+        <p class="px-4 pb-1 pt-2 text-[11px] font-semibold uppercase tracking-wider text-neutral-500">Switch website</p>
+        <form method="POST" action="{{ route('admin.sites.main') }}">@csrf
+          <button class="flex w-full items-center justify-between px-4 py-2 text-left hover:bg-neutral-100 {{ ($currentSite ?? null) ? '' : 'font-semibold text-ink' }}">Main website @unless($currentSite ?? null)<span class="text-xs text-green-600">current</span>@endunless</button>
+        </form>
+        @foreach($sitesList as $s)
+          <form method="POST" action="{{ route('admin.sites.switch', $s) }}">@csrf
+            <button class="flex w-full items-center justify-between gap-2 px-4 py-2 text-left hover:bg-neutral-100 {{ ($currentSite ?? null)?->id === $s->id ? 'font-semibold text-ink' : '' }}">
+              <span class="truncate">{{ $s->name }}</span>
+              @if(($currentSite ?? null)?->id === $s->id)<span class="text-xs text-blue-600">current</span>@elseif($s->status !== 'ready')<span class="text-xs text-neutral-400">not ready</span>@endif
+            </button>
+          </form>
+        @endforeach
+        <a href="{{ route('admin.sites.index') }}" class="mt-1 block border-t border-neutral-100 px-4 py-2 hover:bg-neutral-100 hover:text-ink">Manage sites</a>
+      </div>
+    </div>
+    @endif
     <a href="{{ config('admin.site_url') }}" target="_blank" rel="noopener" class="flex items-center gap-1.5  px-2 py-1.5 hover:bg-neutral-100 hover:text-ink">
       @include('admin.partials.icon', ['name' => 'globe']) <span class="hidden sm:inline">Visit Site</span>
     </a>
@@ -147,6 +172,9 @@
         <span>{{ session('status') }}</span>
         <button @click="show = false" class="text-neutral-400 hover:text-neutral-700">@include('admin.partials.icon', ['name' => 'x'])</button>
       </div>
+    @endif
+    @if(session('error'))
+      <div class="mb-5 border border-red-600 bg-white px-4 py-3 text-[13.5px] text-ink">{{ session('error') }}</div>
     @endif
     @if($errors->any())
       <div class="mb-5 border border-red-600 bg-white px-4 py-3 text-[13.5px]">

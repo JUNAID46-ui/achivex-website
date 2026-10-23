@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 @section('title', 'Dashboard')
 @section('heading', 'Dashboard')
-@section('subheading', 'Welcome back, '.auth()->user()->name.'. Here is what is happening on achivex.com.')
+@section('subheading', 'Welcome back, '.auth()->user()->name.'. Here is what is happening on '.(parse_url(config('admin.site_public_url'), PHP_URL_HOST) ?: 'your website').'.')
 @section('actions')
   <a href="{{ route('admin.builder') }}" class="btn-secondary">@include('admin.partials.icon', ['name' => 'layout']) Edit home page</a>
   <a href="{{ route('admin.resources.create', 'blog-posts') }}" class="btn-primary">@include('admin.partials.icon', ['name' => 'plus']) New post</a>

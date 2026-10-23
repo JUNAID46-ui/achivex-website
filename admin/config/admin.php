@@ -49,6 +49,7 @@ return [
             ['label' => 'Colors and Fonts', 'route' => 'admin.settings.theme', 'area' => 'settings'],
             ['label' => 'Permalinks', 'route' => 'admin.settings.permalinks', 'area' => 'settings'],
         ]],
+        ['label' => 'Sites', 'icon' => 'globe', 'route' => 'admin.sites.index', 'area' => 'sites'],
         ['label' => 'Users', 'icon' => 'users', 'resource' => 'users', 'area' => 'users'],
         ['label' => 'Activity Log', 'icon' => 'activity', 'route' => 'admin.activity', 'area' => 'activity'],
         ['label' => 'Security Center', 'icon' => 'shield', 'route' => 'admin.security', 'area' => 'security'],
