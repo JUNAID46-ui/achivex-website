@@ -41,7 +41,7 @@
     @case('slug')
       <div class="flex  " x-data="{ touched: {{ $record->exists ? 'true' : 'false' }} }"
            x-init="$nextTick(() => { const src = document.getElementById('f-{{ $field['from'] }}'); if (src) src.addEventListener('input', () => { if (!touched) $refs.slug.value = slugify(src.value) }) })">
-        @if(!empty($field['prefix']))<span class="inline-flex items-center  border border-r-0 border-neutral-300 bg-neutral-50 px-3 text-xs text-neutral-500">{{ $field['prefix'] }}</span>@endif
+        @if(!empty($field['prefix']))<span class="inline-flex items-center  border border-r-0 border-neutral-300 bg-neutral-50 px-3 text-xs text-neutral-500">{{ (parse_url((string) config('admin.site_public_url'), PHP_URL_HOST) ?: '').$field['prefix'] }}</span>@endif
         <input id="{{ $id }}" x-ref="slug" name="{{ $name }}" value="{{ $val }}" @input="touched = true" @readonly($locked)
                class="input {{ !empty($field['prefix']) ? 'rounded-l-none' : '' }} {{ $locked ? 'bg-neutral-50 text-neutral-500' : '' }}">
       </div>
