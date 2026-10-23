@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-23T10:23:13.359Z",
+  "generated": "2026-10-23T11:06:04.176Z",
   "pages": [
     {
       "path": "/",
@@ -27,7 +27,7 @@
         ],
         "areasEyebrow": "What we do",
         "areasTitle": "Three areas, eight services",
-        "areasText": "Start with the service you need today and add more as the business grows.",
+        "areasText": "",
         "areas": [
           {
             "title": "Web and Software",
@@ -61,7 +61,7 @@
         "visionText": "A business world where companies of every size can use good technology with confidence and spend their energy on their own customers.",
         "philosophyTitle": "Philosophy",
         "philosophyText": "Listen first, recommend the smallest change that makes a real difference, and leave every client able to run what we build.",
-        "statsTitle": "One team for the website, the software and the marketing behind your growth",
+        "statsTitle": "One team for your website, software and marketing",
         "statsImage": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=2000&q=80",
         "statsImageAlt": "Network of lights across the earth at night",
         "valuesEyebrow": "What we value",

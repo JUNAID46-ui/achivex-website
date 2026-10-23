@@ -12,7 +12,7 @@ function Block({ item, index, onActive }) {
   const inView = useInView(ref, { margin: '-45% 0px -45% 0px' })
   useEffect(() => { if (inView) onActive(index) }, [inView, index, onActive])
   return (
-    <div ref={ref} className="flex min-h-0 flex-col justify-center py-10 lg:min-h-[78vh] lg:py-0">
+    <div ref={ref} className="flex min-h-0 flex-col justify-center py-10 lg:min-h-[105vh] lg:py-0">
       <div className="mb-8 overflow-hidden rounded-[22px] lg:hidden">
         <Img src={item.image} alt={item.alt || ''} className="aspect-[5/4] w-full object-cover" />
       </div>

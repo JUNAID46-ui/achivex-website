@@ -1,8 +1,8 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import HeroShowcase from '../components/sections/HeroShowcase'
 import { Link } from 'react-router-dom'
-import { motion, useScroll, useSpring } from 'framer-motion'
-import { ArrowRight, ArrowRightCircle, ArrowUpRight, Check, Phone, Mail, MapPin, ExternalLink, Target, Handshake, MessageSquareText, KeyRound, Plus } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { ArrowRight, ArrowRightCircle, ArrowUpRight, Check, Phone, Mail, MapPin, ExternalLink, Plus } from 'lucide-react'
 import useSeo from '../hooks/useSeo'
 import Button from '../components/Button'
 import FadeUp from '../components/FadeUp'
@@ -24,6 +24,7 @@ import { blogs } from '../data/blogs'
 import { whitepapers } from '../data/whitepapers'
 import { heroStats } from '../data/about'
 import { homeSections } from '../data/homeSections'
+import { siteFacts } from '../lib/facts'
 import { isLight } from '../theme'
 import PageSections from '../components/PageSections'
 import { safeHref } from '../utils/safeHref'
@@ -165,16 +166,10 @@ function Hero({ d }) {
   )
 }
 
-/* 2. Intro statement, then figures from the site data that count up and drift with the scroll. */
+/* 2. Intro statement, then figures from the site data in a band that holds while they slide past. */
 function Intro({ d }) {
-  const facts = [
-    { value: categories.length, label: 'Service areas' },
-    { value: services.length, label: 'Individual services' },
-    { value: industries.length, label: 'Industries served' },
-    { value: (homeSections.find((x) => x.key === 'process')?.data?.steps || []).length || 4, label: 'Steps to launch' },
-  ]
   return (
-    <section className="overflow-hidden bg-ink py-24 md:py-32">
+    <section className="bg-ink pt-24 md:pt-32">
       <div className="container-site">
         <FadeUp className="max-w-4xl">
           <h2 className="sr-only">About AchiveX</h2>
@@ -187,10 +182,8 @@ function Intro({ d }) {
             <ArrowLink to={d.linkTo || '/about-us/'} className="font-medium text-white">{d.linkText}</ArrowLink>
           </div>
         </FadeUp>
-        <div className="mt-20 border-t border-white/10 pt-16 md:mt-24">
-          <ScrollStats stats={facts} tone="dark" />
-        </div>
       </div>
+      <ScrollStats stats={siteFacts()} tone="dark" eyebrow="AchiveX in numbers" title="What one team covers" />
     </section>
   )
 }
@@ -277,70 +270,57 @@ function ServiceExplorer({ d }) {
   )
 }
 
-/* 5. Why AchiveX: the heading stays in place while the reasons scroll past, with a line that fills as you read. */
-const whyIcons = [Target, Handshake, MessageSquareText, KeyRound]
-
+/* 5. Why AchiveX: an editorial list. Each reason is a row with the title on the left and the
+   explanation on the right; hovering a row fills it softly and nudges the title. */
 function WhyAchivex({ d }) {
-  const listRef = useRef(null)
-  const { scrollYProgress } = useScroll({ target: listRef, offset: ['start 75%', 'end 55%'] })
-  const fill = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.3 })
   const items = d.items || []
   return (
     <section className="bg-ink !bg-[#07152D] py-24 text-white md:py-32">
-      <div className="container-site grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
-        <div>
-          <FadeUp className="lg:sticky lg:top-32">
+      <div className="container-site">
+        <FadeUp className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+          <div>
             <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-[#A3A3A3]">Why choose us</p>
-            <h2 className="h-display mt-4 text-4xl text-white md:text-[56px] md:leading-[1.05]">{d.title}</h2>
-            {d.text && <p className="mt-6 max-w-md text-[17px] leading-relaxed text-[#A3A3A3]">{d.text}</p>}
-            <Link to="/contact-us/" className="group mt-10 inline-flex items-center gap-4 rounded-full bg-[#FFFFFF] py-1.5 pl-6 pr-1.5 text-[15px] font-medium text-[#1C1C1C] transition-transform duration-300 hover:-translate-y-0.5">
-              Talk to our team
-              <span className="grid h-10 w-10 place-items-center rounded-full bg-[#07152D] text-[#FFFFFF] transition-transform duration-300 group-hover:rotate-45">
-                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-              </span>
-            </Link>
-          </FadeUp>
-        </div>
-
-        <div ref={listRef} className="relative pl-8 md:pl-12">
-          <div className="absolute bottom-0 left-0 top-0 w-px bg-white/15" aria-hidden="true">
-            <motion.div className="h-full w-full origin-top bg-[#FFFFFF]" style={{ scaleY: fill }} />
+            <h2 className="h-display mt-4 text-[40px] leading-[1.05] text-white md:text-[64px]">{d.title}</h2>
           </div>
-          <ul className="space-y-5">
-            {items.map((r, i) => {
-              const Icon = whyIcons[i % whyIcons.length]
-              return (
-                <motion.li
-                  key={r.title}
-                  initial={{ opacity: 0, x: 40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: '-80px' }}
-                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                  className="group relative rounded-[22px] border border-white/10 bg-white/[0.03] p-6 transition-colors duration-500 hover:border-white/30 hover:bg-white/[0.06] md:p-10"
-                >
-                  <span className="absolute -left-[38px] top-12 h-3 w-3 rounded-full border-2 border-[#07152D] bg-[#FFFFFF] md:-left-[54px]" aria-hidden="true" />
-                  <div className="flex flex-col items-start gap-5 md:flex-row md:gap-6">
-                    <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white/10 text-[#FFFFFF] transition-colors duration-500 group-hover:bg-[#FFFFFF] group-hover:text-[#07152D]">
-                      <Icon className="h-5 w-5" aria-hidden="true" />
-                    </span>
-                    <div>
-                      <h3 className="text-[21px] font-medium tracking-tight text-white">{r.title}</h3>
-                      <p className="mt-3 max-w-lg leading-relaxed text-[#A3A3A3]">{r.text}</p>
-                    </div>
-                  </div>
-                </motion.li>
-              )
-            })}
-          </ul>
-        </div>
+          <div className="lg:pb-2">
+            {d.text && <p className="max-w-md text-[18px] leading-relaxed text-[#A3A3A3]">{d.text}</p>}
+            <Link to="/contact-us/" className="group mt-6 inline-flex items-center gap-2 border-b border-[#FFFFFF] pb-1 text-[15px] font-semibold text-[#FFFFFF]">
+              Talk to our team
+              <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
+            </Link>
+          </div>
+        </FadeUp>
+
+        <ul className="mt-16 border-b border-white/15 md:mt-20">
+          {items.map((r, i) => (
+            <FadeUp as="li" key={r.title} delay={i * 0.06} className="group relative border-t border-white/15">
+              <span className="absolute inset-0 origin-left scale-x-0 bg-white/[0.04] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100" aria-hidden="true" />
+              <div className="relative grid gap-3 py-9 md:grid-cols-[1fr_1.2fr] md:gap-16 md:py-11">
+                <h3 className="text-[24px] font-medium leading-snug tracking-[-0.02em] text-[#FFFFFF] transition-transform duration-500 group-hover:translate-x-3 md:text-[30px]">{r.title}</h3>
+                <p className="max-w-xl text-[16.5px] leading-[1.7] text-[#A3A3A3] transition-colors duration-500 group-hover:text-[#D4D4D4] md:pt-1.5">{r.text}</p>
+              </div>
+            </FadeUp>
+          ))}
+        </ul>
       </div>
     </section>
   )
 }
 
-/* 6. Service spotlights: the text scrolls while the picture stays and changes with it. */
+/* 6. A closer look at each service area: the text scrolls while the picture holds and changes with it.
+   Uses the spotlights saved in the admin when there are three or more, otherwise the service areas. */
 function Spotlights({ d }) {
-  return <StickyShowcase eyebrow={d.eyebrow || 'Focus areas'} title={d.title || 'A closer look at what we do'} items={d.items || []} />
+  const saved = d.items || []
+  const items = saved.length >= 3 ? saved : categories.map((c) => ({
+    title: c.name,
+    text: c.short || c.description,
+    points: (c.outcomes || []).map((o) => o.title).slice(0, 3),
+    image: c.heroImage || c.image,
+    alt: `${c.name} at AchiveX`,
+    to: pathFor(c.slug),
+    link: `Explore ${c.name}`,
+  }))
+  return <StickyShowcase eyebrow="A closer look" title="How each area helps your business" items={items} />
 }
 
 /* 7. Process: steps on a line that move on by themselves (see ProcessTimeline). */

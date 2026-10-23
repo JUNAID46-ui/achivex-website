@@ -3,6 +3,7 @@ import useSeo from '../../hooks/useSeo'
 import CTA from '../../components/CTA'
 import StatsBand from '../../components/sections/StatsBand'
 import ScrollStats from '../../components/sections/ScrollStats'
+import { siteFacts } from '../../lib/facts'
 import { InnerHero, IntroSplit, CardGrid, ImageSplit, Pair, Steps, FaqBlock, DarkBanner } from '../../components/inner/InnerSections'
 import { pageContent } from '../../data/pageContent'
 import { categories } from '../../data/categories'
@@ -24,10 +25,8 @@ export default function WhoWeAre() {
     <>
       <InnerHero crumbs={[{ label: 'About Us' }]} eyebrow={c.heroEyebrow} title={c.heroTitle} text={c.heroText} image={c.heroImage} alt={c.heroImageAlt} action={{ label: 'Talk to our team', to: '/contact-us/' }} />
       <IntroSplit eyebrow={c.introEyebrow} title={c.introTitle} keyword={c.introKeyword} paragraphs={c.introParagraphs} />
-      <section className="overflow-hidden bg-canvas pb-20 md:pb-28">
-        <div className="container-site">
-          <ScrollStats stats={[...facts.slice(0, 3), { value: c.process.length, label: 'Steps from first call to launch' }]} />
-        </div>
+      <section className="bg-[#EEF0F3]">
+        <ScrollStats stats={siteFacts()} eyebrow="AchiveX in numbers" title="What one team covers" />
       </section>
       <Pair
         eyebrow={c.statementsEyebrow}

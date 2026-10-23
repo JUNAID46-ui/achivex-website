@@ -18,7 +18,7 @@ export default {
 
   areasEyebrow: 'What we do',
   areasTitle: 'Three areas, eight services',
-  areasText: 'Start with the service you need today and add more as the business grows.',
+  areasText: '',
   areas: [
     { title: 'Web and Software', text: 'Websites, online stores, web applications, dashboards and APIs. We build on WordPress, WooCommerce, Laravel and React, and keep every site fast, secure and easy to update.', to: '/services/web-and-software/' },
     { title: 'AI and Automation', text: 'Chatbots, workflow automation and CRM systems that answer questions, move data between your tools and follow up on leads, so your team spends less time on routine tasks.', to: '/services/ai-and-automation/' },
@@ -44,7 +44,7 @@ export default {
   philosophyTitle: 'Philosophy',
   philosophyText: 'Listen first, recommend the smallest change that makes a real difference, and leave every client able to run what we build.',
 
-  statsTitle: 'One team for the website, the software and the marketing behind your growth',
+  statsTitle: 'One team for your website, software and marketing',
   statsImage: img('1451187580459-43490279c0fa', 2000),
   statsImageAlt: 'Network of lights across the earth at night',
 
