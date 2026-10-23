@@ -166,25 +166,45 @@ function Hero({ d }) {
   )
 }
 
-/* 2. Intro statement, then figures from the site data in a band that holds while they slide past. */
+/* 2. Intro statement with key facts on black, then the figures band on silver, as on the About page. */
 function Intro({ d }) {
+  const facts = [
+    { value: 'Wyoming, USA', label: 'Headquarters' },
+    { value: String(categories.length), label: 'Service areas' },
+    { value: String(services.length), label: 'Individual services' },
+    { value: String(industries.length), label: 'Industries served' },
+  ]
   return (
-    <section className="bg-ink pt-24 md:pt-32">
-      <div className="container-site">
-        <FadeUp className="max-w-4xl">
-          <h2 className="sr-only">About AchiveX</h2>
-          <p className="text-3xl font-light leading-snug tracking-tight text-white md:text-[44px] md:leading-[1.22]">
-            {d.before}{' '}
-            {d.highlight && <span className="font-medium text-slate underline decoration-accent decoration-2 underline-offset-[10px]">{d.highlight}</span>}{' '}
-            {d.after}
-          </p>
-          <div className="mt-10">
-            <ArrowLink to={d.linkTo || '/about-us/'} className="font-medium text-white">{d.linkText}</ArrowLink>
-          </div>
-        </FadeUp>
-      </div>
-      <ScrollStats stats={siteFacts()} tone="dark" eyebrow="AchiveX in numbers" title="What one team covers" />
-    </section>
+    <>
+      <section className="bg-ink py-24 md:py-32">
+        <div className="container-site grid gap-16 lg:grid-cols-[1.5fr_1fr]">
+          <FadeUp>
+            <h2 className="sr-only">About AchiveX</h2>
+            <p className="text-3xl font-light leading-snug tracking-tight text-white md:text-[40px] md:leading-[1.25]">
+              {d.before}{' '}
+              {d.highlight && <span className="font-medium text-slate underline decoration-accent decoration-2 underline-offset-[10px]">{d.highlight}</span>}{' '}
+              {d.after}
+            </p>
+            <div className="mt-10">
+              <ArrowLink to={d.linkTo || '/about-us/'} className="font-medium text-white">{d.linkText}</ArrowLink>
+            </div>
+          </FadeUp>
+          <FadeUp delay={0.1}>
+            <dl className="grid grid-cols-2 border-l border-t border-body/10">
+              {facts.map((f) => (
+                <div key={f.label} className="border-b border-r border-body/10 p-6">
+                  <dt className="text-sm text-body/55">{f.label}</dt>
+                  <dd className="mt-3 text-2xl font-medium tracking-tight text-white md:text-3xl">{f.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </FadeUp>
+        </div>
+      </section>
+      <section className="bg-site-grey">
+        <ScrollStats stats={siteFacts()} eyebrow="AchiveX in numbers" title="What one team covers" />
+      </section>
+    </>
   )
 }
 
