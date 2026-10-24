@@ -68,6 +68,8 @@
           if (items.length) blocks.push({ type: 'list', items })
           return
         }
+        // A pull quote is stored as a paragraph that starts with "> ".
+        if (tag === 'BLOCKQUOTE') { const t = fixSpaces(inline(n)); if (t) blocks.push({ type: 'p', text: '> ' + t.replace(/^>\s*/, '') }); return }
         const hasBlockChild = [...n.children].some((c) => BLOCK.test(c.tagName))
         if (hasBlockChild) { walk(n); return }
         const text = fixSpaces(inline(n))
@@ -209,6 +211,7 @@
     if (b.type === 'list') return '<ul>' + b.items.map((li) => `<li>${mdInline(li)}</li>`).join('') + '</ul>'
     if (b.type === 'h1') return `<h1>${esc(b.text)}</h1>`
     if (b.type === 'h2' || b.type === 'h3') return `<${b.type}>${esc(b.text)}</${b.type}>`
+    if (b.text.startsWith('> ')) return `<blockquote>${mdInline(b.text.slice(2))}</blockquote>`
     return `<p>${mdInline(b.text)}</p>`
   }).join('')
   // Pasted HTML or text, reduced to headings, paragraphs, lists, bold and links.
@@ -227,7 +230,8 @@
           const [head, ...rest] = p.split('\n')
           html += `<h3>${esc(head.slice(4).trim())}</h3>`
           if (rest.join(' ').trim()) html += `<p>${mdInline(rest.join(' ').trim())}</p>`
-        } else html += `<p>${mdInline(p.trim())}</p>`
+        } else if (p.trim().startsWith('> ')) html += `<blockquote>${mdInline(p.trim().slice(2))}</blockquote>`
+        else html += `<p>${mdInline(p.trim())}</p>`
       })
       const list = Array.isArray(s.list) ? s.list : String(s.list || '').split('\n')
       if (list.filter((l) => l.trim()).length) html += '<ul>' + list.filter((l) => l.trim()).map((li) => `<li>${mdInline(li.trim())}</li>`).join('') + '</ul>'

@@ -21,6 +21,7 @@
   .article-editor li + li { margin-top: .35em; }
   .article-editor a { color: #0f2c9c; text-decoration: underline; }
   .article-editor strong, .article-editor b { font-weight: 700; color: #111; }
+  .article-editor blockquote { border-left: 3px solid #0f2c9c; padding-left: 1.2em; font-size: 22px; line-height: 1.45; font-weight: 600; color: #111; }
   .article-editor figure { margin: 1.6em 0; cursor: pointer; }
   .article-editor figure img { width: 100%; border-radius: 14px; background: #f1f2f4; }
   .article-editor figure:hover img { outline: 3px solid #0f2c9c; outline-offset: 2px; }
@@ -120,6 +121,7 @@
       <button type="button" class="btn-ghost btn-sm underline" @mousedown.prevent @click="link()" title="Link">Link</button>
       <button type="button" class="btn-ghost btn-sm" @mousedown.prevent @click="cmd('insertUnorderedList')" title="Bullet list">• List</button>
       <button type="button" class="btn-ghost btn-sm" @mousedown.prevent @click="cmd('insertOrderedList')" title="Numbered list">1. List</button>
+      <button type="button" class="btn-ghost btn-sm" @mousedown.prevent @click="block('blockquote')" title="Pull quote: a short line shown large in the article">Quote</button>
       <button type="button" class="btn-ghost btn-sm" @mousedown.prevent @click="image()" title="Add an image where the cursor is">Image</button>
       <span class="mx-1 h-5 w-px bg-neutral-200"></span>
       <button type="button" class="btn-ghost btn-sm" @mousedown.prevent @click="cmd('undo')" title="Undo">↶</button>

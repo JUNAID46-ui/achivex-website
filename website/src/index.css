@@ -118,6 +118,14 @@ html[data-theme='light'] .field::placeholder { color: #9AA0A9; }
   .label {
     @apply mb-2 block text-sm font-semibold text-white;
   }
+  /* Blog article text: larger and darker than page copy, for long reading. */
+  .article-body p {
+    @apply mb-6 text-[18px] leading-[1.85] md:text-[19px];
+    color: rgb(var(--s-heading) / 0.8);
+  }
+  .article-body h3 {
+    @apply mb-3 mt-10 font-display text-[22px] font-semibold leading-snug tracking-tight text-site-heading md:text-[24px];
+  }
   .prose-body p {
     @apply mb-5 text-[17px] leading-[1.8] text-body/80;
   }
