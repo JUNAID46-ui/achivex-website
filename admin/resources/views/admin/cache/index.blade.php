@@ -3,6 +3,21 @@
 @section('heading', 'Cache')
 @section('subheading', 'Saved results that keep the admin fast. Clearing is safe: anything removed is rebuilt on the next visit.')
 @section('content')
+@php $build = \App\Models\AppSetting::group('site_build'); $hook = \App\Services\SiteRebuild::hook() !== ''; @endphp
+<div class="card mb-6">
+  <div class="card-header"><h2 class="card-title">Website build</h2></div>
+  <div class="card-body flex flex-wrap items-center justify-between gap-4 text-[13px]">
+    <div>
+      @if(! $hook)
+        <p class="text-neutral-600">Automatic builds are off. Add SITE_DEPLOY_HOOK to the admin settings on the host to rebuild the website after every change.</p>
+      @else
+        <p class="text-neutral-600">The website rebuilds by itself after content changes, at most once every {{ \App\Services\SiteRebuild::GAP }} seconds.</p>
+        @if(!empty($build['last_at']))<p class="mt-1 text-neutral-500">Last build: {{ \Carbon\Carbon::parse($build['last_at'])->diffForHumans() }} ({{ $build['last_reason'] ?? '' }}){{ empty($build['last_ok']) ? ', could not be started' : '' }}.@if(!empty($build['pending'])) A change is waiting for the next build.@endif</p>@endif
+      @endif
+    </div>
+    @if($hook)<form method="POST" action="{{ route('admin.site.rebuild') }}">@csrf<button class="btn-primary" data-loading>Publish</button></form>@endif
+  </div>
+</div>
 <div class="grid gap-6 xl:grid-cols-2">
   <div class="card">
     <div class="card-header"><h2 class="card-title">Clear caches</h2></div>

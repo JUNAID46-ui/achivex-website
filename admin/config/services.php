@@ -43,5 +43,7 @@ return [
 
     // Vercel Cron sends this as a bearer token to /hooks/daily when it is set.
     'cron_secret' => env('CRON_SECRET'),
+    // Deploy hook URL that rebuilds the static website (Vercel deploy hook, or a build script on other hosts).
+    'site_deploy_hook' => env('SITE_DEPLOY_HOOK'),
 
 ];
