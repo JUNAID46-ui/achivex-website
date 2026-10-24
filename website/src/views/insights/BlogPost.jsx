@@ -107,7 +107,7 @@ function Part({ n, total, children, id }) {
 
 const h2 = 'scroll-mt-28 font-display text-[30px] font-medium leading-[1.12] tracking-[-0.025em] text-site-heading md:text-[42px]'
 
-// Blog article template: a calm editorial hero with a large title and a wide image, then the
+// Blog article template: a dark editorial hero with the featured image overlapping it, then the
 // article in one column with the section number held in the left margin, a drop cap, pull quotes,
 // wide images, FAQs, share links, the author, a large "Up next" link and related posts.
 export default function BlogPost() {
@@ -151,8 +151,6 @@ export default function BlogPost() {
   const related = rest.slice(0, 3)
   const minutes = readTime(post)
   const total = post.sections.length + (faqs.length ? 1 : 0)
-  // A header colour or image chosen in the admin turns the hero dark.
-  const dark = Boolean(post.heroColor || post.heroImage)
 
   return (
     <>
@@ -161,46 +159,51 @@ export default function BlogPost() {
       </div>
 
       <article className="bg-canvas">
-        <header className={`relative overflow-hidden ${dark ? 'bg-ink text-white' : ''}`} style={post.heroColor ? { backgroundColor: post.heroColor } : undefined}>
+        {/* Hero: dark editorial band with the featured image overlapping its lower edge. */}
+        <header
+          className="relative overflow-hidden bg-ink text-white"
+          style={post.heroColor ? { backgroundColor: post.heroColor } : undefined}
+        >
           {post.heroImage && (
             <>
               <Img src={post.heroImage} alt="" className="absolute inset-0 h-full w-full object-cover" />
               <div className="absolute inset-0 bg-site-black/65" aria-hidden="true" />
             </>
           )}
-          <div className="container-site relative pb-12 pt-8 md:pb-16 md:pt-10">
-            <Breadcrumb light={dark} items={[{ label: 'Blog', to: permalink('/insights/blogs/') }, { label: post.title }]} />
-            <div className="motion-rise mt-14 max-w-[1040px] md:mt-20">
-              <div className={`flex flex-wrap items-center gap-3 text-[13px] font-semibold ${dark ? 'text-white/75' : 'text-site-text'}`}>
-                <Link to={permalink('/insights/blogs/')} className={`rounded-full px-3.5 py-1.5 uppercase tracking-[0.14em] transition-colors ${dark ? 'bg-white/10 text-white hover:bg-white/20' : 'bg-site-brand/[0.07] text-site-brand hover:bg-site-brand/[0.12]'}`}>
-                  {post.category}
-                </Link>
-                <span>{minutes} min read</span>
-              </div>
-              <h1 className={`mt-7 text-[40px] font-medium leading-[1.04] tracking-[-0.035em] sm:text-[56px] xl:text-[76px] ${dark ? 'text-white' : 'text-site-heading'}`}>{post.title}</h1>
-              <div className="mt-10 grid gap-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
-                {post.excerpt && <p className={`max-w-[620px] text-[19px] leading-[1.6] ${dark ? 'text-white/70' : 'text-site-text'}`}>{post.excerpt}</p>}
-                <div className="flex items-center gap-3">
-                  <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-full ${dark ? 'bg-[#FFFFFF]' : 'bg-ink'}`}>
-                    <img src={dark ? '/brand/mark-dark.png' : '/brand/mark-light.png'} alt="" width="37" height="18" className="h-[18px] w-auto" />
+          <div className={`container-site relative pt-8 md:pt-10 ${post.image ? 'pb-[150px] md:pb-[230px]' : 'pb-20'}`}>
+            <Breadcrumb light items={[{ label: 'Blog', to: permalink('/insights/blogs/') }, { label: post.title }]} />
+            <div className="motion-rise mx-auto mt-14 max-w-[920px] text-center md:mt-20">
+              <Link
+                to={permalink('/insights/blogs/')}
+                className="inline-flex items-center rounded-full border border-white/20 px-4 py-1.5 text-[12px] font-semibold uppercase tracking-[0.16em] text-white/80 transition-colors hover:border-white hover:text-white"
+              >
+                {post.category}
+              </Link>
+              <h1 className="mt-7 text-[36px] font-medium leading-[1.1] tracking-[-0.03em] text-white sm:text-[48px] xl:text-[60px]">{post.title}</h1>
+              {post.excerpt && <p className="mx-auto mt-6 max-w-[640px] text-[18px] leading-[1.65] text-white/65">{post.excerpt}</p>}
+              <div className="mt-9 inline-flex items-center gap-3 text-left">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[#FFFFFF]">
+                  <img src={`/brand/mark-dark.png`} alt="" width="37" height="18" className="h-[18px] w-auto" />
+                </span>
+                <span>
+                  <span className="block text-[15px] font-semibold text-white">{post.author}</span>
+                  <span className="block text-[13px] text-white/65">
+                    <time dateTime={post.date}>{formatDate(post.date)}</time>
+                    <span className="mx-2" aria-hidden="true">&middot;</span>{minutes} min read
                   </span>
-                  <span>
-                    <span className={`block text-[15px] font-semibold ${dark ? 'text-white' : 'text-site-heading'}`}>{post.author}</span>
-                    <time dateTime={post.date} className={`block text-[13px] ${dark ? 'text-white/65' : 'text-site-text'}`}>{formatDate(post.date)}</time>
-                  </span>
-                </div>
+                </span>
               </div>
             </div>
           </div>
         </header>
-
         {post.image && (
-          <div className={`container-site ${dark ? 'pt-12 md:pt-16' : ''}`}>
-            <div className="overflow-hidden rounded-[28px] bg-site-grey">
-              <Img priority sizes="(min-width: 1280px) 1200px, 100vw" src={post.image} alt={post.title} className="motion-settle aspect-[16/9] w-full object-cover md:aspect-[2.2/1]" />
+          <div className="container-site relative -mt-[110px] md:-mt-[190px]">
+            <div className="mx-auto max-w-[1120px] overflow-hidden rounded-[28px] bg-site-grey shadow-[0_30px_80px_-40px_rgba(0,0,0,0.45)]">
+              <Img priority sizes="(min-width: 1280px) 1200px, 100vw" src={post.image} alt={post.title} className="motion-settle aspect-[16/9] w-full object-cover md:aspect-[21/9]" />
             </div>
           </div>
         )}
+
 
         <div ref={bodyRef} className="container-site pb-24 pt-16 md:pt-24">
           {/* Opening paragraph with a drop cap, in line with the text column. */}
