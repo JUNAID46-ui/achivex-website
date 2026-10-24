@@ -21,9 +21,13 @@
   .article-editor li + li { margin-top: .35em; }
   .article-editor a { color: #0f2c9c; text-decoration: underline; }
   .article-editor strong, .article-editor b { font-weight: 700; color: #111; }
+  .article-editor figure { margin: 1.6em 0; cursor: pointer; }
+  .article-editor figure img { width: 100%; border-radius: 14px; background: #f1f2f4; }
+  .article-editor figure:hover img { outline: 3px solid #0f2c9c; outline-offset: 2px; }
+  .article-editor figcaption { margin-top: .5em; text-align: center; font-size: 14px; color: #6b7280; }
 </style>
 <div x-data="{
-       count: 0, warnings: [], timer: null,
+       count: 0, images: 0, warnings: [], timer: null, range: null,
        init() {
          this.$refs.box.innerHTML = window.articleEditor.toEditorHtml(@js($initial))
          this.sync()
@@ -36,6 +40,41 @@
          if (url.trim() === '') return this.cmd('unlink')
          if (!/^(https?:\/\/|\/|#|mailto:)/i.test(url.trim())) return alert('Use a full address starting with https:// or a site path starting with /')
          this.cmd('createLink', url.trim())
+       },
+       // Remembers where the cursor was, so an image chosen in the media library goes there.
+       keep() {
+         const sel = window.getSelection()
+         if (sel.rangeCount && this.$refs.box.contains(sel.anchorNode)) this.range = sel.getRangeAt(0).cloneRange()
+       },
+       image() {
+         this.keep()
+         pickMedia((url) => {
+           const src = window.articleEditor.imageSrc(url)
+           if (!src) return alert('Choose an image from the media library.')
+           const alt = prompt('Describe the image in a few words (alt text, used by Google and screen readers)', '')
+           if (alt === null) return
+           const caption = prompt('Caption under the image (optional)', '') || ''
+           this.$refs.box.focus()
+           const sel = window.getSelection()
+           if (this.range) { sel.removeAllRanges(); sel.addRange(this.range) }
+           document.execCommand('insertHTML', false, window.articleEditor.figureHtml({ src, alt: alt.trim(), caption: caption.trim() }) + '<p><br></p>')
+           this.changed()
+         })
+       },
+       // Clicking an image in the article edits its description and caption, or removes it.
+       editImage(e) {
+         const fig = e.target.closest('figure')
+         if (!fig || !this.$refs.box.contains(fig)) return
+         e.preventDefault()
+         const img = fig.querySelector('img')
+         const alt = prompt('Image description (alt text). Clear it and press OK to remove the image.', img.getAttribute('alt') || '')
+         if (alt === null) return
+         if (alt.trim() === '') { fig.remove(); return this.changed() }
+         const cap = fig.querySelector('figcaption')
+         const caption = prompt('Caption under the image (optional)', cap ? cap.textContent : '')
+         if (caption === null) return
+         fig.outerHTML = window.articleEditor.figureHtml({ src: img.getAttribute('src'), alt: alt.trim(), caption: caption.trim() })
+         this.changed()
        },
        onPaste(e) {
          e.preventDefault()
@@ -50,6 +89,7 @@
          }
          if (p.html) document.execCommand('insertHTML', false, p.html)
          if (p.faqs.length) window.dispatchEvent(new CustomEvent('quickpaste', { detail: { faqs: p.faqs } }))
+         if (p.lost) window.dispatchEvent(new CustomEvent('toast', { detail: { type: 'error', message: `${p.lost} pasted image(s) were left out. Add them with the Image button.` } }))
          this.changed()
        },
        changed() { clearTimeout(this.timer); this.timer = setTimeout(() => this.sync(), 250) },
@@ -59,6 +99,7 @@
          this.$refs.intro.value = r.intro_text
          this.$refs.sections.value = JSON.stringify(r.sections)
          this.count = r.stats.words
+         this.images = r.stats.images
          this.warnings = r.warnings.concat(r.faqs.length ? ['A FAQs heading was found in the article. Put questions in the FAQs box below instead.'] : [])
          const title = this.$root.closest('form').querySelector(`[name='title']`)?.value || ''
          window.dispatchEvent(new CustomEvent('quickpaste', { detail: { seo: r.seo, title } }))
@@ -79,6 +120,7 @@
       <button type="button" class="btn-ghost btn-sm underline" @mousedown.prevent @click="link()" title="Link">Link</button>
       <button type="button" class="btn-ghost btn-sm" @mousedown.prevent @click="cmd('insertUnorderedList')" title="Bullet list">• List</button>
       <button type="button" class="btn-ghost btn-sm" @mousedown.prevent @click="cmd('insertOrderedList')" title="Numbered list">1. List</button>
+      <button type="button" class="btn-ghost btn-sm" @mousedown.prevent @click="image()" title="Add an image where the cursor is">Image</button>
       <span class="mx-1 h-5 w-px bg-neutral-200"></span>
       <button type="button" class="btn-ghost btn-sm" @mousedown.prevent @click="cmd('undo')" title="Undo">↶</button>
       <button type="button" class="btn-ghost btn-sm" @mousedown.prevent @click="cmd('redo')" title="Redo">↷</button>
@@ -87,11 +129,11 @@
     <div class="mx-auto max-w-[760px] px-6 py-8">
       <div x-ref="box" contenteditable="true" spellcheck="true" class="article-editor"
            data-placeholder="Start writing, or paste your article from Google Docs, Word or ChatGPT. Start the first paragraph with the bold keyword and use H2 for each section."
-           @input="changed()" @paste="onPaste($event)"></div>
+           @input="changed()" @paste="onPaste($event)" @click="editImage($event)" @keyup="keep()" @mouseup="keep()"></div>
     </div>
     <div class="flex flex-wrap items-center justify-between gap-2 border-t border-neutral-200 px-4 py-2 text-xs text-neutral-500">
-      <span x-text="`${count.toLocaleString()} words, ${Math.max(1, Math.round(count / 200))} minute read`"></span>
-      <span>Bold text at the very start of the first paragraph is the opening keyword. Each H2 starts a new section.</span>
+      <span x-text="`${count.toLocaleString()} words, ${Math.max(1, Math.round(count / 200))} minute read, ${images} image${images === 1 ? '' : 's'}`"></span>
+      <span>Bold text at the very start of the first paragraph is the opening keyword. Each H2 starts a new section. 2 or 3 images inside the article look best.</span>
     </div>
   </div>
   <ul x-show="warnings.length" class="mt-2 space-y-1 text-[13px] text-amber-700">

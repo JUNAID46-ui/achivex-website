@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Plus } from 'lucide-react'
 
-export default function FAQ({ items }) {
+// renderAnswer lets a page format the answer text (the blog turns **bold** and links into markup).
+export default function FAQ({ items, renderAnswer }) {
   const [open, setOpen] = useState(0)
   return (
     <div className="divide-y divide-white/15 border-y border-white/15">
@@ -29,7 +30,7 @@ export default function FAQ({ items }) {
                   transition={{ duration: 0.3 }}
                   className="overflow-hidden"
                 >
-                  <p className="max-w-3xl pb-6 text-[16px] leading-relaxed text-body/80">{item.a}</p>
+                  <p className="max-w-3xl pb-6 text-[16px] leading-relaxed text-body/80">{renderAnswer ? renderAnswer(item.a) : item.a}</p>
                 </motion.div>
               )}
             </AnimatePresence>

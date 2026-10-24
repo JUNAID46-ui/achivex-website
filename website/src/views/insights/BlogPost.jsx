@@ -7,10 +7,10 @@ import Img from '../../components/Img'
 import Breadcrumb from '../../components/Breadcrumb'
 import ShareButtons from '../../components/ShareButtons'
 import BlogCard from '../../components/BlogCard'
+import FAQ from '../../components/FAQ'
 import NotFound from '../NotFound'
 import { blogs, getBlog, readTime } from '../../data/blogs'
 import { formatDate } from '../../utils/format'
-import jumpTo from '../../utils/jumpTo'
 import { permalink } from '../../lib/permalinks'
 import { faqSchema } from '../../lib/schema'
 
@@ -34,9 +34,23 @@ function Inline({ text }) {
 }
 
 // Paragraph blocks from the admin. A block that starts with "### " is an H3 heading;
-// any lines after it in the same block are a normal paragraph.
+// any lines after it in the same block are a normal paragraph. A block written as
+// ![alt](url "caption") is an image, shown wider than the text.
+const IMAGE = /^!\[([^\]]*)\]\(((?:https:\/\/|\/)[^)\s"]+)(?:\s+"([^"]*)")?\)$/
+function Figure({ src, alt, caption }) {
+  return (
+    <figure className="my-12 lg:-mx-24">
+      <div className="overflow-hidden rounded-[24px] bg-site-grey">
+        <Img src={src} alt={alt} sizes="(min-width: 1024px) 960px, 100vw" className="w-full object-cover" />
+      </div>
+      {caption && <figcaption className="mx-auto mt-4 max-w-[640px] text-center text-[14px] leading-relaxed text-site-text">{caption}</figcaption>}
+    </figure>
+  )
+}
 function Paragraphs({ items }) {
   return (items || []).map((p, i) => {
+    const img = p.trim().match(IMAGE)
+    if (img) return <Figure key={i} alt={img[1]} src={img[2]} caption={img[3]} />
     if (!p.startsWith('### ')) return <p key={i}><Inline text={p} /></p>
     const [head, ...rest] = p.split('\n')
     return (
@@ -63,13 +77,12 @@ function Bullets({ items }) {
   )
 }
 
-// Blog article template: dark editorial hero with an overlapping image, a sticky contents list that
-// tracks the reader, numbered H2 sections with H3 sub sections, FAQs, author note and
+// Blog article template: dark editorial hero with an overlapping image, one reading column with
+// numbered H2 sections, H3 sub sections and wide images, FAQs, share links, author note and
 // related posts. Articles end with the footer; there is no call to action block.
 export default function BlogPost() {
   const { slug } = useParams()
   const post = getBlog(slug)
-  const [activeId, setActiveId] = useState(null)
   const [progress, setProgress] = useState(0)
   const bodyRef = useRef(null)
   const faqs = (post?.faqs || []).filter((f) => f.q && f.a)
@@ -87,33 +100,19 @@ export default function BlogPost() {
     },
     faqSchema(faqs),
   ])
-  const toc = post ? [...post.sections, ...(faqs.length ? [{ id: 'faqs', heading: 'Frequently asked questions' }] : [])] : []
-
-  // Highlight the section in view and fill the reading bar as the article scrolls.
+  // Fill the reading bar at the top as the article scrolls.
   useEffect(() => {
     if (!post) return
-    const obs = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && setActiveId(e.target.id)),
-      { rootMargin: '-30% 0px -60% 0px' },
-    )
-    toc.forEach(({ id }) => {
-      const el = document.getElementById(id)
-      if (el) obs.observe(el)
-    })
     const onScroll = () => {
       const el = bodyRef.current
       if (!el) return
       const { top, height } = el.getBoundingClientRect()
-      const done = (window.innerHeight * 0.4 - top) / height
-      setProgress(Math.min(1, Math.max(0, done)))
+      setProgress(Math.min(1, Math.max(0, (window.innerHeight * 0.4 - top) / height)))
     }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => {
-      obs.disconnect()
-      window.removeEventListener('scroll', onScroll)
-    }
-  }, [post]) // eslint-disable-line react-hooks/exhaustive-deps
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [post])
 
   if (!post) return <NotFound />
   const related = blogs.filter((b) => b.slug !== slug && b.category === post.category)
@@ -173,44 +172,21 @@ export default function BlogPost() {
           </div>
         )}
 
-        {/* Body */}
+        {/* Body: one reading column; images in the text are shown wider than it. */}
         <div className="pb-24 pt-14 md:pt-20">
-          <div className="container-site grid gap-12 lg:grid-cols-[250px_minmax(0,1fr)] xl:grid-cols-[270px_minmax(0,720px)_1fr]">
-            <aside className="lg:sticky lg:top-28 lg:self-start">
-              <nav aria-label="Table of contents" className="rounded-[22px] border border-site-line bg-site-card p-6">
-                <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-site-text">In this article</p>
-                <ol className="mt-5 space-y-1">
-                  {toc.map((s, i) => {
-                    const on = activeId === s.id
-                    return (
-                      <li key={s.id}>
-                        <a
-                          href={`#${s.id}`} onClick={(e) => jumpTo(e, s.id)}
-                          className={`flex gap-3 rounded-xl px-3 py-2.5 text-[14px] leading-snug transition-colors ${on ? 'bg-[#FFFFFF] font-semibold text-site-heading shadow-[0_4px_14px_-8px_rgba(0,0,0,0.2)]' : 'text-site-text hover:text-site-heading'}`}
-                        >
-                          <span className={`tabular-nums ${on ? 'text-navy' : 'text-site-text'}`}>{pad(i + 1)}</span>
-                          {s.heading}
-                        </a>
-                      </li>
-                    )
-                  })}
-                </ol>
-                <div className="mt-5 h-1 overflow-hidden rounded-full bg-site-line" aria-hidden="true">
-                  <div className="h-full rounded-full bg-navy transition-[width] duration-150" style={{ width: `${Math.round(progress * 100)}%` }} />
-                </div>
-              </nav>
-              <div className="mt-6 hidden lg:block"><ShareButtons title={post.title} /></div>
-            </aside>
-
-            <div ref={bodyRef} className="min-w-0">
+          <div ref={bodyRef} className="container-site">
+            <div className="mx-auto max-w-[740px]">
               <p className="text-[21px] leading-[1.7] text-site-heading">
                 <strong className="font-semibold text-site-heading">{post.intro.keyword}</strong><Inline text={post.intro.text} />
               </p>
 
               {post.sections.map((s, i) => (
-                <section key={s.id} className="mt-14">
-                  <p className="text-[13px] font-semibold tracking-[0.12em] text-navy">{pad(i + 1)}</p>
-                  <h2 id={s.id} className="mt-2 scroll-mt-28 font-display text-[28px] font-medium leading-tight tracking-tight text-site-heading md:text-[34px]">{s.heading}</h2>
+                <section key={s.id} className="mt-16">
+                  <div className="flex items-center gap-4">
+                    <span className="text-[13px] font-semibold tabular-nums tracking-[0.12em] text-navy">{pad(i + 1)}</span>
+                    <span className="h-px flex-1 bg-site-line" aria-hidden="true" />
+                  </div>
+                  <h2 id={s.id} className="mt-5 scroll-mt-28 font-display text-[28px] font-medium leading-tight tracking-tight text-site-heading md:text-[36px]">{s.heading}</h2>
                   <div className="prose-body mt-5">
                     <Paragraphs items={s.paragraphs} />
                   </div>
@@ -219,29 +195,33 @@ export default function BlogPost() {
                     <div key={j} className="mt-8 border-l-2 border-navy/15 pl-6">
                       <h3 className="font-display text-[21px] font-semibold leading-snug tracking-tight text-site-heading md:text-[23px]">{sub.heading}</h3>
                       <div className="prose-body mt-3">
-                        {(sub.paragraphs || []).map((p, k) => <p key={k}><Inline text={p} /></p>)}
+                        <Paragraphs items={sub.paragraphs} />
                       </div>
-                      {sub.list?.length > 0 && <Bullets items={sub.list} />}
                     </div>
                   ))}
                 </section>
               ))}
 
+              {/* FAQs as on the home page: an open list that expands, no box around it. */}
               {faqs.length > 0 && (
-                // Written like the other sections of the article: each question a heading, its answer below.
-                <section className="mt-14">
-                  <p className="text-[13px] font-semibold tracking-[0.12em] text-navy">{pad(post.sections.length + 1)}</p>
-                  <h2 id="faqs" className="mt-2 scroll-mt-28 font-display text-[28px] font-medium leading-tight tracking-tight text-site-heading md:text-[34px]">Frequently asked questions</h2>
-                  {faqs.map((f, j) => (
-                    <div key={j} className="mt-8">
-                      <h3 className="font-display text-[21px] font-semibold leading-snug tracking-tight text-site-heading md:text-[23px]">{f.q}</h3>
-                      <div className="prose-body mt-3"><p><Inline text={f.a} /></p></div>
-                    </div>
-                  ))}
+                <section className="mt-16">
+                  <div className="flex items-center gap-4">
+                    <span className="text-[13px] font-semibold tabular-nums tracking-[0.12em] text-navy">{pad(post.sections.length + 1)}</span>
+                    <span className="h-px flex-1 bg-site-line" aria-hidden="true" />
+                  </div>
+                  <h2 id="faqs" className="mt-5 scroll-mt-28 font-display text-[28px] font-medium leading-tight tracking-tight text-site-heading md:text-[36px]">Frequently asked questions</h2>
+                  <div className="mt-6"><FAQ items={faqs} renderAnswer={(a) => <Inline text={a} />} /></div>
                 </section>
               )}
 
-              <div className="mt-14 flex flex-col gap-6 rounded-[26px] border border-site-line p-7 sm:flex-row sm:items-center md:p-8">
+              <div className="mt-16 flex flex-wrap items-center justify-between gap-4 border-y border-site-line py-6">
+                <Link to={permalink('/insights/blogs/')} className="inline-flex items-center gap-2 text-[15px] font-semibold text-site-heading hover:text-navy">
+                  <ArrowLeft className="h-4 w-4" aria-hidden="true" /> All articles
+                </Link>
+                <ShareButtons title={post.title} />
+              </div>
+
+              <div className="mt-10 flex flex-col gap-6 sm:flex-row sm:items-center">
                 <span className="grid h-16 w-16 shrink-0 place-items-center rounded-full bg-ink">
                   <img src={`/brand/mark-light.png`} alt="" width="58" height="28" className="h-7 w-auto" />
                 </span>
@@ -252,12 +232,6 @@ export default function BlogPost() {
                 </div>
               </div>
 
-              <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
-                <Link to={permalink('/insights/blogs/')} className="inline-flex items-center gap-2 text-[15px] font-semibold text-site-heading hover:text-navy">
-                  <ArrowLeft className="h-4 w-4" aria-hidden="true" /> All articles
-                </Link>
-                <div className="lg:hidden"><ShareButtons title={post.title} /></div>
-              </div>
             </div>
           </div>
         </div>

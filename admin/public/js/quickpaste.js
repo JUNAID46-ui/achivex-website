@@ -39,7 +39,14 @@
     return out
   }
   const fixSpaces = (s) => clean(s).replace(/\*\*\s+/g, '**').replace(/\s+\*\*/g, '**').replace(/\*\*(\S[^*]*?)\*\*/g, ' **$1** ').replace(/\s+([.,;:!?)])/g, '$1').replace(/^\s+|\s+$/g, '').replace(/\s{2,}/g, ' ')
-  const BLOCK = /^(H[1-6]|P|LI|UL|OL|DIV|BLOCKQUOTE|TABLE|SECTION|ARTICLE|PRE)$/
+  const BLOCK = /^(H[1-6]|P|LI|UL|OL|DIV|BLOCKQUOTE|TABLE|SECTION|ARTICLE|PRE|FIGURE|IMG)$/
+  // Images are kept only with a web address (https:// or a site path). Images pasted from
+  // Word or Google Docs have no address the website can use, so they are dropped with a warning.
+  const imageSrc = (src) => (/^(https:\/\/|\/)[^\s"()]+$/.test(src || '') ? src : '')
+  const imageText = (s) => clean(s).replace(/[\[\]"()]/g, '')
+  // An image as it is stored in a section: ![alt](url "caption")
+  const imageMd = (b) => `![${imageText(b.alt)}](${b.src}${b.caption ? ` "${imageText(b.caption)}"` : ''})`
+  const IMAGE_MD = /^!\[([^\]]*)\]\(((?:https:\/\/|\/)[^)\s"]+)(?:\s+"([^"]*)")?\)$/
   function htmlBlocks(html) {
     const body = new DOMParser().parseFromString(html, 'text/html').body
     const blocks = []
@@ -48,6 +55,13 @@
         if (n.nodeType === 3) { if (clean(n.textContent)) blocks.push({ type: 'p', text: fixSpaces(n.textContent) }); return }
         if (n.nodeType !== 1 || /^(SCRIPT|STYLE|META|LINK|TITLE)$/.test(n.tagName)) return
         const tag = n.tagName
+        if (tag === 'FIGURE' || tag === 'IMG') {
+          const img = tag === 'IMG' ? n : n.querySelector('img')
+          const src = imageSrc(img && img.getAttribute('src'))
+          if (src) blocks.push({ type: 'img', src, alt: img.getAttribute('alt') || '', caption: clean((n.querySelector('figcaption') || {}).textContent || '') })
+          else if (img) blocks.push({ type: 'img', src: '', alt: '', caption: '' })
+          return
+        }
         if (/^H[1-6]$/.test(tag)) { const t = plain(inline(n)); if (t) blocks.push({ type: tag === 'H1' ? 'h1' : tag === 'H2' ? 'h2' : 'h3', text: t }); return }
         if (tag === 'UL' || tag === 'OL') {
           const items = [...n.children].filter((c) => c.tagName === 'LI').map((li) => fixSpaces(inline(li))).filter(Boolean)
@@ -89,8 +103,12 @@
   }
 
   function parse(input, isHtml, opts = {}) {
-    const blocks = (isHtml ? htmlBlocks(input) : textBlocks(input)).filter((b) => b.type === 'list' || b.text)
+    const all = isHtml ? htmlBlocks(input) : textBlocks(input)
+    const blocks = all.filter((b) => b.type === 'list' || b.text || (b.type === 'img' && b.src))
     const warnings = []
+    const lost = all.filter((b) => b.type === 'img' && !b.src).length
+    if (lost) warnings.push(`${lost} pasted image(s) were left out. Add them with the Image button so they are uploaded to the media library.`)
+    if (all.some((b) => b.type === 'img' && b.src && !clean(b.alt))) warnings.push('An image has no description (alt text). Click the image to add one.')
 
     // Title: the first H1, otherwise the first short line (not in the article editor, which has its own title).
     let title = ''
@@ -105,6 +123,7 @@
     const pre = []
     while (blocks.length && blocks[0].type !== 'h2') pre.push(blocks.shift())
     const firstP = pre.findIndex((b) => b.type === 'p')
+    if (pre.slice(0, firstP).some((b) => b.type === 'img')) warnings.push('Put images after the first paragraph. The post\'s main image is set in the Featured image field.')
     if (firstP !== -1) {
       const [intro] = pre.splice(firstP, 1)
       const m = intro.text.match(/^\*\*([^*]+)\*\*(.*)$/)
@@ -120,7 +139,8 @@
     let q = null
     if (pre.length) { cur = { heading: 'Overview', paragraphs: [], list: [] }; sections.push(cur); warnings.push('Text before the first H2 was put in a section called "Overview". Rename it if needed.') }
     const addToSection = (b) => {
-      if (b.type === 'h3') cur.paragraphs.push('### ' + b.text)
+      if (b.type === 'img') cur.paragraphs.push(imageMd(b))
+      else if (b.type === 'h3') cur.paragraphs.push('### ' + b.text)
       else if (b.type === 'list') cur.list.push(...b.items)
       else cur.paragraphs.push(b.text)
     }
@@ -134,6 +154,7 @@
         return
       }
       if (inFaq) {
+        if (b.type === 'img') return
         const boldOnly = b.type === 'p' && /^\*\*[^*]+\*\*$/.test(b.text)
         if (b.type === 'h3' || boldOnly || (b.type === 'p' && plain(b.text).endsWith('?') && words(b.text) <= 25)) {
           if (q) faqs.push(q)
@@ -151,7 +172,8 @@
     if (!sections.length) warnings.push('No H2 headings found, so there are no sections.')
 
     const formSections = sections.map((s) => ({ heading: s.heading, paragraphs: s.paragraphs.join('\n\n'), list: s.list.join('\n') }))
-    const allText = [introKeyword + introText, ...sections.map((s) => [s.heading, ...s.paragraphs, ...s.list].join(' ')), ...faqs.map((f) => f.q + ' ' + f.a)].join(' ')
+    const isImage = (p) => IMAGE_MD.test(p)
+    const allText = [introKeyword + introText, ...sections.map((s) => [s.heading, ...s.paragraphs.filter((p) => !isImage(p)), ...s.list].join(' ')), ...faqs.map((f) => f.q + ' ' + f.a)].join(' ')
     const excerpt = cut(introKeyword + introText, 300)
     const description = cut(introKeyword + introText, 158)
     return {
@@ -167,9 +189,9 @@
         raw: allText,
         headings: sections.map((s) => s.heading),
         first: plain(introKeyword + introText),
-        paragraphs: sections.flatMap((s) => s.paragraphs.filter((p) => !p.startsWith('### '))),
+        paragraphs: sections.flatMap((s) => s.paragraphs.filter((p) => !p.startsWith('### ') && !isImage(p))),
       },
-      stats: { title, sections: sections.length, faqs: faqs.length, words: words(allText) },
+      stats: { title, sections: sections.length, faqs: faqs.length, images: sections.reduce((n, s) => n + s.paragraphs.filter(isImage).length, 0), words: words(allText) },
       warnings,
     }
   }
@@ -180,7 +202,10 @@
   const mdInline = (s) => esc(s)
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
     .replace(/\[([^\]]+)\]\(((?:https?:\/\/|\/|#|mailto:)[^)\s"]*)\)/g, '<a href="$2">$1</a>')
+  // In the editor an image is a block that cannot be typed into; clicking it edits its text.
+  const figureHtml = (b) => `<figure contenteditable="false"><img src="${esc(b.src)}" alt="${esc(b.alt || '')}">${b.caption ? `<figcaption>${esc(b.caption)}</figcaption>` : ''}</figure>`
   const blocksToHtml = (blocks) => blocks.map((b) => {
+    if (b.type === 'img') return b.src ? figureHtml(b) : ''
     if (b.type === 'list') return '<ul>' + b.items.map((li) => `<li>${mdInline(li)}</li>`).join('') + '</ul>'
     if (b.type === 'h1') return `<h1>${esc(b.text)}</h1>`
     if (b.type === 'h2' || b.type === 'h3') return `<${b.type}>${esc(b.text)}</${b.type}>`
@@ -196,7 +221,9 @@
       html += `<h2>${esc(s.heading || '')}</h2>`
       const paras = Array.isArray(s.paragraphs) ? s.paragraphs : String(s.paragraphs || '').split(/\n\s*\n/)
       paras.filter((p) => p && p.trim()).forEach((p) => {
-        if (p.startsWith('### ')) {
+        const img = p.trim().match(IMAGE_MD)
+        if (img) html += figureHtml({ alt: img[1], src: img[2], caption: img[3] || '' })
+        else if (p.startsWith('### ')) {
           const [head, ...rest] = p.split('\n')
           html += `<h3>${esc(head.slice(4).trim())}</h3>`
           if (rest.join(' ').trim()) html += `<p>${mdInline(rest.join(' ').trim())}</p>`
@@ -212,13 +239,15 @@
   // A paste into the article editor: the H1 becomes the post title and a trailing FAQs part becomes
   // the FAQ list, so only the article itself goes into the editor.
   const pasteForEditor = (input, isHtml) => {
-    const blocks = (isHtml ? htmlBlocks(input) : textBlocks(input)).filter((b) => b.type === 'list' || b.text)
+    const all = isHtml ? htmlBlocks(input) : textBlocks(input)
+    const lost = all.filter((b) => b.type === 'img' && !b.src).length
+    const blocks = all.filter((b) => b.type === 'list' || b.text || (b.type === 'img' && b.src))
     const h1 = blocks.findIndex((b) => b.type === 'h1')
     const title = h1 !== -1 ? blocks.splice(h1, 1)[0].text : ''
     const faqAt = blocks.findIndex((b) => b.type === 'h2' && FAQ_HEADING.test(b.text))
     const faqs = faqAt !== -1 ? parse(blocksToHtml(blocks.slice(faqAt)), true, { noTitle: true }).faqs : []
-    return { html: blocksToHtml(faqAt !== -1 ? blocks.slice(0, faqAt) : blocks), title, faqs }
+    return { html: blocksToHtml(faqAt !== -1 ? blocks.slice(0, faqAt) : blocks), title, faqs, lost }
   }
 
-  window.articleEditor = { cleanPaste, toEditorHtml, pasteForEditor, words }
+  window.articleEditor = { cleanPaste, toEditorHtml, pasteForEditor, words, figureHtml, imageSrc }
 })()

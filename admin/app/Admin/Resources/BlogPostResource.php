@@ -29,7 +29,7 @@ class BlogPostResource extends Resource
             ['name' => 'excerpt', 'label' => 'Excerpt', 'type' => 'textarea', 'rows' => 2, 'rules' => 'required|max:400', 'help' => 'Shown on blog cards and in search results.'],
             ['name' => 'intro_keyword', 'label' => 'Opening keyword (shown in bold)', 'type' => 'text', 'rules' => 'required|max:120'],
             ['name' => 'intro_text', 'label' => 'Rest of the first paragraph', 'type' => 'textarea', 'rows' => 3, 'rules' => 'required', 'help' => 'Starts right after the bold keyword. Begin with a space, for example " is the process of..."'],
-            ['name' => 'sections', 'label' => 'Article sections', 'type' => 'sections', 'help' => 'Each section heading is an H2 and an entry in the table of contents. Inside the paragraphs, start a line with ### to make it a smaller H3 heading.'],
+            ['name' => 'sections', 'label' => 'Article sections', 'type' => 'sections', 'help' => 'Each section heading is an H2. Inside the paragraphs, start a line with ### to make it a smaller H3 heading.'],
             ['name' => 'faqs', 'label' => 'FAQs (shown as an accordion at the end of the article)', 'type' => 'repeater', 'itemLabel' => 'Question', 'fields' => [
                 ['name' => 'q', 'label' => 'Question', 'type' => 'text'],
                 ['name' => 'a', 'label' => 'Answer', 'type' => 'textarea'],
@@ -72,15 +72,17 @@ class BlogPostResource extends Resource
     {
         $text = $record->intro_keyword.$record->intro_text;
         $headings = [];
+        // Images in the text (![alt](url "caption")) are not words of the article.
+        $isImage = fn ($p) => str_starts_with(trim((string) $p), '![');
         foreach ((array) $record->sections as $s) {
             $headings[] = $s['heading'] ?? '';
-            $text .= ' '.implode(' ', $s['paragraphs'] ?? []).' '.implode(' ', $s['list'] ?? []);
+            $text .= ' '.implode(' ', array_filter($s['paragraphs'] ?? [], fn ($p) => ! $isImage($p))).' '.implode(' ', $s['list'] ?? []);
         }
         foreach ((array) $record->faqs as $f) {
             $text .= ' '.($f['q'] ?? '').' '.($f['a'] ?? '');
         }
 
-        $paragraphs = collect((array) $record->sections)->flatMap(fn ($s) => $s['paragraphs'] ?? [])->reject(fn ($p) => str_starts_with((string) $p, '### '))->values()->all();
+        $paragraphs = collect((array) $record->sections)->flatMap(fn ($s) => $s['paragraphs'] ?? [])->reject(fn ($p) => str_starts_with((string) $p, '### ') || $isImage($p))->values()->all();
 
         return ['text' => $text, 'headings' => $headings, 'first' => $record->intro_keyword.$record->intro_text, 'raw' => $text, 'paragraphs' => $paragraphs];
     }
