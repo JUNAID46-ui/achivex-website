@@ -1,0 +1,12 @@
+# Admin on Hostinger: upload the whole admin folder to the admin subdomain's folder, then rename this
+# file to .htaccess there. Every request goes to Laravel's public folder, so .env, vendor and the
+# rest of the code can never be opened from the browser.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} off
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>

@@ -45,5 +45,9 @@ return [
     'cron_secret' => env('CRON_SECRET'),
     // Deploy hook URL that rebuilds the static website (Vercel deploy hook, or a build script on other hosts).
     'site_deploy_hook' => env('SITE_DEPLOY_HOOK'),
+    // A GitHub token when the hook is GitHub's repository dispatch address (Hostinger builds).
+    'site_deploy_token' => env('SITE_DEPLOY_TOKEN'),
+    // The website folder when the admin runs on the same server (Hostinger), for instant publishing.
+    'site_public_path' => env('SITE_PUBLIC_PATH'),
 
 ];

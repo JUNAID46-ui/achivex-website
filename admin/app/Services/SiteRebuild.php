@@ -26,7 +26,7 @@ class SiteRebuild
     // Notes a change during this request; one build request is sent when the request ends.
     public static function later(string $reason): void
     {
-        if (static::hook() !== '' && Sites::active() === null) {
+        if ((static::hook() !== '' || InstantPublish::enabled()) && Sites::active() === null) {
             static::$reason ??= $reason;
         }
     }
@@ -34,7 +34,19 @@ class SiteRebuild
     // Runs at the end of every request: sends the noted change, or a change that had to wait.
     public static function flush(): void
     {
-        if (static::hook() === '' || Sites::active() !== null) {
+        if (Sites::active() !== null) {
+            return;
+        }
+        // On Hostinger new pages go live at once, before the full build.
+        if (static::$reason !== null) {
+            try {
+                InstantPublish::sync();
+            } catch (\Throwable) {
+            }
+        }
+        if (static::hook() === '') {
+            static::$reason = null;
+
             return;
         }
         try {
@@ -71,7 +83,12 @@ class SiteRebuild
             return false;
         }
         try {
-            $ok = Http::timeout(8)->post(static::hook())->successful();
+            $token = (string) config('services.site_deploy_token', '');
+            // GitHub (Hostinger builds) needs a token and an event name; Vercel's hook needs nothing.
+            $ok = $token !== ''
+                ? Http::timeout(8)->withToken($token)->accept('application/vnd.github+json')
+                    ->post(static::hook(), ['event_type' => 'site-rebuild', 'client_payload' => ['reason' => mb_substr($reason, 0, 100)]])->successful()
+                : Http::timeout(8)->post(static::hook())->successful();
         } catch (\Throwable) {
             $ok = false;
         }

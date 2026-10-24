@@ -3,7 +3,7 @@
 @section('heading', 'Cache')
 @section('subheading', 'Saved results that keep the admin fast. Clearing is safe: anything removed is rebuilt on the next visit.')
 @section('content')
-@php $build = \App\Models\AppSetting::group('site_build'); $hook = \App\Services\SiteRebuild::hook() !== ''; @endphp
+@php $build = \App\Models\AppSetting::group('site_build'); $hook = \App\Services\SiteRebuild::hook() !== ''; $instant = \App\Services\InstantPublish::enabled(); @endphp
 <div class="card mb-6">
   <div class="card-header"><h2 class="card-title">Website build</h2></div>
   <div class="card-body flex flex-wrap items-center justify-between gap-4 text-[13px]">
@@ -14,8 +14,9 @@
         <p class="text-neutral-600">The website rebuilds by itself after content changes, at most once every {{ \App\Services\SiteRebuild::GAP }} seconds.</p>
         @if(!empty($build['last_at']))<p class="mt-1 text-neutral-500">Last build: {{ \Carbon\Carbon::parse($build['last_at'])->diffForHumans() }} ({{ $build['last_reason'] ?? '' }}){{ empty($build['last_ok']) ? ', could not be started' : '' }}.@if(!empty($build['pending'])) A change is waiting for the next build.@endif</p>@endif
       @endif
+      @if($instant)<p class="mt-1 text-neutral-500">Instant publishing is on: new pages go live the moment they are saved.</p>@endif
     </div>
-    @if($hook)<form method="POST" action="{{ route('admin.site.rebuild') }}">@csrf<button class="btn-primary" data-loading>Publish</button></form>@endif
+    @if($hook || $instant)<form method="POST" action="{{ route('admin.site.rebuild') }}">@csrf<button class="btn-primary" data-loading>Publish</button></form>@endif
   </div>
 </div>
 <div class="grid gap-6 xl:grid-cols-2">

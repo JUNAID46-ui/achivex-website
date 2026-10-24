@@ -17,6 +17,11 @@ DirectoryIndex index.html
   RewriteRule ^(.*)$ /$1/ [L,R=301]
 </IfModule>
 
+# The upload tool keeps its list of files here; it is not for visitors.
+<Files ".ftp-deploy-sync-state.json">
+  Require all denied
+</Files>
+
 # Anything without its own file opens the website, which shows the right page or the 404 page.
 ErrorDocument 404 /404.html
 

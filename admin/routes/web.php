@@ -192,7 +192,18 @@ Route::prefix('admin')->name('admin.')->middleware(\App\Http\Middleware\BlockBan
             Route::get('cache', [Admin\CacheController::class, 'index'])->name('cache');
             Route::post('cache/clear', [Admin\CacheController::class, 'clear'])->name('cache.clear');
             Route::post('site/rebuild', function () {
-                return back()->with('status', \App\Services\SiteRebuild::start('Published by hand') ? 'Publishing started. New pages are live in about 2 to 4 minutes.' : 'The website build could not be started. Check SITE_DEPLOY_HOOK.');
+                $instant = \App\Services\InstantPublish::enabled();
+                if ($instant) {
+                    \App\Services\InstantPublish::sync();
+                }
+                $built = \App\Services\SiteRebuild::start('Published by hand');
+
+                return back()->with('status', match (true) {
+                    $instant && $built => 'Published. New pages are live now; the full website build finishes in a few minutes.',
+                    $instant => 'Published. New pages are live now. The full website build could not be started; check SITE_DEPLOY_HOOK.',
+                    $built => 'Publishing started. New pages are live in about 2 to 4 minutes.',
+                    default => 'The website build could not be started. Check SITE_DEPLOY_HOOK.',
+                });
             })->name('site.rebuild');
             Route::get('custom-code', [Admin\CustomCodeController::class, 'index'])->name('custom-code');
             Route::post('custom-code', [Admin\CustomCodeController::class, 'save']);
