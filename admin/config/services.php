@@ -41,4 +41,15 @@ return [
         'secret_key' => env('SUPABASE_SECRET_KEY'),
     ],
 
+    // Vercel Cron sends this as a bearer token to /hooks/daily when it is set.
+    'cron_secret' => env('CRON_SECRET'),
+    // Deploy hook URL that rebuilds the static website (Vercel deploy hook, or a build script on other hosts).
+    'site_deploy_hook' => env('SITE_DEPLOY_HOOK'),
+    // Hostinger: the live website folder (instant publishing and server builds), and the website
+    // code folder that is built on this server when SITE_BUILD=server.
+    'site_public_path' => env('SITE_PUBLIC_PATH'),
+    'site_build' => env('SITE_BUILD'),
+    'site_source_path' => env('SITE_SOURCE_PATH'),
+    'site_npm' => env('SITE_NPM', 'npm'),
+
 ];

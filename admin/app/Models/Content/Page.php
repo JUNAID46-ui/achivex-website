@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 // or per page made in the admin (kind "custom", built from page_sections).
 class Page extends Model
 {
+    use Publishable;
+
     protected $table = 'public.pages';
     protected $primaryKey = 'path';
     public $incrementing = false;
     protected $keyType = 'string';
 
     protected $guarded = [];
-    protected $casts = ['content' => 'array', 'published' => 'boolean'];
+    protected $casts = ['content' => 'array', 'published' => 'boolean', 'publish_at' => 'datetime'];
 }

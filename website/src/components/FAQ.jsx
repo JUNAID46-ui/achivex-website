@@ -2,17 +2,18 @@ import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Plus } from 'lucide-react'
 
-export default function FAQ({ items }) {
+// renderAnswer lets a page format the answer text (the blog turns **bold** and links into markup).
+export default function FAQ({ items, renderAnswer }) {
   const [open, setOpen] = useState(0)
   return (
-    <div className="divide-y divide-navy/15 border-y border-navy/15">
+    <div className="divide-y divide-white/15 border-y border-white/15">
       {items.map((item, i) => {
         const isOpen = open === i
         return (
           <div key={item.q}>
             <h3>
               <button
-                className="flex w-full items-center justify-between gap-6 py-6 text-left text-lg font-semibold text-navy transition-colors hover:text-accent"
+                className="flex w-full items-center justify-between gap-6 py-6 text-left text-lg font-semibold text-white transition-colors hover:text-accent"
                 aria-expanded={isOpen}
                 onClick={() => setOpen(isOpen ? -1 : i)}
               >
@@ -29,7 +30,7 @@ export default function FAQ({ items }) {
                   transition={{ duration: 0.3 }}
                   className="overflow-hidden"
                 >
-                  <p className="max-w-3xl pb-6 text-[16px] leading-relaxed text-ink/70">{item.a}</p>
+                  <p className="max-w-3xl pb-6 text-[16px] leading-relaxed text-body/80">{renderAnswer ? renderAnswer(item.a) : item.a}</p>
                 </motion.div>
               )}
             </AnimatePresence>

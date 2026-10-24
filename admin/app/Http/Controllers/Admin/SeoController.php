@@ -103,12 +103,14 @@ class SeoController extends Controller
             'focus_keyword' => 'nullable|max:120',
             'og_image' => 'nullable|max:500',
             'canonical' => 'nullable|url|max:500',
+            'schema' => 'nullable|string|max:20000',
         ]);
-        $data += ['title' => null, 'description' => null, 'focus_keyword' => null, 'og_image' => null, 'canonical' => null];
+        $data += ['title' => null, 'description' => null, 'focus_keyword' => null, 'og_image' => null, 'canonical' => null, 'schema' => null];
+        $schema = \App\Support\SchemaJson::parse($data['schema']);
         SeoMeta::updateOrCreate(['path' => $data['path']], [
             'title' => $data['title'] ?: null, 'description' => $data['description'] ?: null,
             'focus_keyword' => $data['focus_keyword'] ?: null, 'og_image' => $data['og_image'] ?: null,
-            'canonical' => $data['canonical'] ?: null, 'noindex' => $request->boolean('noindex'), 'updated_at' => now(),
+            'canonical' => $data['canonical'] ?: null, 'noindex' => $request->boolean('noindex'), 'schema' => $schema, 'updated_at' => now(),
         ]);
         $this->forget();
         ActivityLog::record('updated', 'SEO', $data['path']);
@@ -164,7 +166,7 @@ class SeoController extends Controller
     {
         $data = $request->validate(['content' => 'required|max:5000']);
         SiteSetting::put('robots', ['content' => str_replace("\r\n", "\n", $data['content'])]);
-        ActivityLog::record('updated', 'SEO', 'robots.txt');
+        ActivityLog::record('settings', 'SEO', 'robots.txt', null, ['module' => 'SEO']);
 
         return back()->with('status', 'robots.txt saved.');
     }
@@ -180,10 +182,10 @@ class SeoController extends Controller
 
     public function redirectNotFound(Request $request)
     {
-        $data = $request->validate(['from_path' => 'required|max:300', 'to_path' => 'required|max:500']);
+        $data = $request->validate(['from_path' => 'required|max:300', 'to_path' => ['required', 'max:500', 'regex:#^(/(?![/\\\\])|https?://)#i']]);
         $from = '/'.trim($data['from_path'], '/').'/';
         Redirect::updateOrCreate(['from_path' => $from], ['to_path' => $data['to_path'], 'status_code' => 301, 'active' => true]);
-        ActivityLog::record('created', 'Redirect', $from.' to '.$data['to_path']);
+        ActivityLog::record('created', 'Redirect', $from.' to '.$data['to_path'], null, ['module' => 'Redirects']);
 
         return back()->with('status', "Redirect created from {$from}.");
     }
@@ -209,7 +211,7 @@ class SeoController extends Controller
             'url' => 'nullable|url|max:300',
             'logo' => 'nullable|max:500',
             'phone' => 'nullable|max:50',
-            'email' => 'nullable|email|max:200',
+            'email' => 'nullable|email|max:200|not_regex:/[\r\n]/',
             'street' => 'nullable|max:200',
             'city' => 'nullable|max:120',
             'region' => 'nullable|max:60',

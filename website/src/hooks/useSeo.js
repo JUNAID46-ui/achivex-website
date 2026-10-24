@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { settings, seoMeta } from '../data/settings'
+import { setJsonLd } from '../lib/schema'
 
 const setMeta = (attr, key, content) => {
   let tag = document.head.querySelector(`meta[${attr}="${key}"]`)
@@ -28,7 +29,9 @@ const setCanonical = (href) => {
 
 // Sets title, description, robots, canonical and social tags for each page.
 // Values saved in the admin SEO module (seo_meta table) override the page defaults.
-export default function useSeo(title, description) {
+// `schema` is the page's automatic JSON-LD; custom schema saved in the admin is added to it.
+export default function useSeo(title, description, schema) {
+  const schemaKey = JSON.stringify(schema || null)
   const { pathname } = useLocation()
   useEffect(() => {
     const path = pathname.endsWith('/') ? pathname : `${pathname}/`
@@ -49,5 +52,7 @@ export default function useSeo(title, description) {
     setMeta('property', 'og:image', meta.og_image || settings.seo.ogImage)
     setMeta('name', 'twitter:card', 'summary_large_image')
     setMeta('name', 'twitter:site', settings.seo.twitterHandle)
-  }, [pathname, title, description])
+    const custom = meta.schema ? (Array.isArray(meta.schema) ? meta.schema : [meta.schema]) : []
+    setJsonLd('page-schema', [...(Array.isArray(schema) ? schema : [schema]), ...custom])
+  }, [pathname, title, description, schemaKey]) // eslint-disable-line react-hooks/exhaustive-deps
 }

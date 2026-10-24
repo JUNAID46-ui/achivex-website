@@ -21,7 +21,7 @@ class WhitepaperResource extends Resource
     {
         return [
             ['name' => 'title', 'label' => 'Title', 'type' => 'text', 'rules' => 'required|max:200', 'big' => true],
-            ['name' => 'slug', 'label' => 'URL slug', 'type' => 'slug', 'from' => 'title', 'rules' => 'required|max:200|alpha_dash', 'prefix' => '/insights/whitepapers/', 'createOnly' => true],
+            ['name' => 'slug', 'label' => 'URL slug', 'type' => 'slug', 'from' => 'title', 'rules' => 'required|max:200|alpha_dash'.\App\Support\Permalinks::slugRule('whitepapers'), 'prefix' => \App\Support\Permalinks::base('whitepapers'), 'createOnly' => true],
             ['name' => 'description', 'label' => 'Description', 'type' => 'textarea', 'rows' => 2, 'rules' => 'required|max:400'],
             ['name' => 'inside', 'label' => 'What is inside', 'type' => 'lines', 'help' => 'One point per line.'],
             ['name' => 'file_url', 'label' => 'Download file (PDF)', 'type' => 'image', 'help' => 'Upload the PDF in the media library or paste a link. People receive this after filling in the form.', 'accept' => 'file'],
@@ -56,7 +56,7 @@ class WhitepaperResource extends Resource
 
     public function sitePath(Model $record): ?string
     {
-        return "/insights/whitepapers/{$record->slug}/";
+        return \App\Support\Permalinks::base('whitepapers').$record->slug.'/';
     }
 
     public function seoContent(Model $record): array

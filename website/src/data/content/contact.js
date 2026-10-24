@@ -1,4 +1,5 @@
 export default {
+  heroEyebrow: 'Contact us',
   heroTitle: 'Let us talk',
   heroText: 'Tell us a little about what you need and a member of our team will get back to you.',
   formTitle: 'Send us a message',
@@ -6,4 +7,21 @@ export default {
   thanksText: 'Your message has been received. A member of our team will reply to',
   detailsTitle: 'Contact details',
   googleButton: 'View Google Business Profile',
+  nextEyebrow: 'What happens next',
+  nextTitle: 'What to expect after you get in touch',
+  nextText: 'We keep the first steps short and simple, and there is no cost until you approve a proposal.',
+  next: [
+    { title: 'We reply', text: 'A member of our team reads your message and replies, usually within one business day.' },
+    { title: 'Free consultation', text: 'A short call to understand your goals, your customers and what you have in place today.' },
+    { title: 'Written proposal', text: 'A clear plan with scope, timeline and a fixed price for you to review.' },
+    { title: 'We get started', text: 'Once you approve, we agree on a start date and the first piece of work begins.' },
+  ],
+  faqTitle: 'Before you get in touch',
+  faqText: 'A few answers to the questions people ask most when they first contact us.',
+  faqs: [
+    { q: 'Is the first consultation really free?', a: 'Yes. The first call is free and there is no obligation to go ahead with any work.' },
+    { q: 'What should I include in my message?', a: 'A short description of your business, what you want to achieve and any deadline. Links to your website or current tools are helpful too.' },
+    { q: 'Do you work with clients outside the USA?', a: 'Yes. We are based in Wyoming and work remotely with clients in other countries.' },
+    { q: 'Can I call instead of filling in the form?', a: 'Of course. Call us on +1 307 622 1140 or email info@achivex.com, whichever you prefer.' },
+  ],
 }

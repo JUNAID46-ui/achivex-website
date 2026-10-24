@@ -2,20 +2,25 @@
 
 // Editable fields for each home page section in the Page Builder.
 // Field types: text, textarea, image, link, lines, repeater (with "fields"), case (case study picker).
-return [
+$sections = [
     'hero' => [
         'label' => 'Home hero',
-        'description' => 'The first thing visitors see: label, heading, image, figures and button.',
+        'description' => 'The first thing visitors see: heading, button, image slider, featured card and round badge.',
         'fields' => [
-            ['name' => 'pill', 'label' => 'Small label above the heading', 'type' => 'text'],
-            ['name' => 'heading', 'label' => 'Heading', 'type' => 'text'],
-            ['name' => 'text', 'label' => 'Supporting text', 'type' => 'textarea'],
-            ['name' => 'image', 'label' => 'Image', 'type' => 'image'],
-            ['name' => 'imageAlt', 'label' => 'Image description (alt text)', 'type' => 'text'],
-            ['name' => 'buttonText', 'label' => 'Button text', 'type' => 'text'],
-            ['name' => 'buttonLink', 'label' => 'Button link', 'type' => 'link'],
+            ['name' => 'line1', 'label' => 'Heading, first line', 'type' => 'text'],
+            ['name' => 'line2', 'label' => 'Heading, second line', 'type' => 'text'],
+            ['name' => 'lead', 'label' => 'Supporting text', 'type' => 'textarea'],
+            ['name' => 'ctaText', 'label' => 'Button text', 'type' => 'text'],
+            ['name' => 'ctaLink', 'label' => 'Button link', 'type' => 'link'],
+            ['name' => 'slides', 'label' => 'Slider images (changes every 5 seconds)', 'type' => 'images'],
+            ['name' => 'cardImage', 'label' => 'Featured card image', 'type' => 'image'],
+            ['name' => 'cardTitle', 'label' => 'Featured card title', 'type' => 'text'],
+            ['name' => 'cardText', 'label' => 'Featured card text', 'type' => 'text'],
+            ['name' => 'cardLink', 'label' => 'Featured card link', 'type' => 'link'],
+            ['name' => 'badgeLabel', 'label' => 'Round badge button text', 'type' => 'text'],
+            ['name' => 'badgeText', 'label' => 'Round badge rotating text', 'type' => 'text'],
+            ['name' => 'badgeLink', 'label' => 'Round badge link', 'type' => 'link'],
         ],
-        'heroStats' => true,
     ],
     'intro' => [
         'label' => 'Intro statement',
@@ -81,14 +86,6 @@ return [
         'fields' => [
             ['name' => 'title', 'label' => 'Heading', 'type' => 'text'],
             ['name' => 'text', 'label' => 'Supporting text', 'type' => 'textarea'],
-        ],
-    ],
-    'platforms' => [
-        'label' => 'Platforms and partners',
-        'description' => 'Row of technology platforms linking to the alliance pages.',
-        'fields' => [
-            ['name' => 'title', 'label' => 'Heading', 'type' => 'text'],
-            ['name' => 'note', 'label' => 'Small note', 'type' => 'text'],
         ],
     ],
     'featured_case' => [
@@ -200,3 +197,11 @@ return [
         'defaults' => ['heading' => '', 'images' => []],
     ],
 ];
+
+$design = require __DIR__.'/design.php';
+
+return array_map(function ($s) use ($design) {
+    $s['fields'] = [...($s['fields'] ?? []), $design];
+
+    return $s;
+}, $sections);

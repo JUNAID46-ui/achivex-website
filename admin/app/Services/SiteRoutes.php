@@ -21,7 +21,11 @@ class SiteRoutes
                 // Fall back to the bundled copy below.
             }
 
-            return json_decode(file_get_contents(resource_path('site-routes.json')), true);
+            // The bundled copy describes the main website only; another selected website gets an
+            // empty list until its own /site-routes.json can be read.
+            return \App\Support\Sites::active()
+                ? ['pages' => [], 'services' => [], 'industries' => [], 'blogCategories' => []]
+                : json_decode(file_get_contents(resource_path('site-routes.json')), true);
         });
     }
 
@@ -40,10 +44,23 @@ class SiteRoutes
         return collect(static::data()['industries'] ?? [])->pluck('name', 'slug')->all();
     }
 
+    // Category names for blog posts: the list saved under Blog Posts, Categories, plus any name a post
+    // still uses so an older post keeps its value when edited.
     public static function blogCategories(): array
     {
-        $cats = static::data()['blogCategories'] ?? ['Data', 'Cloud', 'Security', 'Strategy', 'Operations'];
+        $saved = \App\Models\Content\SiteSetting::group('blog')['categories'] ?? [];
+        $cats = $saved ?: (static::data()['blogCategories'] ?? ['Data', 'Cloud', 'Security', 'Strategy', 'Operations']);
+        $cats = array_values(array_unique(array_merge($cats, static::blogCategoriesInUse())));
 
         return array_combine($cats, $cats);
+    }
+
+    public static function blogCategoriesInUse(): array
+    {
+        try {
+            return \App\Models\Content\BlogPost::query()->whereNotNull('category')->distinct()->orderBy('category')->pluck('category')->all();
+        } catch (\Throwable) {
+            return [];
+        }
     }
 }

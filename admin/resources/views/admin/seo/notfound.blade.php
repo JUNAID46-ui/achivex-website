@@ -13,10 +13,10 @@
       @forelse($rows as $r)
         @php $key = '/'.trim($r->path, '/').'/'; @endphp
         <tr>
-          <td class="font-semibold text-navy">{{ $r->path }}</td>
+          <td class="font-semibold text-ink">{{ $r->path }}</td>
           <td><span class="badge-red">{{ $r->hits }}</span></td>
-          <td class="whitespace-nowrap text-slate-500">{{ \Illuminate\Support\Carbon::parse($r->last_seen)->diffForHumans() }}</td>
-          <td class="max-w-[200px] truncate text-xs text-slate-500">{{ $r->referrer ?: 'Direct' }}</td>
+          <td class="whitespace-nowrap text-neutral-500">{{ \Illuminate\Support\Carbon::parse($r->last_seen)->diffForHumans() }}</td>
+          <td class="max-w-[200px] truncate text-xs text-neutral-500">{{ $r->referrer ?: 'Direct' }}</td>
           <td>
             @if(isset($redirected[$key]))
               <span class="badge-green">Redirects to {{ $redirected[$key] }}</span>
@@ -30,7 +30,7 @@
           </td>
         </tr>
       @empty
-        <tr><td colspan="5" class="py-14 text-center text-slate-500">No missing pages recorded. Good news.</td></tr>
+        <tr><td colspan="5" class="py-14 text-center text-neutral-500">No missing pages recorded. Good news.</td></tr>
       @endforelse
     </tbody>
   </table>

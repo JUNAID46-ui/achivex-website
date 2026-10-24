@@ -1,4 +1,5 @@
 import { site } from '../data/site'
+import { safeHref } from '../utils/safeHref'
 
 // Brand marks drawn inline so they are not affected by icon library changes.
 const paths = {
@@ -22,11 +23,11 @@ export default function SocialIcons({ className = '' }) {
       {site.social.map((s) => (
         <li key={s.name}>
           <a
-            href={s.href}
+            href={safeHref(s.href)}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`AchiveX on ${s.name}`}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:border-accent hover:bg-accent hover:text-ink"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:border-accent hover:bg-accent hover:text-onaccent"
           >
             <SocialIcon name={s.name} />
           </a>

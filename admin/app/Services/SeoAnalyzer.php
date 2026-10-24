@@ -81,6 +81,19 @@ class SeoAnalyzer
             $add($avg <= 20 ? 'good' : 'ok', "Average sentence length is {$avg} words.", 'Shorter sentences are easier to read.', 'Long sentences');
         }
 
+        // Links and paragraph length, for content that keeps its links (blog posts).
+        if (isset($in['raw'])) {
+            $raw = (string) $in['raw'];
+            $internal = preg_match_all('/\]\(\/[^)]*\)/', $raw);
+            $external = preg_match_all('/\]\(https?:\/\/[^)]*\)/', $raw);
+            $add($internal >= 2 ? 'good' : ($internal >= 1 ? 'ok' : 'bad'), "{$internal} internal link".($internal === 1 ? '' : 's').'.', 'Link to 2 or more related pages on your own site.', 'Few internal links');
+            $add($external >= 1 ? 'good' : 'ok', "{$external} external link".($external === 1 ? '' : 's').'.', 'Link to at least one trusted outside source.', 'No external links');
+        }
+        if (is_array($in['paragraphs'] ?? null) && $in['paragraphs']) {
+            $long = collect($in['paragraphs'])->filter(fn ($p) => str_word_count(strip_tags((string) $p)) > 120)->count();
+            $add($long === 0 ? 'good' : ($long === 1 ? 'ok' : 'bad'), $long ? "{$long} paragraph".($long === 1 ? ' is' : 's are').' over 120 words.' : 'No paragraph is over 120 words.', 'Split long paragraphs so the text is easier to scan.', 'Long paragraphs');
+        }
+
         if (! empty($in['noindex'])) {
             $add('ok', 'This page is hidden from search engines (noindex).', 'Turn off noindex if you want it to appear in Google.', 'Hidden from search engines');
         }
@@ -98,6 +111,6 @@ class SeoAnalyzer
 
     public static function color(int $score): string
     {
-        return ['good' => 'bg-emerald-500', 'ok' => 'bg-amber', 'bad' => 'bg-red-500'][static::grade($score)];
+        return ['good' => 'border border-green-600 !text-green-700', 'ok' => 'border border-ink !text-ink', 'bad' => 'border border-red-600 !text-red-600'][static::grade($score)];
     }
 }

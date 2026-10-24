@@ -13,5 +13,5 @@ class SeoMeta extends Model
 
     public $timestamps = false;
     protected $guarded = [];
-    protected $casts = ['noindex' => 'boolean', 'updated_at' => 'datetime'];
+    protected $casts = ['noindex' => 'boolean', 'schema' => 'array', 'updated_at' => 'datetime'];
 }

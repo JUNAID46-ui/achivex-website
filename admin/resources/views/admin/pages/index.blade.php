@@ -13,7 +13,7 @@
   <label for="type" class="sr-only">Type</label>
   <select id="type" name="type" class="input w-48 py-1.5"><option value="">All page types</option>@foreach($types as $t)<option @selected(request('type') === $t)>{{ $t }}</option>@endforeach</select>
   <button class="btn-secondary">Filter</button>
-  <span class="ml-auto self-center text-xs text-slate-500">{{ $rows->count() }} pages</span>
+  <span class="ml-auto self-center text-xs text-neutral-500">{{ $rows->count() }} pages</span>
 </form>
 
 <div class="card overflow-x-auto">
@@ -24,17 +24,17 @@
         @php($score = $scores[$r['path']] ?? null)
         <tr>
           <td class="max-w-[320px]">
-            <a href="{{ $r['kind'] === 'home' ? route('admin.builder', ['page' => '/']) : route('admin.pages.edit', ['path' => $r['path']]) }}" class="block truncate font-semibold text-navy hover:text-amber-600">{{ $r['title'] }}</a>
-            <span class="block truncate text-xs text-slate-500">{{ $r['path'] }}</span>
+            <a href="{{ $r['kind'] === 'home' ? route('admin.builder', ['page' => '/']) : route('admin.pages.edit', ['path' => $r['path']]) }}" class="block truncate font-semibold text-ink hover:underline">{{ $r['title'] }}</a>
+            <span class="block truncate text-xs text-neutral-500">{{ $r['path'] }}</span>
           </td>
-          <td class="whitespace-nowrap text-slate-600">{{ $r['type'] }}</td>
+          <td class="whitespace-nowrap text-neutral-600">{{ $r['type'] }}</td>
           <td class="whitespace-nowrap">
             @if(! $r['published'])<span class="badge-gray">Draft</span>
             @elseif($r['kind'] === 'custom')<span class="badge-green">Published</span>
-            @elseif($r['edited'])<span class="badge-amber">Edited</span>
+            @elseif($r['edited'])<span class="badge-warn">Edited</span>
             @else<span class="badge-gray">Original</span>@endif
           </td>
-          <td>@if($score !== null)<span class="score {{ \App\Services\SeoAnalyzer::color($score) }}">{{ $score }}</span>@else<span class="text-xs text-slate-400">n/a</span>@endif</td>
+          <td>@if($score !== null)<span class="score {{ \App\Services\SeoAnalyzer::color($score) }}">{{ $score }}</span>@else<span class="text-xs text-neutral-400">n/a</span>@endif</td>
           <td>
             <div class="flex flex-wrap justify-end gap-1.5">
               @if($r['kind'] !== 'home')
@@ -47,7 +47,7 @@
           </td>
         </tr>
       @empty
-        <tr><td colspan="5" class="py-14 text-center text-slate-500">No pages match this search.</td></tr>
+        <tr><td colspan="5" class="py-14 text-center text-neutral-500">No pages match this search.</td></tr>
       @endforelse
     </tbody>
   </table>

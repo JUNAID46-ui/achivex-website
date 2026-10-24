@@ -3,53 +3,59 @@
 @tailwind utilities;
 
 @layer base {
-  body { @apply bg-wp-bg font-sans text-[14px] text-slate-800 antialiased; }
+  body { @apply bg-white font-sans text-[14px] text-ink antialiased; }
   [x-cloak] { display: none !important; }
-  :focus-visible { outline: 2px solid #F0A500; outline-offset: 2px; }
+  :focus-visible { outline: 2px solid #0A0A0A; outline-offset: 2px; }
+  ::selection { background: #0A0A0A; color: #fff; }
 }
 
 @layer components {
-  /* Buttons */
-  .btn { @apply inline-flex items-center justify-center gap-2 rounded-md px-3.5 py-2 text-[13px] font-semibold transition disabled:cursor-not-allowed disabled:opacity-50; }
-  .btn-primary { @apply btn bg-navy text-white hover:bg-slate2; }
-  .btn-accent { @apply btn bg-amber text-navy hover:bg-amber-600 hover:text-white; }
-  .btn-secondary { @apply btn border border-slate-300 bg-white text-slate-700 hover:border-navy hover:text-navy; }
-  .btn-danger { @apply btn border border-red-200 bg-white text-red-600 hover:bg-red-600 hover:text-white; }
-  .btn-ghost { @apply btn text-slate-600 hover:bg-slate-100 hover:text-navy; }
-  .btn-sm { @apply px-2.5 py-1.5 text-xs; }
+  /* Buttons: square, flat, high contrast */
+  .btn { @apply inline-flex items-center justify-center gap-2 border px-4 py-2 text-[12.5px] font-bold uppercase tracking-[0.06em] transition disabled:cursor-not-allowed disabled:opacity-40; }
+  .btn-primary { @apply btn border-ink bg-ink text-white hover:bg-white hover:text-ink; }
+  .btn-accent { @apply btn-primary; }
+  .btn-secondary { @apply btn border-ink bg-white text-ink hover:bg-ink hover:text-white; }
+  .btn-danger { @apply btn border-red-600 bg-white text-red-600 hover:bg-red-600 hover:text-white; }
+  .btn-ghost { @apply btn border-transparent normal-case tracking-normal text-neutral-600 hover:border-ink hover:text-ink; }
+  .btn-sm { @apply px-2.5 py-1 text-[11px]; }
 
-  /* Panels, like WordPress post boxes */
-  .card { @apply rounded-lg border border-slate-200 bg-white shadow-sm; }
-  .card-header { @apply flex items-center justify-between gap-3 border-b border-slate-200 px-5 py-3.5; }
-  .card-title { @apply text-[15px] font-semibold text-navy; }
-  .card-body { @apply p-5; }
+  /* Sections: no boxes. A title, a 1px black rule, then content. */
+  .card { @apply bg-transparent; }
+  .card-header { @apply flex items-center justify-between gap-3 border-b border-ink pb-2; }
+  .card-title { @apply text-[11.5px] font-bold uppercase tracking-[0.14em] text-ink; }
+  .card-body { @apply py-5; }
 
   /* Forms */
-  .label { @apply mb-1.5 block text-[13px] font-semibold text-slate-700; }
-  .help { @apply mt-1 text-xs text-slate-500; }
-  .input { @apply block w-full rounded-md border-slate-300 bg-white text-[14px] shadow-sm focus:border-navy focus:ring-navy; }
-  .error { @apply mt-1 text-xs font-medium text-red-600; }
+  .label { @apply mb-1.5 block text-[11.5px] font-bold uppercase tracking-[0.08em] text-neutral-600; }
+  .help { @apply mt-1 text-xs text-neutral-500; }
+  .input { @apply block w-full rounded-none border-neutral-300 bg-white text-[14px] shadow-none focus:border-ink focus:ring-0; }
+  .error { @apply mt-1 text-xs font-semibold text-red-600; }
 
   /* Tables */
   .table { @apply w-full text-left text-[13.5px]; }
-  .table th { @apply border-b border-slate-200 bg-slate-50 px-4 py-2.5 text-xs font-semibold uppercase tracking-wide text-slate-500; }
-  .table td { @apply border-b border-slate-100 px-4 py-3 align-top; }
-  .table tr:hover td { @apply bg-slate-50/70; }
+  .table th { @apply border-b border-ink px-3 py-2 text-[10.5px] font-bold uppercase tracking-[0.12em] text-neutral-500; }
+  .table td { @apply border-b border-neutral-200 px-3 py-3 align-top; }
+  .table tr:hover td { @apply bg-neutral-50; }
 
-  /* Badges */
-  .badge { @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold; }
-  .badge-green { @apply badge bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200; }
-  .badge-amber { @apply badge bg-amber-50 text-amber-600 ring-1 ring-amber/40; }
-  .badge-red { @apply badge bg-red-50 text-red-700 ring-1 ring-red-200; }
-  .badge-gray { @apply badge bg-slate-100 text-slate-600 ring-1 ring-slate-200; }
-  .badge-navy { @apply badge bg-navy text-white; }
+  /* Badges: small square tags */
+  .badge { @apply inline-flex items-center gap-1 border px-1.5 py-px font-mono text-[10.5px] font-bold uppercase tracking-wide; }
+  .badge-green { @apply badge border-green-600 text-green-700; }
+  .badge-warn { @apply badge border-ink text-ink; }
+  .badge-red { @apply badge border-red-600 text-red-600; }
+  .badge-gray { @apply badge border-neutral-300 text-neutral-500; }
+  .badge-ink { @apply badge border-ink bg-ink text-white; }
+  .badge-blue { @apply badge border-blue-600 text-ink; }
 
-  /* Sidebar */
-  .nav-link { @apply flex items-center gap-3 rounded-md px-3 py-2 text-[13.5px] text-slate-300 transition hover:bg-wp-sideHover hover:text-white; }
-  .nav-link.active { @apply bg-amber font-semibold text-navy hover:bg-amber hover:text-navy; }
-  .nav-sub { @apply block rounded-md py-1.5 pl-10 pr-3 text-[13px] text-slate-400 hover:text-white; }
-  .nav-sub.active { @apply font-semibold text-amber; }
+  /* Big figures */
+  .stat-label { @apply text-[10.5px] font-bold uppercase tracking-[0.14em] text-neutral-500; }
+  .stat-value { @apply mt-2 font-mono text-[34px] font-bold leading-none tracking-tight; }
 
-  /* SEO score dot */
-  .score { @apply inline-flex h-9 w-9 items-center justify-center rounded-full text-xs font-bold text-white; }
+  /* Sidebar: shades of black, white text */
+  .nav-link { @apply flex items-center gap-3 px-3 py-2 text-[13.5px] text-neutral-400 transition hover:bg-wp-sideHover hover:text-white; }
+  .nav-link.active { @apply bg-wp-sideActive font-semibold text-white; }
+  .nav-sub { @apply block py-1.5 pl-10 pr-3 text-[13px] text-neutral-500 hover:text-white; }
+  .nav-sub.active { @apply font-semibold text-white; }
+
+  /* SEO score: a square figure */
+  .score { @apply inline-flex h-9 w-9 items-center justify-center bg-white font-mono text-xs font-bold text-white; }
 }

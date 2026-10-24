@@ -18,32 +18,35 @@
   <div class="space-y-6">
     <div class="card card-body">
       <p class="label">Google preview</p>
-      <div class="rounded-md border border-slate-200 p-4">
-        <p class="text-xs text-slate-600">{{ parse_url(config('admin.site_public_url'), PHP_URL_HOST) }}{{ $row['path'] }}</p>
+      <div class="border border-neutral-200 p-4">
+        <p class="text-xs text-neutral-600">{{ parse_url(config('admin.site_public_url'), PHP_URL_HOST) }}{{ $row['path'] }}</p>
         <p class="mt-1 text-[19px] leading-snug text-[#1a0dab]" x-text="fullTitle"></p>
-        <p class="mt-1 text-[13px] leading-snug text-slate-600" x-text="fullDesc"></p>
+        <p class="mt-1 text-[13px] leading-snug text-neutral-600" x-text="fullDesc"></p>
       </div>
     </div>
     <div class="card card-body space-y-4">
       <div><label for="focus_keyword" class="label">Focus keyword</label><input id="focus_keyword" name="focus_keyword" x-model="keyword" class="input" placeholder="The main phrase people search for"></div>
-      <div><label for="title" class="label">SEO title <span class="font-normal text-slate-400" x-text="'(' + fullTitle.length + ' of 60)'"></span></label>
+      <div><label for="title" class="label">SEO title <span class="font-normal text-neutral-400" x-text="'(' + fullTitle.length + ' of 60)'"></span></label>
         <input id="title" name="title" x-model="title" class="input" :placeholder="fallbackTitle"><p class="help">Shown as: <code x-text="template"></code>. Leave empty to use the page name.</p></div>
-      <div><label for="description" class="label">Meta description <span class="font-normal text-slate-400" x-text="'(' + fullDesc.length + ' of 160)'"></span></label>
+      <div><label for="description" class="label">Meta description <span class="font-normal text-neutral-400" x-text="'(' + fullDesc.length + ' of 160)'"></span></label>
         <textarea id="description" name="description" x-model="desc" rows="3" class="input" :placeholder="fallbackDesc"></textarea></div>
       @include('admin.partials.field', ['field' => ['name' => 'og_image', 'label' => 'Social share image', 'type' => 'image'], 'value' => $meta?->og_image, 'record' => new \App\Models\Content\SeoMeta])
       <div><label for="canonical" class="label">Canonical URL (advanced)</label><input id="canonical" name="canonical" value="{{ old('canonical', $meta?->canonical) }}" class="input" placeholder="Leave empty to use this page's own URL"></div>
       @include('admin.partials.field', ['field' => ['name' => 'noindex', 'label' => 'Hide this page from search engines (noindex)', 'type' => 'toggle'], 'value' => $meta?->noindex, 'record' => new \App\Models\Content\SeoMeta])
+      <div class="border-t border-neutral-100 pt-4">
+        @include('admin.seo.partials.schema-field', ['name' => 'schema', 'value' => $meta?->schema, 'pageUrl' => rtrim(config('admin.site_public_url'), '/').$row['path'], 'pageTitle' => $row['title']])
+      </div>
       <button class="btn-primary">Save SEO settings</button>
     </div>
   </div>
   <div class="card self-start">
-    <div class="card-header"><h2 class="card-title">Analysis</h2><span class="score" :class="result.score >= 80 ? 'bg-emerald-500' : result.score >= 50 ? 'bg-amber' : 'bg-red-500'" x-text="result.score"></span></div>
+    <div class="card-header"><h2 class="card-title">Analysis</h2><span class="score" :class="result.score >= 80 ? 'bg-green-500' : result.score >= 50 ? 'bg-ink' : 'bg-red-500'" x-text="result.score"></span></div>
     <ul class="card-body space-y-2.5">
       <template x-for="c in result.checks" :key="c.label">
-        <li class="flex gap-2 text-[13px]"><span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full" :class="c.status === 'good' ? 'bg-emerald-500' : c.status === 'ok' ? 'bg-amber' : 'bg-red-500'"></span><span x-text="c.label"></span></li>
+        <li class="flex gap-2 text-[13px]"><span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full" :class="c.status === 'good' ? 'bg-green-500' : c.status === 'ok' ? 'bg-ink' : 'bg-red-500'"></span><span x-text="c.label"></span></li>
       </template>
     </ul>
-    <div class="border-t border-slate-100 px-5 py-3 text-xs text-slate-500">The page text itself is part of the website code. Ask your developer to update it, or contact AchiveX.</div>
+    <div class="border-t border-neutral-100 px-5 py-3 text-xs text-neutral-500">The page text itself is part of the website code. Ask your developer to update it, or contact AchiveX.</div>
   </div>
 </form>
 @endsection

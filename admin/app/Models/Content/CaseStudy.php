@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class CaseStudy extends Model
 {
+    use Publishable;
+
     protected $table = 'public.case_studies';
     protected $primaryKey = 'slug';
     public $incrementing = false;
@@ -13,5 +15,5 @@ class CaseStudy extends Model
 
     public $timestamps = false;
     protected $guarded = [];
-    protected $casts = ['services' => \App\Casts\PgTextArray::class, 'challenge' => 'array', 'solution' => 'array', 'results' => 'array', 'published' => 'boolean'];
+    protected $casts = ['services' => \App\Casts\PgTextArray::class, 'challenge' => 'array', 'solution' => 'array', 'results' => 'array', 'published' => 'boolean', 'publish_at' => 'datetime'];
 }

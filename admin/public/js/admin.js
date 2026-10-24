@@ -26,7 +26,7 @@ window.slugify = (s) => String(s || '').toLowerCase().normalize('NFKD').replace(
 window.toast = (message, type = 'success') => window.dispatchEvent(new CustomEvent('toast', { detail: { message, type } }))
 
 // Live SEO checks used by the SEO box on edit screens.
-window.seoChecks = ({ title, description, keyword, slug, content }) => {
+window.seoChecks = ({ title, description, keyword, slug, content, first, headings, raw, paragraphs }) => {
   const k = (keyword || '').trim().toLowerCase()
   const t = (title || '').trim()
   const d = (description || '').trim()
@@ -50,22 +50,47 @@ window.seoChecks = ({ title, description, keyword, slug, content }) => {
     }
   }
   if (words.length) add(words.length >= 300, words.length >= 150, `Content length is ${words.length} words (300 or more is better).`)
+  if (k && first) {
+    const inFirst = first.toLowerCase().includes(k)
+    add(inFirst, true, inFirst ? 'Focus keyword appears in the first paragraph.' : 'Focus keyword is missing from the first paragraph.')
+  }
+  if (k && headings && headings.length) {
+    const inH = headings.some((h) => (h || '').toLowerCase().includes(k))
+    add(inH, true, inH ? 'Focus keyword appears in a subheading.' : 'Focus keyword is missing from the subheadings.')
+  }
+  if (raw) {
+    const internal = (raw.match(/\]\(\/[^)]*\)/g) || []).length
+    const external = (raw.match(/\]\(https?:\/\/[^)]*\)/g) || []).length
+    add(internal >= 2, internal >= 1, `${internal} internal link${internal === 1 ? '' : 's'} (2 or more is better).`)
+    add(external >= 1, true, `${external} external link${external === 1 ? '' : 's'} (1 or more to a trusted source is better).`)
+  }
+  if (paragraphs && paragraphs.length) {
+    const long = paragraphs.filter((p) => (p || '').split(/\s+/).filter(Boolean).length > 120).length
+    add(long === 0, long <= 1, long ? `${long} paragraph${long === 1 ? ' is' : 's are'} over 120 words. Split them up.` : 'No paragraph is over 120 words.')
+  }
   const score = Math.round((checks.reduce((s, c) => s + (c.status === 'good' ? 1 : c.status === 'ok' ? 0.5 : 0), 0) / checks.length) * 100)
   return { checks, score }
 }
 
 // Repeater fields: list values become multi-line text while editing and are split again on the server.
 let repeaterKey = 0
-window.repeater = (items, fields) => ({
-  fields,
-  items: (items || []).map((it) => {
+const repeaterRows = (items, fields) =>
+  (items || []).map((it) => {
     const row = { _k: ++repeaterKey, _open: false }
     fields.forEach((f) => {
       const v = it[f.name]
       row[f.name] = Array.isArray(v) ? v.join(f.type === 'paragraphs' ? '\n\n' : '\n') : v ?? ''
     })
     return row
-  }),
+  })
+
+window.repeater = (items, fields) => ({
+  fields,
+  items: repeaterRows(items, fields),
+  // Replaces every row, for example with the sections QuickPaste found.
+  fill(rows) {
+    this.items = repeaterRows(rows, this.fields)
+  },
   add() {
     const row = { _k: ++repeaterKey, _open: true }
     this.fields.forEach((f) => (row[f.name] = ''))
@@ -128,3 +153,86 @@ window.contentForm = {
     },
   },
 }
+
+// Uploads files to the media library and returns the saved items. With image storage connected,
+// each file goes from the browser straight to Supabase, so large files work (Vercel itself only
+// accepts 4.5 MB per request). Without it, files go through the admin, for local testing.
+window.uploadMedia = async (files, onProgress = () => {}) => {
+  const cfg = window.adminMedia || {}
+  const list = [...files]
+  const saved = []
+  for (const [index, file] of list.entries()) {
+    const step = (percent) => onProgress({ index, total: list.length, name: file.name, percent })
+    step(0)
+    if (!cfg.cloud) {
+      const fd = new FormData()
+      fd.append('files[]', file)
+      saved.push(...(await adminFetch(cfg.store, { method: 'POST', body: fd })))
+      step(100)
+      continue
+    }
+    const link = await adminFetch(cfg.sign, { method: 'POST', body: JSON.stringify({ filename: file.name, size: file.size }) })
+    await new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest()
+      xhr.open('PUT', link.url)
+      xhr.setRequestHeader('Content-Type', link.mime)
+      xhr.setRequestHeader('cache-control', 'max-age=31536000')
+      xhr.setRequestHeader('x-upsert', 'false')
+      xhr.upload.onprogress = (e) => e.lengthComputable && step(Math.round((e.loaded / e.total) * 100))
+      xhr.onload = () => (xhr.status < 300 ? resolve() : reject(new Error(uploadError(xhr, file))))
+      xhr.onerror = () => reject(new Error(`The upload of ${file.name} was interrupted. Check the connection and try again.`))
+      xhr.send(file)
+    })
+    saved.push(await adminFetch(cfg.complete, { method: 'POST', body: JSON.stringify({ path: link.path, filename: file.name, ...(await imageSize(file)) }) }))
+  }
+  return saved
+}
+
+function uploadError(xhr, file) {
+  let message = ''
+  try { message = JSON.parse(xhr.responseText).message || '' } catch {}
+  if (xhr.status === 413 || /maximum allowed size|too large/i.test(message)) {
+    return `${file.name} is larger than your Supabase storage allows. The Free plan accepts up to 50 MB per file.`
+  }
+  return `${file.name} could not be uploaded${message ? ': ' + message : '.'}`
+}
+
+async function imageSize(file) {
+  if (!file.type.startsWith('image/') || file.type === 'image/svg+xml' || !window.createImageBitmap) return {}
+  try {
+    const bitmap = await createImageBitmap(file)
+    const size = { width: bitmap.width, height: bitmap.height }
+    bitmap.close()
+    return size
+  } catch {
+    return {}
+  }
+}
+
+// Forms marked data-unsaved-warning ask before leaving with unsaved changes.
+// Buttons marked data-loading show progress and block double submits.
+document.addEventListener('DOMContentLoaded', () => {
+  let dirty = false
+  document.querySelectorAll('form[data-unsaved-warning]').forEach((form) => {
+    form.addEventListener('input', () => { dirty = true })
+    form.addEventListener('change', () => { dirty = true })
+    form.addEventListener('submit', () => { dirty = false })
+  })
+  window.addEventListener('beforeunload', (e) => {
+    if (!dirty) return
+    e.preventDefault()
+    e.returnValue = ''
+  })
+})
+
+document.addEventListener('submit', (e) => {
+  if (e.defaultPrevented) return
+  const button = e.submitter && e.submitter.matches('[data-loading]') ? e.submitter : e.target.querySelector('button[data-loading]:not([name])')
+  if (!button) return
+  // Let the browser send the form first, then lock the button.
+  setTimeout(() => {
+    button.disabled = true
+    button.dataset.label = button.innerHTML
+    button.textContent = 'Working…'
+  }, 0)
+})

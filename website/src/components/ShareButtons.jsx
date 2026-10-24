@@ -20,10 +20,10 @@ export default function ShareButtons({ title, vertical = false }) {
       /* clipboard not available */
     }
   }
-  const btn = 'flex h-10 w-10 items-center justify-center rounded-full border border-navy/20 text-navy transition-colors hover:border-accent hover:bg-accent hover:text-ink'
+  const btn = 'flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:border-accent hover:bg-accent hover:text-onaccent'
   return (
     <div className={`flex items-center gap-2 ${vertical ? 'lg:flex-col' : ''}`}>
-      <span className="mr-1 text-sm font-semibold text-navy">Share</span>
+      <span className="mr-1 text-sm font-semibold text-white">Share</span>
       {links.map((l) => (
         <a key={l.name} href={l.href} target="_blank" rel="noopener noreferrer" aria-label={`Share on ${l.name}`} className={btn}>
           <SocialIcon name={l.name} />

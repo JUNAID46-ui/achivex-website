@@ -1,5 +1,5 @@
 import { supabase } from './supabase'
-import { blogs } from '../data/blogs'
+import { blogs, blogCategories } from '../data/blogs'
 import { caseStudies } from '../data/caseStudies'
 import { news } from '../data/news'
 import { whitepapers } from '../data/whitepapers'
@@ -7,7 +7,7 @@ import { milestones, leaders, locations, careers, heroStats } from '../data/abou
 import { homeSections } from '../data/homeSections'
 import { site } from '../data/site'
 import { settings, seoMeta, redirects } from '../data/settings'
-import { customPages, pageSections } from '../data/customPages'
+import { customPages, pageSections, pageDesigns } from '../data/customPages'
 import { contentTargets } from '../data/contentTargets'
 
 const normalizePath = (p) => (p.endsWith('/') ? p : `${p}/`)
@@ -32,6 +32,12 @@ function applySettings(rows) {
   })
   Object.assign(settings.seo, byKey.seo || {})
   Object.assign(settings.schema, byKey.schema || {})
+  Object.assign(settings.customCode, byKey.custom_code || {})
+  Object.assign(settings.permalinks, byKey.permalinks || {})
+  Object.assign(settings.theme, byKey.theme || {})
+  // Blog categories saved in the admin (Blog Posts, Categories) replace the default list.
+  const cats = (byKey.blog || {}).categories
+  if (Array.isArray(cats) && cats.length) blogCategories.splice(0, blogCategories.length, ...cats)
 }
 
 // Loads the editable content from the database and swaps it into the data arrays
@@ -44,7 +50,8 @@ const tables = [
   ['blog_posts', 'published_on', (r) => replace(blogs, r.map((x) => ({
     slug: x.slug, title: x.title, category: x.category, date: x.published_on, author: x.author,
     featured: x.featured, image: x.image, excerpt: x.excerpt,
-    intro: { keyword: x.intro_keyword, text: x.intro_text }, sections: x.sections || [],
+    intro: { keyword: x.intro_keyword, text: x.intro_text }, sections: x.sections || [], faqs: x.faqs || [],
+    heroColor: x.hero_color, heroImage: x.hero_image,
   }))), false],
   ['case_studies', 'sort', (r) => replace(caseStudies, r.map((x) => ({
     slug: x.slug, title: x.title, clientType: x.client_type, industry: x.industry, services: x.services || [],
@@ -77,8 +84,10 @@ const tables = [
   ['pages', 'path', (r) => {
     const targets = contentTargets()
     Object.keys(customPages).forEach((k) => delete customPages[k])
+    Object.keys(pageDesigns).forEach((k) => delete pageDesigns[k])
     r.forEach((x) => {
       const path = normalizePath(x.path)
+      if (x.kind !== 'custom' && x.content?.design) pageDesigns[path] = x.content.design
       if (x.kind === 'custom') customPages[path] = { path, title: x.title, ...(x.content || {}) }
       else if (targets[path] && x.content) Object.assign(targets[path], x.content)
     })
@@ -95,7 +104,7 @@ const tables = [
 
 const CACHE_KEY = 'achivex_content_v1'
 
-const applyAll = (byTable) => {
+export const applyAll = (byTable) => {
   tables.forEach(([name, , apply]) => { if (Array.isArray(byTable[name])) apply(byTable[name]) })
 }
 
@@ -112,19 +121,33 @@ export function applyCachedContent() {
 
 // Fetches the latest content. Resolves true only when it differs from what is on screen,
 // so the page re-renders once at most, and only when something actually changed.
-export async function loadContent(timeoutMs = 8000) {
-  if (!supabase) return false
-  const work = Promise.all(
+// Every editable table, read with the public key. Used at build time for the prerendered pages
+// and in the browser for the live refresh.
+export async function fetchTables() {
+  if (!supabase) throw new Error('Database is not configured')
+  const rows = await Promise.all(
     tables.map(async ([name, order, , ascending = true]) => {
       const { data, error } = await supabase.from(name).select('*').order(order, { ascending })
       if (error) throw error
       return [name, data]
     }),
-  ).then((rows) => {
-    const byTable = Object.fromEntries(rows)
+  )
+  return Object.fromEntries(rows)
+}
+
+// Content the page was prerendered with (set by SiteRoot), so the live refresh only re-renders
+// when the database has changed since the build.
+let builtJson = null
+export const setBuiltContent = (byTable) => { builtJson = byTable ? JSON.stringify(byTable) : null }
+
+export async function loadContent(timeoutMs = 8000) {
+  if (!supabase) return false
+  const work = fetchTables().then((byTable) => {
     const json = JSON.stringify(byTable)
-    let previous = null
-    try { previous = localStorage.getItem(CACHE_KEY) } catch { /* storage blocked */ }
+    let previous = builtJson
+    if (previous === null) {
+      try { previous = localStorage.getItem(CACHE_KEY) } catch { /* storage blocked */ }
+    }
     // Apply only when every table loaded, so content is never half from each source.
     applyAll(byTable)
     try { localStorage.setItem(CACHE_KEY, json) } catch { /* storage full or blocked */ }

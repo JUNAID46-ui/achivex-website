@@ -17,6 +17,7 @@ class SettingsController extends Controller
             'general' => SiteSetting::group('general'),
             'social' => SiteSetting::group('social'),
             'mail' => AppSetting::group('mail'),
+            'notifyError' => \Illuminate\Support\Facades\Cache::get(\App\Services\InboxNotifier::ERROR_KEY),
             'storageReady' => SupabaseStorage::enabled(),
             'storageKeyHint' => ($k = SupabaseStorage::key()) ? substr($k, 0, 12).'...'.substr($k, -4) : null,
         ]);
@@ -31,7 +32,7 @@ class SettingsController extends Controller
             return back()->withErrors(['secretKey' => $error])->withFragment('storage');
         }
         AppSetting::put('storage', ['secretKey' => $key]);
-        ActivityLog::record('updated', 'Settings', 'Image storage');
+        ActivityLog::record('settings', 'Settings', 'Image storage', null, ['module' => 'Settings']);
 
         return redirect()->to(route('admin.settings').'#storage')->with('status', 'Image storage connected. New uploads now go to Supabase and show on the live website.');
     }
@@ -40,16 +41,27 @@ class SettingsController extends Controller
     public function saveMail(Request $request)
     {
         $data = $request->validate([
-            'host' => 'required|max:200',
+            // A local address cannot work on Vercel, which has no mail server of its own.
+            'host' => 'required|max:200|not_in:127.0.0.1,localhost,0.0.0.0',
             'port' => 'required|integer|min:1|max:65535',
             'username' => 'required|max:200',
             'password' => 'nullable|max:200',
-            'from_address' => 'required|email|max:200',
+            'from_address' => 'nullable|email|max:200|not_regex:/[\r\n]/',
             'from_name' => 'required|max:120',
-        ]);
-        $data['password'] = str_replace(' ', '', (string) $data['password']) ?: (AppSetting::group('mail')['password'] ?? '');
+            'signature_name' => 'nullable|max:120',
+            'signature_title' => 'nullable|max:120',
+            'notify_to' => ['nullable', 'max:500', function ($attribute, $value, $fail) {
+                foreach (array_filter(array_map('trim', explode(',', (string) $value))) as $email) {
+                    if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                        $fail("{$email} is not a valid email address.");
+                    }
+                }
+            }],
+        ], ['host.not_in' => 'Use your email provider\'s SMTP server. For Gmail that is smtp.gmail.com.']);
+        $data['password'] = str_replace(' ', '', (string) ($data['password'] ?? '')) ?: (AppSetting::group('mail')['password'] ?? '');
+        $data['from_address'] = ($data['from_address'] ?? null) ?: $data['username'];
         AppSetting::put('mail', $data);
-        ActivityLog::record('updated', 'Settings', 'Email server');
+        ActivityLog::record('settings', 'Settings', 'Email server', null, ['module' => 'Settings']);
 
         return redirect()->to(route('admin.settings').'#email')->with('status', 'Email settings saved. Use "Send test email" to check them.');
     }
@@ -60,7 +72,7 @@ class SettingsController extends Controller
             'general.siteName' => 'required|max:120',
             'general.tagline' => 'nullable|max:200',
             'general.phone' => 'nullable|max:50',
-            'general.email' => 'nullable|email|max:200',
+            'general.email' => 'nullable|email|max:200|not_regex:/[\r\n]/',
             'general.location' => 'nullable|max:120',
             'general.googleProfile' => 'nullable|url|max:300',
             'social.facebook' => 'nullable|url|max:300',
@@ -72,7 +84,7 @@ class SettingsController extends Controller
         ]);
         SiteSetting::put('general', $data['general']);
         SiteSetting::put('social', $data['social'] ?? []);
-        ActivityLog::record('updated', 'Settings', 'General settings');
+        ActivityLog::record('settings', 'Settings', 'General settings', null, ['module' => 'Settings']);
 
         return back()->with('status', 'Settings saved. The website shows the new details on its next load.');
     }

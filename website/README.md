@@ -81,3 +81,25 @@ The contact form saves to `contact_submissions` and the guide download form save
 ## Colors
 
 `tailwind.config.js` replaces Tailwind's default palette with the brand colors only: `navy` #082032, `slate` #334756, `accent` #F0A500, `ink` #000000, `mist` #EEF1F3 (a light tint of slate) and `white`.
+
+## Build and deploy (Next.js)
+
+The website is a Next.js app that exports every page to plain HTML (`output: 'export'`), so it runs
+on any host. Search engines get each page's full text and title without running JavaScript.
+
+```bash
+cd website
+npm ci
+npm run build        # writes site-routes.json for the admin, then builds into website/out
+```
+
+The build reads the latest content from Supabase. If the build machine cannot reach it, set
+`CONTENT_SNAPSHOT=/path/to/content.json` or the bundled content is used. In the browser the site
+still loads the newest content from the database, so admin changes show without a rebuild; a rebuild
+only refreshes the prerendered HTML that search engines read.
+
+**Hostinger (or any Apache host):** upload everything inside `website/out` (including the hidden
+`.htaccess` file) to `public_html`. Addresses without their own file fall back to `404.html`, which
+opens posts published after the last build and shows the 404 page for anything else.
+
+**Vercel:** the root `vercel.json` runs the build and serves `website/out`.

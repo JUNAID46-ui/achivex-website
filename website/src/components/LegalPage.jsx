@@ -27,20 +27,20 @@ export default function LegalPage({ title, updated, intro, sections: raw }) {
         <div className="container-site">
           <Breadcrumb items={[{ label: title }]} />
           <h1 className="h-display mt-10 text-5xl md:text-7xl">{title}</h1>
-          <p className="mt-4 text-sm text-ink/60">Last updated: {updated}</p>
+          <p className="mt-4 text-sm text-body/80">Last updated: {updated}</p>
         </div>
       </section>
-      <section className="bg-white py-16 md:py-20">
+      <section className="bg-canvas py-16 md:py-20">
         <div className="container-site grid gap-12 lg:grid-cols-[260px_minmax(0,760px)]">
           <aside className="lg:sticky lg:top-28 lg:self-start">
             <nav aria-label="On this page">
-              <p className="text-sm font-bold text-navy">On this page</p>
+              <p className="text-sm font-bold text-white">On this page</p>
               <ol className="mt-4 space-y-1 text-sm">
                 {sections.map((s, i) => (
                   <li key={s.id}>
                     <a
                       href={`#${s.id}`} onClick={(e) => jumpTo(e, s.id)}
-                      className={`flex gap-3 px-3 py-2 transition-colors hover:text-accent ${active === s.id ? 'bg-mist font-semibold text-navy' : 'text-ink/60'}`}
+                      className={`flex gap-3 px-3 py-2 transition-colors hover:text-accent ${active === s.id ? 'bg-mist font-semibold text-white' : 'text-body/80'}`}
                     >
                       <span className={active === s.id ? 'text-accent' : ''}>{i + 1}.</span>{s.title}
                     </a>

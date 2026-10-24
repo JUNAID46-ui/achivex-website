@@ -25,7 +25,7 @@
         @endforeach
       </div>
     </div>
-    <div class="card card-body"><p class="text-[13px] text-slate-500">Keep these details identical to your Google Business Profile. Matching name, address and phone helps local rankings.</p><button class="btn-primary mt-4">Save local SEO</button></div>
+    <div class="card card-body"><p class="text-[13px] text-neutral-500">Keep these details identical to your Google Business Profile. Matching name, address and phone helps local rankings.</p><button class="btn-primary mt-4">Save local SEO</button></div>
   </div>
 </form>
 @endsection

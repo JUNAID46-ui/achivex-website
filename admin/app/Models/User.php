@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -16,7 +18,7 @@ class User extends Authenticatable
     ];
 
     protected $fillable = ['name', 'email', 'password', 'role', 'avatar', 'last_login_at'];
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = ['password', 'remember_token', 'two_factor_secret', 'two_factor_recovery_codes'];
 
     protected function casts(): array
     {
@@ -24,7 +26,44 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'last_login_at' => 'datetime',
             'password' => 'hashed',
+            'two_factor_secret' => 'encrypted',
+            'two_factor_recovery_codes' => 'encrypted:array',
+            'two_factor_confirmed_at' => 'datetime',
         ];
+    }
+
+    public function hasTwoFactor(): bool
+    {
+        return $this->two_factor_confirmed_at !== null && (bool) $this->two_factor_secret;
+    }
+
+    // A new password or role signs the account out everywhere else: other browser sessions are
+    // removed and "remember me" cookies stop working. The browser making the change stays signed in.
+    protected static function booted(): void
+    {
+        static::updating(function (User $user) {
+            if ($user->isDirty('password')) {
+                $user->remember_token = Str::random(60);
+            }
+        });
+        static::updated(function (User $user) {
+            if ($user->wasChanged('role')) {
+                ActivityLog::record('role_changed', 'User', $user->name, 'Role changed from '.($user->getOriginal('role') ?? '?').' to '.$user->role, ['module' => 'Users', 'id' => $user->id]);
+            }
+            if ($user->wasChanged(['password', 'role']) && config('session.driver') === 'database') {
+                DB::connection(\App\Support\Sites::mainConnection() ?? config('session.connection'))->table(config('session.table', 'sessions'))
+                    ->where('user_id', $user->getKey())
+                    ->when(session()->isStarted(), fn ($q) => $q->where('id', '!=', session()->getId()))
+                    ->delete();
+            }
+        });
+    }
+
+    // Users always live in the main database. When another website is selected in Sites, the
+    // default connection points at that website, so users stay on the main one explicitly.
+    public function getConnectionName()
+    {
+        return \App\Support\Sites::mainConnection() ?? parent::getConnectionName();
     }
 
     public function isAdmin(): bool

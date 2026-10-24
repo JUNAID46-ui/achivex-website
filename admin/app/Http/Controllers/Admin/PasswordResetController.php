@@ -19,7 +19,7 @@ class PasswordResetController extends Controller
 
     public function send(Request $request)
     {
-        $request->validate(['email' => 'required|email']);
+        $request->validate(['email' => 'required|email|not_regex:/[\r\n]/']);
         try {
             Password::sendResetLink($request->only('email'));
         } catch (\Throwable $e) {
@@ -41,13 +41,13 @@ class PasswordResetController extends Controller
     {
         $request->validate([
             'token' => 'required',
-            'email' => 'required|email',
-            'password' => ['required', 'confirmed', PasswordRule::min(8)],
+            'email' => 'required|email|not_regex:/[\r\n]/',
+            'password' => ['required', 'confirmed', PasswordRule::defaults()],
         ]);
 
         $status = Password::reset($request->only('email', 'password', 'password_confirmation', 'token'), function (User $user, string $password) {
             $user->forceFill(['password' => $password])->save();
-            ActivityLog::record('updated', 'User', $user->name, 'Password reset by email');
+            ActivityLog::record('password_changed', 'User', $user->name, 'Password reset by email', ['module' => 'Security', 'id' => $user->id]);
         });
 
         return $status === Password::PASSWORD_RESET

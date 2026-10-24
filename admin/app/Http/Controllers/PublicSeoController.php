@@ -19,4 +19,13 @@ class PublicSeoController extends Controller
 
         return response($content, 200, ['Content-Type' => 'text/plain']);
     }
+
+    // Served here so the website build can copy it. 404 until one is written in the admin.
+    public function llms()
+    {
+        $content = (string) (SiteSetting::group('llms')['content'] ?? '');
+        abort_if(trim($content) === '', 404);
+
+        return response($content, 200, ['Content-Type' => 'text/plain; charset=utf-8']);
+    }
 }

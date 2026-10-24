@@ -4,28 +4,27 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "npm run export-routes && vite build",
-    "preview": "vite preview",
+    "dev": "next dev",
+    "build": "npm run export-routes && next build && node scripts/csp-hashes.mjs",
+    "start": "npx serve out",
     "export-routes": "esbuild scripts/export-routes.mjs --bundle --platform=node --format=esm --outfile=node_modules/.cache/export-routes.mjs --log-level=warning && node node_modules/.cache/export-routes.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.118.0",
-    "framer-motion": "^11.11.0",
+    "framer-motion": "^12.43.0",
     "lucide-react": "^0.460.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.28.0"
+    "next": "^16.4.3",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-router-dom": "^7.18.4"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
+    "esbuild": "^0.28.2",
     "postcss": "^8.4.49",
-    "tailwindcss": "^3.4.15",
-    "vite": "^5.4.11",
-    "esbuild": "^0.21.5"
+    "tailwindcss": "^3.4.15"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20.9"
   }
 }

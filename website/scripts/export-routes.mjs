@@ -1,11 +1,11 @@
-// Writes public/site-routes.json: every fixed page of the website with its default SEO text.
+// Writes public/site-routes.json: every fixed page of the website with its default SEO text and default address
+// (the admin maps addresses to the saved permalinks).
 // The admin panel reads this file for the SEO page list and the sitemap.
 // Run with: npm run export-routes
-import { writeFileSync } from 'node:fs'
+import { rmSync, writeFileSync } from 'node:fs'
 import { categories } from '../src/data/categories.js'
-import { services, servicePath, categoryPath } from '../src/data/services.js'
+import { services, defaultServicePath as servicePath, categoryPath } from '../src/data/services.js'
 import { industries } from '../src/data/industries.js'
-import { alliances } from '../src/data/alliances.js'
 import { contentTargets } from '../src/data/contentTargets.js'
 import { blogs } from '../src/data/blogs.js'
 import { caseStudies } from '../src/data/caseStudies.js'
@@ -13,18 +13,17 @@ import { news } from '../src/data/news.js'
 import { whitepapers } from '../src/data/whitepapers.js'
 
 const pages = [
-  { path: '/', title: 'Home', description: 'AchiveX LLC is a Wyoming based marketing and software solutions company offering digital strategy, data and analytics, cloud, security and business process services.', type: 'Page' },
-  { path: '/about-us/', title: 'Who We Are', description: 'Learn about AchiveX LLC, a Wyoming based technology services company, its story, mission, vision and the values that guide its work.', type: 'Page' },
-  { path: '/about-us/accomplishments/', title: 'Our Accomplishments', description: 'Milestones and what AchiveX LLC has built so far: service areas, services, guides and articles.', type: 'Page' },
-  { path: '/about-us/esg/', title: 'Our Commitment to ESG', description: 'How AchiveX LLC approaches environmental, social and governance responsibilities.', type: 'Page' },
-  { path: '/about-us/leadership/', title: 'Our Leadership', description: 'The leadership team at AchiveX LLC and how they work with clients.', type: 'Page' },
-  { path: '/about-us/global-presence/', title: 'Our Global Presence', description: 'AchiveX LLC is headquartered in Wyoming, USA.', type: 'Page' },
-  { path: '/services/', title: 'Services', description: 'Explore AchiveX services across digital, data and analytics, cloud, infrastructure, security, emerging technologies and business process services.', type: 'Page' },
+  { path: '/', title: 'Home', description: 'AchiveX LLC is a Wyoming based marketing and software solutions company offering web development, custom software, AI and automation, CRM, SEO, social media and ads management.', type: 'Page' },
+  { path: '/about-us/', title: 'About Us', description: 'AchiveX LLC is a Wyoming based company that builds websites, custom software, AI automation and growth marketing for small and mid sized businesses.', type: 'Page' },
+  { path: '/services/', title: 'Services', description: 'Explore AchiveX services: web development, custom software, AI and intelligent systems, automation, CRM, SEO, AEO and GEO, social media and ads management.', type: 'Page' },
+  { path: '/industries/', title: 'Industries', description: 'The industries AchiveX works with, from financial services and healthcare to retail, manufacturing, logistics and education.', type: 'Page' },
+  { path: '/insights/', title: 'Insights', description: 'Case studies, company news, free guides and practical articles from AchiveX LLC.', type: 'Page' },
   { path: '/insights/case-studies/', title: 'Case Studies', description: 'Examples of how AchiveX approaches client challenges across digital, data, cloud, security and business process services.', type: 'Page' },
   { path: '/insights/newsroom/', title: 'Newsroom', description: 'Company announcements and news from AchiveX LLC.', type: 'Page' },
   { path: '/insights/whitepapers/', title: 'Whitepapers and eBooks', description: 'Free practical guides from AchiveX on cloud migration, data quality, generative AI and security.', type: 'Page' },
   { path: '/insights/blogs/', title: 'Blogs', description: 'Practical articles from AchiveX on data, cloud, security, strategy and business operations.', type: 'Page' },
   { path: '/contact-us/', title: 'Contact Us', description: 'Contact AchiveX LLC by phone at +1 307 622 1140, by email at info@achivex.com, or send a message using our contact form.', type: 'Page' },
+  { path: '/free-consultation/', title: 'Book a Free Consultation', description: 'Book a free consultation with AchiveX LLC for web development, custom software, AI automation, CRM, SEO and digital marketing. Fixed price quotes in writing.', type: 'Landing page' },
   { path: '/careers/', title: 'Careers', description: 'Careers at AchiveX LLC. Learn about our culture and see current open positions.', type: 'Page' },
   { path: '/privacy-policy/', title: 'Privacy Policy', description: 'How AchiveX LLC collects, uses and protects personal information.', type: 'Page' },
   { path: '/terms-of-service/', title: 'Terms of Service', description: 'The terms that govern use of the AchiveX LLC website and services.', type: 'Page' },
@@ -37,9 +36,6 @@ for (const s of services) {
 }
 for (const i of industries) {
   pages.push({ path: `/industries/${i.slug}/`, title: i.name, description: `${i.summary} See how AchiveX supports ${i.name.toLowerCase()} organisations.`, type: 'Industry' })
-}
-for (const a of alliances) {
-  pages.push({ path: `/about-us/alliances/${a.slug}/`, title: `${a.name} Services`, description: `How AchiveX works with ${a.name} technology. ${a.intro}`, type: 'Alliance' })
 }
 
 // Default text and images of every editable page, so the admin can build the "Edit Page" form.
@@ -71,6 +67,29 @@ const urls = [
 ]
 const xml = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
   ...urls.map((u) => `  <url><loc>${base}${u.path}</loc><lastmod>${u.lastmod}</lastmod></url>`), '</urlset>', ''].join('\n')
-writeFileSync('public/sitemap.xml', xml)
-writeFileSync('public/robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${base}/sitemap.xml\n`)
-console.log(`sitemap.xml written with ${urls.length} URLs`)
+// The admin owns robots.txt, sitemap.xml and llms.txt (SEO menu). Use its versions when it can be
+// reached and the file looks right; otherwise keep the files generated above from bundled data.
+const admin = (process.env.ADMIN_URL || 'https://achivex-admin.vercel.app').replace(/\/$/, '')
+async function fromAdmin(file, looksRight) {
+  try {
+    const res = await fetch(`${admin}/${file}`, { signal: AbortSignal.timeout(8000) })
+    const text = await res.text()
+    if (res.ok && !/^\s*<!doctype html/i.test(text) && looksRight(text)) return text
+  } catch {}
+  return null
+}
+// On Vercel, vercel.json rewrites these three files to the admin, so they are always current and
+// a new blog post shows up in the sitemap without a redeploy. No static copy is written there,
+// because a file in the build would take priority over the rewrite.
+if (process.env.VERCEL) {
+  for (const f of ['sitemap.xml', 'robots.txt', 'llms.txt']) rmSync(`public/${f}`, { force: true })
+  console.log('sitemap.xml, robots.txt, llms.txt: served live from the admin (vercel.json rewrites)')
+  process.exit(0)
+}
+const adminSitemap = await fromAdmin('sitemap.xml', (t) => t.includes('<urlset'))
+const adminRobots = await fromAdmin('robots.txt', (t) => /user-agent\s*:/i.test(t))
+const adminLlms = await fromAdmin('llms.txt', (t) => t.trim().length > 0)
+writeFileSync('public/sitemap.xml', adminSitemap ?? xml)
+writeFileSync('public/robots.txt', adminRobots ?? `User-agent: *\nAllow: /\n\nSitemap: ${base}/sitemap.xml\n`)
+if (adminLlms) writeFileSync('public/llms.txt', adminLlms)
+console.log(`sitemap.xml: ${adminSitemap ? 'from the admin' : `bundled, ${urls.length} URLs`}; robots.txt: ${adminRobots ? 'from the admin' : 'default'}; llms.txt: ${adminLlms ? 'from the admin' : 'none'}`)

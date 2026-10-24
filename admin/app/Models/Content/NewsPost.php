@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class NewsPost extends Model
 {
+    use Publishable;
+
     protected $table = 'public.news_posts';
     protected $primaryKey = 'slug';
     public $incrementing = false;
@@ -13,5 +15,5 @@ class NewsPost extends Model
 
     public $timestamps = false;
     protected $guarded = [];
-    protected $casts = ['body' => 'array', 'published' => 'boolean', 'published_on' => 'date'];
+    protected $casts = ['body' => 'array', 'published' => 'boolean', 'published_on' => 'date', 'publish_at' => 'datetime'];
 }

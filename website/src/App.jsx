@@ -1,29 +1,30 @@
+import { lazy } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Layout from './components/Layout'
-import Home from './pages/Home'
-import WhoWeAre from './pages/about/WhoWeAre'
-import Accomplishments from './pages/about/Accomplishments'
-import Esg from './pages/about/Esg'
-import Leadership from './pages/about/Leadership'
-import GlobalPresence from './pages/about/GlobalPresence'
-import Alliance from './pages/about/Alliance'
-import ServicesOverview from './pages/services/ServicesOverview'
-import ServiceResolver from './pages/services/ServiceResolver'
-import ServiceDetail from './pages/services/ServiceDetail'
-import Industry from './pages/Industry'
-import CaseStudies from './pages/insights/CaseStudies'
-import CaseStudyDetail from './pages/insights/CaseStudyDetail'
-import Newsroom from './pages/insights/Newsroom'
-import NewsDetail from './pages/insights/NewsDetail'
-import Whitepapers from './pages/insights/Whitepapers'
-import WhitepaperDetail from './pages/insights/WhitepaperDetail'
-import Blogs from './pages/insights/Blogs'
-import BlogPost from './pages/insights/BlogPost'
-import Contact from './pages/Contact'
-import Careers from './pages/Careers'
-import PrivacyPolicy from './pages/legal/PrivacyPolicy'
-import Terms from './pages/legal/Terms'
-import NotFound from './pages/NotFound'
+import Home from './views/Home'
+const WhoWeAre = lazy(() => import('./views/about/WhoWeAre'))
+const ServicesOverview = lazy(() => import('./views/services/ServicesOverview'))
+const ServiceResolver = lazy(() => import('./views/services/ServiceResolver'))
+const ServiceDetail = lazy(() => import('./views/services/ServiceDetail'))
+const Industry = lazy(() => import('./views/Industry'))
+const Industries = lazy(() => import('./views/Industries'))
+const Insights = lazy(() => import('./views/insights/Insights'))
+const CaseStudies = lazy(() => import('./views/insights/CaseStudies'))
+const CaseStudyDetail = lazy(() => import('./views/insights/CaseStudyDetail'))
+const Newsroom = lazy(() => import('./views/insights/Newsroom'))
+const NewsDetail = lazy(() => import('./views/insights/NewsDetail'))
+const Whitepapers = lazy(() => import('./views/insights/Whitepapers'))
+const WhitepaperDetail = lazy(() => import('./views/insights/WhitepaperDetail'))
+const Blogs = lazy(() => import('./views/insights/Blogs'))
+const BlogPost = lazy(() => import('./views/insights/BlogPost'))
+const Contact = lazy(() => import('./views/Contact'))
+const Careers = lazy(() => import('./views/Careers'))
+const PrivacyPolicy = lazy(() => import('./views/legal/PrivacyPolicy'))
+const Terms = lazy(() => import('./views/legal/Terms'))
+import NotFound from './views/NotFound'
+const RootResolver = lazy(() => import('./views/RootResolver'))
+const Landing = lazy(() => import('./views/Landing'))
+import { routePath, listRoutePath, isRoot } from './lib/permalinks'
 
 export default function App() {
   return (
@@ -33,11 +34,10 @@ export default function App() {
 
         <Route path="about-us">
           <Route index element={<WhoWeAre />} />
-          <Route path="accomplishments" element={<Accomplishments />} />
-          <Route path="esg" element={<Esg />} />
-          <Route path="leadership" element={<Leadership />} />
-          <Route path="global-presence" element={<GlobalPresence />} />
-          <Route path="alliances/:slug" element={<Alliance />} />
+          {/* The Alliance pages were removed; old links go to the services page. */}
+          <Route path="alliances/*" element={<Navigate to="/services/" replace />} />
+          {/* About Us is a single page; older sub pages send visitors back to it. */}
+          <Route path="*" element={<Navigate to="/about-us/" replace />} />
         </Route>
 
         <Route path="services">
@@ -46,24 +46,24 @@ export default function App() {
           <Route path=":category/:slug" element={<ServiceDetail />} />
         </Route>
 
+        <Route path="industries" element={<Industries />} />
         <Route path="industries/:slug" element={<Industry />} />
 
-        <Route path="insights">
-          <Route index element={<Navigate to="/insights/case-studies/" replace />} />
-          <Route path="case-studies" element={<CaseStudies />} />
-          <Route path="case-studies/:slug" element={<CaseStudyDetail />} />
-          <Route path="newsroom" element={<Newsroom />} />
-          <Route path="newsroom/:slug" element={<NewsDetail />} />
-          <Route path="whitepapers" element={<Whitepapers />} />
-          <Route path="whitepapers/:slug" element={<WhitepaperDetail />} />
-          <Route path="blogs" element={<Blogs />} />
-          <Route path="blogs/:slug" element={<BlogPost />} />
-        </Route>
+        {/* Content addresses follow the prefixes saved under Settings, Permalinks in the admin. */}
+        <Route path="insights" element={<Insights />} />
+        {Object.entries({ caseStudies: [CaseStudies, CaseStudyDetail], newsroom: [Newsroom, NewsDetail], whitepapers: [Whitepapers, WhitepaperDetail], blogs: [Blogs, BlogPost] })
+          .flatMap(([type, [List, Detail]]) => [
+            <Route key={type} path={listRoutePath(type)} element={<List />} />,
+            // A root prefix ("/") has no route of its own: RootResolver below picks the item.
+            isRoot(type) ? null : <Route key={`${type}-item`} path={`${routePath(type)}/:slug`} element={<Detail />} />,
+          ])}
 
         <Route path="contact-us" element={<Contact />} />
+        <Route path="free-consultation" element={<Landing />} />
         <Route path="careers" element={<Careers />} />
         <Route path="privacy-policy" element={<PrivacyPolicy />} />
         <Route path="terms-of-service" element={<Terms />} />
+        <Route path=":slug" element={<RootResolver />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

@@ -7,8 +7,8 @@
   <a href="{{ route('admin.seo.sitemap.download') }}" class="btn-primary">@include('admin.partials.icon', ['name' => 'download']) Download</a>
 @endsection
 @section('content')
-<div class="card card-body mb-6 text-[13.5px] leading-relaxed text-slate-600">
-  <p class="font-semibold text-navy">How to use it</p>
+<div class="card card-body mb-6 text-[13.5px] leading-relaxed text-neutral-600">
+  <p class="font-semibold text-ink">How to use it</p>
   <ol class="mt-2 list-decimal space-y-1 pl-5">
     <li>Download sitemap.xml and place it in the website's <code>public</code> folder, or point <code>{{ rtrim(config('admin.site_public_url'), '/') }}/sitemap.xml</code> to <code>{{ $publicUrl }}</code> on your host.</li>
     <li>Submit the sitemap address in Google Search Console and Bing Webmaster Tools.</li>
@@ -20,7 +20,7 @@
     <thead><tr><th>URL</th><th>Type</th><th>Last modified</th><th>Priority</th></tr></thead>
     <tbody>
       @foreach($urls as $u)
-        <tr><td><a href="{{ $u['loc'] }}" target="_blank" class="text-navy hover:underline">{{ $u['loc'] }}</a></td><td class="text-slate-500">{{ $u['type'] }}</td><td class="text-slate-500">{{ $u['lastmod'] }}</td><td>{{ $u['priority'] }}</td></tr>
+        <tr><td><a href="{{ $u['loc'] }}" target="_blank" class="text-ink hover:underline">{{ $u['loc'] }}</a></td><td class="text-neutral-500">{{ $u['type'] }}</td><td class="text-neutral-500">{{ $u['lastmod'] }}</td><td>{{ $u['priority'] }}</td></tr>
       @endforeach
     </tbody>
   </table>

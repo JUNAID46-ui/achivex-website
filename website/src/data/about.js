@@ -1,11 +1,3 @@
-export const aboutLinks = [
-  { label: 'Who We Are', to: '/about-us/' },
-  { label: 'Our Accomplishments', to: '/about-us/accomplishments/' },
-  { label: 'Our Commitment to ESG', to: '/about-us/esg/' },
-  { label: 'Our Leadership', to: '/about-us/leadership/' },
-  { label: 'Our Global Presence', to: '/about-us/global-presence/' },
-]
-
 // Milestones. The live site reads these from the database (milestones table).
 export const milestones = [
   { date: '2026', title: 'New website and service catalog', text: 'AchiveX launched its new website describing seven service areas and twenty individual services.' },

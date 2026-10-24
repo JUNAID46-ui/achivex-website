@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
+import { safeHref } from '../utils/safeHref'
 
 const styles = {
-  primary: 'bg-navy text-white hover:bg-accent hover:text-ink',
-  light: 'bg-white text-navy hover:bg-accent hover:text-ink',
-  outline: 'border border-navy text-navy hover:border-accent hover:bg-accent hover:text-ink',
-  outlineLight: 'border border-white/60 text-white hover:border-accent hover:bg-accent hover:text-ink',
+  primary: 'bg-accent text-onaccent hover:bg-white hover:text-onaccent',
+  light: 'bg-accent text-onaccent hover:bg-white hover:text-onaccent',
+  outline: 'border border-white text-white hover:border-accent hover:bg-accent hover:text-onaccent',
+  outlineLight: 'border border-white/60 text-white hover:border-accent hover:bg-accent hover:text-onaccent',
 }
 
 export default function Button({ to, href, children, variant = 'primary', arrow = true, className = '', ...rest }) {
@@ -17,6 +18,6 @@ export default function Button({ to, href, children, variant = 'primary', arrow 
     </>
   )
   if (to) return <Link to={to} className={cls} {...rest}>{inner}</Link>
-  if (href) return <a href={href} className={cls} {...rest}>{inner}</a>
+  if (href) return <a href={safeHref(href)} className={cls} {...rest}>{inner}</a>
   return <button className={cls} {...rest}>{inner}</button>
 }

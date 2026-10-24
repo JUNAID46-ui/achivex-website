@@ -5,6 +5,9 @@ return [
     'site_url' => env('SITE_URL', 'http://localhost:5173'),
     'site_public_url' => env('SITE_PUBLIC_URL', 'https://www.achivex.com'),
 
+    // Largest file the media library accepts, in MB. Files go straight to Supabase Storage.
+    'max_upload_mb' => (int) env('MEDIA_MAX_UPLOAD_MB', 2048),
+
     'menu' => [
         ['label' => 'Dashboard', 'icon' => 'gauge', 'route' => 'admin.dashboard', 'area' => 'dashboard'],
         ['label' => 'Pages', 'icon' => 'layout', 'area' => 'builder', 'children' => [
@@ -37,10 +40,24 @@ return [
             ['label' => '404 Monitor', 'route' => 'admin.seo.notfound', 'area' => 'seo'],
             ['label' => 'Local SEO', 'route' => 'admin.seo.schema', 'area' => 'seo'],
             ['label' => 'Webmaster Tools', 'route' => 'admin.seo.webmaster', 'area' => 'seo'],
+            ['label' => 'SEO Audit', 'route' => 'admin.seo.audit', 'area' => 'seo'],
+            ['label' => 'AI Visibility', 'route' => 'admin.seo.ai', 'area' => 'seo'],
         ]],
         ['label' => 'Analytics', 'icon' => 'chart', 'route' => 'admin.analytics', 'area' => 'analytics'],
-        ['label' => 'Settings', 'icon' => 'settings', 'route' => 'admin.settings', 'area' => 'settings'],
+        ['label' => 'Settings', 'icon' => 'settings', 'area' => 'settings', 'children' => [
+            ['label' => 'General', 'route' => 'admin.settings', 'area' => 'settings'],
+            ['label' => 'Colors and Fonts', 'route' => 'admin.settings.theme', 'area' => 'settings'],
+            ['label' => 'Permalinks', 'route' => 'admin.settings.permalinks', 'area' => 'settings'],
+        ]],
+        ['label' => 'Sites', 'icon' => 'globe', 'route' => 'admin.sites.index', 'area' => 'sites'],
         ['label' => 'Users', 'icon' => 'users', 'resource' => 'users', 'area' => 'users'],
         ['label' => 'Activity Log', 'icon' => 'activity', 'route' => 'admin.activity', 'area' => 'activity'],
+        ['label' => 'Security Center', 'icon' => 'shield', 'route' => 'admin.security', 'area' => 'security'],
+        ['label' => 'Tools', 'icon' => 'refresh', 'area' => 'tools', 'children' => [
+            ['label' => 'System Health', 'route' => 'admin.health', 'area' => 'tools'],
+            ['label' => 'Backup and Restore', 'route' => 'admin.backup', 'area' => 'tools'],
+            ['label' => 'Cache', 'route' => 'admin.cache', 'area' => 'tools'],
+            ['label' => 'Custom Code', 'route' => 'admin.custom-code', 'area' => 'tools'],
+        ]],
     ],
 ];
