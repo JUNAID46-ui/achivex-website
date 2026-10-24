@@ -22,3 +22,7 @@ Artisan::command('site:publish', function () {
     \App\Services\SiteRebuild::flush();
     $this->line("Pages written: {$pages}");
 })->purpose('Write new pages to the website folder and send any waiting website build');
+
+Artisan::command('site:build', function () {
+    $this->line(\App\Services\SiteBuilder::runIfRequested());
+})->purpose('Build the website on this server when the admin asked for it');

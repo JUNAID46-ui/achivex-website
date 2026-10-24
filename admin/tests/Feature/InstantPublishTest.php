@@ -70,12 +70,4 @@ class InstantPublishTest extends PostgresTestCase
         $this->actingAs($this->makeUser('administrator'))->post('/admin/site/rebuild')->assertSessionHas('status', fn ($s) => str_contains($s, 'live now'));
         $this->assertFileExists("{$this->root}/insights/blogs/quiet-post/index.html");
     }
-
-    public function test_github_dispatch_sends_token_and_event(): void
-    {
-        config(['services.site_deploy_hook' => 'https://api.github.com/repos/o/r/dispatches', 'services.site_deploy_token' => 'tok']);
-        Http::fake(['api.github.com/*' => Http::response('', 204)]);
-        $this->assertTrue(SiteRebuild::start('Test'));
-        Http::assertSent(fn ($r) => $r->hasHeader('Authorization', 'Bearer tok') && $r['event_type'] === 'site-rebuild');
-    }
 }

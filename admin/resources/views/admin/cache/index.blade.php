@@ -3,13 +3,19 @@
 @section('heading', 'Cache')
 @section('subheading', 'Saved results that keep the admin fast. Clearing is safe: anything removed is rebuilt on the next visit.')
 @section('content')
-@php $build = \App\Models\AppSetting::group('site_build'); $hook = \App\Services\SiteRebuild::hook() !== ''; $instant = \App\Services\InstantPublish::enabled(); @endphp
+@php $build = \App\Models\AppSetting::group('site_build'); $hook = \App\Services\SiteRebuild::active(); $server = \App\Services\SiteBuilder::enabled(); $instant = \App\Services\InstantPublish::enabled(); @endphp
 <div class="card mb-6">
   <div class="card-header"><h2 class="card-title">Website build</h2></div>
   <div class="card-body flex flex-wrap items-center justify-between gap-4 text-[13px]">
     <div>
       @if(! $hook)
-        <p class="text-neutral-600">Automatic builds are off. Add SITE_DEPLOY_HOOK to the admin settings on the host to rebuild the website after every change.</p>
+        <p class="text-neutral-600">Automatic builds are off. On Hostinger set SITE_BUILD=server (see docs/HOSTINGER-MOVE.md); on Vercel add SITE_DEPLOY_HOOK.</p>
+      @elseif($server)
+        <p class="text-neutral-600">The website is built on this server within a minute of every change.</p>
+        @if(!empty($build['running']))<p class="mt-1 font-semibold text-neutral-700">Building now...</p>
+        @elseif(!empty($build['requested']))<p class="mt-1 text-neutral-500">A build is waiting to start.</p>@endif
+        @if(!empty($build['finished_at']))<p class="mt-1 text-neutral-500">Last build: {{ \Carbon\Carbon::parse($build['finished_at'])->diffForHumans() }}{{ empty($build['last_ok']) ? ', failed' : '' }}.</p>@endif
+        @if(empty($build['last_ok']) && !empty($build['last_error']))<pre class="mt-2 max-h-40 overflow-auto whitespace-pre-wrap bg-neutral-50 p-2 text-[11px] text-red-700">{{ $build['last_error'] }}</pre>@endif
       @else
         <p class="text-neutral-600">The website rebuilds by itself after content changes, at most once every {{ \App\Services\SiteRebuild::GAP }} seconds.</p>
         @if(!empty($build['last_at']))<p class="mt-1 text-neutral-500">Last build: {{ \Carbon\Carbon::parse($build['last_at'])->diffForHumans() }} ({{ $build['last_reason'] ?? '' }}){{ empty($build['last_ok']) ? ', could not be started' : '' }}.@if(!empty($build['pending'])) A change is waiting for the next build.@endif</p>@endif

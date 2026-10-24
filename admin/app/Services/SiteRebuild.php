@@ -10,8 +10,9 @@ use Illuminate\Support\Facades\Http;
 
 // Rebuilds the static website after content changes, so new and edited pages are real pages at once
 // (a page that is not built yet answers with a 404 status, which search engines treat as missing).
-// The build is started by calling the hosting's deploy hook (SITE_DEPLOY_HOOK in .env). Builds are at
-// least GAP seconds apart; a change in between is remembered and built on the next admin request.
+// On Hostinger the build runs on the same server (SiteBuilder, SITE_BUILD=server); on Vercel it is
+// started by calling the deploy hook (SITE_DEPLOY_HOOK in .env). Hook builds are at least GAP seconds
+// apart; a change in between is remembered and built on the next admin request.
 class SiteRebuild
 {
     public const GAP = 90;
@@ -23,10 +24,16 @@ class SiteRebuild
         return (string) config('services.site_deploy_hook', '');
     }
 
+    // True when the website can be rebuilt from the admin, on this server or through a hook.
+    public static function active(): bool
+    {
+        return SiteBuilder::enabled() || static::hook() !== '';
+    }
+
     // Notes a change during this request; one build request is sent when the request ends.
     public static function later(string $reason): void
     {
-        if ((static::hook() !== '' || InstantPublish::enabled()) && Sites::active() === null) {
+        if ((static::active() || InstantPublish::enabled()) && Sites::active() === null) {
             static::$reason ??= $reason;
         }
     }
@@ -44,7 +51,7 @@ class SiteRebuild
             } catch (\Throwable) {
             }
         }
-        if (static::hook() === '') {
+        if (! static::active()) {
             static::$reason = null;
 
             return;
@@ -65,6 +72,12 @@ class SiteRebuild
 
     private static function request(string $reason, array $state): void
     {
+        // The server build queues requests itself, so there is no gap to wait for.
+        if (SiteBuilder::enabled()) {
+            static::start($reason);
+
+            return;
+        }
         $last = $state['last_at'] ?? null;
         if ($last && Carbon::parse($last)->addSeconds(self::GAP)->isFuture()) {
             if (empty($state['pending'])) {
@@ -79,16 +92,17 @@ class SiteRebuild
     // Starts a build now. Used by the "Publish" button and after content changes.
     public static function start(string $reason): bool
     {
+        if (SiteBuilder::enabled()) {
+            SiteBuilder::request($reason);
+            AppSetting::put('site_build', ['last_at' => now()->toIso8601String(), 'last_reason' => $reason, 'pending' => false]);
+
+            return true;
+        }
         if (static::hook() === '') {
             return false;
         }
         try {
-            $token = (string) config('services.site_deploy_token', '');
-            // GitHub (Hostinger builds) needs a token and an event name; Vercel's hook needs nothing.
-            $ok = $token !== ''
-                ? Http::timeout(8)->withToken($token)->accept('application/vnd.github+json')
-                    ->post(static::hook(), ['event_type' => 'site-rebuild', 'client_payload' => ['reason' => mb_substr($reason, 0, 100)]])->successful()
-                : Http::timeout(8)->post(static::hook())->successful();
+            $ok = Http::timeout(8)->post(static::hook())->successful();
         } catch (\Throwable) {
             $ok = false;
         }
