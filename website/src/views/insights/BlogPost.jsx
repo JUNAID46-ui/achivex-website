@@ -7,7 +7,6 @@ import Img from '../../components/Img'
 import Breadcrumb from '../../components/Breadcrumb'
 import ShareButtons from '../../components/ShareButtons'
 import BlogCard from '../../components/BlogCard'
-import FAQ from '../../components/FAQ'
 import NotFound from '../NotFound'
 import { blogs, getBlog, readTime } from '../../data/blogs'
 import { formatDate } from '../../utils/format'
@@ -229,10 +228,16 @@ export default function BlogPost() {
               ))}
 
               {faqs.length > 0 && (
-                <section className="mt-16 rounded-[26px] bg-site-grey p-7 md:p-10">
+                // Written like the other sections of the article: each question a heading, its answer below.
+                <section className="mt-14">
                   <p className="text-[13px] font-semibold tracking-[0.12em] text-navy">{pad(post.sections.length + 1)}</p>
                   <h2 id="faqs" className="mt-2 scroll-mt-28 font-display text-[28px] font-medium leading-tight tracking-tight text-site-heading md:text-[34px]">Frequently asked questions</h2>
-                  <div className="mt-6"><FAQ items={faqs} /></div>
+                  {faqs.map((f, j) => (
+                    <div key={j} className="mt-8">
+                      <h3 className="font-display text-[21px] font-semibold leading-snug tracking-tight text-site-heading md:text-[23px]">{f.q}</h3>
+                      <div className="prose-body mt-3"><p><Inline text={f.a} /></p></div>
+                    </div>
+                  ))}
                 </section>
               )}
 
