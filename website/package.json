@@ -5,17 +5,17 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "npm run export-routes && next build",
+    "build": "npm run export-routes && next build && node scripts/csp-hashes.mjs",
     "start": "npx serve out",
     "export-routes": "esbuild scripts/export-routes.mjs --bundle --platform=node --format=esm --outfile=node_modules/.cache/export-routes.mjs --log-level=warning && node node_modules/.cache/export-routes.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.118.0",
-    "framer-motion": "^11.11.0",
+    "framer-motion": "^12.43.0",
     "lucide-react": "^0.460.0",
-    "next": "^14.2.15",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "next": "^16.4.3",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
     "react-router-dom": "^7.18.4"
   },
   "devDependencies": {
@@ -25,6 +25,6 @@
     "tailwindcss": "^3.4.15"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20.9"
   }
 }

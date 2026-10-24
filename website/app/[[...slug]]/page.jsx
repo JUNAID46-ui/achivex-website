@@ -10,7 +10,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  const path = toPath(params.slug)
+  const path = toPath((await params).slug)
   const m = await metaFor(path)
   return {
     title: m.title,
@@ -24,5 +24,5 @@ export async function generateMetadata({ params }) {
 
 export default async function Page({ params }) {
   const rows = await getContent()
-  return <SiteRoot path={toPath(params.slug)} rows={rows} />
+  return <SiteRoot path={toPath((await params).slug)} rows={rows} />
 }

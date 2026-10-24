@@ -7,5 +7,4 @@ export default {
   images: { unoptimized: true },
   reactStrictMode: true,
   poweredByHeader: false,
-  eslint: { ignoreDuringBuilds: true },
 }
